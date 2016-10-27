@@ -1,0 +1,106 @@
+App\FrontBundle\Entity\State:
+    state_1:
+        country: @IN
+        stateName: Andaman and Nicobar Islands
+    state_2:
+        country: @IN
+        stateName: Andhra Pradesh
+    state_3:
+        country: @IN
+        stateName: Arunachal Pradesh
+    state_4:
+        country: @IN
+        stateName: Assam
+    state_5:
+        country: @IN
+        stateName: Bihar
+    state_6:
+        country: @IN
+        stateName: Chandigarh
+    state_7:
+        country: @IN
+        stateName: Chhattisgarh
+    state_8:
+        country: @IN
+        stateName: Dadra and Nagar Haveli
+    state_9:
+        country: @IN
+        stateName: Daman and Diu
+    state_10:
+        country: @IN
+        stateName: Delhi
+    state_11:
+        country: @IN
+        stateName: Goa
+    state_12:
+        country: @IN
+        stateName: Gujarat 
+    state_13:
+        country: @IN
+        stateName: Haryana
+    state_14:
+        country: @IN
+        stateName: Himachal Pradesh
+    state_15:
+        country: @IN
+        stateName: Jammu & Kashmir 
+    state_16:
+        country: @IN
+        stateName: Jharkhand
+    state_17:
+        country: @IN
+        stateName: Karnataka
+    state_18:
+        country: @IN
+        stateName: Kerala
+    state_19:
+        country: @IN
+        stateName: Lakshadweep
+    state_20:
+        country: @IN
+        stateName: Madhya Pradesh
+    state_21:
+        country: @IN
+        stateName: Maharashtra
+    state_22:
+        country: @IN
+        stateName: Manipur
+    state_23:
+        country: @IN
+        stateName: Meghalaya
+    state_24:
+        country: @IN
+        stateName: Mizoram
+    state_25:
+        country: @IN
+        stateName: Nagaland
+    state_26:
+        country: @IN
+        stateName: Orissa 
+    state_27:
+        country: @IN
+        stateName: Pondicherry
+    state_28:
+        country: @IN
+        stateName: Punjab
+    state_29:
+        country: @IN
+        stateName: Rajasthan
+    state_30:
+        country: @IN
+        stateName: Sikkim
+    state_31:
+        country: @IN
+        stateName: Tamil Nadu
+    state_32:
+        country: @IN
+        stateName: Tripura
+    state_33:
+        country: @IN
+        stateName: Uttaranchal
+    state_34:
+        country: @IN
+        stateName: Uttar Pradesh
+    state_35:
+        country: @IN
+        stateName: West Bengal

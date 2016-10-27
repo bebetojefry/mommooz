@@ -1,0 +1,149 @@
+{% extends "AppFrontBundle::layout.html.twig" %}
+
+{% block title %}{{ 'page_title.login' | trans }}{% endblock %}
+
+{% block styleseet %}
+    
+{% endblock %}
+
+{% block content %}                           
+    <section class="page-content">
+        <div class="page-content-inner" style="background-image: url({{ asset('assets/img/temp/login/4.jpg') }})">
+
+            <!-- Login Omega Page -->
+            <div class="single-page-block-header">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="logo">
+                            <a href="javascript: history.back();">
+                                <img src="{{ asset('assets/img/logo.png') }}" alt="logo" />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+
+                    </div>
+                </div>
+            </div>
+            <div class="single-page-block">
+                <div class="single-page-block-inner effect-3d-element">
+                    <div class="blur-placeholder"><!-- --></div>
+                    <div class="single-page-block-form">
+                        <h3 class="text-center">
+                            <i class="icmn-enter margin-right-10"></i>
+                            {{ 'login.headline' | trans }}
+                        </h3>
+                        <br />
+                        <form id="frmLogin" action="{{ path('app_front_admin_login_check') }}" name="frmLogin" method="POST">
+                            <div class="form-group">
+                                <input id="validation-email"
+                                       class="form-control"
+                                       placeholder="Username"
+                                       name="_username"
+                                       type="text"
+                                       data-validation="[NOTEMPTY]"
+                                       data-validation-message="Invalid username">
+                            </div>
+                            <div class="form-group">
+                                <input id="validation-password"
+                                       class="form-control password"
+                                       name="_password"
+                                       type="password" data-validation="[L>=4]"
+                                       data-validation-message="password must be at least 4 characters"
+                                       placeholder="Password">
+                            </div>
+                            <div class="form-group">
+                                <a href="javascript: void(0);" class="pull-right">Forgot Password?</a>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="_remember_me" checked>
+                                        Remember me
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                {% set errors = app.session.flashbag.get('login_error') %}
+                                {% if errors|length > 0%}
+                                    <div class="messages">
+                                        {% for flashMessage in errors %}
+                                            <span>{{ flashMessage | trans }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                                <button type="submit" class="btn btn-primary width-150">Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- End Login Omega Page -->
+
+        </div>
+    <!-- End Page Scripts -->
+    </section>
+
+<div class="main-backdrop"><!-- --></div>
+{% endblock%}
+
+{% block javascript %}
+    <!-- Page Scripts -->
+        <script>
+            $(function() {
+
+                // Add class to body for change layout settings
+                $('body').addClass('single-page single-page-inverse');
+
+                // Form Validation
+                $('#frmLogin').validate({
+                    submit: {
+                        settings: {
+                            inputContainer: '.form-group',
+                            errorListClass: 'form-control-error',
+                            errorClass: 'has-danger'
+                        }
+                    }
+                });
+
+                // Show/Hide Password
+                $('.password').password({
+                    eyeClass: '',
+                    eyeOpenClass: 'icmn-eye',
+                    eyeCloseClass: 'icmn-eye-blocked'
+                });
+
+                // Set Background Image for Form Block
+                function setImage() {
+                    var imgUrl = $('.page-content-inner').css('background-image');
+
+                    $('.blur-placeholder').css('background-image', imgUrl);
+                };
+
+                function changeImgPositon() {
+                    var width = $(window).width(),
+                            height = $(window).height(),
+                            left = - (width - $('.single-page-block-inner').outerWidth()) / 2,
+                            top = - (height - $('.single-page-block-inner').outerHeight()) / 2;
+
+
+                    $('.blur-placeholder').css({
+                        width: width,
+                        height: height,
+                        left: left,
+                        top: top
+                    });
+                };
+
+                setImage();
+                changeImgPositon();
+
+                $(window).on('resize', function(){
+                    changeImgPositon();
+                });
+
+
+
+            });
+        </script>
+{% endblock %}

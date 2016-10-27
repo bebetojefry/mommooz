@@ -1,0 +1,76 @@
+app_front_consumer_login:
+    path:     /login
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppFrontBundle:User:login }
+    
+app_front_consumer_login_check:
+    path:     /login_check
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppFrontBundle:User:logincheck }
+    
+app_front_consumer_logout:
+    host:     "%domain_consumer%"
+    path: /logout
+    
+app_front_consumers_home:
+    path:     /home
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppFrontBundle:Consumer:Index}
+    
+########################################################
+
+app_front_admin_login:
+    path:     /login
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:User:login }
+    
+app_front_admin_login_check:
+    path:     /login_check
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:User:logincheck }
+    
+app_front_admin_logout:
+    host:     "%domain_admin%"
+    path: /logout
+    
+app_front_admin_home:
+    path:     /dashboard
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:index}
+
+app_front_admin_register:
+    path:     /register
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:User:register }
+    
+
+#########################################################
+
+app_front_vendor_login:
+    path:     /login
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:User:login }
+    
+app_front_vendor_login_check:
+    path:     /login_check
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:User:logincheck }
+    
+app_front_vendor_logout:
+    host:     "%domain_vendor%"
+    path: /logout
+
+app_front_vendor_home:
+    path:     /dashboard
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:index}
+    
+admin_region_actions:
+    resource: "@AppFrontBundle/Controller/RegionController.php"
+    type:     annotation
+    prefix: /region
+    
+admin_location_actions:
+    resource: "@AppFrontBundle/Controller/LocationController.php"
+    type:     annotation
+    prefix: /location

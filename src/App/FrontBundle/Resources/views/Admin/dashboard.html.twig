@@ -1,0 +1,32 @@
+{% extends "AppFrontBundle::layout2.html.twig" %}
+
+{% block title %}{{ 'page_title.dashbaord' | trans }}{% endblock %}
+
+{% block styleseet %}
+    
+{% endblock %}
+
+{% block content %} 
+    <div class="dashboard-container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="panel panel-with-borders m-b-0">
+                    <div class="panel-body">
+                        <div class="nav-tabs-horizontal margin-bottom-20">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="javascript: void(0);" data-toggle="tab" data-target="#h1" role="tab">Regions</a>
+                                </li>
+                            </ul>
+                        </div>
+                        {{ datatable_render(regionDatatable) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}
+
+{% block javascript %}
+    
+{% endblock %}

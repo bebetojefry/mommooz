@@ -1,0 +1,965 @@
+App\FrontBundle\Entity\Country:
+  AF:
+    countryCode:  "AF"
+    countryName:   "Afghanistan"
+
+  AL:
+    countryCode:  "AL"
+    countryName:   "Albania"
+
+  DZ:
+    countryCode:  "DZ"
+    countryName:   "Algeria"
+
+  AS:
+    countryCode:  "AS"
+    countryName:   "American Samoa"
+
+  AD:
+    countryCode:  "AD"
+    countryName:   "Andorra"
+
+  AO:
+    countryCode:  "AO"
+    countryName:   "Angola"
+
+  AI:
+    countryCode:  "AI"
+    countryName:   "Anguilla"
+
+  AQ:
+    countryCode:  "AQ"
+    countryName:   "Antarctica"
+
+  AG:
+    countryCode:  "AG"
+    countryName:   "Antigua And Barbuda"
+
+  AR:
+    countryCode:  "AR"
+    countryName:   "Argentina"
+
+  AM:
+    countryCode:  "AM"
+    countryName:   "Armenia"
+
+  AW:
+    countryCode:  "AW"
+    countryName:   "Aruba"
+
+  AU:
+    countryCode:  "AU"
+    countryName:   "Australia"
+
+  AT:
+    countryCode:  "AT"
+    countryName:   "Austria"
+
+  AZ:
+    countryCode:  "AZ"
+    countryName:   "Azerbaijan"
+
+  BS:
+    countryCode:  "BS"
+    countryName:   "Bahamas"
+
+  BH:
+    countryCode:  "BH"
+    countryName:   "Bahrain"
+
+  BD:
+    countryCode:  "BD"
+    countryName:   "Bangladesh"
+
+  BB:
+    countryCode:  "BB"
+    countryName:   "Barbados"
+
+  BY:
+    countryCode:  "BY"
+    countryName:   "Belarus"
+
+  BE:
+    countryCode:  "BE"
+    countryName:   "Belgium"
+
+  BZ:
+    countryCode:  "BZ"
+    countryName:   "Belize"
+
+  BJ:
+    countryCode:  "BJ"
+    countryName:   "Benin"
+
+  BM:
+    countryCode:  "BM"
+    countryName:   "Bermuda"
+
+  BT:
+    countryCode:  "BT"
+    countryName:   "Bhutan"
+
+  BO:
+    countryCode:  "BO"
+    countryName:   "Bolivia"
+
+  BA:
+    countryCode:  "BA"
+    countryName:   "Bosnia And Herzegovina"
+
+  BW:
+    countryCode:  "BW"
+    countryName:   "Botswana"
+
+  BV:
+    countryCode:  "BV"
+    countryName:   "Bouvet Island"
+
+  BR:
+    countryCode:  "BR"
+    countryName:   "Brazil"
+
+  IO:
+    countryCode:  "IO"
+    countryName:   "British Indian Ocean Territory"
+
+  BN:
+    countryCode:  "BN"
+    countryName:   "Brunei Darussalam"
+
+  BG:
+    countryCode:  "BG"
+    countryName:   "Bulgaria"
+
+  BF:
+    countryCode:  "BF"
+    countryName:   "Burkina Faso"
+
+  BI:
+    countryCode:  "BI"
+    countryName:   "Burundi"
+
+  KH:
+    countryCode:  "KH"
+    countryName:   "Cambodia"
+
+  CM:
+    countryCode:  "CM"
+    countryName:   "Cameroon"
+
+  CA:
+    countryCode:  "CA"
+    countryName:   "Canada"
+
+  CV:
+    countryCode:  "CV"
+    countryName:   "Cape Verde"
+
+  KY:
+    countryCode:  "KY"
+    countryName:   "Cayman Islands"
+
+  CF:
+    countryCode:  "CF"
+    countryName:   "Central African Republic"
+
+  TD:
+    countryCode:  "TD"
+    countryName:   "Chad"
+
+  CL:
+    countryCode:  "CL"
+    countryName:   "Chile"
+
+  CN:
+    countryCode:  "CN"
+    countryName:   "China"
+
+  CX:
+    countryCode:  "CX"
+    countryName:   "Christmas Island"
+
+  CC:
+    countryCode:  "CC"
+    countryName:   "Cocos (keeling) Islands"
+
+  CO:
+    countryCode:  "CO"
+    countryName:   "Colombia"
+
+  KM:
+    countryCode:  "KM"
+    countryName:   "Comoros"
+
+  CG:
+    countryCode:  "CG"
+    countryName:   "Congo"
+
+  CD:
+    countryCode:  "CD"
+    countryName:   "Congo, The Democratic Republic Of The"
+
+  CK:
+    countryCode:  "CK"
+    countryName:   "Cook Islands"
+
+  CR:
+    countryCode:  "CR"
+    countryName:   "Costa Rica"
+
+  CI:
+    countryCode:  "CI"
+    countryName:   "Cote D'ivoire"
+
+  HR:
+    countryCode:  "HR"
+    countryName:   "Croatia"
+
+  CU:
+    countryCode:  "CU"
+    countryName:   "Cuba"
+
+  CY:
+    countryCode:  "CY"
+    countryName:   "Cyprus"
+
+  CZ:
+    countryCode:  "CZ"
+    countryName:   "Czech Republic"
+
+  DK:
+    countryCode:  "DK"
+    countryName:   "Denmark"
+
+  DJ:
+    countryCode:  "DJ"
+    countryName:   "Djibouti"
+
+  DM:
+    countryCode:  "DM"
+    countryName:   "Dominica"
+
+  DO:
+    countryCode:  "DO"
+    countryName:   "Dominican Republic"
+
+  TP:
+    countryCode:  "TP"
+    countryName:   "East Timor"
+
+  EC:
+    countryCode:  "EC"
+    countryName:   "Ecuador"
+
+  EG:
+    countryCode:  "EG"
+    countryName:   "Egypt"
+
+  SV:
+    countryCode:  "SV"
+    countryName:   "El Salvador"
+
+  GQ:
+    countryCode:  "GQ"
+    countryName:   "Equatorial Guinea"
+
+  ER:
+    countryCode:  "ER"
+    countryName:   "Eritrea"
+
+  EE:
+    countryCode:  "EE"
+    countryName:   "Estonia"
+
+  ET:
+    countryCode:  "ET"
+    countryName:   "Ethiopia"
+
+  FK:
+    countryCode:  "FK"
+    countryName:   "Falkland Islands (malvinas)"
+
+  FO:
+    countryCode:  "FO"
+    countryName:   "Faroe Islands"
+
+  FJ:
+    countryCode:  "FJ"
+    countryName:   "Fiji"
+
+  FI:
+    countryCode:  "FI"
+    countryName:   "Finland"
+
+  FR:
+    countryCode:  "FR"
+    countryName:   "France"
+
+  GF:
+    countryCode:  "GF"
+    countryName:   "French Guiana"
+
+  PF:
+    countryCode:  "PF"
+    countryName:   "French Polynesia"
+
+  TF:
+    countryCode:  "TF"
+    countryName:   "French Southern Territories"
+
+  GA:
+    countryCode:  "GA"
+    countryName:   "Gabon"
+
+  GM:
+    countryCode:  "GM"
+    countryName:   "Gambia"
+
+  GE:
+    countryCode:  "GE"
+    countryName:   "Georgia"
+
+  DE:
+    countryCode:  "DE"
+    countryName:   "Germany"
+
+  GH:
+    countryCode:  "GH"
+    countryName:   "Ghana"
+
+  GI:
+    countryCode:  "GI"
+    countryName:   "Gibraltar"
+
+  GR:
+    countryCode:  "GR"
+    countryName:   "Greece"
+
+  GL:
+    countryCode:  "GL"
+    countryName:   "Greenland"
+
+  GD:
+    countryCode:  "GD"
+    countryName:   "Grenada"
+
+  GP:
+    countryCode:  "GP"
+    countryName:   "Guadeloupe"
+
+  GU:
+    countryCode:  "GU"
+    countryName:   "Guam"
+
+  GT:
+    countryCode:  "GT"
+    countryName:   "Guatemala"
+
+  GN:
+    countryCode:  "GN"
+    countryName:   "Guinea"
+
+  GW:
+    countryCode:  "GW"
+    countryName:   "Guinea-bissau"
+
+  GY:
+    countryCode:  "GY"
+    countryName:   "Guyana"
+
+  HT:
+    countryCode:  "HT"
+    countryName:   "Haiti"
+
+  HM:
+    countryCode:  "HM"
+    countryName:   "Heard Island And Mcdonald Islands"
+
+  VA:
+    countryCode:  "VA"
+    countryName:   "Holy See (vatican City State)"
+
+  HN:
+    countryCode:  "HN"
+    countryName:   "Honduras"
+
+  HK:
+    countryCode:  "HK"
+    countryName:   "Hong Kong"
+
+  HU:
+    countryCode:  "HU"
+    countryName:   "Hungary"
+
+  IS:
+    countryCode:  "IS"
+    countryName:   "Iceland"
+
+  IN:
+    countryCode:  "IN"
+    countryName:   "India"
+
+  ID:
+    countryCode:  "ID"
+    countryName:   "Indonesia"
+
+  IR:
+    countryCode:  "IR"
+    countryName:   "Iran, Islamic Republic Of"
+
+  IQ:
+    countryCode:  "IQ"
+    countryName:   "Iraq"
+
+  IE:
+    countryCode:  "IE"
+    countryName:   "Ireland"
+
+  IL:
+    countryCode:  "IL"
+    countryName:   "Israel"
+
+  IT:
+    countryCode:  "IT"
+    countryName:   "Italy"
+
+  JM:
+    countryCode:  "JM"
+    countryName:   "Jamaica"
+
+  JP:
+    countryCode:  "JP"
+    countryName:   "Japan"
+
+  JO:
+    countryCode:  "JO"
+    countryName:   "Jordan"
+
+  KZ:
+    countryCode:  "KZ"
+    countryName:   "Kazakstan"
+
+  KE:
+    countryCode:  "KE"
+    countryName:   "Kenya"
+
+  KI:
+    countryCode:  "KI"
+    countryName:   "Kiribati"
+
+  KP:
+    countryCode:  "KP"
+    countryName:   "Korea, Democratic People's Republic Of"
+
+  KR:
+    countryCode:  "KR"
+    countryName:   "Korea, Republic Of"
+
+  KV:
+    countryCode:  "KV"
+    countryName:   "Kosovo"
+
+  KW:
+    countryCode:  "KW"
+    countryName:   "Kuwait"
+
+  KG:
+    countryCode:  "KG"
+    countryName:   "Kyrgyzstan"
+
+  LA:
+    countryCode:  "LA"
+    countryName:   "Lao People's Democratic Republic"
+
+  LV:
+    countryCode:  "LV"
+    countryName:   "Latvia"
+
+  LB:
+    countryCode:  "LB"
+    countryName:   "Lebanon"
+
+  LS:
+    countryCode:  "LS"
+    countryName:   "Lesotho"
+
+  LR:
+    countryCode:  "LR"
+    countryName:   "Liberia"
+
+  LY:
+    countryCode:  "LY"
+    countryName:   "Libyan Arab Jamahiriya"
+
+  LI:
+    countryCode:  "LI"
+    countryName:   "Liechtenstein"
+
+  LT:
+    countryCode:  "LT"
+    countryName:   "Lithuania"
+
+  LU:
+    countryCode:  "LU"
+    countryName:   "Luxembourg"
+
+  MO:
+    countryCode:  "MO"
+    countryName:   "Macau"
+
+  MK:
+    countryCode:  "MK"
+    countryName:   "Macedonia, The Former Yugoslav Republic Of"
+
+  MG:
+    countryCode:  "MG"
+    countryName:   "Madagascar"
+
+  MW:
+    countryCode:  "MW"
+    countryName:   "Malawi"
+
+  MY:
+    countryCode:  "MY"
+    countryName:   "Malaysia"
+
+  MV:
+    countryCode:  "MV"
+    countryName:   "Maldives"
+
+  ML:
+    countryCode:  "ML"
+    countryName:   "Mali"
+
+  MT:
+    countryCode:  "MT"
+    countryName:   "Malta"
+
+  MH:
+    countryCode:  "MH"
+    countryName:   "Marshall Islands"
+
+  MQ:
+    countryCode:  "MQ"
+    countryName:   "Martinique"
+
+  MR:
+    countryCode:  "MR"
+    countryName:   "Mauritania"
+
+  MU:
+    countryCode:  "MU"
+    countryName:   "Mauritius"
+
+  YT:
+    countryCode:  "YT"
+    countryName:   "Mayotte"
+
+  MX:
+    countryCode:  "MX"
+    countryName:   "Mexico"
+
+  FM:
+    countryCode:  "FM"
+    countryName:   "Micronesia, Federated States Of"
+
+  MD:
+    countryCode:  "MD"
+    countryName:   "Moldova, Republic Of"
+
+  MC:
+    countryCode:  "MC"
+    countryName:   "Monaco"
+
+  MN:
+    countryCode:  "MN"
+    countryName:   "Mongolia"
+
+  MS:
+    countryCode:  "MS"
+    countryName:   "Montserrat"
+
+  ME:
+    countryCode:  "ME"
+    countryName:   "Montenegro"
+
+  MA:
+    countryCode:  "MA"
+    countryName:   "Morocco"
+
+  MZ:
+    countryCode:  "MZ"
+    countryName:   "Mozambique"
+
+  MM:
+    countryCode:  "MM"
+    countryName:   "Myanmar"
+
+  NA:
+    countryCode:  "NA"
+    countryName:   "Namibia"
+
+  NR:
+    countryCode:  "NR"
+    countryName:   "Nauru"
+
+  NP:
+    countryCode:  "NP"
+    countryName:   "Nepal"
+
+  NL:
+    countryCode:  "NL"
+    countryName:   "Netherlands"
+
+  AN:
+    countryCode:  "AN"
+    countryName:   "Netherlands Antilles"
+
+  NC:
+    countryCode:  "NC"
+    countryName:   "New Caledonia"
+
+  NZ:
+    countryCode:  "NZ"
+    countryName:   "New Zealand"
+
+  NI:
+    countryCode:  "NI"
+    countryName:   "Nicaragua"
+
+  NE:
+    countryCode:  "NE"
+    countryName:   "Niger"
+
+  NG:
+    countryCode:  "NG"
+    countryName:   "Nigeria"
+
+  NU:
+    countryCode:  "NU"
+    countryName:   "Niue"
+
+  NF:
+    countryCode:  "NF"
+    countryName:   "Norfolk Island"
+
+  MP:
+    countryCode:  "MP"
+    countryName:   "Northern Mariana Islands"
+
+  NO:
+    countryCode:  "NO"
+    countryName:   "Norway"
+
+  OM:
+    countryCode:  "OM"
+    countryName:   "Oman"
+
+  PK:
+    countryCode:  "PK"
+    countryName:   "Pakistan"
+
+  PW:
+    countryCode:  "PW"
+    countryName:   "Palau"
+
+  PS:
+    countryCode:  "PS"
+    countryName:   "Palestinian Territory, Occupied"
+
+  PA:
+    countryCode:  "PA"
+    countryName:   "Panama"
+
+  PG:
+    countryCode:  "PG"
+    countryName:   "Papua New Guinea"
+
+  PY:
+    countryCode:  "PY"
+    countryName:   "Paraguay"
+
+  PE:
+    countryCode:  "PE"
+    countryName:   "Peru"
+
+  PH:
+    countryCode:  "PH"
+    countryName:   "Philippines"
+
+  PN:
+    countryCode:  "PN"
+    countryName:   "Pitcairn"
+
+  PL:
+    countryCode:  "PL"
+    countryName:   "Poland"
+
+  PT:
+    countryCode:  "PT"
+    countryName:   "Portugal"
+
+  PR:
+    countryCode:  "PR"
+    countryName:   "Puerto Rico"
+
+  QA:
+    countryCode:  "QA"
+    countryName:   "Qatar"
+
+  RE:
+    countryCode:  "RE"
+    countryName:   "Reunion"
+
+  RO:
+    countryCode:  "RO"
+    countryName:   "Romania"
+
+  RU:
+    countryCode:  "RU"
+    countryName:   "Russian Federation"
+
+  RW:
+    countryCode:  "RW"
+    countryName:   "Rwanda"
+
+  SH:
+    countryCode:  "SH"
+    countryName:   "Saint Helena"
+
+  KN:
+    countryCode:  "KN"
+    countryName:   "Saint Kitts And Nevis"
+
+  LC:
+    countryCode:  "LC"
+    countryName:   "Saint Lucia"
+
+  PM:
+    countryCode:  "PM"
+    countryName:   "Saint Pierre And Miquelon"
+
+  VC:
+    countryCode:  "VC"
+    countryName:   "Saint Vincent And The Grenadines"
+
+  WS:
+    countryCode:  "WS"
+    countryName:   "Samoa"
+
+  SM:
+    countryCode:  "SM"
+    countryName:   "San Marino"
+
+  ST:
+    countryCode:  "ST"
+    countryName:   "Sao Tome And Principe"
+
+  SA:
+    countryCode:  "SA"
+    countryName:   "Saudi Arabia"
+
+  SN:
+    countryCode:  "SN"
+    countryName:   "Senegal"
+
+  RS:
+    countryCode:  "RS"
+    countryName:   "Serbia"
+
+  SC:
+    countryCode:  "SC"
+    countryName:   "Seychelles"
+
+  SL:
+    countryCode:  "SL"
+    countryName:   "Sierra Leone"
+
+  SG:
+    countryCode:  "SG"
+    countryName:   "Singapore"
+
+  SK:
+    countryCode:  "SK"
+    countryName:   "Slovakia"
+
+  SI:
+    countryCode:  "SI"
+    countryName:   "Slovenia"
+
+  SB:
+    countryCode:  "SB"
+    countryName:   "Solomon Islands"
+
+  SO:
+    countryCode:  "SO"
+    countryName:   "Somalia"
+
+  ZA:
+    countryCode:  "ZA"
+    countryName:   "South Africa"
+
+  GS:
+    countryCode:  "GS"
+    countryName:   "South Georgia And The South Sandwich Islands"
+
+  ES:
+    countryCode:  "ES"
+    countryName:   "Spain"
+
+  LK:
+    countryCode:  "LK"
+    countryName:   "Sri Lanka"
+
+  SD:
+    countryCode:  "SD"
+    countryName:   "Sudan"
+
+  SR:
+    countryCode:  "SR"
+    countryName:   "SuricountryName"
+
+  SJ:
+    countryCode:  "SJ"
+    countryName:   "Svalbard And Jan Mayen"
+
+  SZ:
+    countryCode:  "SZ"
+    countryName:   "Swaziland"
+
+  SE:
+    countryCode:  "SE"
+    countryName:   "Sweden"
+
+  CH:
+    countryCode:  "CH"
+    countryName:   "Switzerland"
+
+  SY:
+    countryCode:  "SY"
+    countryName:   "Syrian Arab Republic"
+
+  TW:
+    countryCode:  "TW"
+    countryName:   "Taiwan, Province Of China"
+
+  TJ:
+    countryCode:  "TJ"
+    countryName:   "Tajikistan"
+
+  TZ:
+    countryCode:  "TZ"
+    countryName:   "Tanzania, United Republic Of"
+
+  TH:
+    countryCode:  "TH"
+    countryName:   "Thailand"
+
+  TG:
+    countryCode:  "TG"
+    countryName:   "Togo"
+
+  TK:
+    countryCode:  "TK"
+    countryName:   "Tokelau"
+
+  TO:
+    countryCode:  "TO"
+    countryName:   "Tonga"
+
+  TT:
+    countryCode:  "TT"
+    countryName:   "Trinidad And Tobago"
+
+  TN:
+    countryCode:  "TN"
+    countryName:   "Tunisia"
+
+  TR:
+    countryCode:  "TR"
+    countryName:   "Turkey"
+
+  TM:
+    countryCode:  "TM"
+    countryName:   "Turkmenistan"
+
+  TC:
+    countryCode:  "TC"
+    countryName:   "Turks And Caicos Islands"
+
+  TV:
+    countryCode:  "TV"
+    countryName:   "Tuvalu"
+
+  UG:
+    countryCode:  "UG"
+    countryName:   "Uganda"
+
+  UA:
+    countryCode:  "UA"
+    countryName:   "Ukraine"
+
+  AE:
+    countryCode:  "AE"
+    countryName:   "United Arab Emirates"
+
+  GB:
+    countryCode:  "GB"
+    countryName:   "United Kingdom"
+
+  US:
+    countryCode:  "US"
+    countryName:   "United States"
+
+  UM:
+    countryCode:  "UM"
+    countryName:   "United States Minor Outlying Islands"
+
+  UY:
+    countryCode:  "UY"
+    countryName:   "Uruguay"
+
+  UZ:
+    countryCode:  "UZ"
+    countryName:   "Uzbekistan"
+
+  VU:
+    countryCode:  "VU"
+    countryName:   "Vanuatu"
+
+  VE:
+    countryCode:  "VE"
+    countryName:   "Venezuela"
+
+  VN:
+    countryCode:  "VN"
+    countryName:   "Viet Nam"
+
+  VG:
+    countryCode:  "VG"
+    countryName:   "Virgin Islands, British"
+
+  VI:
+    countryCode:  "VI"
+    countryName:   "Virgin Islands, U.s."
+
+  WF:
+    countryCode:  "WF"
+    countryName:   "Wallis And Futuna"
+
+  EH:
+    countryCode:  "EH"
+    countryName:   "Western Sahara"
+
+  YE:
+    countryCode:  "YE"
+    countryName:   "Yemen"
+
+  ZM:
+    countryCode:  "ZM"
+    countryName:   "Zambia"
+
+  ZW:
+    countryCode:  "ZW"
+    countryName:   "Zimbabwe"
+        

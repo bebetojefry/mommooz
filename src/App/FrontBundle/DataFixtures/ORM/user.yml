@@ -1,0 +1,10 @@
+App\FrontBundle\Entity\Admin:
+    user_adm_1:
+        firstname: Mamoos
+        lastname: Admin
+        gender: 1
+        phone: 9747143513
+        username: admin
+        password: admin
+        locale: en
+        status: true
