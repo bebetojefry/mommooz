@@ -24,3 +24,14 @@ body {
     background-color: #bbb;
     overflow: scroll;
 }
+
+.modal-dialog {
+    width: auto !important;
+    max-width: 80%;
+}
+.form-control.input-sm {
+    padding: 0px 30px 0 10px !important;
+}
+.modal .modal-content {
+    border: none;
+}

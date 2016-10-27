@@ -1,3 +1,9 @@
+set_lang:
+    path:  /lang/{_locale}/{route}
+    defaults: { _controller: AppFrontBundle:Default:setlang }
+    requirements:
+        _locale: de|en
+        
 app_front_consumer_login:
     path:     /login
     host:     "%domain_consumer%"

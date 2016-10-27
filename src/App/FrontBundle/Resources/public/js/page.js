@@ -12,12 +12,26 @@ modal.filter('unsafe', function($sce) {
     };
 });
 
+function openConfirm(obj){    
+    obj.preventDefault();
+    angular.element(obj.target).scope().confirmExecuteUrl(obj);
+    return false;
+}
+
+function openModal(obj){    
+    obj.preventDefault();
+    angular.element(obj.target).scope().toggleModal(obj);
+    return false;
+}
+
 // Main Controller for modal
 modal.controller('MainCtrl', function ($scope, $http) {
     $scope.showModal = false;
     $scope.toggleModal = function(obj){
         $scope.modalTitle = obj.target.attributes.modalTitle.value;
-        $http.get(obj.target.attributes.modalUrl.value)
+        var action = obj.target.attributes.modalUrl;
+        action = (action == undefined) ? obj.target.attributes.href : action;
+        $http.get(action.value)
         .success(function (response) {
             $scope.processResponse(response);
             $scope.showModal = !$scope.showModal;
@@ -26,7 +40,9 @@ modal.controller('MainCtrl', function ($scope, $http) {
             $scope.errorhandler(response);
         });
         
-        $scope.formAction = obj.target.attributes.formAction.value;
+        action = obj.target.attributes.formAction;
+        action = (action == undefined) ? obj.target.attributes.href : action;
+        $scope.formAction = action.value;
         $('#modal-form').ajaxForm({
             success: function(response) {
                 $scope.processResponse(response);
@@ -38,15 +54,17 @@ modal.controller('MainCtrl', function ($scope, $http) {
     };
     
     $scope.confirmExecuteUrl = function(obj){
+        var act = obj.target.attributes.targetUrl;
+        act = (act == undefined) ? obj.target.attributes.href : act;
         BootstrapDialog.show({
-            title: Translator.trans('globals.confirm'),
+            title: 'Confirm Action',
             message: obj.target.attributes.cofirmText.value,
             buttons: [{
-                label: Translator.trans('globals.yes'),
+                label: 'Yes',
                 cssClass: 'btn-primary',
                 action: function(dialog) {
                     dialog.close();
-                    $http.get(obj.target.attributes.targetUrl.value)
+                    $http.get(act.value)
                     .success(function (response) {
                         $scope.processResponse(response);
                     })
@@ -55,7 +73,7 @@ modal.controller('MainCtrl', function ($scope, $http) {
                     });
                 }
                 }, {
-                label: Translator.trans('globals.no'),
+                label: 'No',
                 cssClass: '',
                 action: function(dialog) {
                     dialog.close();

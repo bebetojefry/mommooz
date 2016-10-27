@@ -5,7 +5,7 @@ namespace App\FrontBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Professional
+ * Vendor
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="App\FrontBundle\Entity\UserRepository")

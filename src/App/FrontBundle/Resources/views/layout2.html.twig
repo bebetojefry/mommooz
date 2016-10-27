@@ -23,6 +23,24 @@
         <link rel="stylesheet" href="{{ asset_url }}">
     {% endstylesheets %}
     {% block style %}{% endblock %}
+    {% javascripts
+        'assets/vendor/jquery/jquery.min.js'
+        'assets/vendor/angular/angular.min.js'
+        'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
+        'assets/vendor/bootstrap/js/modal.js'
+        'assets/vendor/moment/min/moment.min.js'
+        'assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js'
+        'assets/vendor/bootstrap-validator/dist/validator.js'
+        'assets/vendor/metisMenu/dist/metisMenu.min.js'
+        '@AppFrontBundle/Resources/public/js/*'
+        output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>var TRANSLATIONS_LOCALE = "{{ app.request.locale }}"</script>
+    <script src="{{ path('funddy_jstranslations', {locale: app.request.locale}) }}"></script>
+    <script src="{{ asset('bundles/funddyjstranslations/js/lib/funddytranslations.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 </head>
 <body ng-app="modal">
     <div id="wrapper" ng-controller="MainCtrl">
@@ -87,21 +105,6 @@
             {% block content %}{% endblock %}
         </div>
     </div>
-    {% javascripts
-        'assets/vendor/jquery/jquery.min.js'
-        'assets/vendor/angular/angular.min.js'
-        'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
-        'assets/vendor/bootstrap/js/modal.js'
-        'assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js'
-        'assets/vendor/bootstrap-validator/dist/validator.js'
-        'assets/vendor/metisMenu/dist/metisMenu.min.js'
-        '@AppFrontBundle/Resources/public/js/*'
-        output='js/compiled/main.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-    <script>var TRANSLATIONS_LOCALE = "{{ app.request.locale }}"</script>
-    <script src="{{ path('funddy_jstranslations', {locale: app.request.locale}) }}"></script>
-    <script src="{{ asset('bundles/funddyjstranslations/js/lib/funddytranslations.js') }}"></script>
     {% block javascript %}{% endblock %}
 </body>
 

@@ -29,7 +29,7 @@ class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler {
 
         // Decides the user provider according to domain host
         if($request->server->get('HTTP_HOST') == $this->container->getParameter('domain_admin')){
-            $userRepo = $em->getRepository('AppFrontBundle:Professional');
+            $userRepo = $em->getRepository('AppFrontBundle:Admin');
         } else {
             $userRepo = $em->getRepository('AppFrontBundle:Consumer');
         }

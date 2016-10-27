@@ -23,6 +23,7 @@
     "metisMenu": "^2.5.2",
     "font-awesome": "^4.7.0",
     "datatables": "^1.10.12",
-    "datatables-plugins": "^1.10.12"
+    "datatables-plugins": "^1.10.12",
+    "moment": "^2.15.2"
   }
 }
