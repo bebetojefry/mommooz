@@ -5,18 +5,18 @@
 !app/logs/.gitkeep
 
 # Parameters
-/app/config/parameters.yml
+# /app/config/parameters.yml
 
 # Managed by Composer
-/app/bootstrap.php.cache
-/bin/*
-!bin/console
-!bin/symfony_requirements
-/vendor/
+# /app/bootstrap.php.cache
+# /bin/*
+# !bin/console
+# !bin/symfony_requirements
+# /vendor/
 
 # Assets and user uploads
 /web/bundles/
-/composer.lock
+# /composer.lock
 
 # Assets managed by Bower
 /web/assets/vendor/

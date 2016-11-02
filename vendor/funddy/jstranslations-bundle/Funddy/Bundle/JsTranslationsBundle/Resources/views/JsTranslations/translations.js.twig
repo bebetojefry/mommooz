@@ -1,0 +1,4 @@
+var TRANSLATIONS = TRANSLATIONS || {};
+if (typeof TRANSLATIONS["{{ locale }}"] === "undefined") {
+    TRANSLATIONS["{{ locale }}"] = {{ translations|raw }};
+}
