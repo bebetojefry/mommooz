@@ -43,6 +43,11 @@ app_front_admin_home:
     path:     /dashboard
     host:     "%domain_admin%"
     defaults: { _controller: AppFrontBundle:Admin:index}
+    
+app_front_admin_category:
+    path:     /categroy
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:category}
 
 app_front_admin_register:
     path:     /register
@@ -80,3 +85,8 @@ admin_location_actions:
     resource: "@AppFrontBundle/Controller/LocationController.php"
     type:     annotation
     prefix: /location
+
+admin_category_actions:
+    resource: "@AppFrontBundle/Controller/CategoryController.php"
+    type:     annotation
+    prefix: /category

@@ -1,0 +1,4 @@
+App\FrontBundle\Entity\Category:
+    main:
+        categoryName: 'root'
+        status: 1

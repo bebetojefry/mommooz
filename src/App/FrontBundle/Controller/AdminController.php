@@ -15,4 +15,12 @@ class AdminController extends Controller
             'regionDatatable' => $regionDatatable,
         ));
     }
+    
+    public function categoryAction(Request $request){
+        $categoryDatatable = $this->get('app.front.datatable.category');
+        $categoryDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:category.html.twig', array(
+            'categoryDatatable' => $categoryDatatable,
+        ));
+    }
 }

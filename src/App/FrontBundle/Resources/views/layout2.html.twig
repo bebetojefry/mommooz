@@ -61,20 +61,10 @@
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        {#
-                        {% if is_granted('ROLE_PROFESSIONAL') %}
-                            <li><a href="{{ path('app_front_admin_products') }}"><i class="fa fa-cubes fa-fw"></i>{{ 'menu.products' | trans }}</a></li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li><a href="{{ path('app_front_consumers') }}"><i class="fa fa-users fa-fw"></i>{{ 'menu.consumers' | trans }}</a></li>
-                            <li><a href="{{ path('app_front_admin_products', {'_su': 'bebeto'}) }}"><i class="fa fa-user-md fa-fw"></i>{{ 'menu.switch_user' | trans }}</a></li>
-                        {% endif %}
-                        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                            <li><a href="{{ path('app_front_admin_products', {'_su': '_exit'}) }}"><i class="fa fa-user fa-fw"></i>{{ 'menu.switch_user_exit' | trans }}</a></li>
-                        {% endif %}
+                        <li><a href="{{ path('app_front_admin_home') }}"><i class="fa fa-tachometer fa-1"></i>{{ 'menu.dashboard' | trans }}</a></li>
+                        <li><a href="{{ path('app_front_admin_category') }}"><i class="fa fa-tags fa-1"></i>{{ 'menu.category' | trans }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ path('app_front_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
-                        #}
+                        <li><a href="{{ path('app_front_admin_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
                     </ul>
                 </li>
                 <li>
