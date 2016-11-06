@@ -27,7 +27,7 @@ class UserListener
             $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
             $entity->setPassword($password);
         } else if($entity instanceof Product){
-            $entity->setUser($this->container->get('security.context')->getToken()->getUser());
+//            $entity->setUser($this->container->get('security.context')->getToken()->getUser());
         }
     }
 
@@ -37,16 +37,16 @@ class UserListener
 
         if($entity instanceof Product) {
             // creating the ACL
-            $aclProvider = $this->container->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-            $acl = $aclProvider->createAcl($objectIdentity);
-
-            // retrieving the security identity of the currently logged-in user
-            $securityIdentity = UserSecurityIdentity::fromAccount($entity->getUser());
-
-            // grant owner access
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-            $aclProvider->updateAcl($acl);
+//            $aclProvider = $this->container->get('security.acl.provider');
+//            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+//            $acl = $aclProvider->createAcl($objectIdentity);
+//
+//            // retrieving the security identity of the currently logged-in user
+//            $securityIdentity = UserSecurityIdentity::fromAccount($entity->getUser());
+//
+//            // grant owner access
+//            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+//            $aclProvider->updateAcl($acl);
         }
     }
 }

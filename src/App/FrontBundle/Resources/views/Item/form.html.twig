@@ -1,0 +1,33 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.product) }}
+        {{ form_row(form.brand) }}
+        {{ form_row(form.keywords) }}
+    </div>
+    <div class="col-md-6">
+        {{ form_row(form.images) }}
+        {{ form_row(form.offers) }}
+        {{ form_row(form.status) }}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        {{ form_row(form.submit) }}
+    </div>
+</div>
+{{ form_rest(form) }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#{{ form.keywords.vars.id }}").tokenInput("{{ path('keyword_search') }}", {
+            theme: "facebook"
+            {% if keyword_values is defined %},prePopulate: {{ keyword_values|raw }}{% endif %}
+        });
+
+        $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
+        
+        $("#{{ form.images.vars.id }}").imageUploader();
+    });
+</script>

@@ -39,7 +39,7 @@ class Category
     private $parent;
 
     /**
-     * @var State
+     * @var ArrayCollection|Keyword[]
      *
      * @ORM\ManyToMany(targetEntity="Keyword"))
      */
@@ -51,6 +51,13 @@ class Category
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
      */
     private $childs;
+    
+    /**
+     * @var ArrayCollection|Product[]
+     *
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="category")
+     */
+    private $products;
     
     /**
      * @var boolean
@@ -230,5 +237,39 @@ class Category
     public function getChilds()
     {
         return $this->childs;
+    }
+
+    /**
+     * Add product
+     *
+     * @param \App\FrontBundle\Entity\Product $product
+     *
+     * @return Category
+     */
+    public function addProduct(\App\FrontBundle\Entity\Product $product)
+    {
+        $this->products[] = $product;
+    
+        return $this;
+    }
+
+    /**
+     * Remove product
+     *
+     * @param \App\FrontBundle\Entity\Product $product
+     */
+    public function removeProduct(\App\FrontBundle\Entity\Product $product)
+    {
+        $this->products->removeElement($product);
+    }
+
+    /**
+     * Get products
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

@@ -23,8 +23,8 @@ class CategoryController extends Controller
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
         $qb = $query->getQuery();
         if($category){
-            $qb->andWhere("category.parent = :p");
-            $qb->setParameter('p', $category);
+            $qb->andWhere("category.parent = :c");
+            $qb->setParameter('c', $category);
         }
         $query->setQuery($qb);
         return $query->getResponse();
@@ -49,7 +49,7 @@ class CategoryController extends Controller
                 $category->setStatus(true);
                 $dm->persist($category);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'category.msg.created');
+                $this->get('session')->getFlashBag()->add('success', 'category.msg.updated');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;

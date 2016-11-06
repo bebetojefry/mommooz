@@ -154,3 +154,73 @@ modal.directive('modal', function () {
         }
     };
 });
+
+
+$.fn.imageUploader = function() {
+    var inputFile = document.createElement("input");
+    var preview_box = document.createElement("div");
+    $(preview_box).addClass('preview_box');
+    inputFile.type = 'file';
+    inputFile.id = inputFile.id+'_file';
+    $(this).parent().append(inputFile);
+    $(this).parent().append(preview_box);
+    $(this).parent().addClass('image_uploader');
+    $(this).addClass('real_input');
+    
+    var that = this;
+    if($(this).val() != ''){
+        var images = $(this).val().split('<>');
+        for(var i = 0; i < images.length; i++){
+            var val = images[i].split('|');
+            var img_box = document.createElement("div");
+            $(img_box).addClass('img_box');
+            var img = document.createElement("img");
+            img.src = val[1];
+            $(img_box).append(img);
+            var img_remove_btn = document.createElement("button");
+            $(img_remove_btn).attr('index', i);
+            $(img_remove_btn).text('X');
+            $(img_box).append(img_remove_btn);
+
+            $(img_remove_btn).on('click', function(){
+                var index = $(this).attr('index');
+                images.splice(index, 1);
+                $(that).val(images.join('<>'));
+                $(that).parent().find('.preview_box').find('.img_box').eq(index).remove();
+            });
+            
+            $(that).parent().find('.preview_box').append(img_box);
+        }
+    } else {
+        var images = [];
+    }
+    
+    $(inputFile).change(function(){
+        if (inputFile.files && inputFile.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var img_box = document.createElement("div");
+                $(img_box).addClass('img_box');
+                var img = document.createElement("img");
+                img.src = e.target.result;
+                $(img_box).append(img);
+                var img_remove_btn = document.createElement("button");
+                $(img_remove_btn).attr('index', images.length);
+                $(img_remove_btn).text('X');
+                $(img_box).append(img_remove_btn);
+                
+                $(img_remove_btn).on('click', function(){
+                    var index = $(this).attr('index');
+                    images.splice(index, 1);
+                    $(that).parent().find('.preview_box').find('.img_box').eq(index).remove();
+                });
+                
+                $(that).parent().find('.preview_box').append(img_box);
+                
+                images.push('0|'+e.target.result);
+                $(that).val(images.join('<>'));
+            }
+            reader.readAsDataURL(inputFile.files[0]);
+        }
+    });
+};
