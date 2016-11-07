@@ -33,7 +33,7 @@ class ProductController extends Controller
     public function newAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new ProductType(), new Product());
+        $form = $this->createForm(new ProductType($dm), new Product());
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -66,7 +66,7 @@ class ProductController extends Controller
     public function editAction(Request $request, Product $product)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new ProductType(), $product);
+        $form = $this->createForm(new ProductType($dm), $product);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -82,8 +82,14 @@ class ProductController extends Controller
             }
         }
         
+        $keywords = $product->getKeywords()->getValues();
+        $keyword_values = array();
+        foreach($keywords as $keyword){
+            $keyword_values[] = array('id' => $keyword->getId(), 'name' => $keyword->getKeyword());
+        }
+        
         $body = $this->renderView('AppFrontBundle:Product:form.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
