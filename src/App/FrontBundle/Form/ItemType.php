@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
 use App\FrontBundle\DataTransformer\ProductImageToIdsTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\FrontBundle\Form\SpecificationType;
 
 class ItemType extends AbstractType
 {
@@ -53,6 +54,12 @@ class ItemType extends AbstractType
                     'required' => false,
                 ))->addModelTransformer($imageTransformer)
             )
+            ->add('specifications', 'collection', array(
+                'type'         => new SpecificationType(),
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+            ))
             ->add('offers')
             ->add('status')
             ->add('submit', 'submit', array(

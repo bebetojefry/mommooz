@@ -68,7 +68,7 @@ class Item
     /**
      * @var ArrayCollection|Specification[]
      *
-     * @ORM\OneToMany(targetEntity="Specification", mappedBy="item")
+     * @ORM\ManyToMany(targetEntity="Specification", orphanRemoval=true, cascade={"persist"})
      */
     private $specifications;
     

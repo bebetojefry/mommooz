@@ -87,3 +87,21 @@ ul.token-input-list-facebook {
     right: 9px;
     top: 3px;
 }
+
+ul.specifications {
+    padding: 0;
+}
+
+ul.specifications li {
+    list-style: none;
+    border-bottom: 1px solid #CCC;
+    padding: 10px 0;
+}
+
+ul.specifications li:last-child {
+    border: none;
+}
+
+ul.specifications li a {
+    
+}

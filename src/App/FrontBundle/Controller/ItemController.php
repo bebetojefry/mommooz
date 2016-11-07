@@ -11,6 +11,7 @@ use App\FrontBundle\Entity\Product;
 use App\FrontBundle\Entity\Item;
 use App\FrontBundle\Form\ItemType;
 use App\FrontBundle\Helper\FormHelper;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class ItemController extends Controller
 {

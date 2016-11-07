@@ -20,13 +20,6 @@ class Specification
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var Item
-     * 
-     * @ORM\ManyToOne(targetEntity="Item", inversedBy="specifications"))
-     */
-    private $item;
     
     /**
      * @var string
@@ -99,29 +92,5 @@ class Specification
     public function getValue()
     {
         return $this->value;
-    }
-
-    /**
-     * Set item
-     *
-     * @param integer $item
-     *
-     * @return Specification
-     */
-    public function setItem($item)
-    {
-        $this->item = $item;
-    
-        return $this;
-    }
-
-    /**
-     * Get item
-     *
-     * @return integer
-     */
-    public function getItem()
-    {
-        return $this->item;
     }
 }
