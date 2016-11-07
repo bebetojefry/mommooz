@@ -39,7 +39,7 @@ class CategoryController extends Controller
     public function newAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new CategoryType(), new Category());
+        $form = $this->createForm(new CategoryType($dm), new Category());
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -72,7 +72,7 @@ class CategoryController extends Controller
     public function editAction(Request $request, Category $category)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new CategoryType(), $category);
+        $form = $this->createForm(new CategoryType($dm), $category);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -88,8 +88,14 @@ class CategoryController extends Controller
             }
         }
         
+        $keywords = $category->getKeywords()->getValues();
+        $keyword_values = array();
+        foreach($keywords as $keyword){
+            $keyword_values[] = array('id' => $keyword->getId(), 'name' => $keyword->getKeyword());
+        }
+        
         $body = $this->renderView('AppFrontBundle:Category:form.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));

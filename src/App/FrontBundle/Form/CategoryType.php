@@ -5,15 +5,26 @@ namespace App\FrontBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
 
 class CategoryType extends AbstractType
 {
+    private $om;
+    
+    public function __construct(ObjectManager $om)
+    {
+        $this->om = $om;
+    }
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $keywordTransformer = new KeywordsToIdsTransformer($this->om);
+        
         $builder
             ->add('categoryName')
             ->add('parent', 'entity', array(
@@ -23,7 +34,11 @@ class CategoryType extends AbstractType
                 'expanded' => false,
             ))
             ->add('status')
-            ->add('keywords')
+            ->add(
+                $builder->create('keywords', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($keywordTransformer)
+            )
             ->add('submit', 'submit', array(
                 'attr' => array('class' => 'class="btn btn-primary"'),
             ));    
