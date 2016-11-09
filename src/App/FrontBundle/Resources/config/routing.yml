@@ -42,13 +42,53 @@ app_front_admin_logout:
 app_front_admin_home:
     path:     /dashboard
     host:     "%domain_admin%"
-    defaults: { _controller: AppFrontBundle:Admin:index}
-
-app_front_admin_register:
-    path:     /register
-    host:     "%domain_admin%"
-    defaults: { _controller: AppFrontBundle:User:register }
+    defaults: { _controller: AppFrontBundle:Admin:dashboard}
     
+app_front_admin_region:
+    path:     /region
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:region}
+
+admin_region_actions:
+    resource: "@AppFrontBundle/Controller/RegionController.php"
+    type:     annotation
+    prefix: /region
+    
+admin_location_actions:
+    resource: "@AppFrontBundle/Controller/LocationController.php"
+    type:     annotation
+    prefix: /location
+
+app_front_admin_category:
+    path:     /categroy
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:category}
+
+admin_category_actions:
+    resource: "@AppFrontBundle/Controller/CategoryController.php"
+    type:     annotation
+    prefix: /category
+    
+app_front_admin_product:
+    path:     /product
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:product}
+    
+admin_product_actions:
+    resource: "@AppFrontBundle/Controller/ProductController.php"
+    type:     annotation
+    prefix: /product
+       
+admin_item_actions:
+    resource: "@AppFrontBundle/Controller/ItemController.php"
+    type:     annotation
+    prefix: /item  
+    
+    
+admin_keyword_pages:
+    resource: "@AppFrontBundle/Controller/KeywordController.php"
+    type:     annotation
+    prefix: /keyword
 
 #########################################################
 
@@ -70,13 +110,3 @@ app_front_vendor_home:
     path:     /dashboard
     host:     "%domain_vendor%"
     defaults: { _controller: AppFrontBundle:Vendor:index}
-    
-admin_region_actions:
-    resource: "@AppFrontBundle/Controller/RegionController.php"
-    type:     annotation
-    prefix: /region
-    
-admin_location_actions:
-    resource: "@AppFrontBundle/Controller/LocationController.php"
-    type:     annotation
-    prefix: /location

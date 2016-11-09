@@ -1,7 +1,4 @@
 <?php
-ob_start();
-session_start();
-
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 

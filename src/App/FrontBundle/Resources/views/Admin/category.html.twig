@@ -10,18 +10,18 @@
     {% endstylesheets %}
 {% endblock %}
 
-{% block region_active %}active{% endblock %}
+{% block category_active %}active{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ 'region.module_name' | trans }}
+                    {{ 'category.module_name' | trans }}
                 </div>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        {{ datatable_render(regionDatatable) }}
+                        {{ datatable_render(categoryDatatable) }}
                     </div>
                 </div>
             </div>

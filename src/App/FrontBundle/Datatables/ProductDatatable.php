@@ -6,11 +6,11 @@ use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
- * Class RegionDatatable
+ * Class ProductDatatable
  *
  * @package App\FrontBundle\Datatables
  */
-class RegionDatatable extends AbstractDatatableView
+class ProductDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -22,16 +22,16 @@ class RegionDatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('region_new'),
-                    'label' => $this->translator->trans('region.actions.new'),
+                    'route' => $this->router->generate('product_new'),
+                    'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
-                        'title' => $this->translator->trans('region.actions.new'),
+                        'title' => $this->translator->trans('datatables.actions.new'),
                         'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
-                        'modalTitle' => $this->translator->trans('region.title.new'),
+                        'modalTitle' => $this->translator->trans('product.title.new'),
                     ),
                 )
             )
@@ -57,7 +57,7 @@ class RegionDatatable extends AbstractDatatableView
         ));
 
         $this->ajax->set(array(
-            'url' => $this->router->generate('region_results'),
+            'url' => $this->router->generate('product_results'),
             'type' => 'GET',
             'pipeline' => 0
         ));
@@ -66,11 +66,11 @@ class RegionDatatable extends AbstractDatatableView
             'display_start' => 0,
             'defer_loading' => -1,
             'dom' => 'lfrtip',
-            'length_menu' => array(5, 10, 25, 50, 100),
+            'length_menu' => array(10, 25, 50, 100),
             'order_classes' => true,
             'order' => array(array(0, 'asc')),
             'order_multi' => true,
-            'page_length' => 5,
+            'page_length' => 10,
             'paging_type' => Style::FULL_NUMBERS_PAGINATION,
             'renderer' => '',
             'scroll_collapse' => false,
@@ -89,69 +89,68 @@ class RegionDatatable extends AbstractDatatableView
             ->add('id', 'column', array(
                 'title' => 'Id',
             ))
-            ->add('regionName', 'column', array(
-                'title' => 'Region Name',
+            ->add('name', 'column', array(
+                'title' => 'Name',
+            ))
+            ->add('description', 'column', array(
+                'title' => 'Description',
+            ))
+            ->add('category.categoryName', 'column', array(
+                'title' => 'Category CategoryName',
             ))
             ->add('status', 'boolean', array(
                 'title' => 'Status',
-            ))
-            ->add('createdOn', 'datetime', array(
-                'title' => 'Created on',
-            ))
-            ->add('state.stateName', 'column', array(
-                'title' => 'State',
-            ))
+            ))          
             ->add(null, 'action', array(
-                'title' => $this->translator->trans('datatables.actions.title'),
+                'title' => $this->translator->trans('product.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'region_edit',
+                        'route' => 'product_items',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('region.actions.edit'),
+                        'label' => $this->translator->trans('product.actions.items'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('region.actions.edit'),
+                            'title' => $this->translator->trans('product.actions.items'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
-                            'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('region.title.edit'),
                             'style' => 'margin-right:5px;'
-                        ),
+                        )
                     ),
                     array(
-                        'route' => 'region_delete',
+                        'route' => 'product_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('region.actions.delete'),
+                        'label' => $this->translator->trans('product.actions.edit'),
+                        'icon' => 'glyphicon glyphicon-edit',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('product.actions.edit'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openModal(event);',
+                            'modalTitle' => $this->translator->trans('product.title.edit'),
+                            'style' => 'margin-right:5px;'
+                        )
+                    ),
+                    array(
+                        'route' => 'product_delete',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('product.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('region.actions.delete'),
+                            'title' => $this->translator->trans('product.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
-                            'cofirmText' => $this->translator->trans('region.delete.confirm'),
+                            'cofirmText' => $this->translator->trans('product.delete.confirm'),
                             'style' => 'margin-right:5px;'
-                        ),
-                    ),
-                    array(
-                        'route' => 'region_detail',
-                        'route_parameters' => array(
-                            'id' => 'id'
-                        ),
-                        'label' => $this->translator->trans('region.actions.detail'),
-                        'icon' => 'glyphicon glyphicon-th-list',
-                        'attributes' => array(
-                            'rel' => 'tooltip',
-                            'title' => $this->translator->trans('region.actions.detail'),
-                            'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button',
-                            'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('region.title.locations')
                         ),
                     )
                 )
@@ -164,7 +163,7 @@ class RegionDatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'App\FrontBundle\Entity\Region';
+        return 'App\FrontBundle\Entity\Product';
     }
 
     /**
@@ -172,6 +171,6 @@ class RegionDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'region_datatable';
+        return 'product_datatable';
     }
 }

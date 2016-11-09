@@ -81,3 +81,15 @@ services:
     app.front.datatable.location:
           class: App\FrontBundle\Datatables\LocationDatatable
           parent: sg_datatables.datatable.abstract
+          
+    app.front.datatable.category:
+          class: App\FrontBundle\Datatables\CategoryDatatable
+          parent: sg_datatables.datatable.abstract
+          
+    app.front.datatable.product:
+          class: App\FrontBundle\Datatables\ProductDatatable
+          parent: sg_datatables.datatable.abstract
+          
+    app.front.datatable.item:
+         class: App\FrontBundle\Datatables\ItemDatatable
+         parent: sg_datatables.datatable.abstract

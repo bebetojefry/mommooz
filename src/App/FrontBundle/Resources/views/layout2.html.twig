@@ -12,6 +12,8 @@
         'assets/vendor/metisMenu/dist/metisMenu.min.css'
         'assets/vendor/font-awesome/css/font-awesome.min.css'
         'assets/vendor/bootstrap3-dialog/src/css/bootstrap-dialog.css'
+        'assets/vendor/jquery-tokeninput/styles/token-input.css'
+        'assets/vendor/jquery-tokeninput/styles/token-input-facebook.css'
         'bundles/appfront/css/*'
         filter='cssrewrite' output='css/compiled/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}">
@@ -32,6 +34,7 @@
         'assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js'
         'assets/vendor/bootstrap-validator/dist/validator.js'
         'assets/vendor/metisMenu/dist/metisMenu.min.js'
+        'assets/vendor/jquery-tokeninput/build/jquery.tokeninput.min.js'
         '@AppFrontBundle/Resources/public/js/*'
         output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
@@ -55,26 +58,21 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">{{ 'menu.hello' | trans }} {{ app.user.getUsedName() }} {% if is_granted('ROLE_ADMIN') %} [Admin] {% endif %}</a>
             </div>
+            <ul class="nav navbar-nav">
+                <li class="{% block region_active %}{% endblock %}"><a href="{{ path('app_front_admin_region') }}">Regions</a></li>
+                <li class="{% block category_active %}{% endblock %}"><a href="{{ path('app_front_admin_category') }}">Category</a></li>
+                <li class="{% block product_active %}{% endblock %}"><a href="{{ path('app_front_admin_product') }}">Products</a></li>
+                <li class="{% block item_active %}{% endblock %}"><a href="{{ path('product_items', {'id' : 0}) }}">Items</a></li>
+            </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        {#
-                        {% if is_granted('ROLE_PROFESSIONAL') %}
-                            <li><a href="{{ path('app_front_admin_products') }}"><i class="fa fa-cubes fa-fw"></i>{{ 'menu.products' | trans }}</a></li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li><a href="{{ path('app_front_consumers') }}"><i class="fa fa-users fa-fw"></i>{{ 'menu.consumers' | trans }}</a></li>
-                            <li><a href="{{ path('app_front_admin_products', {'_su': 'bebeto'}) }}"><i class="fa fa-user-md fa-fw"></i>{{ 'menu.switch_user' | trans }}</a></li>
-                        {% endif %}
-                        {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                            <li><a href="{{ path('app_front_admin_products', {'_su': '_exit'}) }}"><i class="fa fa-user fa-fw"></i>{{ 'menu.switch_user_exit' | trans }}</a></li>
-                        {% endif %}
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile </a></li>
                         <li class="divider"></li>
-                        <li><a href="{{ path('app_front_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
-                        #}
+                        <li><a href="{{ path('app_front_admin_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
                     </ul>
                 </li>
                 <li>
