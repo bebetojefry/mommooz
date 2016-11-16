@@ -84,12 +84,21 @@ admin_item_actions:
     type:     annotation
     prefix: /item  
     
-    
 admin_keyword_pages:
     resource: "@AppFrontBundle/Controller/KeywordController.php"
     type:     annotation
     prefix: /keyword
 
+app_front_admin_brand:
+    path:     /brand
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:brand}
+
+admin_brand_actions:
+    resource: "@AppFrontBundle/Controller/BrandController.php"
+    type:     annotation
+    prefix: /brand
+    
 #########################################################
 
 app_front_vendor_login:

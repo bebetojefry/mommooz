@@ -16,7 +16,11 @@ class SpecificationType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('value')
+            ->add('value', 'textarea', array(
+                'attr' => array(
+                    'class' => 'tinymce'
+                )
+            ))
         ;
     }
     

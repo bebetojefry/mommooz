@@ -63,7 +63,7 @@ class ItemType extends AbstractType
             ->add('offers')
             ->add('status')
             ->add('submit', 'submit', array(
-                'attr' => array('class' => 'class="btn btn-primary"'),
+                'attr' => array('class' => 'btn btn-primary'),
             ));
         ;
     }

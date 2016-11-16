@@ -12,14 +12,16 @@ use App\FrontBundle\Entity\Item;
 use App\FrontBundle\Form\ItemType;
 use App\FrontBundle\Helper\FormHelper;
 use Doctrine\Common\Collections\ArrayCollection;
+use App\FrontBundle\Entity\Brand;
 
 class ItemController extends Controller
 {
     /**
      * @Route("/{id}/results", name="item_results", defaults={"id":0}, options={"expose"=true})
      */
-    public function indexResultsAction(Product $product = null)
+    public function indexResultsAction(Request $request, Product $product = null)
     {
+        $dm = $this->getDoctrine()->getManager();
         $datatable = $this->get('app.front.datatable.item');
         $datatable->buildDatatable(array('product' => $product));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
@@ -28,6 +30,15 @@ class ItemController extends Controller
             $qb->andWhere("item.product = :p");
             $qb->setParameter('p', $product);
         }
+        
+        if($brandId = $request->query->get('brand')){
+            $brand = $dm->getRepository('AppFrontBundle:Brand')->find($brandId);
+            if($brand instanceof Brand) {
+                $qb->andWhere("item.brand = :b");
+                $qb->setParameter('b', $brand);
+            }
+        }
+        
         $query->setQuery($qb);
         return $query->getResponse();
     }

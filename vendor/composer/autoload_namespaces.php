@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
+    'Stfalcon\\Bundle\\TinymceBundle' => array($vendorDir . '/stfalcon/tinymce-bundle'),
     'Sg\\DatatablesBundle' => array($vendorDir . '/sg/datatablesbundle'),
     'Sensio\\Bundle\\GeneratorBundle' => array($vendorDir . '/sensio/generator-bundle'),
     'Sensio\\Bundle\\DistributionBundle' => array($vendorDir . '/sensio/distribution-bundle'),

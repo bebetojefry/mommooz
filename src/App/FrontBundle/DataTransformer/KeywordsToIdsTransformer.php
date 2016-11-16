@@ -6,6 +6,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use App\FrontBundle\Entity\Keyword;
 
 class KeywordsToIdsTransformer implements DataTransformerInterface
 {
@@ -43,9 +44,17 @@ class KeywordsToIdsTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($ids, 'string');
         }
         $idsArray = explode(",", $ids);
-        $idsArray = array_filter ($idsArray, 'is_numeric');
         foreach($idsArray as $id){
-            $keywords->add($this->manager->getRepository('AppFrontBundle:Keyword')->findOneById($id));
+            if(is_numeric($id)){
+                $keyword = $this->manager->getRepository('AppFrontBundle:Keyword')->findOneById($id);
+            } else {
+                $keyword = new Keyword();
+                $keyword->setKeyword($id);
+                $this->manager->persist($keyword);
+                $this->manager->flush();
+            }
+            
+            $keywords->add($keyword);
         }
         
         return $keywords;

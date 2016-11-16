@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Funddy\Bundle\JsTranslationsBundle\FunddyJsTranslationsBundle(),
             new Sg\DatatablesBundle\SgDatatablesBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
+            new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new App\FrontBundle\AppFrontBundle(),
         );
 

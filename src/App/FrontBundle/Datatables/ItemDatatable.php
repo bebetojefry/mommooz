@@ -5,6 +5,8 @@ namespace App\FrontBundle\Datatables;
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 use App\FrontBundle\Entity\Product;
+use App\FrontBundle\Entity\Brand;
+
 /**
  * Class ItemDatatable
  *
@@ -57,8 +59,9 @@ class ItemDatatable extends AbstractDatatableView
         ));
 
         $id = (isset($options['product']) && $options['product'] instanceof Product) ? $options['product']->getId() : 0;
+        $brandId = (isset($options['brand']) && $options['brand'] instanceof Brand) ? $options['brand']->getId() : 0;
         $this->ajax->set(array(
-            'url' => $this->router->generate('item_results', array('id' => $id)),
+            'url' => $this->router->generate('item_results', array('id' => $id, 'brand' => $brandId)),
             'type' => 'GET',
             'pipeline' => 0
         ));

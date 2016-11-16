@@ -40,7 +40,7 @@ class CategoryType extends AbstractType
                 ))->addModelTransformer($keywordTransformer)
             )
             ->add('submit', 'submit', array(
-                'attr' => array('class' => 'class="btn btn-primary"'),
+                'attr' => array('class' => 'btn btn-primary'),
             ));    
         ;
     }

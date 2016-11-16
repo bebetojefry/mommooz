@@ -27,7 +27,8 @@
         "jms/serializer-bundle": "^1.1",
         "funddy/jstranslations-bundle": "^2.0",
         "sg/datatablesbundle": "^0.13.0",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "stfalcon/tinymce-bundle": "1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

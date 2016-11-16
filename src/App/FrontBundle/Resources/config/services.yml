@@ -93,3 +93,7 @@ services:
     app.front.datatable.item:
          class: App\FrontBundle\Datatables\ItemDatatable
          parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.brand:
+         class: App\FrontBundle\Datatables\BrandDatatable
+         parent: sg_datatables.datatable.abstract

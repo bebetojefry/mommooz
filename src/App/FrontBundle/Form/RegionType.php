@@ -23,7 +23,7 @@ class RegionType extends AbstractType
                 'expanded' => false,
             ))
             ->add('submit', 'submit', array(
-                'attr' => array('class' => 'class="btn btn-primary"'),
+                'attr' => array('class' => 'btn btn-primary'),
             ));
         ;
     }

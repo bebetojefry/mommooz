@@ -104,3 +104,12 @@ gregwar_image: ~
 funddy_js_translations:
     languages: [en,de]
     domains: [messages]
+
+stfalcon_tinymce:
+    include_jquery: false
+    tinymce_jquery: true
+    selector: '.tinymce'
+    language: %locale%
+    theme:
+        simple:
+            theme: "modern"

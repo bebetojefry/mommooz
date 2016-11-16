@@ -68,12 +68,13 @@
         
         // add a delete link to the new form
         addSpecificationFormDeleteLink($newFormLi);
+        initTinyMCE();
     }
     
     function addSpecificationFormDeleteLink($tagFormLi) {
         var $removeFormA = $('<a href="#">Delete this Specification</a>');
         $tagFormLi.append($removeFormA);
-
+        initTinyMCE();
         $removeFormA.on('click', function(e) {
             // prevent the link from creating a "#" on the URL
             e.preventDefault();

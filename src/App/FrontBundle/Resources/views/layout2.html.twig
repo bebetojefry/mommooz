@@ -33,8 +33,7 @@
         'assets/vendor/moment/min/moment.min.js'
         'assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js'
         'assets/vendor/bootstrap-validator/dist/validator.js'
-        'assets/vendor/metisMenu/dist/metisMenu.min.js'
-        'assets/vendor/jquery-tokeninput/build/jquery.tokeninput.min.js'
+        'assets/vendor/metisMenu/dist/metisMenu.min.js'       
         '@AppFrontBundle/Resources/public/js/*'
         output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
@@ -44,6 +43,7 @@
     <script src="{{ asset('bundles/funddyjstranslations/js/lib/funddytranslations.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    {{ tinymce_init() }}
 </head>
 <body ng-app="modal">
     <div id="wrapper" ng-controller="MainCtrl">
@@ -63,6 +63,7 @@
                 <li class="{% block category_active %}{% endblock %}"><a href="{{ path('app_front_admin_category') }}">Category</a></li>
                 <li class="{% block product_active %}{% endblock %}"><a href="{{ path('app_front_admin_product') }}">Products</a></li>
                 <li class="{% block item_active %}{% endblock %}"><a href="{{ path('product_items', {'id' : 0}) }}">Items</a></li>
+                <li class="{% block brand_active %}{% endblock %}"><a href="{{ path('app_front_admin_brand') }}">Brands</a></li>
             </ul>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">

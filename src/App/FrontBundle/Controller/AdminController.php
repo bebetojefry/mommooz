@@ -40,4 +40,12 @@ class AdminController extends Controller
             'productDatatable' => $productDatatable,
         ));
     }
+    
+    public function brandAction(Request $request){
+        $brandDatatable = $this->get('app.front.datatable.brand');
+        $brandDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:brand.html.twig', array(
+            'brandDatatable' => $brandDatatable,
+        ));
+    }
 }
