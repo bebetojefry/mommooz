@@ -72,7 +72,7 @@ class ItemController extends Controller
             }
         }
         
-        return $this->render('AppFrontBundle:Item:form.html.twig',
+        $body = $this->renderView('AppFrontBundle:Item:form.html.twig',
             array('form' => $form->createView())
         );
 
