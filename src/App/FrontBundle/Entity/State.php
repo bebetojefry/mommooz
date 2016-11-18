@@ -39,11 +39,11 @@ class State
     private $stateName;
     
     /**
-     * @var ArrayCollection|Region[]
+     * @var ArrayCollection|District[]
      *
-     * @ORM\OneToMany(targetEntity="Region", mappedBy="state")
+     * @ORM\OneToMany(targetEntity="District", mappedBy="state")
      */
-    private $regions;
+    private $districts;
 
     /**
      * Get id
@@ -107,40 +107,40 @@ class State
      */
     public function __construct()
     {
-        $this->regions = new ArrayCollection();
+        $this->districts = new ArrayCollection();
     }
 
     /**
-     * Add region
+     * Add district
      *
-     * @param Region $region
+     * @param \App\FrontBundle\Entity\District $district
      *
      * @return State
      */
-    public function addRegion(Region $region)
+    public function addDistrict(\App\FrontBundle\Entity\District $district)
     {
-        $this->regions[] = $region;
+        $this->districts[] = $district;
 
         return $this;
     }
 
     /**
-     * Remove region
+     * Remove district
      *
-     * @param Region $region
+     * @param \App\FrontBundle\Entity\District $district
      */
-    public function removeRegion(Region $region)
+    public function removeDistrict(\App\FrontBundle\Entity\District $district)
     {
-        $this->regions->removeElement($region);
+        $this->districts->removeElement($district);
     }
 
     /**
-     * Get regions
+     * Get districts
      *
-     * @return Collection
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getRegions()
+    public function getDistricts()
     {
-        return $this->regions;
+        return $this->districts;
     }
 }

@@ -9,6 +9,7 @@ use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
 use App\FrontBundle\DataTransformer\ProductImageToIdsTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\FrontBundle\Form\SpecificationType;
+use App\FrontBundle\Form\ItemVariantType;
 
 class ItemType extends AbstractType
 {
@@ -29,7 +30,8 @@ class ItemType extends AbstractType
         $imageTransformer = new ProductImageToIdsTransformer($this->om);
         $builder
             ->add('name')
-            ->add('description')    
+            ->add('description')
+            ->add('price')
             ->add('product', 'entity', array(
                 'class' => 'AppFrontBundle:Product',
                 'property' => 'name',
@@ -56,6 +58,12 @@ class ItemType extends AbstractType
             )
             ->add('specifications', 'collection', array(
                 'type'         => new SpecificationType(),
+                'allow_add'    => true,
+                'by_reference' => false,
+                'allow_delete' => true,
+            ))
+            ->add('variants', 'collection', array(
+                'type'         => new ItemVariantType(),
                 'allow_add'    => true,
                 'by_reference' => false,
                 'allow_delete' => true,

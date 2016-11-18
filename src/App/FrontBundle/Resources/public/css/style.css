@@ -90,6 +90,7 @@ ul.token-input-list-facebook {
 
 ul.specifications {
     padding: 0;
+    border-bottom: 1px solid #888;
 }
 
 ul.specifications li {
@@ -103,5 +104,24 @@ ul.specifications li:last-child {
 }
 
 ul.specifications li a {
+    
+}
+
+ul.variants {
+    padding: 0;
+    border-bottom: 1px solid #888;
+}
+
+ul.variants li {
+    list-style: none;
+    border-bottom: 1px solid #CCC;
+    padding: 10px 0;
+}
+
+ul.variants li:last-child {
+    border: none;
+}
+
+ul.variants li a {
     
 }

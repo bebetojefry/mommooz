@@ -1,0 +1,7 @@
+App\FrontBundle\Entity\VariantType:
+    variantType_1:
+        name: Weight
+    variantType_2:
+        name: Color
+    variantType_3:
+        name: Size

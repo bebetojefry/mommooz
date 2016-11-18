@@ -1,0 +1,43 @@
+App\FrontBundle\Entity\District:
+    district_1:
+        state: @state_18
+        name: Kasargod
+    district_2:
+        state: @state_18
+        name: Kannur
+    district_3:
+        state: @state_18
+        name: Wayanad
+    district_4:
+        state: @state_18
+        name: Kozhikode
+    district_5:
+        state: @state_18
+        name: Malappuram
+    district_6:
+        state: @state_18
+        name: Palakkad
+    district_7:
+        state: @state_18
+        name: Thrissur
+    district_8:
+        state: @state_18
+        name: Ernakulam
+    district_9:
+        state: @state_18
+        name: Idukki
+    district_10:
+        state: @state_18
+        name: Kottayam
+    district_11:
+        state: @state_18
+        name: Alapuzha
+    district_12:
+        state: @state_18
+        name: Pathanamthitta
+    district_13:
+        state: @state_18
+        name: Kollam
+    district_14:
+        state: @state_18
+        name: Thiruvananthapuram

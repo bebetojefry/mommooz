@@ -23,11 +23,11 @@ class Region
     private $id;
 
     /**
-     * @var State
+     * @var District
      *
-     * @ORM\ManyToOne(targetEntity="State", inversedBy="regions"))
+     * @ORM\ManyToOne(targetEntity="District", inversedBy="regions"))
      */
-    private $state;
+    private $district;
 
     /**
      * @var string
@@ -73,30 +73,6 @@ class Region
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set state
-     *
-     * @param State $state
-     *
-     * @return Region
-     */
-    public function setState($state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Get state
-     *
-     * @return string
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 
     /**
@@ -203,5 +179,29 @@ class Region
     public function getLocations()
     {
         return $this->locations;
+    }
+
+    /**
+     * Set district
+     *
+     * @param \App\FrontBundle\Entity\District $district
+     *
+     * @return Region
+     */
+    public function setDistrict(\App\FrontBundle\Entity\District $district = null)
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    /**
+     * Get district
+     *
+     * @return \App\FrontBundle\Entity\District
+     */
+    public function getDistrict()
+    {
+        return $this->district;
     }
 }

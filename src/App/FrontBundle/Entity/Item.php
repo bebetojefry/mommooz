@@ -40,14 +40,14 @@ class Item
     /**
      * @var Product
      * 
-     * @ORM\ManyToOne(targetEntity="Product", inversedBy="items"))
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="items")
      */
     private $product;
 
     /**
      * @var Brand
      * 
-     * @ORM\ManyToOne(targetEntity="Brand", inversedBy="items"))
+     * @ORM\ManyToOne(targetEntity="Brand", inversedBy="items")
      */
     private $brand;
 
@@ -85,7 +85,20 @@ class Item
      * @ORM\Column(name="status", type="boolean")
      */
     private $status;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="price", type="float")
+     */
+    private $price;
 
+    /**
+     * @var ArrayCollection|ItemVariant[]
+     *
+     * @ORM\OneToMany(targetEntity="ItemVariant", mappedBy="item", cascade={"persist"})
+     */
+    private $variants;
 
     /**
      * Get id
@@ -403,5 +416,63 @@ class Item
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Item
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
+     * Add variant
+     *
+     * @param \App\FrontBundle\Entity\ItemVariant $variant
+     *
+     * @return Item
+     */
+    public function addVariant(\App\FrontBundle\Entity\ItemVariant $variant)
+    {
+        $this->variants[] = $variant;
+
+        return $this;
+    }
+
+    /**
+     * Remove variant
+     *
+     * @param \App\FrontBundle\Entity\ItemVariant $variant
+     */
+    public function removeVariant(\App\FrontBundle\Entity\ItemVariant $variant)
+    {
+        $this->variants->removeElement($variant);
+    }
+
+    /**
+     * Get variants
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getVariants()
+    {
+        return $this->variants;
     }
 }

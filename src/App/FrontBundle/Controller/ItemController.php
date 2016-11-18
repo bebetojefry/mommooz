@@ -59,6 +59,9 @@ class ItemController extends Controller
             $form->handleRequest($request);
             if($form->isValid()){
                 $item = $form->getData();
+                foreach ($item->getVariants() as $variant){
+                    $variant->setItem($item);
+                }
                 $item->setStatus(true);
                 $dm->persist($item);
                 $dm->flush();
@@ -69,7 +72,7 @@ class ItemController extends Controller
             }
         }
         
-        $body = $this->renderView('AppFrontBundle:Item:form.html.twig',
+        return $this->render('AppFrontBundle:Item:form.html.twig',
             array('form' => $form->createView())
         );
 
@@ -92,6 +95,9 @@ class ItemController extends Controller
             $form->handleRequest($request);
             if($form->isValid()){
                 $item = $form->getData();
+                foreach ($item->getVariants() as $variant){
+                    $variant->setItem($item);
+                }
                 $dm->persist($item);
                 $dm->flush();
                 $this->get('session')->getFlashBag()->add('success', 'item.msg.updated');

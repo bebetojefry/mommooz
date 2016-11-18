@@ -98,7 +98,7 @@ class RegionDatatable extends AbstractDatatableView
             ->add('createdOn', 'datetime', array(
                 'title' => 'Created on',
             ))
-            ->add('state.stateName', 'column', array(
+            ->add('district.name', 'column', array(
                 'title' => 'State',
             ))
             ->add(null, 'action', array(

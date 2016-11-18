@@ -1,17 +1,17 @@
 App\FrontBundle\Entity\Region:
     region_1:
-        state: @state_18
+        district: @district_4
         regionName: Kozhikode City
         status: true
     region_2:
-        state: @state_18
+        district: @district_4
         regionName: West Hill
         status: true
     region_3:
-        state: @state_18
+        district: @district_4
         regionName: Thamarasseri
         status: true
     region_4:
-        state: @state_18
+        district: @district_4
         regionName: Feroke
         status: true
