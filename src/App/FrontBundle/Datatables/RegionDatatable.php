@@ -99,7 +99,7 @@ class RegionDatatable extends AbstractDatatableView
                 'title' => 'Created on',
             ))
             ->add('district.name', 'column', array(
-                'title' => 'State',
+                'title' => 'District',
             ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
