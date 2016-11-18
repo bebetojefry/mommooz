@@ -16,9 +16,9 @@ class RegionType extends AbstractType
     {
         $builder
             ->add('regionName')
-            ->add('state', 'entity', array(
-                'class' => 'AppFrontBundle:State',
-                'property' => 'stateName',
+            ->add('district', 'entity', array(
+                'class' => 'AppFrontBundle:District',
+                'property' => 'name',
                 'multiple' => false,
                 'expanded' => false,
             ))
