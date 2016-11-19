@@ -8,7 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use App\FrontBundle\Entity\Image;
 
-class ProductImageToIdsTransformer implements DataTransformerInterface
+class ImageToIdsTransformer implements DataTransformerInterface
 {
     private $manager;
 

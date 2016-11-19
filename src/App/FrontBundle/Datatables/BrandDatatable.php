@@ -18,7 +18,7 @@ class BrandDatatable extends AbstractDatatableView
     public function buildDatatable(array $options = array())
     {
         $this->topActions->set(array(
-            'start_html' => '<div class="row"><div class="col-sm-3">',
+            'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(

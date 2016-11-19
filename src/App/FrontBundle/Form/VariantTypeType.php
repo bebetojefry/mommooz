@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class RegionType extends AbstractType
+class VariantTypeType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,16 +15,10 @@ class RegionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('regionName')
-            ->add('district', 'entity', array(
-                'class' => 'AppFrontBundle:District',
-                'property' => 'name',
-                'multiple' => false,
-                'expanded' => false,
-            ))
+            ->add('name')
             ->add('submit', 'submit', array(
                 'attr' => array('class' => 'btn btn-primary'),
-            ))
+            ))    
         ;
     }
     
@@ -34,7 +28,7 @@ class RegionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'App\FrontBundle\Entity\Region'
+            'data_class' => 'App\FrontBundle\Entity\VariantType'
         ));
     }
 
@@ -43,6 +37,6 @@ class RegionType extends AbstractType
      */
     public function getName()
     {
-        return 'app_frontbundle_region';
+        return 'app_frontbundle_varianttype';
     }
 }

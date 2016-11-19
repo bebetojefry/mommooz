@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
-use App\FrontBundle\DataTransformer\ProductImageToIdsTransformer;
+use App\FrontBundle\DataTransformer\ImageToIdsTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\FrontBundle\Form\SpecificationType;
 use App\FrontBundle\Form\ItemVariantType;
@@ -27,7 +27,7 @@ class ItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $keywordTransformer = new KeywordsToIdsTransformer($this->om);
-        $imageTransformer = new ProductImageToIdsTransformer($this->om);
+        $imageTransformer = new ImageToIdsTransformer($this->om);
         $builder
             ->add('name')
             ->add('description')

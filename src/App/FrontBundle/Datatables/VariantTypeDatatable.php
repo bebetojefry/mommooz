@@ -6,11 +6,11 @@ use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
- * Class CategoryDatatable
+ * Class VariantTypeDatatable
  *
  * @package App\FrontBundle\Datatables
  */
-class CategoryDatatable extends AbstractDatatableView
+class VariantTypeDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -22,8 +22,8 @@ class CategoryDatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('category_new'),
-                    'label' => $this->translator->trans('datatables.actions.new'),
+                    'route' => $this->router->generate('varianttype_new'),
+                    'label' => $this->translator->trans('variant.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
@@ -31,7 +31,7 @@ class CategoryDatatable extends AbstractDatatableView
                         'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
-                        'modalTitle' => $this->translator->trans('category.title.new'),
+                        'modalTitle' => $this->translator->trans('variant.title.new'),
                     ),
                 )
             )
@@ -56,9 +56,8 @@ class CategoryDatatable extends AbstractDatatableView
             'highlight_color' => 'red'
         ));
 
-        $id = isset($options['category']) ? $options['category']->getId() : 1;
         $this->ajax->set(array(
-            'url' => $this->router->generate('category_results', array('id' => $id)),
+            'url' => $this->router->generate('varianttype_results'),
             'type' => 'GET',
             'pipeline' => 0
         ));
@@ -90,67 +89,43 @@ class CategoryDatatable extends AbstractDatatableView
             ->add('id', 'column', array(
                 'title' => 'Id',
             ))
-            ->add('categoryName', 'column', array(
-                'title' => 'CategoryName',
-            ))
-            ->add('parent.categoryName', 'column', array(
-                'title' => 'Parent',
-            ))
-            ->add('status', 'boolean', array(
-                'title' => 'Status',
+            ->add('name', 'column', array(
+                'title' => 'Name',
             ))
             ->add(null, 'action', array(
-                'title' => $this->translator->trans('datatables.actions.title'),
+                'title' => $this->translator->trans('variant.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'category_show',
+                        'route' => 'varianttype_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('datatables.actions.show'),
-                        'icon' => 'glyphicon glyphicon-eye-open',
-                        'attributes' => array(
-                            'rel' => 'tooltip',
-                            'title' => $this->translator->trans('datatables.actions.show'),
-                            'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button',
-                            'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('category.title.show'),
-                            'style' => 'margin-right:5px;'
-                        ),
-                    ),
-                    array(
-                        'route' => 'category_edit',
-                        'route_parameters' => array(
-                            'id' => 'id'
-                        ),
-                        'label' => $this->translator->trans('datatables.actions.edit'),
+                        'label' => $this->translator->trans('variant.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('datatables.actions.edit'),
+                            'title' => $this->translator->trans('variant.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('category.title.edit'),
+                            'modalTitle' => $this->translator->trans('variant.title.edit'),
                             'style' => 'margin-right:5px;'
-                        ),
+                        )
                     ),
                     array(
-                        'route' => 'category_delete',
+                        'route' => 'varianttype_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('category.actions.delete'),
+                        'label' => $this->translator->trans('variant.actions.detail'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('category.actions.delete'),
+                            'title' => $this->translator->trans('variant.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
-                            'cofirmText' => $this->translator->trans('category.delete.confirm'),
-                            'style' => 'margin-right:5px;'
+                            'cofirmText' => $this->translator->trans('variant.delete.confirm')
                         ),
                     )
                 )
@@ -163,7 +138,7 @@ class CategoryDatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'App\FrontBundle\Entity\Category';
+        return 'App\FrontBundle\Entity\VariantType';
     }
 
     /**
@@ -171,6 +146,6 @@ class CategoryDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'category_datatable';
+        return 'varianttype_datatable';
     }
 }

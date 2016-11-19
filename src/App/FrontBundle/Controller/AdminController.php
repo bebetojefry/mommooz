@@ -48,4 +48,20 @@ class AdminController extends Controller
             'brandDatatable' => $brandDatatable,
         ));
     }
+    
+    public function variantAction(Request $request){
+        $variantDatatable = $this->get('app.front.datatable.variant');
+        $variantDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:variant.html.twig', array(
+            'variantDatatable' => $variantDatatable,
+        ));
+    }
+    
+    public function bannerAction(Request $request){
+        $bannerDatatable = $this->get('app.front.datatable.banner');
+        $bannerDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:banner.html.twig', array(
+            'bannerDatatable' => $bannerDatatable,
+        ));
+    }
 }

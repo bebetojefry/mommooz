@@ -97,3 +97,11 @@ services:
     app.front.datatable.brand:
          class: App\FrontBundle\Datatables\BrandDatatable
          parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.variant:
+         class: App\FrontBundle\Datatables\VariantTypeDatatable
+         parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.banner:
+         class: App\FrontBundle\Datatables\BannerDatatable
+         parent: sg_datatables.datatable.abstract

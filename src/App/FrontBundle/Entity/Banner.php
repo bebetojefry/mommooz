@@ -33,21 +33,27 @@ abstract class Banner
     private $banner_name;
 
     /**
-     * @var string
+     * @var ArrayCollection|Image[]
      *
-     * @ORM\Column(name="banner_image", type="text")
+     * @ORM\ManyToMany(targetEntity="Image", orphanRemoval=true)
      */
-    private $banner_image;    
-
+    private $images;    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
-     * Get bannerId
+     * Get id
      *
      * @return integer
      */
-    public function getBannerId()
+    public function getId()
     {
-        return $this->banner_id;
+        return $this->id;
     }
 
     /**
@@ -60,7 +66,7 @@ abstract class Banner
     public function setBannerName($bannerName)
     {
         $this->banner_name = $bannerName;
-
+    
         return $this;
     }
 
@@ -75,36 +81,36 @@ abstract class Banner
     }
 
     /**
-     * Set bannerImage
+     * Add image
      *
-     * @param string $bannerImage
+     * @param \App\FrontBundle\Entity\Image $image
      *
      * @return Banner
      */
-    public function setBannerImage($bannerImage)
+    public function addImage(\App\FrontBundle\Entity\Image $image)
     {
-        $this->banner_image = $bannerImage;
-
+        $this->images[] = $image;
+    
         return $this;
     }
 
     /**
-     * Get bannerImage
+     * Remove image
      *
-     * @return string
+     * @param \App\FrontBundle\Entity\Image $image
      */
-    public function getBannerImage()
+    public function removeImage(\App\FrontBundle\Entity\Image $image)
     {
-        return $this->banner_image;
+        $this->images->removeElement($image);
     }
 
     /**
-     * Get id
+     * Get images
      *
-     * @return integer
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getId()
+    public function getImages()
     {
-        return $this->id;
+        return $this->images;
     }
 }

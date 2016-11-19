@@ -98,7 +98,27 @@ admin_brand_actions:
     resource: "@AppFrontBundle/Controller/BrandController.php"
     type:     annotation
     prefix: /brand
+
+app_front_admin_variant:
+    path:     /variant
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:variant}
     
+admin_variant_actions:
+    resource: "@AppFrontBundle/Controller/VariantController.php"
+    type:     annotation
+    prefix: /variant
+
+app_front_admin_banner:
+    path:     /banner
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:banner}
+
+admin_banner_actions:
+    resource: "@AppFrontBundle/Controller/BannerController.php"
+    type:     annotation
+    prefix: /banner
+
 #########################################################
 
 app_front_vendor_login:
