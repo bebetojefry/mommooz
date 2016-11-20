@@ -3,7 +3,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#{{ form.keywords.vars.id }}").tokenInput("{{ path('keyword_search') }}", {
-            theme: "facebook"
+            theme: "facebook",
+            allow_new: true
             {% if keyword_values is defined %},prePopulate: {{ keyword_values|raw }}{% endif %}
         });
 

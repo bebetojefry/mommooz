@@ -105,3 +105,7 @@ services:
     app.front.datatable.banner:
          class: App\FrontBundle\Datatables\BannerDatatable
          parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.vendor:
+         class: App\FrontBundle\Datatables\UserDatatable
+         parent: sg_datatables.datatable.abstract

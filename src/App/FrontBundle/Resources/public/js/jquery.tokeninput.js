@@ -34,6 +34,7 @@
     animateDropdown: true,
     placeholder: null,
     theme: null,
+    allow_new: false,
     zindex: 999,
     resultsLimit: null,
 
@@ -876,9 +877,13 @@
           // exclude current tokens if configured
           results = excludeCurrent(results);
           
-          if(results.length == 0){
-              dropdown.html("<p>"+settings.noResultsText+"</p>");
-              results = [{name : input_box.val(), id: input_box.val()}];
+          if($(input).data("settings").allow_new){
+            if(results.length == 0){
+                dropdown.html("<p>"+settings.noResultsText+"</p>");
+                results = [{name : input_box.val(), id: input_box.val()}];
+            } else {
+                dropdown.empty();
+            }
           } else {
               dropdown.empty();
           }

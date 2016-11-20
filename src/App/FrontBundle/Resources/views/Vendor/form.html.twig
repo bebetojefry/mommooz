@@ -1,0 +1,36 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.gender) }}
+        {{ form_row(form.phone) }}        
+        {{ form_row(form.regions) }}
+        {{ form_row(form.status) }}
+    </div>
+    <div class="col-md-6">
+        {% if form.addresses|length > 0 %}
+            {% for address in form.addresses %}
+                {{ form_widget(address) }}
+            {% endfor %}
+        {% else %}
+            {{ form_widget(form.addresses.vars.prototype) }}
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        {{ form_row(form.submit) }}
+    </div>
+</div>
+{{ form_widget(form._token) }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#{{ form.regions.vars.id }}").tokenInput("{{ path('region_search') }}", {
+            theme: "facebook"
+            {% if region_values is defined %},prePopulate: {{ region_values|raw }}{% endif %}
+        });
+
+        $('#{{ form.regions.vars.id }}').addClass('token-input-real-field');
+    });
+</script>

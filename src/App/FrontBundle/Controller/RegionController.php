@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\Region;
 use App\FrontBundle\Form\RegionType;
 use App\FrontBundle\Helper\FormHelper;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class RegionController extends Controller
 {
@@ -134,5 +135,24 @@ class RegionController extends Controller
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
+    }
+    
+    /**
+     * @Route("/search", name="region_search")
+     */
+    public function searchAction(Request $request){
+        $q = $request->query->get('q');
+        $regions = $this->getDoctrine()->getManager()->getRepository("AppFrontBundle:Region")->createQueryBuilder('r')
+        ->where('r.regionName LIKE :q')
+        ->setParameter('q', '%'.$q.'%')
+        ->getQuery()
+        ->getResult();
+        
+        $result = array();
+        foreach($regions as $region){
+            $result[] = array('id' => $region->getId(), 'name' => $region->getRegionName().' ('.$region->getDistrict()->getName().')');
+        }
+        
+        return new JsonResponse($result);
     }
 }

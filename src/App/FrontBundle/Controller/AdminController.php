@@ -64,4 +64,12 @@ class AdminController extends Controller
             'bannerDatatable' => $bannerDatatable,
         ));
     }
+    
+    public function vendorAction(Request $request){
+        $vendorDatatable = $this->get('app.front.datatable.vendor');
+        $vendorDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:vendor.html.twig', array(
+            'vendorDatatable' => $vendorDatatable,
+        ));
+    }
 }

@@ -118,6 +118,16 @@ admin_banner_actions:
     resource: "@AppFrontBundle/Controller/BannerController.php"
     type:     annotation
     prefix: /banner
+    
+app_front_admin_vendor:
+    path:     /vendor
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:vendor}
+
+admin_vendor_actions:
+    resource: "@AppFrontBundle/Controller/VendorController.php"
+    type:     annotation
+    prefix: /vendor
 
 #########################################################
 

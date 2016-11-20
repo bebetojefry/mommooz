@@ -1,6 +1,6 @@
 {% extends "AppFrontBundle::layout2.html.twig" %}
 
-{% block title %}{{ 'page_title.items' | trans }}{% endblock %}
+{% block title %}{{ 'page_title.vendor' | trans }}{% endblock %}
 
 {% block style %}
     {% stylesheets
@@ -10,18 +10,18 @@
     {% endstylesheets %}
 {% endblock %}
 
-{% block item_active %}active{% endblock %}
+{% block vendor_active %}active{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ 'item.module_name' | trans }}
+                    {{ 'vendor.module_name' | trans }}
                 </div>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        {{ datatable_render(itemDatatable) }}
+                        {{ datatable_render(vendorDatatable) }}
                     </div>
                 </div>
             </div>

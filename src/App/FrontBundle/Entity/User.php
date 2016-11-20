@@ -11,6 +11,7 @@ use JMS\Serializer\Annotation\Expose;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -137,12 +138,28 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     private $created_on;
 
     /**
+     * @var ArrayCollection|Region[]
+     *
+     * @ORM\ManyToMany(targetEntity="Region")
+     */
+    private $regions;
+    
+     /**
+     * @var ArrayCollection|Address[]
+     *
+     * @ORM\ManyToMany(targetEntity="Address", orphanRemoval=true, cascade={"persist"})
+     */
+    private $addresses;
+    
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->created_on = new \DateTime();
         $this->regenerateSalt();
+        $this->regions = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
     }
 
 
@@ -633,5 +650,73 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     public function getCreatedOn()
     {
         return $this->created_on;
+    }
+
+    /**
+     * Add region
+     *
+     * @param \App\FrontBundle\Entity\Region $region
+     *
+     * @return User
+     */
+    public function addRegion(\App\FrontBundle\Entity\Region $region)
+    {
+        $this->regions[] = $region;
+    
+        return $this;
+    }
+
+    /**
+     * Remove region
+     *
+     * @param \App\FrontBundle\Entity\Region $region
+     */
+    public function removeRegion(\App\FrontBundle\Entity\Region $region)
+    {
+        $this->regions->removeElement($region);
+    }
+
+    /**
+     * Get regions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRegions()
+    {
+        return $this->regions;
+    }
+
+    /**
+     * Add address
+     *
+     * @param \App\FrontBundle\Entity\Address $address
+     *
+     * @return User
+     */
+    public function addAddress(\App\FrontBundle\Entity\Address $address)
+    {
+        $this->addresses[] = $address;
+    
+        return $this;
+    }
+
+    /**
+     * Remove address
+     *
+     * @param \App\FrontBundle\Entity\Address $address
+     */
+    public function removeAddress(\App\FrontBundle\Entity\Address $address)
+    {
+        $this->addresses->removeElement($address);
+    }
+
+    /**
+     * Get addresses
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAddresses()
+    {
+        return $this->addresses;
     }
 }
