@@ -125,3 +125,10 @@ ul.variants li:last-child {
 ul.variants li a {
     
 }
+.navbar-default {
+    position: static !important;
+}
+.navbar-collapse.in,
+.navbar-collapse.collapsing {
+    clear: left;
+}

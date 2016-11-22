@@ -54,56 +54,68 @@
                 </form>
             </modal>
         </div>
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">{{ 'menu.hello' | trans }} {{ app.user.getUsedName() }} {% if is_granted('ROLE_ADMIN') %} [Admin] {% endif %}</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="{% block region_active %}{% endblock %}"><a href="{{ path('app_front_admin_region') }}">Regions</a></li>
-                <li class="{% block category_active %}{% endblock %}"><a href="{{ path('app_front_admin_category') }}">Category</a></li>
-                <li class="{% block product_active %}{% endblock %}"><a href="{{ path('app_front_admin_product') }}">Products</a></li>
-                <li class="{% block item_active %}{% endblock %}"><a href="{{ path('product_items', {'id' : 0}) }}">Items</a></li>
-                <li class="{% block brand_active %}{% endblock %}"><a href="{{ path('app_front_admin_brand') }}">Brands</a></li>
-                <li class="{% block variant_active %}{% endblock %}"><a href="{{ path('app_front_admin_variant') }}">Variants</a></li>
-                <li class="{% block banner_active %}{% endblock %}"><a href="{{ path('app_front_admin_banner') }}">Banners</a></li>
-                <li class="{% block vendor_active %}{% endblock %}"><a href="{{ path('app_front_admin_vendor') }}">Vendors</a></li>
-            </ul>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile </a></li>
-                        <li class="divider"></li>
-                        <li><a href="{{ path('app_front_admin_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                <div class="navbar-header pull-left">
+                    <a class="navbar-brand" href="#">{{ 'menu.hello' | trans }} {{ app.user.getUsedName() }} {% if is_granted('ROLE_ADMIN') %} [Admin] {% endif %}</a>
+                </div>
+                <div class="navbar-header pull-right">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <ul class="nav navbar-top-links navbar-right" style="float: left;">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile </a></li>
+                                <li class="divider"></li>
+                                <li><a href="{{ path('app_front_admin_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
+                            </ul>
+                        </li>
+                        {#<li>
+                            <div class="lang_container">
+                                <a {% if app.request.locale == 'en' %}class="active_locale"{% endif %} href="{{ path('set_lang', {_locale: 'en', route: path(app.request.get('_route'), app.request.get('_route_params')) | urlencrypt}) }}"><img src="{{ asset('/bundles/appfront/images/flag_en.png') }}" /></a>
+                                <a {% if app.request.locale == 'de' %}class="active_locale"{% endif %} href="{{ path('set_lang', {_locale: 'de', route: path(app.request.get('_route'), app.request.get('_route_params')) | urlencrypt}) }}"><img src="{{ asset('/bundles/appfront/images/flag_de.png') }}" /></a>
+                            </div>
+                        </li>#}
                     </ul>
-                </li>
-                <li>
-                    <div class="lang_container">
-                        <a {% if app.request.locale == 'en' %}class="active_locale"{% endif %} href="{{ path('set_lang', {_locale: 'en', route: path(app.request.get('_route'), app.request.get('_route_params')) | urlencrypt}) }}"><img src="{{ asset('/bundles/appfront/images/flag_en.png') }}" /></a>
-                        <a {% if app.request.locale == 'de' %}class="active_locale"{% endif %} href="{{ path('set_lang', {_locale: 'de', route: path(app.request.get('_route'), app.request.get('_route_params')) | urlencrypt}) }}"><img src="{{ asset('/bundles/appfront/images/flag_de.png') }}" /></a>
-                    </div>
-                </li>
-            </ul>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="{% block region_active %}{% endblock %}"><a href="{{ path('app_front_admin_region') }}">Regions</a></li>
+                        <li class="{% block category_active %}{% endblock %}"><a href="{{ path('app_front_admin_category') }}">Category</a></li>
+                        <li class="{% block product_active %}{% endblock %}"><a href="{{ path('app_front_admin_product') }}">Products</a></li>
+                        <li class="{% block item_active %}{% endblock %}"><a href="{{ path('product_items', {'id' : 0}) }}">Items</a></li>
+                        <li class="{% block brand_active %}{% endblock %}"><a href="{{ path('app_front_admin_brand') }}">Brands</a></li>
+                        <li class="{% block variant_active %}{% endblock %}"><a href="{{ path('app_front_admin_variant') }}">Variants</a></li>
+                        <li class="{% block banner_active %}{% endblock %}"><a href="{{ path('app_front_admin_banner') }}">Banners</a></li>
+                        <li class="{% block vendor_active %}{% endblock %}"><a href="{{ path('app_front_admin_vendor') }}">Vendors</a></li>
+                    </ul>
+                </div>
+            
         </nav>
         <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="page-header">
-                        {% for type, messages in app.session.flashBag.all %}
-                            {% for message in messages %}
-                                {%if type == 'error'%} {% set type = 'danger' %} {%endif%}
-                                <div class="alert alert-{{ type }}">
-                                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                                    <strong>{{ type | capitalize }}!</strong>
-                                    {{ message | trans | raw }}
-                                </div>
+            {% if app.session.flashBag.all|length > 0 %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-header">
+                            {% for type, messages in app.session.flashBag.all %}
+                                {% for message in messages %}
+                                    {%if type == 'error'%} {% set type = 'danger' %} {%endif%}
+                                    <div class="alert alert-{{ type }}">
+                                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                                        <strong>{{ type | capitalize }}!</strong>
+                                        {{ message | trans | raw }}
+                                    </div>
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
             {% block content %}{% endblock %}
         </div>
     </div>
