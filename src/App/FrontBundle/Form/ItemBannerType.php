@@ -39,9 +39,6 @@ class ItemBannerType extends AbstractType
                 'expanded' => false,
                 'required' => true,
             ))
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ));
         ;
     }
     

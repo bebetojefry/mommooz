@@ -33,9 +33,6 @@ class BrandType extends AbstractType
                 ))->addModelTransformer($keywordTransformer)
             )
             ->add('status')
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ));
         ;
     }
     

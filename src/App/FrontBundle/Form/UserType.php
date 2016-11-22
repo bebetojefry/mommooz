@@ -45,10 +45,7 @@ class UserType extends AbstractType
                 $builder->create('regions', 'text', array(
                     'required' => false,
                 ))->addModelTransformer($regionstoIdsTransformer)
-            )
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ))    
+            )  
         ;
     }
     

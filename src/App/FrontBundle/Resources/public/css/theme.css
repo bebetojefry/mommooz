@@ -375,3 +375,21 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+.modal-footer {
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+    
+.modal-footer .btn-group button {
+    height:40px;
+    border-top-left-radius : 0;
+    border-top-right-radius : 0;
+    border: none;
+    border-right: 1px solid #ddd;
+}
+	
+.modal-footer .btn-group:last-child > button {
+    border-right: 0;
+}

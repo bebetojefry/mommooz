@@ -69,10 +69,7 @@ class ItemType extends AbstractType
                 'allow_delete' => true,
             ))
             ->add('offers')
-            ->add('status')
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ));
+            ->add('status')            
         ;
     }
     

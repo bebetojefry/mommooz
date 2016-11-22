@@ -50,7 +50,8 @@
         <div class="modal_container">
             <modal id="modal" title="[[ modalTitle ]]" visible="showModal">
                 <form id="modal-form" role="form" data-toggle="validator" method="post" action="[[ formAction ]]" ng-controller="MainCtrl" enctype="multipart/form-data">
-                    <div ng-bind-html="modalHtml | unsafe"></div>
+                    <div ng-bind-html="modalHtml | unsafe" style="margin-bottom: 45px;"></div>
+                    <div class="modal-footer"><div class="btn-group btn-group-justified" role="group" aria-label="group button"><div class="btn-group" role="group"><button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Close</button></div><div class="btn-group" role="group"><button type="submit" id="saveImage" class="btn btn-default btn-hover-green" data-action="save" role="button">Save</button></div></div></div>
                 </form>
             </modal>
         </div>

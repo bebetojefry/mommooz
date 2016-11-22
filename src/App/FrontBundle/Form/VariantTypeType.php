@@ -15,10 +15,7 @@ class VariantTypeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name')
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ))    
+            ->add('name')  
         ;
     }
     

@@ -25,9 +25,6 @@ class LocationType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ))
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ));
         ;
     }
     

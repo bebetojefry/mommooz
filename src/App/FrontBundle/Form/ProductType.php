@@ -39,9 +39,7 @@ class ProductType extends AbstractType
                     'required' => false,
                 ))->addModelTransformer($keywordTransformer)
             )
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ));
+        ;
     }
     
     /**
