@@ -48,7 +48,14 @@ class StockEntryType extends AbstractType
                 'expanded' => false,
                 'required' => true,
             ))
-            ->add('stock', 'hidden')
+            ->add('stock', 'entity', array(
+                'class' => 'AppFrontBundle:Stock',
+                'property' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'required' => true,
+                'attr' => array('readonly' => true)
+            ))
             ->add('offers')
             ->add('status');
         } else {

@@ -12,6 +12,7 @@ use App\FrontBundle\Entity\StockEntry;
 use App\FrontBundle\Form\StockEntryType;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Item;
+use Doctrine\ORM\QueryBuilder;
 
 class StockEntryController extends Controller
 {
@@ -23,13 +24,14 @@ class StockEntryController extends Controller
         $datatable = $this->get('app.front.datatable.stockentry');
         $datatable->buildDatatable(array('stock' => $stock));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
         $qb = $query->getQuery();
         if($stock){
-            $qb->andWhere("stockentry.stock = :s");
+            $qb->andWhere("stock_entry.stock = :s");
             $qb->setParameter('s', $stock);
         }
         $query->setQuery($qb);
-        return $query->getResponse();
+        return $query->getResponse(false);
     }
     
     /**

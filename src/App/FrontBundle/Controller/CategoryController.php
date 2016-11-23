@@ -21,13 +21,14 @@ class CategoryController extends Controller
         $datatable = $this->get('app.front.datatable.category');
         $datatable->buildDatatable(array('category' => $category));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
         $qb = $query->getQuery();
         if($category){
             $qb->andWhere("category.parent = :c");
             $qb->setParameter('c', $category);
         }
         $query->setQuery($qb);
-        return $query->getResponse();
+        return $query->getResponse(false);
     }
     
     /**
