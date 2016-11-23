@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use App\FrontBundle\Entity\Item;
-
+use Doctrine\ORM\EntityRepository;
 class StockEntryType extends AbstractType
 {
     private $item;
@@ -24,25 +24,33 @@ class StockEntryType extends AbstractType
     {
         if($this->item instanceof Item){
             $builder
-            ->add('quantity')
-            ->add('price')
-            ->add('actualPrice')
-            ->add('status')
             ->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
                 'property' => 'name',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
+                'attr' => array('readonly' => true)
             ))
-            ->add('stock', 'entity', array(
-                'class' => 'AppFrontBundle:Stock',
-                'property' => 'name',
+            ->add('quantity')
+            ->add('price')
+            ->add('actualPrice')
+            ->add('variant', 'entity', array(
+                'class' => 'AppFrontBundle:ItemVariant',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('iv')
+                        ->orderBy('iv.id', 'ASC')
+                        ->where('iv.item = :item')
+                        ->setParameter('item', $this->item);
+                },
+                'property' => 'uniqueName',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
             ))
-            ->add('offers');
+            ->add('stock', 'hidden')
+            ->add('offers')
+            ->add('status');
         } else {
             $builder->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
@@ -51,7 +59,8 @@ class StockEntryType extends AbstractType
                 'expanded' => false,
                 'required' => true,
             ));
-        } 
+        }
+        $builder->add('state', 'hidden');
     }
     
     /**

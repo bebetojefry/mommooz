@@ -143,9 +143,6 @@ class VendorController extends Controller
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
             ))
-            ->add('submit', 'submit', array(
-                'attr' => array('class' => 'btn btn-primary'),
-            ))
             ->getForm();
         
         $code = FormHelper::FORM;

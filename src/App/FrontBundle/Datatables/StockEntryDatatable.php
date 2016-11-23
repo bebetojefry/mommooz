@@ -17,12 +17,14 @@ class StockEntryDatatable extends AbstractDatatableView
      */
     public function buildDatatable(array $options = array())
     {
+        $id = isset($options['stock']) ? $options['stock']->getId() : 0;
+        
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-3">',
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('stockentry_new'),
+                    'route' => $this->router->generate('stockentry_new', array('id' => $id)),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
@@ -55,8 +57,6 @@ class StockEntryDatatable extends AbstractDatatableView
             'highlight' => false,
             'highlight_color' => 'red'
         ));
-
-        $id = isset($options['vendor']) ? $options['vendor']->getId() : 0;
         
         $this->ajax->set(array(
             'url' => $this->router->generate('stockentry_results', array('id' => $id)),

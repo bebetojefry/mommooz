@@ -49,6 +49,12 @@ class ItemVariant
      */
     private $price;
 
+    /**
+     * @var ArrayCollection|StockEntry[]
+     *
+     * @ORM\OneToMany(targetEntity="StockEntry", mappedBy="variant")
+     */
+    private $stock_entries;
 
     /**
      * Get id
@@ -154,5 +160,51 @@ class ItemVariant
     public function getVariantType()
     {
         return $this->variantType;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->stock_entries = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add stockEntry
+     *
+     * @param \App\FrontBundle\Entity\StockEntry $stockEntry
+     *
+     * @return ItemVariant
+     */
+    public function addStockEntry(\App\FrontBundle\Entity\StockEntry $stockEntry)
+    {
+        $this->stock_entries[] = $stockEntry;
+
+        return $this;
+    }
+
+    /**
+     * Remove stockEntry
+     *
+     * @param \App\FrontBundle\Entity\StockEntry $stockEntry
+     */
+    public function removeStockEntry(\App\FrontBundle\Entity\StockEntry $stockEntry)
+    {
+        $this->stock_entries->removeElement($stockEntry);
+    }
+
+    /**
+     * Get stockEntries
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStockEntries()
+    {
+        return $this->stock_entries;
+    }
+    
+    public function getUniqueName()
+    {
+        return sprintf('%s - %s', $this->getVariantType()->getName(), $this->value);
     }
 }

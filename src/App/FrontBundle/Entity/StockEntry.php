@@ -29,6 +29,13 @@ class StockEntry
     private $item;
     
     /**
+     * @var Variant
+     * 
+     * @ORM\ManyToOne(targetEntity="ItemVariant", inversedBy="stock_entries")
+     */
+    private $variant;
+    
+    /**
      * @var Stock
      * 
      * @ORM\ManyToOne(targetEntity="Stock", inversedBy="items")
@@ -69,6 +76,8 @@ class StockEntry
      * @ORM\Column(name="status", type="boolean")
      */
     private $status;
+    
+    private $state;
 
     /**
      * Get id
@@ -277,5 +286,39 @@ class StockEntry
     public function removeOffer(\App\FrontBundle\Entity\Offer $offer)
     {
         $this->offers->removeElement($offer);
+    }
+
+    /**
+     * Set variant
+     *
+     * @param \App\FrontBundle\Entity\ItemVariant $variant
+     *
+     * @return StockEntry
+     */
+    public function setVariant(\App\FrontBundle\Entity\ItemVariant $variant = null)
+    {
+        $this->variant = $variant;
+
+        return $this;
+    }
+
+    /**
+     * Get variant
+     *
+     * @return \App\FrontBundle\Entity\ItemVariant
+     */
+    public function getVariant()
+    {
+        return $this->variant;
+    }
+    
+    public function setState($state){
+        $this->state = $state;
+        
+        return $this;
+    }
+    
+    public function getState(){
+        return $this->state;
     }
 }

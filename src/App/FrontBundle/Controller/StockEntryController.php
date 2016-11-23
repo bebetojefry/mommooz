@@ -11,6 +11,7 @@ use App\FrontBundle\Entity\Stock;
 use App\FrontBundle\Entity\StockEntry;
 use App\FrontBundle\Form\StockEntryType;
 use App\FrontBundle\Helper\FormHelper;
+use App\FrontBundle\Entity\Item;
 
 class StockEntryController extends Controller
 {
@@ -34,24 +35,38 @@ class StockEntryController extends Controller
     /**
      * Displays a form to add an existing stockentry entity.
      *
-     * @Route("/new", name="stockentry_new", options={"expose"=true})
+     * @Route("/{id}/new", name="stockentry_new", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Stock $stock = null)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new StockEntryType(), new StockEntry());
+        
+        $item = $this->get('session')->get('stock_entry_item');
+        if($item instanceof Item){
+            $this->get('session')->remove('stock_entry_item');
+        }
+        
+        $entry = new StockEntry();
+        $entry->setStock($stock);
+        $form = $this->createForm(new StockEntryType($item), $entry);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if($form->isValid()){
                 $stockentry = $form->getData();
-                $stockentry->setVendor($this->getUser());
-                $dm->persist($stockentry);
-                $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.created');
-                $code = FormHelper::REFRESH;
+                if($stockentry->getState() == null) {
+                    $stockentry->setState(1);
+                    $this->get('session')->set('stock_entry_item', $stockentry->getItem());
+                    $form = $this->createForm(new StockEntryType($this->get('session')->get('stock_entry_item')), $stockentry);
+                    $code = FormHelper::REFRESH_FORM;
+                } else {
+                    $dm->persist($stockentry);
+                    $dm->flush();
+                    $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.created');
+                    $code = FormHelper::REFRESH;
+                }
             } else {
                 $code = FormHelper::REFRESH_FORM;
             }
@@ -73,7 +88,7 @@ class StockEntryController extends Controller
     public function editAction(Request $request, StockEntry $stockentry)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new StockEntryType(), $stockentry);
+        $form = $this->createForm(new StockEntryType($stockentry->getItem()), $stockentry);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
