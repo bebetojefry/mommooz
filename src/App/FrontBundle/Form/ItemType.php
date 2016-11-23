@@ -56,6 +56,12 @@ class ItemType extends AbstractType
                     'required' => false,
                 ))->addModelTransformer($imageTransformer)
             )
+            ->add('comm_type', 'choice', array(
+                'expanded' => true,
+                'choices' => array(1 => 'Fixed', 2 => 'Percentile'),
+                'data' => 1
+            ))
+            ->add('comm_value')
             ->add('specifications', 'collection', array(
                 'type'         => new SpecificationType(),
                 'allow_add'    => true,

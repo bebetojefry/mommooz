@@ -1,0 +1,5 @@
+App\FrontBundle\Entity\Brand:
+    brandless:
+        name: ''
+        description: 'brand less'
+        status: 1

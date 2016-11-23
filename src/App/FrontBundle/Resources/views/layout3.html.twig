@@ -57,7 +57,7 @@
         </div>
         <nav class="navbar navbar-default navbar-static-top" role="navigation">
                 <div class="navbar-header pull-left">
-                    <a class="navbar-brand" href="#">{{ 'menu.hello' | trans }} {{ app.user.getUsedName() }} {% if is_granted('ROLE_ADMIN') %} [Admin] {% endif %}</a>
+                    <a class="navbar-brand" href="#">{{ 'menu.hello' | trans }} {{ app.user.getUsedName() }} {% if is_granted('ROLE_VENDOR') %} [Vendor] {% endif %}</a>
                 </div>
                 <div class="navbar-header pull-right">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -73,7 +73,7 @@
                             <ul class="dropdown-menu dropdown-user">
                                 <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile </a></li>
                                 <li class="divider"></li>
-                                <li><a href="{{ path('app_front_admin_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
+                                <li><a href="{{ path('app_front_vendor_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
                             </ul>
                         </li>
                         {#<li>
@@ -86,14 +86,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="{% block region_active %}{% endblock %}"><a href="{{ path('app_front_admin_region') }}">Regions</a></li>
-                        <li class="{% block category_active %}{% endblock %}"><a href="{{ path('app_front_admin_category') }}">Category</a></li>
-                        <li class="{% block product_active %}{% endblock %}"><a href="{{ path('app_front_admin_product') }}">Products</a></li>
-                        <li class="{% block brand_active %}{% endblock %}"><a href="{{ path('app_front_admin_brand') }}">Brands</a></li>
-                        <li class="{% block variant_active %}{% endblock %}"><a href="{{ path('app_front_admin_variant') }}">Variants</a></li>
-                        <li class="{% block item_active %}{% endblock %}"><a href="{{ path('product_items', {'id' : 0}) }}">Items</a></li>
-                        <li class="{% block banner_active %}{% endblock %}"><a href="{{ path('app_front_admin_banner') }}">Banners</a></li>
-                        <li class="{% block vendor_active %}{% endblock %}"><a href="{{ path('app_front_admin_vendor') }}">Vendors</a></li>
+                        <li class="{% block stock_active %}{% endblock %}"><a href="{{ path('app_front_vendor_home') }}">Stocks</a></li>
                     </ul>
                 </div>
             

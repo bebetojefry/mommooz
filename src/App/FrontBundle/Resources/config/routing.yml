@@ -134,12 +134,12 @@ admin_vendor_actions:
 app_front_vendor_login:
     path:     /login
     host:     "%domain_vendor%"
-    defaults: { _controller: AppFrontBundle:User:login }
+    defaults: { _controller: AppFrontBundle:Vendor:login }
     
 app_front_vendor_login_check:
     path:     /login_check
     host:     "%domain_vendor%"
-    defaults: { _controller: AppFrontBundle:User:logincheck }
+    defaults: { _controller: AppFrontBundle:Vendor:logincheck }
     
 app_front_vendor_logout:
     host:     "%domain_vendor%"
@@ -149,3 +149,13 @@ app_front_vendor_home:
     path:     /dashboard
     host:     "%domain_vendor%"
     defaults: { _controller: AppFrontBundle:Vendor:index}
+
+stock_actions:
+    resource: "@AppFrontBundle/Controller/StockController.php"
+    type:     annotation
+    prefix: /stock
+    
+stockentry_actions:
+    resource: "@AppFrontBundle/Controller/StockEntryController.php"
+    type:     annotation
+    prefix: /stockentry

@@ -12,6 +12,14 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Vendor extends User
 {
+    
+    /**
+     * @var ArrayCollection|Stock[]
+     *
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="vendor")
+     */
+    private $stocks;
+    
     /**
      * Get roles
      *
@@ -20,5 +28,39 @@ class Vendor extends User
     public function getRoles()
     {
         return array('ROLE_VENDOR', 'ROLE_USER', 'ROLE_'.strtoupper($this->getUsername()));
+    }
+
+    /**
+     * Add stock
+     *
+     * @param \App\FrontBundle\Entity\Stock $stock
+     *
+     * @return Vendor
+     */
+    public function addStock(\App\FrontBundle\Entity\Stock $stock)
+    {
+        $this->stocks[] = $stock;
+    
+        return $this;
+    }
+
+    /**
+     * Remove stock
+     *
+     * @param \App\FrontBundle\Entity\Stock $stock
+     */
+    public function removeStock(\App\FrontBundle\Entity\Stock $stock)
+    {
+        $this->stocks->removeElement($stock);
+    }
+
+    /**
+     * Get stocks
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStocks()
+    {
+        return $this->stocks;
     }
 }

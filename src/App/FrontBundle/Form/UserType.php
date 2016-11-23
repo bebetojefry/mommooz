@@ -31,7 +31,8 @@ class UserType extends AbstractType
             ->add('lastname')
             ->add('gender', 'choice', array(
                 'expanded' => true,
-                'choices' => array(1 => 'Male', 2 => 'Female')
+                'choices' => array(1 => 'Male', 2 => 'Female'),
+                'data' => 1
             ))
             ->add('phone')
             ->add('status')

@@ -9,15 +9,8 @@ class UserController extends Controller
 {
     public function loginAction(Request $request)
     {
-        if($this->getUser()){
-            $token = $this->get('security.token_storage')->getToken();
-            if($token->getProviderKey() == 'admin'){
-                return $this->redirect($this->generateUrl('app_front_admin_home'));
-            } else if($token->getProviderKey() == 'vendor'){ 
-                return $this->redirect($this->generateUrl('app_front_vendor_home'));
-            } else {
-                return $this->redirect($this->generateUrl('app_front_consumers_home'));
-            }
+        if($this->getUser()){            
+            return $this->redirect($this->generateUrl('app_front_admin_home'));
         }
         
         $authenticationUtils = $this->get('security.authentication_utils');

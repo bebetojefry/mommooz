@@ -6,11 +6,11 @@ use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
- * Class VariantTypeDatatable
+ * Class StockDatatable
  *
  * @package App\FrontBundle\Datatables
  */
-class VariantTypeDatatable extends AbstractDatatableView
+class StockDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -22,16 +22,16 @@ class VariantTypeDatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('varianttype_new'),
-                    'label' => $this->translator->trans('variant.actions.new'),
+                    'route' => $this->router->generate('stock_new'),
+                    'label' => $this->translator->trans('stock.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
-                        'title' => $this->translator->trans('datatables.actions.new'),
+                        'title' => $this->translator->trans('stock.actions.new'),
                         'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
-                        'modalTitle' => $this->translator->trans('variant.title.new'),
+                        'modalTitle' => $this->translator->trans('stock.title.new'),
                     ),
                 )
             )
@@ -56,8 +56,10 @@ class VariantTypeDatatable extends AbstractDatatableView
             'highlight_color' => 'red'
         ));
 
+        $id = isset($options['vendor']) ? $options['vendor']->getId() : 0;
+        
         $this->ajax->set(array(
-            'url' => $this->router->generate('varianttype_results'),
+            'url' => $this->router->generate('stock_results', array('id' => $id)),
             'type' => 'GET',
             'pipeline' => 0
         ));
@@ -92,41 +94,62 @@ class VariantTypeDatatable extends AbstractDatatableView
             ->add('name', 'column', array(
                 'title' => 'Name',
             ))
+            ->add('date', 'column', array(
+                'title' => 'Date',
+            ))
+            ->add('status', 'boolean', array(
+                'title' => 'Status',
+            ))
             ->add(null, 'action', array(
-                'title' => $this->translator->trans('variant.actions.title'),
+                'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'varianttype_edit',
+                        'route' => 'stock_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('variant.actions.edit'),
+                        'label' => $this->translator->trans('stock.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('variant.actions.edit'),
+                            'title' => $this->translator->trans('stock.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('variant.title.edit'),
+                            'modalTitle' => $this->translator->trans('stock.title.edit'),
                             'style' => 'margin-right:5px;'
                         )
                     ),
                     array(
-                        'route' => 'varianttype_delete',
+                        'route' => 'stock_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('variant.actions.delete'),
+                        'label' => $this->translator->trans('stock.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('variant.actions.delete'),
+                            'title' => $this->translator->trans('stock.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
-                            'cofirmText' => $this->translator->trans('variant.delete.confirm')
+                            'cofirmText' => $this->translator->trans('stock.delete.confirm'),
+                            'style' => 'margin-right:5px;'
                         ),
+                    ),
+                    array(
+                        'route' => 'stock_items',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('stock.actions.items'),
+                        'icon' => 'glyphicon glyphicon-edit',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('stock.actions.edit'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button'
+                        )
                     )
                 )
             ))
@@ -138,7 +161,7 @@ class VariantTypeDatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'App\FrontBundle\Entity\VariantType';
+        return 'App\FrontBundle\Entity\Stock';
     }
 
     /**
@@ -146,6 +169,6 @@ class VariantTypeDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'varianttype_datatable';
+        return 'stock_datatable';
     }
 }

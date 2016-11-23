@@ -173,4 +173,37 @@ class VendorController extends Controller
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
     }
+    
+    public function loginAction(Request $request)
+    {      
+        if($this->getUser()){            
+            return $this->redirect($this->generateUrl('app_front_vendor_home'));
+        }
+        
+        $authenticationUtils = $this->get('security.authentication_utils');
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+		
+        return $this->render('AppFrontBundle:Vendor:login.html.twig', array(
+            // last username entered by the user
+            'last_username' => $lastUsername,
+            'error'         => $error,
+        ));
+    }
+    
+    public function logincheckAction(){
+
+    }
+    
+    public function indexAction(Request $request){
+        $stockDatatable = $this->get('app.front.datatable.stock');
+        $stockDatatable->buildDatatable(array('vendor' => $this->getUser()));
+        return $this->render('AppFrontBundle:Vendor:dashboard.html.twig', array(
+            'stockDatatable' => $stockDatatable,
+        ));
+    }
 }

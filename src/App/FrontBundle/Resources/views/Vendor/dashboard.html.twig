@@ -1,6 +1,6 @@
-{% extends "AppFrontBundle::layout2.html.twig" %}
+{% extends "AppFrontBundle::layout3.html.twig" %}
 
-{% block title %}{{ 'page_title.category' | trans }}{% endblock %}
+{% block title %}{{ 'page_title.dashbaord' | trans }}{% endblock %}
 
 {% block style %}
     {% stylesheets
@@ -10,18 +10,18 @@
     {% endstylesheets %}
 {% endblock %}
 
-{% block category_active %}active{% endblock %}
+{% block stock_active %}active{% endblock %}
 
 {% block content %}
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ 'category.module_name' | trans }}
+                    {{ 'stock.module_name' | trans }}
                 </div>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        {{ datatable_render(categoryDatatable) }}
+                        {{ datatable_render(stockDatatable) }}
                     </div>
                 </div>
             </div>

@@ -109,3 +109,11 @@ services:
     app.front.datatable.vendor:
          class: App\FrontBundle\Datatables\UserDatatable
          parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.stock:
+         class: App\FrontBundle\Datatables\StockDatatable
+         parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.stockentry:
+         class: App\FrontBundle\Datatables\StockEntryDatatable
+         parent: sg_datatables.datatable.abstract

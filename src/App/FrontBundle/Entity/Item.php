@@ -99,7 +99,28 @@ class Item
      * @ORM\OneToMany(targetEntity="ItemVariant", mappedBy="item", cascade={"persist"})
      */
     private $variants;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="comm_type", type="integer", nullable=true)
+     */
+    private $comm_type;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="comm_value", type="float", nullable=true)
+     */
+    private $comm_value;
+    
+    /**
+     * @var ArrayCollection|StockEntry[]
+     *
+     * @ORM\OneToMany(targetEntity="StockEntry", mappedBy="item")
+     */
+    private $stock_entries;
+    
     /**
      * Get id
      *
@@ -474,5 +495,87 @@ class Item
     public function getVariants()
     {
         return $this->variants;
+    }
+
+    /**
+     * Set commType
+     *
+     * @param integer $commType
+     *
+     * @return Item
+     */
+    public function setCommType($commType)
+    {
+        $this->comm_type = $commType;
+    
+        return $this;
+    }
+
+    /**
+     * Get commType
+     *
+     * @return integer
+     */
+    public function getCommType()
+    {
+        return $this->comm_type;
+    }
+
+    /**
+     * Set commValue
+     *
+     * @param float $commValue
+     *
+     * @return Item
+     */
+    public function setCommValue($commValue)
+    {
+        $this->comm_value = $commValue;
+    
+        return $this;
+    }
+
+    /**
+     * Get commValue
+     *
+     * @return float
+     */
+    public function getCommValue()
+    {
+        return $this->comm_value;
+    }
+
+    /**
+     * Add stockEntry
+     *
+     * @param \App\FrontBundle\Entity\StockEntry $stockEntry
+     *
+     * @return Item
+     */
+    public function addStockEntry(\App\FrontBundle\Entity\StockEntry $stockEntry)
+    {
+        $this->stock_entries[] = $stockEntry;
+    
+        return $this;
+    }
+
+    /**
+     * Remove stockEntry
+     *
+     * @param \App\FrontBundle\Entity\StockEntry $stockEntry
+     */
+    public function removeStockEntry(\App\FrontBundle\Entity\StockEntry $stockEntry)
+    {
+        $this->stock_entries->removeElement($stockEntry);
+    }
+
+    /**
+     * Get stockEntries
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStockEntries()
+    {
+        return $this->stock_entries;
     }
 }
