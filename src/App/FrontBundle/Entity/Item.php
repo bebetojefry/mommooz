@@ -283,6 +283,7 @@ class Item
         $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->specifications = new \Doctrine\Common\Collections\ArrayCollection();
         $this->images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->variants = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

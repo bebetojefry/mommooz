@@ -77,6 +77,13 @@ class StockEntry
      */
     private $status;
     
+     /**
+     * @var ArrayCollection|Keyword[]
+     *
+     * @ORM\ManyToMany(targetEntity="Keyword")
+     */
+    private $keywords;
+    
     private $state;
     
     private $commtype;
@@ -266,6 +273,7 @@ class StockEntry
     public function __construct()
     {
         $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -344,5 +352,39 @@ class StockEntry
     
     public function getCommvalue(){
         return $this->commvalue;
+    }
+
+    /**
+     * Add keyword
+     *
+     * @param \App\FrontBundle\Entity\Keyword $keyword
+     *
+     * @return StockEntry
+     */
+    public function addKeyword(\App\FrontBundle\Entity\Keyword $keyword)
+    {
+        $this->keywords[] = $keyword;
+
+        return $this;
+    }
+
+    /**
+     * Remove keyword
+     *
+     * @param \App\FrontBundle\Entity\Keyword $keyword
+     */
+    public function removeKeyword(\App\FrontBundle\Entity\Keyword $keyword)
+    {
+        $this->keywords->removeElement($keyword);
+    }
+
+    /**
+     * Get keywords
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getKeywords()
+    {
+        return $this->keywords;
     }
 }

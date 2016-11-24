@@ -7,13 +7,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use App\FrontBundle\Entity\Item;
 use Doctrine\ORM\EntityRepository;
+use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
+use Doctrine\Common\Persistence\ObjectManager;
+
 class StockEntryType extends AbstractType
 {
     private $item;
+    private $om;
 
-    public function __construct(Item $item = null)
+    public function __construct(ObjectManager $om, Item $item = null)
     {
         $this->item = $item;
+        $this->om = $om;
     }
     
     /**
@@ -23,6 +28,7 @@ class StockEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if($this->item instanceof Item){
+            $keywordTransformer = new KeywordsToIdsTransformer($this->om);
             $equation = '';
             if($this->item->getCommType() == 1){
                 $equation = '[Price] + '.$this->item->getCommValue();
@@ -44,20 +50,25 @@ class StockEntryType extends AbstractType
             ->add('actualPrice', 'text', array(
                 'label' => 'Actual Price ('.$equation.')',
                 'attr' => array('readonly' => true)
-            ))
-            ->add('variant', 'entity', array(
-                'class' => 'AppFrontBundle:ItemVariant',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('iv')
-                        ->orderBy('iv.id', 'ASC')
-                        ->where('iv.item = :item')
-                        ->setParameter('item', $this->item);
-                },
-                'property' => 'uniqueName',
-                'multiple' => false,
-                'expanded' => false,
-                'required' => true,
-            ))
+            ));
+              
+            if($this->item->getVariants()->count() > 0){
+                $builder->add('variant', 'entity', array(
+                    'class' => 'AppFrontBundle:ItemVariant',
+                    'query_builder' => function (EntityRepository $er) {
+                        return $er->createQueryBuilder('iv')
+                            ->orderBy('iv.id', 'ASC')
+                            ->where('iv.item = :item')
+                            ->setParameter('item', $this->item);
+                    },
+                    'property' => 'uniqueName',
+                    'multiple' => false,
+                    'expanded' => false,
+                    'required' => true,
+                ));
+            }
+            
+            $builder            
             ->add('stock', 'entity', array(
                 'class' => 'AppFrontBundle:Stock',
                 'property' => 'name',
@@ -67,6 +78,11 @@ class StockEntryType extends AbstractType
                 'attr' => array('readonly' => true)
             ))
             ->add('offers')
+            ->add(
+                $builder->create('keywords', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($keywordTransformer)
+            )
             ->add('status');
         } else {
             $builder->add('item', 'entity', array(
@@ -80,6 +96,7 @@ class StockEntryType extends AbstractType
         $builder->add('state', 'hidden');
         $builder->add('commtype', 'hidden');
         $builder->add('commvalue', 'hidden');
+        $builder->add('submit', 'submit');
     }
     
     /**
