@@ -43,10 +43,9 @@ class StockEntryController extends Controller
     public function newAction(Request $request, Stock $stock = null)
     {
         $dm = $this->getDoctrine()->getManager();
-        
-        $item = $this->get('session')->get('stock_entry_item');
-        if($item instanceof Item){
-            $this->get('session')->remove('stock_entry_item');
+        $item = null;
+        if(isset($_POST['app_frontbundle_stockentry']['state']) && $_POST['app_frontbundle_stockentry']['state']){
+            $item = $dm->getRepository('AppFrontBundle:Item')->find($_POST['app_frontbundle_stockentry']['state']);
         }
         
         $entry = new StockEntry();
@@ -59,9 +58,11 @@ class StockEntryController extends Controller
             if($form->isValid()){
                 $stockentry = $form->getData();
                 if($stockentry->getState() == null) {
-                    $stockentry->setState(1);
-                    $this->get('session')->set('stock_entry_item', $stockentry->getItem());
-                    $form = $this->createForm(new StockEntryType($this->get('session')->get('stock_entry_item')), $stockentry);
+                    $stockentry->setPrice(0);
+                    $stockentry->setState($stockentry->getItem()->getId());
+                    $stockentry->setCommtype($stockentry->getItem()->getCommType());
+                    $stockentry->setCommvalue($stockentry->getItem()->getCommValue());
+                    $form = $this->createForm(new StockEntryType($stockentry->getItem()), $stockentry);
                     $code = FormHelper::REFRESH_FORM;
                 } else {
                     $dm->persist($stockentry);
@@ -90,6 +91,9 @@ class StockEntryController extends Controller
     public function editAction(Request $request, StockEntry $stockentry)
     {
         $dm = $this->getDoctrine()->getManager();
+        $stockentry->setState($stockentry->getItem()->getId());
+        $stockentry->setCommtype($stockentry->getItem()->getCommType());
+        $stockentry->setCommvalue($stockentry->getItem()->getCommValue());
         $form = $this->createForm(new StockEntryType($stockentry->getItem()), $stockentry);
         
         $code = FormHelper::FORM;

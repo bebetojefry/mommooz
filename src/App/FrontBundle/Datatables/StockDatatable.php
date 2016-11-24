@@ -94,11 +94,16 @@ class StockDatatable extends AbstractDatatableView
             ->add('name', 'column', array(
                 'title' => 'Name',
             ))
-            ->add('date', 'column', array(
+            ->add('date', 'datetime', array(
                 'title' => 'Date',
-            ))
+                'date_format' => 'DD-MM-Y'
+            ))           
             ->add('status', 'boolean', array(
-                'title' => 'Status',
+                'title' => 'Published',
+                'true_icon' => 'glyphicon glyphicon-ok',
+                'false_icon' => 'glyphicon glyphicon-remove',
+                'true_label' => 'Yes',
+                'false_label' => 'No'
             ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
@@ -118,7 +123,10 @@ class StockDatatable extends AbstractDatatableView
                             'onclick' => 'return openModal(event);',
                             'modalTitle' => $this->translator->trans('stock.title.edit'),
                             'style' => 'margin-right:5px;'
-                        )
+                        ),
+                        'render_if' => function($row) {                            ;
+                            return $row['status'] === false;
+                        }
                     ),
                     array(
                         'route' => 'stock_delete',
@@ -136,6 +144,9 @@ class StockDatatable extends AbstractDatatableView
                             'cofirmText' => $this->translator->trans('stock.delete.confirm'),
                             'style' => 'margin-right:5px;'
                         ),
+                        'render_if' => function($row) {                            ;
+                            return $row['status'] === false;
+                        }
                     ),
                     array(
                         'route' => 'stock_items',
@@ -148,8 +159,28 @@ class StockDatatable extends AbstractDatatableView
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('stock.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button'
+                            'role' => 'button',
+                            'style' => 'margin-right:5px;'
                         )
+                    ),
+                    array(
+                        'route' => 'stock_publish',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('stock.actions.publish'),
+                        'icon' => 'glyphicon glyphicon-trash',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('stock.actions.publish'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openConfirm(event);',
+                            'cofirmText' => $this->translator->trans('stock.publish.confirm')
+                        ),
+                        'render_if' => function($row) {                            ;
+                            return $row['status'] === false;
+                        }
                     )
                 )
             ))

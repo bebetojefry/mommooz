@@ -1,2 +1,24 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {{ form_widget(form) }}
+{% if form.price is defined %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var commtype = parseInt($('#{{ form.commtype.vars.id }}').val());
+            var commvalue = parseFloat($('#{{ form.commvalue.vars.id }}').val());
+            $("#{{ form.price.vars.id }}").on('keyup', function(){
+                if($(this).val() == '') {
+                    $(this).val('0');
+                }
+                var price = parseFloat($(this).val());
+                var actual_price = parseFloat($(this).val());
+                if(commtype == 1){
+                    actual_price = price + commvalue;
+                } else if(commtype == 2){
+                    actual_price = price + parseFloat((commvalue*price)/100);
+                }
+                $("#{{ form.actualPrice.vars.id }}").val(actual_price);
+            });
+        });
+        $("#{{ form.price.vars.id }}").trigger('keyup');
+    </script>
+{% endif %}

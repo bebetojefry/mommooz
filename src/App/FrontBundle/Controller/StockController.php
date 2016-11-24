@@ -48,6 +48,7 @@ class StockController extends Controller
             if($form->isValid()){
                 $stock = $form->getData();
                 $stock->setVendor($this->getUser());
+                $stock->setStatus(false);
                 $dm->persist($stock);
                 $dm->flush();
                 $this->get('session')->getFlashBag()->add('success', 'stock.msg.created');
@@ -124,6 +125,24 @@ class StockController extends Controller
         $itemsDatatable->buildDatatable(array('stock' => $stock));
         return $this->render('AppFrontBundle:Stock:items.html.twig', array(
             'itemsDatatable' => $itemsDatatable,
+            'stock' => $stock
         ));
+    }
+    
+    /**
+     * Displays a form to publish an existing stock entity.
+     *
+     * @Route("/{id}/publish", name="stock_publish", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function publishAction(Request $request, Stock $stock)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $stock->setStatus(true);
+        $dm->persist($stock);
+        $dm->flush();
+        
+        $this->get('session')->getFlashBag()->add('success', 'stock.msg.published');
+        return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
 }

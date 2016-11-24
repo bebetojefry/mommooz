@@ -23,6 +23,13 @@ class StockEntryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if($this->item instanceof Item){
+            $equation = '';
+            if($this->item->getCommType() == 1){
+                $equation = '[Price] + '.$this->item->getCommValue();
+            } else if($this->item->getCommType() == 2) {
+                $equation = '[Price] + ([price]*'.$this->item->getCommValue().'/100)';
+            }
+            
             $builder
             ->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
@@ -34,7 +41,10 @@ class StockEntryType extends AbstractType
             ))
             ->add('quantity')
             ->add('price')
-            ->add('actualPrice')
+            ->add('actualPrice', 'text', array(
+                'label' => 'Actual Price ('.$equation.')',
+                'attr' => array('readonly' => true)
+            ))
             ->add('variant', 'entity', array(
                 'class' => 'AppFrontBundle:ItemVariant',
                 'query_builder' => function (EntityRepository $er) {
@@ -68,6 +78,8 @@ class StockEntryType extends AbstractType
             ));
         }
         $builder->add('state', 'hidden');
+        $builder->add('commtype', 'hidden');
+        $builder->add('commvalue', 'hidden');
     }
     
     /**

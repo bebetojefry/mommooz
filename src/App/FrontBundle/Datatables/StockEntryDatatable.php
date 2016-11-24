@@ -18,6 +18,7 @@ class StockEntryDatatable extends AbstractDatatableView
     public function buildDatatable(array $options = array())
     {
         $id = isset($options['stock']) ? $options['stock']->getId() : 0;
+        $published = isset($options['stock']) ? $options['stock']->getStatus() : 0;
         
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-3">',
@@ -30,7 +31,7 @@ class StockEntryDatatable extends AbstractDatatableView
                     'attributes' => array(
                         'rel' => 'tooltip',
                         'title' => $this->translator->trans('stockentry.actions.new'),
-                        'class' => 'btn btn-primary',
+                        'class' => 'btn btn-primary '.($published?'disabled':''),
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
                         'modalTitle' => $this->translator->trans('stockentry.title.new'),
@@ -104,7 +105,11 @@ class StockEntryDatatable extends AbstractDatatableView
                 'title' => 'ActualPrice',
             ))
             ->add('status', 'boolean', array(
-                'title' => 'Status',
+                'title' => 'Enabled',
+                'true_icon' => 'glyphicon glyphicon-ok',
+                'false_icon' => 'glyphicon glyphicon-remove',
+                'true_label' => 'Yes',
+                'false_label' => 'No'
             ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
@@ -119,7 +124,7 @@ class StockEntryDatatable extends AbstractDatatableView
                         'attributes' => array(
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('stockentry.actions.edit'),
-                            'class' => 'btn btn-primary btn-xs',
+                            'class' => 'btn btn-primary btn-xs '.($published?'disabled':''),
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
                             'modalTitle' => $this->translator->trans('stockentry.title.edit'),
@@ -136,7 +141,7 @@ class StockEntryDatatable extends AbstractDatatableView
                         'attributes' => array(
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('stockentry.actions.delete'),
-                            'class' => 'btn btn-primary btn-xs',
+                            'class' => 'btn btn-primary btn-xs '.($published?'disabled':''),
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
                             'cofirmText' => $this->translator->trans('stockentry.delete.confirm'),

@@ -78,6 +78,10 @@ class StockEntry
     private $status;
     
     private $state;
+    
+    private $commtype;
+    
+    private $commvalue;
 
     /**
      * Get id
@@ -320,5 +324,25 @@ class StockEntry
     
     public function getState(){
         return $this->state;
+    }
+    
+    public function setCommtype($commtype){
+       $this->commtype = $commtype;
+        
+        return $this;
+    }
+    
+    public function getCommtype(){
+        return $this->commtype;
+    }
+    
+    public function setCommvalue($commvalue){
+       $this->commvalue = $commvalue;
+        
+        return $this;
+    }
+    
+    public function getCommvalue(){
+        return $this->commvalue;
     }
 }

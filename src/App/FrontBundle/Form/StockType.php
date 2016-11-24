@@ -17,7 +17,6 @@ class StockType extends AbstractType
         $builder
             ->add('name')
             ->add('date')
-            ->add('status')
             ->add('offers')
         ;
     }
