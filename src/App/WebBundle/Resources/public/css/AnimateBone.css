@@ -1,0 +1,271 @@
+@charset "utf-8";
+
+/*------------css animation ----------------*/
+
+
+
+
+.blur_items { filter: blur(5px); }
+
+.transition_01s
+{
+	-webkit-transition: 0.1s ease;
+	-moz-transition: 0.1s ease;
+	-o-transition: 0.1s ease;
+	transition: 0.1s ease;
+}
+
+.transition_02s
+{
+	-webkit-transition: 0.2s ease;
+	-moz-transition: 0.2s ease;
+	-o-transition: 0.2s ease;
+	transition: 0.2s ease;
+}
+
+.transition_03s
+{
+	-webkit-transition: 0.3s ease;
+	-moz-transition: 0.3s ease;
+	-o-transition: 0.3s ease;
+	transition: 0.3s ease;
+}
+
+.transition_40s
+{
+	-webkit-transition: 0.4s ease;
+	-moz-transition: 0.4s ease;
+	-o-transition: 0.4s ease;
+	transition: 0.4s ease;
+}
+
+.transition_05s
+{
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	transition: all 0.5s ease;
+}
+
+.transition_06s
+{
+	-moz-transition: all 0.6s ease;
+	-o-transition: all 0.6s ease;
+	-webkit-transition: all 0.6s ease;
+	transition: all 0.6s ease;
+}
+
+.transition_07s
+{
+	-moz-transition: all 0.7s ease;
+	-o-transition: all 0.7s ease;
+	-webkit-transition: all 0.7s ease;
+	transition: all 0.7s ease;
+}
+
+.transition_08s
+{
+	-moz-transition: all 0.8s ease;
+	-o-transition: all 0.8s ease;
+	-webkit-transition: all 0.8s ease;
+	transition: all 0.8s ease;
+}
+
+.transition_09s
+{
+	-moz-transition: all 0.9s ease;
+	-o-transition: all 0.9s ease;
+	-webkit-transition: all 0.9s ease;
+	transition: all 0.9s ease;
+}
+
+.transition_1s
+{
+	-moz-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+.transition_2s
+{
+	-moz-transition: all 2s ease;
+	-o-transition: all 2s ease;
+	-webkit-transition: all 2s ease;
+	transition: all 2s ease;
+}
+
+.transition_3s
+{
+	-moz-transition: all 3s ease;
+	-o-transition: all 3s ease;
+	-webkit-transition: all 3s ease;
+	transition: all 3s ease;
+}
+
+.transition_4s
+{
+	-moz-transition: all 4s ease;
+	-o-transition: all 4s ease;
+	-webkit-transition: all 4s ease;
+	transition: all 4s ease;
+}
+
+.transition_5s
+{
+	-moz-transition: all 5s ease;
+	-o-transition: all 5s ease;
+	-webkit-transition: all 5s ease;
+	transition: all 5s ease;
+}
+ @-webkit-keyframes 
+shadowtext { 0% {
+text-shadow:0 0 5px rgba(120, 205, 255, 2);
+ border:1px #eae9e4 solid;
+}
+50% {
+text-shadow:0 0 7px rgba(70, 170, 225, 4);;
+ border:1px #ffba30 solid;
+}
+75% {
+text-shadow:0 0 10px rgba(120, 205, 255, 6);
+ border:1px #eae9e4 solid;
+}
+100% {
+text-shadow:0 0 7px rgba(120, 205, 255, 4);
+ border:1px #47aae3 solid;
+}
+}
+@keyframes 
+shadowtext { 0% {
+text-shadow:0 0 5px rgba(120, 205, 255, 2);
+ border:1px #eae9e4 solid;
+}
+50% {
+text-shadow:0 0 7px rgba(70, 170, 225, 4);;
+ border:1px #ffba30 solid;
+}
+75% {
+text-shadow:0 0 10px rgba(120, 205, 255, 6);
+ border:1px #eae9e4 solid;
+}
+100% {
+text-shadow:0 0 7px rgba(120, 205, 255, 4);
+ border:1px #47aae3 solid;
+}
+}
+ @keyframes 
+read_aniamte1 { 0% {
+width:0%;
+}
+25% {
+width:30%;
+}
+75% {
+width:30%;
+}
+100% {
+width:30%;
+}
+}
+@keyframes 
+read_aniamte2 { 0% {
+width:0%;
+}
+25% {
+width:0%;
+}
+75% {
+width:60%;
+}
+100% {
+width:60%;
+}
+}
+@keyframes 
+read_aniamte3 { 0% {
+width:0%;
+}
+25% {
+width:0%;
+}
+75% {
+width:0%;
+}
+100% {
+width:40%;
+}
+}
+ @-webkit-keyframes 
+color-change { 0% {
+color: red;
+}
+ 50% {
+color: blue;
+}
+ 100% {
+color: red;
+}
+}
+@-moz-keyframes 
+color-change { 0% {
+color: red;
+}
+ 50% {
+color: blue;
+}
+ 100% {
+color: red;
+}
+}
+@-ms-keyframes 
+color-change { 0% {
+color: red;
+}
+ 50% {
+color: blue;
+}
+ 100% {
+color: red;
+}
+}
+@-o-keyframes 
+color-change { 0% {
+color: red;
+}
+ 50% {
+color: blue;
+}
+ 100% {
+color: red;
+}
+}
+@keyframes 
+color-change { 0% {
+color: #525252;
+}
+ 50% {
+color: #f6be72;
+}
+ 75% {
+color: #03ac7e;
+}
+ 100% {
+color: #525252;
+}
+}
+
+
+
+/*------------------
+
+
+    ease - specifies a transition effect with a slow start, then fast, then end slowly (this is default)
+    linear - specifies a transition effect with the same speed from start to end
+    ease-in - specifies a transition effect with a slow start
+    ease-out - specifies a transition effect with a slow end
+    ease-in-out - specifies a transition effect with a slow start and end
+    cubic-bezier(n,n,n,n) - lets you define your own values in a cubic-bezier function
+
+
+-----------*/

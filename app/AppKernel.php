@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
             new App\FrontBundle\AppFrontBundle(),
+            new App\WebBundle\AppWebBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
