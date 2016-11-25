@@ -1,0 +1,12 @@
+function rowCallback(nRow, aData, index) {
+    var $nRow = $(nRow);
+    
+    $nRow.find('td').each(function(k, v){
+        if(k < $nRow.find('td').length - 1) {
+            var title = $('.dataTable').find('thead tr').find('th').eq(k).text();
+            $(this).attr('data-title', title);
+        }
+    });
+
+    return nRow;
+}

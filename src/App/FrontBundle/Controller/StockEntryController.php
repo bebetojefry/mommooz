@@ -50,7 +50,7 @@ class StockEntryController extends Controller
         
         $entry = new StockEntry();
         $entry->setStock($stock);
-        $form = $this->createForm(new StockEntryType($item), $entry);
+        $form = $this->createForm(new StockEntryType($dm, $item), $entry);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -62,7 +62,7 @@ class StockEntryController extends Controller
                     $stockentry->setState($stockentry->getItem()->getId());
                     $stockentry->setCommtype($stockentry->getItem()->getCommType());
                     $stockentry->setCommvalue($stockentry->getItem()->getCommValue());
-                    $form = $this->createForm(new StockEntryType($stockentry->getItem()), $stockentry);
+                    $form = $this->createForm(new StockEntryType($dm, $stockentry->getItem()), $stockentry);
                     $code = FormHelper::REFRESH_FORM;
                 } else {
                     $dm->persist($stockentry);
@@ -94,7 +94,7 @@ class StockEntryController extends Controller
         $stockentry->setState($stockentry->getItem()->getId());
         $stockentry->setCommtype($stockentry->getItem()->getCommType());
         $stockentry->setCommvalue($stockentry->getItem()->getCommValue());
-        $form = $this->createForm(new StockEntryType($stockentry->getItem()), $stockentry);
+        $form = $this->createForm(new StockEntryType($dm, $stockentry->getItem()), $stockentry);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -110,8 +110,14 @@ class StockEntryController extends Controller
             }
         }
         
+        $keywords = $stockentry->getKeywords()->getValues();
+        $keyword_values = array();
+        foreach($keywords as $keyword){
+            $keyword_values[] = array('id' => $keyword->getId(), 'name' => $keyword->getKeyword());
+        }
+        
         $body = $this->renderView('AppFrontBundle:Stock:entry.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));

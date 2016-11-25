@@ -21,7 +21,7 @@ class StockEntryDatatable extends AbstractDatatableView
         $published = isset($options['stock']) ? $options['stock']->getStatus() : 0;
         
         $this->topActions->set(array(
-            'start_html' => '<div class="row"><div class="col-sm-3">',
+            'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
@@ -150,6 +150,12 @@ class StockEntryDatatable extends AbstractDatatableView
                 )
             ))
         ;
+        
+        $this->callbacks->set(array(
+            'row_callback' => array(
+                'template' => 'AppFrontBundle:DataTable:row_callback.js.twig',
+            )
+        ));
     }
 
     /**

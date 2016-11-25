@@ -393,3 +393,73 @@ table.dataTable thead .sorting:after {
 #modal-form .modal-footer .btn-group:last-child > button {
     border-right: 0;
 }
+
+@media only screen and (max-width: 800px) {
+    
+    /* Force table to not be like tables anymore */
+    .dataTables_wrapper table, 
+    .dataTables_wrapper thead, 
+    .dataTables_wrapper tbody, 
+    .dataTables_wrapper th, 
+    .dataTables_wrapper td, 
+    .dataTables_wrapper tr { 
+        display: block; 
+    }
+
+    .dataTables_wrapper table {
+        border: none !important;
+        border-top: 1px solid #ddd !important;
+    }
+    
+    .dataTables_wrapper table tr {
+        border: none !important;
+    }
+    
+    /* Hide table headers (but not display: none;, for accessibility) */
+    .dataTables_wrapper thead tr { 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .dataTables_wrapper tr { border: 1px solid #ccc; }
+
+    .dataTables_wrapper td {
+        /* Behave  like a "row" */
+        border: none !important;
+        border-bottom: 1px solid #ddd !important; 
+        border-left: 1px solid #ddd !important; 
+        border-right: 1px solid #ddd !important; 
+        position: relative;
+        padding-left: 50% !important; 
+        white-space: normal;
+        text-align:left;
+    }
+    
+    .dataTables_wrapper td:last-child {
+        padding-left: 8px !important;
+    }
+
+    .dataTables_wrapper td:before { 
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        text-align:left;
+        font-weight: bold;
+    }
+
+    /*
+    Label the data
+    */
+    .dataTables_wrapper td:before { content: attr(data-title); }
+
+    .dataTables_wrapper td a {
+        margin-top: 5px;
+        width: 100%;
+    }
+}

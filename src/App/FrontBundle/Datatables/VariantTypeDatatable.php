@@ -131,6 +131,12 @@ class VariantTypeDatatable extends AbstractDatatableView
                 )
             ))
         ;
+        
+        $this->callbacks->set(array(
+            'row_callback' => array(
+                'template' => 'AppFrontBundle:DataTable:row_callback.js.twig',
+            )
+        ));
     }
 
     /**
