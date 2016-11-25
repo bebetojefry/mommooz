@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="description" content="Drinn, Confidential and Reliable consultation at your fingertips"  />
+        <meta http-equiv="keywords" content="" />
+        <link rel="icon" type="image/png" sizes="16x16" href="">
+        <!-- Twitter card -->
+        <meta name="twitter:card" content="">
+        <meta name="twitter:site" content="">
+        <meta name="twitter:title" content="">
+        <meta name="twitter:description" content="">
+        <meta name="twitter:image" content="">
+        <!-- OpenGraph information-->
+        <meta property="og:title" content="Momooz" />
+        <meta property="og:description" content="" />
+        <meta property="og:url" content="" />
+        <meta property="og:image" content="">
+        <title>Momooz - {% block title %}{% endblock %}</title>
+        {% stylesheets
+        'bundles/appweb/css/*'
+        filter='cssrewrite' output='css/compiled/main.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+        {% endstylesheets %}
+    {% block stylesheet %}{% endblock %}
+    {% javascripts
+        'assets/vendor/jquery/jquery.min.js'
+        'assets/vendor/jquery.easing/js/jquery.easing.min.js'
+        'bundles/appweb/js/*'
+        output='js/compiled/main.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+</head>
+<body class="relative-pos">
+    <section class="full-width clearSet block-fl-cary top-header va-top">
+        <div class="center-1200px clearSet block-fl-cary">
+            <div class="block-6 white-txt mt-20p mb-5p block-mb-6 block-sb-12 sb-font-10p sb-text-left">
+                <span class="icon-phone mr-5p"></span> +91 0000 000 000  <span class="ml-20p mr-5p icon-envelope-o mb-none"></span>
+                <a href="mailto:care@momooz.in" class="mb-none"> care@momooz.in </a>
+            </div>
+            <div class="block-6 white-txt block-fl-cary block-mb-6 block-sb-12">
+                <div class="block-6 ptrbl-10p sb-ptb-5p block-fl-cary  change-location block-mb-12">
+                    <form>
+                        <span class="icon-map-marker block-1 dispaly-inline-block"></span>
+
+                        <select class="top-place-select dispaly-inline-block ml-10p" name="" >
+                            <option > Kozhikode, Feroke </option>
+                            <option > Kozhikode, Ramanattukara </option>
+                            <option > Kozhikode, Meechantha </option>
+                        </select>
+                    </form>
+                </div>
+                <div class="block-6 block-mb-12 mt-20p clearSet social-top-header relative-pos mb-none">
+                    <a href="" class="fb"></a>
+                    <a href="" class="tw"></a>
+                    <a href="" class="yt"></a>
+                    <a href="" class="gp"></a>
+                    <img src="{{ asset('bundles/appweb/images/icons/social-w-icons.svg') }}" class="right-float" width="100" alt="social momooz">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="center-1200px block-fl-cary ptb-25p logo-cart-search va-top">
+        <div class="block-2 block-mb-12 mb-text-center">
+            <div class="block-mb-5 center-pos">
+                <a href="."> <img src="{{ asset('bundles/appweb/images/icons/logo-image.svg') }}" class="image-fw" alt="momooz"> </a>
+            </div>
+        </div>
+        <div class="block-6 clearSet block-mb-12">
+            <div class="block-10 right-float mb-fn block-mb-12">
+                <form >
+                    <input type="text" placeholder="search product" class="search-main-home">
+                </form>
+            </div>
+        </div>
+        <div class="block-4 block-fl-cary block-mb-12 text-right home-page-cart mb-text-center">
+            <ul class="mt-25p">
+                <li class="prl-15p responcive-menu-cliker  pointer-csr"> <span class="icon-bars"></span> </li>
+                <li class="prl-15p user-click pointer-csr"> <img src="{{ asset('bundles/appweb/images/icons/user.svg') }}" width="25" alt="user"> </li>
+                <li class="prl-15p relative-pos whish-click pointer-csr"> <img src="{{ asset('bundles/appweb/images/icons/wishlist.svg') }}" width="25" alt="Whishlist">
+                    <div class="badge">08</div>
+                </li>
+                <li class="pl-15p relative-pos cart-click "> <img src="{{ asset('bundles/appweb/images/icons/cart.svg') }}" width="25" alt="Cart">
+                    <div class="badge">05</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="login-register-show absolute-pos block-4 transition_03s">
+        <div class="block-8 mt-30p center-pos text-center">
+
+            <h4 class="text-center white-txt mt-50p"> - Login - </h4>
+            <form>
+                <ul>
+                    <li> <input type="text" placeholder="User Name" id="" > </li>
+                    <li> <input type="password" placeholder="Password" id="" > </li>
+                    <li class="text-center login-butn">
+                        <span class="submit-login mr-5p transition_05s pointer-csr" > Login <span class="icon-arrow-right"></span> </span>  /
+                        <a href=""> <span class="icon-facebook"></span> </a> /
+                        <a href=""> <span class="icon-google-plus"></span> </a>
+                    </li>
+                    <li class="text-center login-reg-pasword pt-15p"> <a href="register.php"> Register </a> - <a href=""> Forget Password </a>  </li>
+                </ul>
+            </form>
+            <span class="close-login icon-close-x pointer-csr white-txt" title="close"></span>
+        </div>
+    </div>
+
+
+    <nav class="center-1200px block-fl-cary relative-pos text-center ptb-20p navigation transition_03s">
+        <span class="icon-close-x pointer-csr close-main-menu white-txt"></span>
+        <ul>
+            <li class="pointer-csr nav-catg-click"> Category <span class="icon-angle-down"> </span> </li>
+            <li class="pointer-csr"> <a href="store.php"> Store </a>  </li>
+            <li class="pointer-csr"> <a href="offer.php">  Offer </a> </li>
+            <li class="pointer-csr"> <a href="recipe.php">  recipe </a> </li>
+        </ul>
+
+        <div class="full-width nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">
+            <div class="block-3 main-sub-nav transition_05s ptb-10p">
+                <ul>
+                    <li data_id="1"><a href="products.php"> First menu</a> <span class="icon-arrow-right"></span>
+                        <ul class="second-sub-nav absolute-pos transition_05s" id="1">
+                            <li data_id="501"> Second 1
+                                <div class="block-fl-cary  text-left third-sub-nav" id="501">
+                                    <ul class="block-6">
+                                        <li> Third 1 </li>
+                                        <li> Grocery & Staples </li>
+                                        <li> Bread Dairy & Eggs </li>
+                                        <li> Beverages </li>
+                                        <li> Branded Foods </li>
+                                        <li> Personal Care </li>
+                                        <li> Household </li>
+                                        <li> Imported & Gourmet</li>
+                                        <li> Meat </li>
+                                        <li> View All </li>
+                                    </ul>
+                                    <ul class="block-6">
+                                        <li> Third 2 </li>
+                                        <li> Grocery & Staples </li>
+                                        <li> Bread Dairy & Eggs </li>
+                                        <li> Beverages </li>
+                                        <li> Branded Foods </li>
+                                        <li> Personal Care </li>
+                                        <li> Household </li>
+                                        <li> Imported & Gourmet</li>
+                                        <li> Meat </li>
+                                        <li> View All </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li> Grocery & Staples </li>
+                            <li> Bread Dairy & Eggs </li>
+                            <li> Beverages </li>
+                            <li> Branded Foods </li>
+                            <li> Personal Care </li>
+                            <li> Household </li>
+                            <li> Imported & Gourmet</li>
+                            <li> Meat </li>
+                            <li> View All </li>
+                        </ul>
+                    </li>
+                    <li data_id="2"> Grocery & Staples <span class="icon-arrow-right"> </li>
+                    <li> Bread Dairy & Eggs <span class="icon-arrow-right"> </li>
+                    <li> Beverages <span class="icon-arrow-right"> </li>
+                    <li> Branded Foods <span class="icon-arrow-right"> </li>
+                    <li> Personal Care <span class="icon-arrow-right"> </li>
+                    <li> Household <span class="icon-arrow-right"> </li>
+                    <li> Imported & Gourmet <span class="icon-arrow-right"> </li>
+                    <li> Meat <span class="icon-arrow-right"> </li>
+                    <li> View All <span class="icon-arrow-right"> </li>
+                </ul>
+            </div>
+
+
+        </div>
+    </nav>
+    {% block content %}{% endblock%}
+    <footer class="center-1200px  ptb-30p">
+        <div class="block-fl-cary va-top">
+            <div class="block-2 mt-15p block-mb-4 block-sb-12 sb-text-left">
+                <h4 class="mb-10p"> <strong>site</strong> </h4>
+                <a href="about.php"> About Us </a> <br>
+                <a href=""> Local Shop </a><br>
+                <a href=""> Products </a><br>
+            </div>
+            <div class="block-2 mt-15p block-mb-4 block-sb-12 sb-text-left">
+                <div class="block-11">
+                    <h4 class="mb-10p"> <strong>Help</strong> </h4>
+                    <a href="faq.php"> FAQs </a> <br>
+                    <a href="contact.php"> Contact Us </a><br>
+                </div>
+            </div>
+            <div class="block-3 mt-15p block-mb-4 block-sb-12 sb-text-left">
+                <div class="block-11">
+                    <h4 class="mb-10p"> <strong>Policies</strong> </h4>
+                    <a href="">Privacy Policy  </a> <br>
+                    <a href=""> Terms and Conditions  </a><br>
+                </div>
+            </div>
+            <div class="block-2 mt-15p block-mb-4 block-sb-12 sb-text-left">
+                <h4 class="mb-10p"> <strong>Social Media</strong> </h4>
+                <div class="full-width mt-15p relative-pos footer-social">
+                    <a href="" class="fb"></a>
+                    <a href="" class="tw"></a>
+                    <a href="" class="yt"></a>
+                    <a href="" class="gp"></a>
+                    <img src="{{ asset('bundles/appweb/images/icons/social-icons.svg') }}" width="100" alt="social momooz">
+                </div>
+            </div>
+            <div class="block-3 mt-15p block-mb-4 block-sb-12 sb-text-left">
+                <div class="block-11">
+                    <h4 class="mb-10p"> <strong>Reach Us</strong> </h4>
+                    For any query please email us   <br>
+                    <a href="mailto:store@momooz.com"> store@momooz.com  </a><br>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <section class="footer-comn-catg center-1200px bottom-brd footer-bottom-click pointer-csr transition_05s ptb-10p">
+        <div class="full-width block-fl-cary">
+            <div class="block-6"> <h5 class="transition_05s sb-text-left"> POPULAR CATEGORIES </h5> </div>
+            <div class="block-6 text-right"> <span class="footer-submenu transition_06s pointer-csr relative-pos pr-15p"> Expand </span> </div>
+        </div>
+        <div class="full-width mt-15p block-fl-cary sb-text-left">
+            <a href=""> Sunflower Oils </a> <a href=""> Wheat Atta</a> <a href="">Ghee</a> <a href=""> Milk </a> <a href=""> Health Drinks </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+        </div>
+    </section>
+
+    <section class="footer-comn-catg center-1200px bottom-brd footer-bottom-click pointer-csr transition_05s ptb-10p">
+        <div class="full-width block-fl-cary">
+            <div class="block-6"> <h5 class="transition_05s sb-text-left"> POPULAR Shopes </h5> </div>
+            <div class="block-6 text-right"> <span class="footer-submenu transition_06s pointer-csr relative-pos pr-15p"> Expand </span> </div>
+        </div>
+        <div class="full-width mt-15p block-fl-cary sb-text-left">
+            <a href=""> Sunflower Oils </a> <a href=""> Wheat Atta</a> <a href="">Ghee</a> <a href=""> Milk </a> <a href=""> Health Drinks </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+        </div>
+    </section>
+
+    <section class="footer-comn-catg center-1200px bottom-brd footer-bottom-click pointer-csr transition_05s ptb-10p">
+        <div class="full-width block-fl-cary">
+            <div class="block-6"> <h5 class="transition_05s sb-text-left"> Available CITIES </h5> </div>
+            <div class="block-6 text-right sb-text-left"> <span class="footer-submenu transition_06s  pointer-csr relative-pos pr-15p"> Expand </span> </div>
+        </div>
+        <div class="full-width mt-15p block-fl-cary sb-text-left">
+            <a href=""> Sunflower Oils </a> <a href=""> Wheat Atta</a> <a href="">Ghee</a> <a href=""> Milk </a> <a href=""> Health Drinks </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+        </div>
+    </section>
+
+    <section class="footer-comn-catg center-1200px footer-bottom-click pointer-csr bottom-brd transition_05s ptb-10p">
+        <div class="full-width block-fl-cary">
+            <div class="block-6"> <h5 class="transition_05s sb-text-left"> PAYMENT OPTIONS </h5> </div>
+            <div class="block-6 text-right"> <span class="footer-submenu transition_06s pointer-csr relative-pos pr-15p"> Expand </span> </div>
+        </div>
+        <div class="full-width mt-15p block-fl-cary sb-text-left">
+            <a href=""> Sunflower Oils </a> <a href=""> Wheat Atta</a> <a href="">Ghee</a> <a href=""> Milk </a> <a href=""> Health Drinks </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+            <a href=""> Flakes </a> <a href=""> Organic F&V </a> <a href=""> Namkeen </a> <a href=""> Eggs </a> <a href=""> Floor Cleaners </a>
+            <a href=""> Other Juices </a> <a href=""> Leafy Vegetables </a> <a href=""> Frozen Veg Food </a> <a href=""> Diapers & Wipes </a>
+        </div>
+    </section>
+
+    <section class="full-width footer-second mt-20p text-center ptb-10p white-txt"> Copyright Â© 2016, momooz Pvt Ltd, powered by
+    <a href="http://primalcodes.com/" target="new"> primalcodes </a> </section>
+    
+    {% block javascript %}{% endblock %}
+</body>
+
+</html>

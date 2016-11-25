@@ -14,4 +14,3 @@ parameters:
     domain_admin: admin.mamoos.dev
     domain_vendor: vendor.mamoos.dev
     domain_consumer: mamoos.dev
-    domain_api: api.mamoos.dev

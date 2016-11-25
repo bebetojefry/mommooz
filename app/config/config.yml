@@ -47,7 +47,7 @@ assetic:
     debug:          "%kernel.debug%"
     node: /usr/bin/nodejs
     use_controller: false
-    bundles:        [ AppFrontBundle ]
+    bundles:        [ AppFrontBundle, AppWebBundle ]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~

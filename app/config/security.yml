@@ -104,4 +104,4 @@ security:
       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/[a-z]+, roles: ROLE_ADMIN, host: %domain_admin% }
       - { path: ^/[a-z]+, roles: ROLE_VENDOR, host: %domain_vendor% }
-      - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+      - { path: ^/account/[a-z]+, roles: ROLE_CONSUMER, host: %domain_consumer% }

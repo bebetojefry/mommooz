@@ -1,0 +1,4 @@
+home:
+    path:     /
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppWebBundle:Index:index }
