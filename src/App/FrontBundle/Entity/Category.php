@@ -66,6 +66,12 @@ class Category
      */
     private $status;
 
+    /**
+     * @var ArrayCollection|Image[]
+     *
+     * @ORM\ManyToMany(targetEntity="Image", orphanRemoval=true)
+     */
+    private $images;
 
     /**
      * Get id
@@ -179,6 +185,7 @@ class Category
     {
         $this->keywords = new ArrayCollection();
         $this->childs = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -271,5 +278,39 @@ class Category
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \App\FrontBundle\Entity\Image $image
+     *
+     * @return Category
+     */
+    public function addImage(\App\FrontBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \App\FrontBundle\Entity\Image $image
+     */
+    public function removeImage(\App\FrontBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

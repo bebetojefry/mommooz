@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
+use App\FrontBundle\DataTransformer\ImageToIdsTransformer;
 
 class CategoryType extends AbstractType
 {
@@ -24,6 +25,7 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $keywordTransformer = new KeywordsToIdsTransformer($this->om);
+        $imageTransformer = new ImageToIdsTransformer($this->om);
         
         $builder
             ->add('categoryName')
@@ -33,12 +35,17 @@ class CategoryType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ))
-            ->add('status')
+            ->add(
+                $builder->create('images', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($imageTransformer)
+            )
             ->add(
                 $builder->create('keywords', 'text', array(
                     'required' => false,
                 ))->addModelTransformer($keywordTransformer)
-            )    
+            )
+            ->add('status')
         ;
     }
     
