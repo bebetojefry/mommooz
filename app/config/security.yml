@@ -67,15 +67,6 @@ security:
                 lifetime: 604800 # one week in seconds
                 path: /
                 domain: "%domain_vendor%"
-                
-        api:  
-            pattern: ^/
-            host: "%domain_api%"
-            stateless: true
-            simple_preauth:
-                authenticator: apikey_authenticator
-            provider: api_key_user_provider
-            
         default:
             anonymous: ~
             http_basic: ~
