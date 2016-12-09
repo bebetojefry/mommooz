@@ -15,6 +15,24 @@ class StockEntryDatatable extends AbstractDatatableView
     /**
      * {@inheritdoc}
      */
+    public function getLineFormatter()
+    {
+        $repo = $this->em->getRepository('AppFrontBundle:StockEntry');
+        
+        $formatter = function($line) use ($repo){
+            $entry = $repo->find($line['id']);
+            $line['in_stock'] = $entry->getInStock();
+
+            return $line;
+        };
+
+        return $formatter;
+    }
+
+    
+    /**
+     * {@inheritdoc}
+     */
     public function buildDatatable(array $options = array())
     {
         $id = isset($options['stock']) ? $options['stock']->getId() : 0;
@@ -98,6 +116,9 @@ class StockEntryDatatable extends AbstractDatatableView
             ->add('quantity', 'column', array(
                 'title' => 'Quantity',
             ))
+            ->add('in_stock', 'virtual', array(
+                'title' => 'In Stock',
+            ))
             ->add('price', 'column', array(
                 'title' => 'Price',
             ))
@@ -145,7 +166,47 @@ class StockEntryDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
                             'cofirmText' => $this->translator->trans('stockentry.delete.confirm'),
+                            'style' => 'margin-right:5px;'
                         ),
+                    ),
+                    array(
+                        'route' => 'stockentry_add',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => 'Add Stock',
+                        'icon' => 'glyphicon glyphicon-plus-sign',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('stockentry.actions.add'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openPrompt(event);',
+                            'promptText' => $this->translator->trans('stockentry.add.prompt'),
+                            'style' => 'margin-right:5px;'
+                        ),
+                        'render_if' => function($row) use($published) {                            ;
+                            return $published === true;
+                        }
+                    ),
+                    array(
+                        'route' => 'stockentry_minus',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => 'Minus Stock',
+                        'icon' => 'glyphicon glyphicon-minus-sign',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('stockentry.actions.minus'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openPrompt(event);',
+                            'promptText' => $this->translator->trans('stockentry.minus.prompt'),
+                        ),
+                        'render_if' => function($row) use ($published) {                        ;
+                            return $published === true;
+                        }
                     )
                 )
             ))

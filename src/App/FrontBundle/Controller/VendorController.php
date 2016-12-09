@@ -43,7 +43,8 @@ class VendorController extends Controller
             $form->handleRequest($request);
             if($form->isValid()){
                 $vendor = $form->getData();
-                $username = $password = 'VEND'.time();
+                $username = $vendor->getEmail();
+                $password = 'VEND'.time();
                 $vendor->setUsername($username);
                 $vendor->setPassword($password);
                 $vendor->setLocale('en');                

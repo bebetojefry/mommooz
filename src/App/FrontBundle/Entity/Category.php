@@ -72,6 +72,13 @@ class Category
      * @ORM\ManyToMany(targetEntity="Image", orphanRemoval=true)
      */
     private $images;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="popular", type="boolean")
+     */
+    private $popular;
 
     /**
      * Get id
@@ -312,5 +319,29 @@ class Category
     public function getImages()
     {
         return $this->images;
+    }
+
+    /**
+     * Set popular
+     *
+     * @param boolean $popular
+     *
+     * @return Category
+     */
+    public function setPopular($popular)
+    {
+        $this->popular = $popular;
+    
+        return $this;
+    }
+
+    /**
+     * Get popular
+     *
+     * @return boolean
+     */
+    public function getPopular()
+    {
+        return $this->popular;
     }
 }

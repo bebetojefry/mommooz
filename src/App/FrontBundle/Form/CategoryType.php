@@ -45,6 +45,7 @@ class CategoryType extends AbstractType
                     'required' => false,
                 ))->addModelTransformer($keywordTransformer)
             )
+            ->add('popular')
             ->add('status')
         ;
     }

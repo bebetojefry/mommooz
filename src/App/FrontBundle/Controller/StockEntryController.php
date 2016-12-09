@@ -13,6 +13,7 @@ use App\FrontBundle\Form\StockEntryType;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Item;
 use Doctrine\ORM\QueryBuilder;
+use App\FrontBundle\Entity\StockPurchase;
 
 class StockEntryController extends Controller
 {
@@ -136,6 +137,62 @@ class StockEntryController extends Controller
         $dm->flush();
         
         $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.removed');
+        return new Response(json_encode(array('code' => FormHelper::REFRESH)));
+    }
+    
+    /**
+     * Displays a form to add stock to an existing stockentry entity.
+     *
+     * @Route("/{id}/add", name="stockentry_add", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function addAction(Request $request, StockEntry $stockentry)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $val = $request->get('val');
+        
+        if(is_numeric($val)){
+            $quantity = $stockentry->getQuantity() + $val;
+            $stockentry->setQuantity($quantity);
+            $em->persist($stockentry);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.added');
+        } else {
+             $this->get('session')->getFlashBag()->add('error', 'stockentry.msg.invalid_quantity');
+        }
+        
+        return new Response(json_encode(array('code' => FormHelper::REFRESH)));
+    }
+    
+    /**
+     * Displays a form to minus stock to an existing stockentry entity.
+     *
+     * @Route("/{id}/minus", name="stockentry_minus", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function minusAction(Request $request, StockEntry $stockentry)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $val = $request->get('val');
+        if(is_numeric($val)){
+            if($stockentry->getInStock() >= $val){
+                $purchase = new StockPurchase();
+                $purchase->setUser($stockentry->getStock()->getVendor());
+                $purchase->setPrice($stockentry->getActualPrice());
+                $purchase->setQuantity($val);
+                $purchase->setReverse(TRUE);
+                $purchase->setStockItem($stockentry);
+                $purchase->setPurchsedOn(new \DateTime('now'));
+                $em->persist($purchase);
+                $em->flush();
+                $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.minus');
+            } else {
+                $this->get('session')->getFlashBag()->add('error', 'stockentry.msg.stock_is_less');
+            }
+        } else {
+             $this->get('session')->getFlashBag()->add('error', 'stockentry.msg.invalid_quantity');
+        }
+        
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
 }

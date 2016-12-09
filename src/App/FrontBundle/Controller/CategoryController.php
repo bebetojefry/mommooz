@@ -34,13 +34,15 @@ class CategoryController extends Controller
     /**
      * Displays a form to add an existing location entity.
      *
-     * @Route("/new", name="category_new", options={"expose"=true})
+     * @Route("/{id}/new", name="category_new", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Category $parent)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new CategoryType($dm), new Category());
+        $category = new Category();
+        $category->setParent($parent);
+        $form = $this->createForm(new CategoryType($dm), $category);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -131,10 +133,8 @@ class CategoryController extends Controller
         
         $categoryDatatable = $this->get('app.front.datatable.category');
         $categoryDatatable->buildDatatable(array('category' => $category));
-        $body = $this->renderView('AppFrontBundle:Category:detail.html.twig',
-            array('categoryDatatable' => $categoryDatatable)
-        );
-        
-        return new Response(json_encode(array('code' => $code, 'data' => $body)));
+        return $this->render('AppFrontBundle:Admin:category.html.twig', array(
+            'categoryDatatable' => $categoryDatatable,
+        ));
     }
 }

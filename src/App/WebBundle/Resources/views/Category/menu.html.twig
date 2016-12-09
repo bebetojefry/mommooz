@@ -1,0 +1,13 @@
+<ul>
+    {% for menu in category.getChilds() %}
+        <li data-id="{{  }}">
+            <a href="{{ path('category_menu', {id: menu.getId()}) }}">{{ menu.getCategoryName() }}</a>
+            {% if menu.getChilds()|length > 0 %}
+                <span class="icon-arrow-right"></span>
+                <div>
+                    {{ render(controller('AppWebBundle:Category:menuRender', { 'id': menu.getId() })) }}
+                </div>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

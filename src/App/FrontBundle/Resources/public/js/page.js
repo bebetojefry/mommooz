@@ -18,6 +18,12 @@ function openConfirm(obj){
     return false;
 }
 
+function openPrompt(obj){    
+    obj.preventDefault();
+    angular.element(obj.target).scope().promptExecuteUrl(obj);
+    return false;
+}
+
 function openModal(obj){    
     obj.preventDefault();
     angular.element(obj.target).scope().toggleModal(obj);
@@ -80,6 +86,22 @@ modal.controller('MainCtrl', function ($scope, $http) {
                 }
             }]
         });
+    };
+    
+    $scope.promptExecuteUrl = function(obj){
+        var act = obj.target.attributes.targetUrl;
+        act = (act == undefined) ? obj.target.attributes.href : act;
+        
+        var val = prompt(obj.target.attributes.promptText.value, "");
+        if (val != null) {
+            $http.get(act.value+'?val='+val)
+            .success(function (response) {
+                $scope.processResponse(response);
+            })
+            .error(function(response){
+                $scope.errorhandler(response);
+            });
+        }
     };
     
     $scope.errorhandler = function(response){

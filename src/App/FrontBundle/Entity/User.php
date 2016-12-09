@@ -67,6 +67,14 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @Expose
      */
     private $phone;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     * @Expose
+     */
+    private $email;
 
     /**
      * @var string
@@ -152,6 +160,13 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     private $addresses;
     
     /**
+     * @var ArrayCollection|StockPurchase[]
+     *
+     * @ORM\OneToMany(targetEntity="StockPurchase", mappedBy="user")
+     */
+    private $purchases;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -160,6 +175,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
         $this->regenerateSalt();
         $this->regions = new ArrayCollection();
         $this->addresses = new ArrayCollection();
+        $this->purchases = new ArrayCollection();
     }
 
 
@@ -718,5 +734,63 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Add purchase
+     *
+     * @param \App\FrontBundle\Entity\StockPurchase $purchase
+     *
+     * @return User
+     */
+    public function addPurchase(\App\FrontBundle\Entity\StockPurchase $purchase)
+    {
+        $this->purchases[] = $purchase;
+    
+        return $this;
+    }
+
+    /**
+     * Remove purchase
+     *
+     * @param \App\FrontBundle\Entity\StockPurchase $purchase
+     */
+    public function removePurchase(\App\FrontBundle\Entity\StockPurchase $purchase)
+    {
+        $this->purchases->removeElement($purchase);
+    }
+
+    /**
+     * Get purchases
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPurchases()
+    {
+        return $this->purchases;
     }
 }

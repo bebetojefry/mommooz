@@ -119,61 +119,8 @@
 
         <div class="full-width nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">
             <div class="block-3 main-sub-nav transition_05s ptb-10p">
-                <ul>
-                    <li data_id="1"><a href="products.php"> First menu</a> <span class="icon-arrow-right"></span>
-                        <ul class="second-sub-nav absolute-pos transition_05s" id="1">
-                            <li data_id="501"> Second 1
-                                <div class="block-fl-cary  text-left third-sub-nav" id="501">
-                                    <ul class="block-6">
-                                        <li> Third 1 </li>
-                                        <li> Grocery & Staples </li>
-                                        <li> Bread Dairy & Eggs </li>
-                                        <li> Beverages </li>
-                                        <li> Branded Foods </li>
-                                        <li> Personal Care </li>
-                                        <li> Household </li>
-                                        <li> Imported & Gourmet</li>
-                                        <li> Meat </li>
-                                        <li> View All </li>
-                                    </ul>
-                                    <ul class="block-6">
-                                        <li> Third 2 </li>
-                                        <li> Grocery & Staples </li>
-                                        <li> Bread Dairy & Eggs </li>
-                                        <li> Beverages </li>
-                                        <li> Branded Foods </li>
-                                        <li> Personal Care </li>
-                                        <li> Household </li>
-                                        <li> Imported & Gourmet</li>
-                                        <li> Meat </li>
-                                        <li> View All </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li> Grocery & Staples </li>
-                            <li> Bread Dairy & Eggs </li>
-                            <li> Beverages </li>
-                            <li> Branded Foods </li>
-                            <li> Personal Care </li>
-                            <li> Household </li>
-                            <li> Imported & Gourmet</li>
-                            <li> Meat </li>
-                            <li> View All </li>
-                        </ul>
-                    </li>
-                    <li data_id="2"> Grocery & Staples <span class="icon-arrow-right"> </li>
-                    <li> Bread Dairy & Eggs <span class="icon-arrow-right"> </li>
-                    <li> Beverages <span class="icon-arrow-right"> </li>
-                    <li> Branded Foods <span class="icon-arrow-right"> </li>
-                    <li> Personal Care <span class="icon-arrow-right"> </li>
-                    <li> Household <span class="icon-arrow-right"> </li>
-                    <li> Imported & Gourmet <span class="icon-arrow-right"> </li>
-                    <li> Meat <span class="icon-arrow-right"> </li>
-                    <li> View All <span class="icon-arrow-right"> </li>
-                </ul>
+                {{ render(controller('AppWebBundle:Category:menuRender', { 'id': 1 })) }}
             </div>
-
-
         </div>
     </nav>
     {% block content %}{% endblock%}

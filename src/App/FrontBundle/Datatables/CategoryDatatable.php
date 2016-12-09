@@ -17,12 +17,14 @@ class CategoryDatatable extends AbstractDatatableView
      */
     public function buildDatatable(array $options = array())
     {
+        $id = isset($options['category']) ? $options['category']->getId() : 1;
+        
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('category_new'),
+                    'route' => $this->router->generate('category_new', array('id' => $id)),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
@@ -56,7 +58,6 @@ class CategoryDatatable extends AbstractDatatableView
             'highlight_color' => 'red'
         ));
 
-        $id = isset($options['category']) ? $options['category']->getId() : 1;
         $this->ajax->set(array(
             'url' => $this->router->generate('category_results', array('id' => $id)),
             'type' => 'GET',
@@ -114,8 +115,6 @@ class CategoryDatatable extends AbstractDatatableView
                             'title' => $this->translator->trans('datatables.actions.show'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
-                            'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('category.title.show'),
                             'style' => 'margin-right:5px;'
                         ),
                     ),

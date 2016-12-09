@@ -35,6 +35,7 @@ class UserType extends AbstractType
                 'data' => 1
             ))
             ->add('phone')
+            ->add('email')
             ->add('status')
             ->add('addresses', 'collection', array(
                 'type'         => new AddressType(),

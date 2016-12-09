@@ -186,4 +186,3 @@ class Address
         return $this->state;
     }
 }
-

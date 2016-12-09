@@ -2,3 +2,13 @@ home:
     path:     /
     host:     "%domain_consumer%"
     defaults: { _controller: AppWebBundle:Index:index }
+
+consumer_category:
+    resource: "@AppWebBundle/Controller/CategoryController.php"
+    type:     annotation
+    prefix: /category
+    
+page_category:
+    resource: "@AppWebBundle/Controller/ComponentController.php"
+    type:     annotation
+    prefix: /components

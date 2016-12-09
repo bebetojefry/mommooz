@@ -113,4 +113,21 @@ abstract class Banner
     {
         return $this->images;
     }
+    
+    public function getDescription(){
+        $value = null;
+        switch(get_class($this)){
+            case 'App\FrontBundle\Entity\CategoryBanner':
+                $value = 'Category <br/><b>'.$this->getEntity()->getCategoryName().'</b>';
+                break;
+            case 'App\FrontBundle\Entity\ItemBanner';
+                $value = 'Item <br/><b>'.$this->getEntity()->getName().'</b>';
+                break;
+            case 'App\FrontBundle\Entity\OfferBanner':
+                $value = 'Offer <br/><b>'.$this->getEntity()->getName().'</b>';
+                break;
+        }
+        
+        return $value;
+    }
 }

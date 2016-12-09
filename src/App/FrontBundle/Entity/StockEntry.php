@@ -84,6 +84,13 @@ class StockEntry
      */
     private $keywords;
     
+    /**
+     * @var ArrayCollection|StockPurchase[]
+     *
+     * @ORM\OneToMany(targetEntity="StockPurchase", mappedBy="stockItem")
+     */
+    private $purchases;
+    
     private $state;
     
     private $commtype;
@@ -274,6 +281,7 @@ class StockEntry
     {
         $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->purchases = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -386,5 +394,49 @@ class StockEntry
     public function getKeywords()
     {
         return $this->keywords;
+    }
+
+    /**
+     * Add purchase
+     *
+     * @param \App\FrontBundle\Entity\StockPurchase $purchase
+     *
+     * @return StockEntry
+     */
+    public function addPurchase(\App\FrontBundle\Entity\StockPurchase $purchase)
+    {
+        $this->purchases[] = $purchase;
+    
+        return $this;
+    }
+
+    /**
+     * Remove purchase
+     *
+     * @param \App\FrontBundle\Entity\StockPurchase $purchase
+     */
+    public function removePurchase(\App\FrontBundle\Entity\StockPurchase $purchase)
+    {
+        $this->purchases->removeElement($purchase);
+    }
+
+    /**
+     * Get purchases
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPurchases()
+    {
+        return $this->purchases;
+    }
+    
+    public function getInStock()
+    {
+        $in_stock = $this->quantity;
+        foreach($this->purchases as $purchase) {
+            $in_stock -= $purchase->getQuantity();
+        }
+        
+        return $in_stock;
     }
 }
