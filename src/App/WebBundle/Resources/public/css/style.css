@@ -432,7 +432,7 @@ nav .nav-submenu.active, nav .nav-submenu:hover{
 	opacity:1;
 	display:block;
 }
-nav .nav-submenu ul li{
+/*nav .nav-submenu ul li{
 	width:100%;
 	font-size:12px;
 	padding-top:6px;
@@ -462,7 +462,7 @@ nav .nav-submenu .block-6{
 	}
 nav .nav-submenu .block-3{
 	background:#fff;}
-
+*/
 .block-3.main-sub-nav{
 	/*display:none !important;*/
 	margin-left:0px;
@@ -817,3 +817,105 @@ span.pending-user{
 	font-size:14px;
 	color:#999;
 	}
+        
+.nav-submenu{
+	background:#fff;
+	min-height:350px;
+	}
+.nav-submenu ul{
+	height:100%;
+	position:inherit;}
+.nav-submenu ul li{
+	border-bottom:1px #d0e6c8 solid !important;
+	}	
+.nav-submenu > ul{
+	width:180px;
+	background:#fff;
+	display:inline-block;
+	border-right:1px #d6d6d6 solid;
+	position:relative;
+	}
+.nav-submenu > ul li{
+	width:100%;
+	padding:5px 10px;
+	border-bottom:1px #d6d6d6 solid;
+	position:static !important;
+	}
+.nav-submenu > ul li span{
+	display:none;
+	}
+.nav-submenu > ul li:hover span{
+	display:inline-block;
+	font-size:8px !important;
+	margin-left:2px;
+	color:#e1c400;}
+.nav-submenu > ul li a{
+	width:100%;
+	height:100%;
+	display:block;
+	}
+.nav-submenu > ul li:hover{
+	background:#f4f4ee;}
+.nav-submenu a{
+	font-size:12px;
+	}
+.nav-submenu > ul li > ul{
+	display:none;
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:100%;
+	border-left:1px #d6d6d6 solid;
+	}
+.nav-submenu > ul li:hover > ul{
+	display:block;}
+.nav-submenu > ul li > ul li{
+	border-bottom:1px #fff solid;
+	}
+.nav-submenu > ul li > ul li:hover{
+	background:#fdfddc;
+	}
+	
+.nav-submenu > ul li > ul li > ul{
+	display:none;
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:100%;
+	border-left:1px #d6d6d6 solid;
+	}
+.nav-submenu > ul li > ul li:hover > ul {
+	display:block;}
+
+.nav-submenu > ul li > ul li > ul li > ul{
+	display:none;
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:100%;
+	border-left:1px #d6d6d6 solid;
+	}
+.nav-submenu > ul li > ul li > ul li:hover > ul {
+	display:block;}
+	
+.nav-submenu > ul li > ul li > ul li > ul li > ul{
+	display:none;
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:100%;
+	border-left:1px #d6d6d6 solid;
+	}
+.nav-submenu > ul li > ul li > ul li > ul li:hover > ul {
+	display:block;}
+	
+.nav-submenu > ul li > ul li > ul li > ul li > ul li > ul{
+	display:none;
+	width:100%;
+	position:absolute;
+	top:0px;
+	left:100%;
+	border-left:1px #d6d6d6 solid;
+	}
+.nav-submenu > ul li > ul li > ul li > ul li > ul li:hover > ul {
+	display:block;}

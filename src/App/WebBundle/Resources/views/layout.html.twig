@@ -118,9 +118,7 @@
         </ul>
 
         <div class="full-width nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">
-            <div class="block-3 main-sub-nav transition_05s ptb-10p">
-                {{ render(controller('AppWebBundle:Category:menuRender', { 'id': 1 })) }}
-            </div>
+            {{ render(controller('AppWebBundle:Category:index', { 'id': 1 })) }}
         </div>
     </nav>
     {% block content %}{% endblock%}

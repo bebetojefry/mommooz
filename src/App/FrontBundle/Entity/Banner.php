@@ -130,4 +130,26 @@ abstract class Banner
         
         return $value;
     }
+    
+    public function getClass(){
+        $class = explode('\\', get_class($this));
+        return end($class);
+    }
+    
+    public function getRouteName(){
+        $route = '';
+        switch($this->getClass()){
+            case 'CategoryBanner':
+                $route = 'category_page';
+                break;
+            case 'ItemBanner':
+                $route = 'item_page';
+                break;
+            case 'OfferBanner':
+                $route = 'offer_page';
+                break;
+        }
+        
+        return $route;
+    }
 }

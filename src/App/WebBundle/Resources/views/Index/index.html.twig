@@ -9,40 +9,7 @@
 {% block content %}
     <section class="center-1200px block-fl-cary slider-offer-cary va-top">
         <div class="block-2 lb-none">
-            <h5 class="black-txt ptb-5p head relative-pos"> <span> most purchased </span> </h5>
-            <div class="full-width block-fl-cary mt-15p">
-                <a href="">
-                    <div class="block-4"> <img src="{{ asset('bundles/appweb/images/product.png') }}" class="image-fw" alt="momooz product"> </div>
-                    <div class="block-8 text-center">
-                        <div class="block-10 center-pos text-left">
-                            <h5 class="mt-10p"> Tata Sampann Toor Dal </h5>
-                            <h5 class="mt-10p">RS. 195/KG </h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="full-width block-fl-cary mt-40p">
-                <a href="">
-                    <div class="block-4"> <img src="{{ asset('bundles/appweb/images/product.png') }}" class="image-fw" alt="momooz product"> </div>
-                    <div class="block-8 text-center">
-                        <div class="block-10 center-pos text-left">
-                            <h5 class="mt-10p"> Tata Sampann Toor Dal </h5>
-                            <h5 class="mt-10p">RS. 195/KG </h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="full-width block-fl-cary mt-40p">
-                <a href="">
-                    <div class="block-4"> <img src="{{ asset('bundles/appweb/images/product.png') }}" class="image-fw" alt="momooz product"> </div>
-                    <div class="block-8 text-center">
-                        <div class="block-10 center-pos text-left">
-                            <h5 class="mt-10p"> Tata Sampann Toor Dal </h5>
-                            <h5 class="mt-10p">RS. 195/KG </h5>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            {{ render(controller('AppWebBundle:Item:mostPurchased')) }}
         </div>
         <div class="block-8 relative-pos block-lb-10 block-mb-12">
             {{ render(controller('AppWebBundle:Component:banner')) }}

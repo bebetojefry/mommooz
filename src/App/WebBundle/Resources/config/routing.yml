@@ -8,6 +8,11 @@ consumer_category:
     type:     annotation
     prefix: /category
     
+consumer_item:
+    resource: "@AppWebBundle/Controller/ItemController.php"
+    type:     annotation
+    prefix: /item
+    
 page_category:
     resource: "@AppWebBundle/Controller/ComponentController.php"
     type:     annotation

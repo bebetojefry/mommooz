@@ -2,14 +2,14 @@
     {% for banner in banners %}
         {% if loop.index0 == 0 %}
             {% set image = banner.getImages()|first %}
-            <img src="{{ image.getImage() }}" class="image-fw" alt="">
+            <a href="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}"><img src="{{ image.getImage() }}" class="image-fw" alt=""></a>
         {% endif %}
     {% endfor %}
 </div>
 <div id="banner-items" class="slider-navigation sb-none block-98 absolute-centre absolute-pos block-fl-cary font-normal">
     {% for banner in banners %}
         {% set image = banner.getImages()|first %}
-        <div class="block-3 {% if loop.index0 == 0 %}active{% endif %} banner-item" data-image="{{ image.getImage() }}">
+        <div class="block-3 {% if loop.index0 == 0 %}active{% endif %} banner-item" data-image="{{ image.getImage() }}" data-link="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}">
             {{ banner.getDescription()|raw }}
         </div>
     {% endfor %}
@@ -19,7 +19,8 @@
         $('#banner-items .banner-item').on('click', function(){
             $('#banner-items .banner-item').removeClass('active');
             $(this).addClass('active');
-            $('#banner-image img').attr('src', $(this).data('image'));
+            $('#banner-image a').attr('href', $(this).data('link'));
+            $('#banner-image a img').attr('src', $(this).data('image'));
         });
     });
 </script>

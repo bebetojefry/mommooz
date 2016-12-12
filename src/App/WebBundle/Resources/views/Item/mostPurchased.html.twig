@@ -1,0 +1,15 @@
+<h5 class="black-txt ptb-5p head relative-pos"> <span> most purchased</span> </h5>
+{% for stockitem in items %}
+    <div class="full-width block-fl-cary mt-15p">
+        <a href="{{ path('item_page', {'id': stockitem.getItem().getId()}) }}">
+            {% set image = stockitem.getItem().getImages()|first %}
+            <div class="block-4"> <img src="{{ image.getImage() }}" class="image-fw" alt="momooz product"> </div>
+            <div class="block-8 text-center">
+                <div class="block-10 center-pos text-left">
+                    <h5 class="mt-10p">{{ stockitem.getItem().getName() }}</h5>
+                    <h5 class="mt-10p">RS. {{ stockitem.getActualPrice() }}</h5>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}

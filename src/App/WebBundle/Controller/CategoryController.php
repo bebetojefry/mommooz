@@ -12,18 +12,19 @@ use App\FrontBundle\Entity\Category;
 class CategoryController extends Controller
 {
     /**
-     * @Route("/{id}", name="category_menu", options={"expose"=true})
+     * @Route("/{id}/{child}", name="category_menu", options={"expose"=true})
      */
-    public function indexAction(Category $category)
+    public function indexAction(Category $category, $child = null)
     {
-        return $this->render('AppWebBundle:Category:menu.html.twig', array('category' => $category));
+        return $this->render('AppWebBundle:Category:menu.html.twig', array('category' => $category, 'child' => $child));
     }
     
     /**
-     * @Route("/menu/{id}", name="category_menu_render", options={"expose"=true})
+     * @Route("/page/category/{id}", name="category_page", options={"expose"=true})
      */
-    public function menuRenderAction(Category $category)
+    public function pageAction(Category $category)
     {
-        return $this->render('AppWebBundle:Category:menu.html.twig', array('category' => $category));
+        
     }
+        
 }
