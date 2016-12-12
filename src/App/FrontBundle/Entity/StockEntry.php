@@ -77,7 +77,7 @@ class StockEntry
      */
     private $status;
     
-     /**
+    /**
      * @var ArrayCollection|Keyword[]
      *
      * @ORM\ManyToMany(targetEntity="Keyword")

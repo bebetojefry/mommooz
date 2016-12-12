@@ -64,121 +64,13 @@
     </section>
 
     <section class="full-width by-product-home mt-15p ptb-20p">
-        <div class="center-1200px block-fl-cary">
-            <div class="block-3 pointer-csr mt-10p block-mb-6 sb-block-12">
-                <div class="block-98 center-pos relative-pos">
-                    <img src="{{ asset('bundles/appweb/images/bottom-products.jpg') }}" class="image-fw" alt="momooz product">
-                    <div class="block-9 absolute-centre absolute-pos outer-div ptrbl-5p">
-                        <div class="block-12 inner-div ptrbl-10p text-center">
-                            <h4> groceries </h4>
-                            <span class="how-product"> - 120 Products - </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="block-3 pointer-csr mt-10p block-mb-6 sb-block-12">
-                <div class="block-98 center-pos relative-pos">
-                    <img src="{{ asset('bundles/appweb/images/poultry.jpg') }}" class="image-fw" alt="momooz product">
-                    <div class="block-9 absolute-centre absolute-pos outer-div ptrbl-5p">
-                        <div class="block-12 inner-div ptrbl-10p text-center">
-                            <h4> poultry </h4>
-                            <span class="how-product"> - 100 Products - </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="block-3 pointer-csr mt-10p block-mb-6 sb-block-12">
-                <div class="block-98 center-pos relative-pos">
-                    <img src="{{ asset('bundles/appweb/images/recipes.jpg') }}" class="image-fw" alt="momooz product">
-                    <div class="block-9 absolute-centre absolute-pos outer-div ptrbl-5p">
-                        <div class="block-12 inner-div ptrbl-10p text-center">
-                            <h4> recipes</h4>
-                            <span class="how-product"> - 80 Products - </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="block-3 pointer-csr mt-10p block-mb-6 sb-block-12">
-                <div class="block-98 center-pos relative-pos">
-                    <img src="{{ asset('bundles/appweb/images/household.jpg') }}" class="image-fw" alt="momooz product">
-                    <div class="block-9 absolute-centre absolute-pos outer-div ptrbl-5p">
-                        <div class="block-12 inner-div ptrbl-10p text-center">
-                            <h4> household </h4>
-                            <span class="how-product"> - 30 Products - </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{ render(controller('AppWebBundle:Category:popular')) }}
     </section>
 
     <section class="whats-new center-1200px block-fl-cary ptb-20p mt-10p mb-20p">
         <h3 class="text-center mb-20p"> What's New  </h3>
-        <div class="block-3 ptrbl-5p mt-10p block-mb-6 sb-block-12">
-            <a href="">
-                <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
-                    <div class="block-6">
-                        <img src="{{ asset('bundles/appweb/images/product.png') }}" class="image-fw" alt="momooz product image">
-                    </div>
-                    <div class="block-8 capitalize-txt mt-20p">
-                        india gate premium basmati rice 
-                        <br>
-                        <strong>RS. 50/kg</strong>
-                    </div>
-
-                </div>
-            </a>
-        </div>
-        <div class="block-3 ptrbl-5p mt-10p block-mb-6 sb-block-12">
-            <a href="">
-                <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
-                    <div class="block-6">
-                        <img src="{{ asset('bundles/appweb/images/product.png') }}" class="image-fw" alt="momooz product image">
-                    </div>
-                    <div class="block-8 capitalize-txt mt-20p">
-                        india gate premium basmati rice 
-                        <br>
-                        <strong>RS. 50/kg</strong>
-                    </div>
-
-                </div>
-            </a>
-        </div>
-        <div class="block-3 ptrbl-5p mt-10p block-mb-6 sb-block-12">
-            <a href="">
-                <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
-                    <div class="block-6">
-                        <img src="{{ asset('bundles/appweb/images/product.png') }}" class="image-fw" alt="momooz product image">
-                    </div>
-                    <div class="block-8 capitalize-txt mt-20p">
-                        india gate premium basmati rice 
-                        <br>
-                        <strong>RS. 50/kg</strong>
-                    </div>
-
-                </div>
-            </a>
-        </div>
-        <div class="block-3 ptrbl-5p mt-10p block-mb-6 sb-block-12">
-            <a href="">
-                <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
-                    <div class="block-6">
-                        <img src="{{ asset('bundles/appweb/images/product.png') }}" class="image-fw" alt="momooz product image">
-                    </div>
-                    <div class="block-8 capitalize-txt mt-20p">
-                        india gate premium basmati rice 
-                        <br>
-                        <strong>RS. 50/kg</strong>
-                    </div>
-
-                </div>
-            </a>
-        </div>
+        {{ render(controller('AppWebBundle:Item:new')) }}
     </section>
-
-
-
-
 
     <section class="whats-new center-1200px block-fl-cary ptb-20p mt-10p mb-20p">
         <h3 class="text-center mb-20p"> Top Offers  </h3>

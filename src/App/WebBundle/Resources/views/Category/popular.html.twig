@@ -1,0 +1,18 @@
+<div class="center-1200px block-fl-cary">
+    {% for cat in categories %}
+        <a href="{{ path('category_menu', {id: cat.getId()}) }}">
+            <div class="block-3 pointer-csr mt-10p block-mb-6 sb-block-12">
+                <div class="block-98 center-pos relative-pos">
+                    {% set image = cat.getImages()|first %}
+                    <img src="{{ image.getImage() }}" class="image-fw" alt="momooz product">
+                    <div class="block-9 absolute-centre absolute-pos outer-div ptrbl-5p">
+                        <div class="block-12 inner-div ptrbl-10p text-center">
+                            <h4> {{ cat.getCategoryName() }} </h4>
+                            <span class="how-product"> - {{ cat.getProducts()|length }} Products - </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+</div>

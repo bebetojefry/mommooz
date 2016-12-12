@@ -40,4 +40,11 @@ class ItemController extends Controller
             'items' => $items
         ));
     }
+    
+    public function newAction() {
+        $items = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:StockEntry')->findBy(array('status' => true), array(), 4, 0);
+        return $this->render('AppWebBundle:Item:new.html.twig', array(
+            'items' => $items
+        ));
+    }
 }

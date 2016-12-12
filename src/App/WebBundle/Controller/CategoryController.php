@@ -26,5 +26,10 @@ class CategoryController extends Controller
     {
         
     }
+    
+    public function popularAction(){
+        $categories = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true), null, 4, 0);
+        return $this->render('AppWebBundle:Category:popular.html.twig', array('categories' => $categories));
+    }
         
 }

@@ -1,10 +1,11 @@
 app_web:
     resource: "@AppWebBundle/Resources/config/routing.yml"
+    host:     "%domain_consumer%"
     prefix:   /
-
+    
 app_front:
     resource: "@AppFrontBundle/Resources/config/routing.yml"
-
+    
 jstranslations:
     resource: "@FunddyJsTranslationsBundle/Resources/config/routing.yml"
 
