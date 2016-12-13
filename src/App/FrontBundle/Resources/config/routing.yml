@@ -39,6 +39,11 @@ app_front_admin_logout:
     host:     "%domain_admin%"
     path: /logout
     
+app_front_admin_profile:
+    host:     "%domain_admin%"
+    path: /profile
+    defaults: { _controller: AppFrontBundle:Admin:profile}
+    
 app_front_admin_home:
     path:     /dashboard
     host:     "%domain_admin%"
@@ -144,7 +149,17 @@ app_front_vendor_login_check:
 app_front_vendor_logout:
     host:     "%domain_vendor%"
     path: /logout
-
+    
+app_front_vendor_profile:
+    host:     "%domain_vendor%"
+    path: /profile
+    defaults: { _controller: AppFrontBundle:Vendor:profile}
+    
+app_front_vendor_pwd_reset:
+    host:     "%domain_vendor%"
+    path: /reset
+    defaults: { _controller: AppFrontBundle:Vendor:password}
+    
 app_front_vendor_home:
     path:     /dashboard
     host:     "%domain_vendor%"

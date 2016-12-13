@@ -204,4 +204,66 @@ class VendorController extends Controller
             'stockDatatable' => $stockDatatable,
         ));
     }
+    
+    public function passwordAction(Request $request){
+        $user = $this->getUser();
+        
+        $dm = $this->getDoctrine()->getManager();
+        $obj = new \stdClass();
+        $obj->password = '';
+        $form = $this->createFormBuilder($obj)
+            ->add('password', 'repeated', array(
+                'type' => 'password',
+                'required' => true,
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('submit', 'submit', array('attr' => array('class' => 'btn btn-primary')))
+            ->getForm();
+        
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $obj = $form->getData();
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                $password = $encoder->encodePassword($obj->password, $user->getSalt());
+                $user->setPassword($password);
+                $dm->persist($user);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'admin.msg.reseted');
+            } else {
+                $this->get('session')->getFlashBag()->add('warning', 'Password doesn\'t match');
+            }
+        }
+
+        return $this->render('AppFrontBundle:Vendor:password.html.twig',
+            array('form' => $form->createView())
+        );
+    }
+    
+    public function profileAction(Request $request){
+        $dm = $this->getDoctrine()->getManager();
+        $vendor = $this->getUser();
+        
+        $form = $this->createForm(new UserType($dm), $vendor);
+        
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $vendor = $form->getData();
+                $dm->persist($vendor);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'vendor.msg.profile.updated');
+            } else {
+                $this->get('session')->getFlashBag()->add('warning', 'vendor.msg.profile.error');
+            }
+        }
+        
+        return $this->render('AppFrontBundle:Vendor:profile.html.twig',
+            array('form' => $form->createView())
+        );
+    }
 }

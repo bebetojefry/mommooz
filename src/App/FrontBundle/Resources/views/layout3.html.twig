@@ -71,7 +71,8 @@
                                 <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#"><i class="fa fa-user fa-fw"></i> Profile </a></li>
+                                <li><a href="{{ path('app_front_vendor_profile') }}"><i class="fa fa-user fa-fw"></i> {{ 'menu.profile' | trans }} </a></li>
+                                <li><a href="{{ path('app_front_vendor_pwd_reset') }}"><i class="fa fa-user fa-fw"></i> {{ 'menu.reset' | trans }} </a></li>
                                 <li class="divider"></li>
                                 <li><a href="{{ path('app_front_vendor_logout') }}"><i class="fa fa-sign-out fa-fw"></i> {{ 'menu.logout' | trans }}</a></li>
                             </ul>

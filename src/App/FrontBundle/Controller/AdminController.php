@@ -72,4 +72,43 @@ class AdminController extends Controller
             'vendorDatatable' => $vendorDatatable,
         ));
     }
+    
+    public function profileAction(Request $request){
+        $user = $this->getUser();
+        
+        $dm = $this->getDoctrine()->getManager();
+        $obj = new \stdClass();
+        $obj->password = '';
+        $form = $this->createFormBuilder($obj)
+            ->add('password', 'repeated', array(
+                'type' => 'password',
+                'required' => true,
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->add('submit', 'submit', array('attr' => array('class' => 'btn btn-primary')))
+            ->getForm();
+        
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $obj = $form->getData();
+                $encoder = $this->get('security.encoder_factory')->getEncoder($user);
+                $password = $encoder->encodePassword($obj->password, $user->getSalt());
+                $user->setPassword($password);
+                $dm->persist($user);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'admin.msg.reseted');
+            } else {
+                $this->get('session')->getFlashBag()->add('warning', 'Password doesn\'t match');
+            }
+        }
+
+        return $this->render('AppFrontBundle:Admin:reset.html.twig',
+            array('form' => $form->createView())
+        );
+    }
 }
