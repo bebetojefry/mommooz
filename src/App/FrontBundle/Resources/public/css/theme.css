@@ -463,3 +463,8 @@ table.dataTable thead .sorting:after {
         width: 100%;
     }
 }
+
+.hidden_form_field {
+    visibility: hidden;
+    height: 0;
+}

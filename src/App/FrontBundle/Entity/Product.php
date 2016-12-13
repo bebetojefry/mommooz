@@ -3,6 +3,7 @@
 namespace App\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Product
@@ -55,6 +56,20 @@ class Product
      * @ORM\OneToMany(targetEntity="Item", mappedBy="product")
      */
     private $items;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="deliverable", type="integer", nullable=true)
+     */
+    private $deliverable;
+    
+    /**
+     * @var ArrayCollection|Region[]
+     *
+     * @ORM\ManyToMany(targetEntity="Region")
+     */
+    private $regions;
     
     /**
      * @var boolean
@@ -198,7 +213,8 @@ class Product
      */
     public function __construct()
     {
-        $this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->keywords = new ArrayCollection();
+        $this->regions = new ArrayCollection();
     }
 
     /**
@@ -257,5 +273,77 @@ class Product
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set deliverable
+     *
+     * @param integer $deliverable
+     *
+     * @return Product
+     */
+    public function setDeliverable($deliverable)
+    {
+        $this->deliverable = $deliverable;
+
+        return $this;
+    }
+
+    /**
+     * Get deliverable
+     *
+     * @return integer
+     */
+    public function getDeliverable()
+    {
+        return $this->deliverable;
+    }
+
+    /**
+     * Add region
+     *
+     * @param \App\FrontBundle\Entity\Region $region
+     *
+     * @return Product
+     */
+    public function addRegion(\App\FrontBundle\Entity\Region $region)
+    {
+        $this->regions[] = $region;
+
+        return $this;
+    }
+
+    /**
+     * Remove region
+     *
+     * @param \App\FrontBundle\Entity\Region $region
+     */
+    public function removeRegion(\App\FrontBundle\Entity\Region $region)
+    {
+        $this->regions->removeElement($region);
+    }
+
+    /**
+     * Get regions
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRegions()
+    {
+        return $this->regions;
+    }
+    
+    /**
+     * Set regions
+     *
+     * @param \Doctrine\Common\Collections\Collection $regions
+     * 
+     * @return Product
+     */
+    public function setRegions($regions)
+    {
+        $this->regions = $regions;
+        
+        return $this;
     }
 }

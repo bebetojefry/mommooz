@@ -2,6 +2,8 @@
 {{ form_widget(form) }}
 <script type="text/javascript">
     $(document).ready(function () {        
-        $("#{{ form.images.vars.id }}").imageUploader();
+        $("#{{ form.images.vars.id }}").imageUploader({
+            multiple: false
+        });
     });
 </script>

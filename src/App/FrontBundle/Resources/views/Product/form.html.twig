@@ -7,7 +7,26 @@
             allow_new: true
             {% if keyword_values is defined %},prePopulate: {{ keyword_values|raw }}{% endif %}
         });
-
+        
         $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
+        
+        $("#{{ form.regions.vars.id }}").tokenInput("{{ path('region_search') }}", {
+            theme: "facebook"
+            {% if region_values is defined %},prePopulate: {{ region_values|raw }}{% endif %}
+        });
+
+        $('#{{ form.regions.vars.id }}').addClass('token-input-real-field');
+        
+        if(parseInt($('#{{ form.deliverable.vars.id }}').val()) != 2){
+            $('#{{ form.regions.vars.id }}').parent('.form-group').addClass('hidden_form_field');
+        }
+            
+        $('#{{ form.deliverable.vars.id }}').on('change', function(){
+            if(parseInt($(this).val()) == 2){
+                $('#{{ form.regions.vars.id }}').parent('.form-group').removeClass('hidden_form_field');
+            } else {
+                $('#{{ form.regions.vars.id }}').parent('.form-group').addClass('hidden_form_field');
+            }
+        });
     });
 </script>

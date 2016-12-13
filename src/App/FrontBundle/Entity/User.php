@@ -167,6 +167,13 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     private $purchases;
     
     /**
+     * @var ArrayCollection|Image[]
+     *
+     * @ORM\ManyToMany(targetEntity="Image", orphanRemoval=true)
+     */
+    private $images;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -176,6 +183,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
         $this->regions = new ArrayCollection();
         $this->addresses = new ArrayCollection();
         $this->purchases = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
 
@@ -792,5 +800,39 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     public function getPurchases()
     {
         return $this->purchases;
+    }
+
+    /**
+     * Add image
+     *
+     * @param \App\FrontBundle\Entity\Image $image
+     *
+     * @return User
+     */
+    public function addImage(\App\FrontBundle\Entity\Image $image)
+    {
+        $this->images[] = $image;
+
+        return $this;
+    }
+
+    /**
+     * Remove image
+     *
+     * @param \App\FrontBundle\Entity\Image $image
+     */
+    public function removeImage(\App\FrontBundle\Entity\Image $image)
+    {
+        $this->images->removeElement($image);
+    }
+
+    /**
+     * Get images
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getImages()
+    {
+        return $this->images;
     }
 }

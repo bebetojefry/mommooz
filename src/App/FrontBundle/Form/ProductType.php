@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
+use App\FrontBundle\DataTransformer\RegionsToIdsTransformer;
 
 class ProductType extends AbstractType
 {
@@ -24,10 +25,11 @@ class ProductType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $keywordTransformer = new KeywordsToIdsTransformer($this->om);
+        $regionstoIdsTransformer = new RegionsToIdsTransformer($this->om);
+        
         $builder
             ->add('name')
             ->add('description')
-            ->add('status')
             ->add('category', 'entity', array(
                 'class' => 'AppFrontBundle:Category',
                 'property' => 'categoryName',
@@ -39,6 +41,17 @@ class ProductType extends AbstractType
                     'required' => false,
                 ))->addModelTransformer($keywordTransformer)
             )
+            ->add('deliverable', 'choice', array(
+                'multiple' => false,
+                'expanded' => false,
+                'choices' => array(0 => 'None', 1 => 'All Regions', 2 => 'Specific Regions'),                
+            ))
+            ->add(
+                $builder->create('regions', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($regionstoIdsTransformer)
+            )
+            ->add('status')
         ;
     }
     

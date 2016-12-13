@@ -10,6 +10,8 @@
 
         $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
         
-        $("#{{ form.images.vars.id }}").imageUploader();
+        $("#{{ form.images.vars.id }}").imageUploader({
+            multiple: false
+        });
     });
 </script>

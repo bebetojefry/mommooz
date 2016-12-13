@@ -178,12 +178,18 @@ modal.directive('modal', function () {
 });
 
 
-$.fn.imageUploader = function() {
+$.fn.imageUploader = function( options ) {
+    
+    var settings = $.extend({
+        multiple: true,        
+    }, options );
+        
     var inputFile = document.createElement("input");
     var preview_box = document.createElement("div");
     $(preview_box).addClass('preview_box');
     inputFile.type = 'file';
-    inputFile.id = inputFile.id+'_file';
+    inputFile.id = $(this).attr('id')+'_file';
+    inputFile.accept = 'image/*';
     $(this).parent().append(inputFile);
     $(this).parent().append(preview_box);
     $(this).parent().addClass('image_uploader');
@@ -218,6 +224,11 @@ $.fn.imageUploader = function() {
     }
     
     $(inputFile).change(function(){
+        if(!settings.multiple && images.length > 0){
+            $(that).parent().find('.preview_box').html('');
+            images = [];
+        }
+        
         if (inputFile.files && inputFile.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {

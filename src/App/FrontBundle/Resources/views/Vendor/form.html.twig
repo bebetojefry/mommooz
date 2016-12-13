@@ -10,6 +10,7 @@
         {{ form_row(form.status) }}
     </div>
     <div class="col-md-6">
+        {{ form_row(form.images) }}
         {% if form.addresses|length > 0 %}
             {% for address in form.addresses %}
                 {{ form_widget(address) }}
@@ -28,5 +29,9 @@
         });
 
         $('#{{ form.regions.vars.id }}').addClass('token-input-real-field');
+        
+        $("#{{ form.images.vars.id }}").imageUploader({
+            multiple: false
+        });
     });
 </script>

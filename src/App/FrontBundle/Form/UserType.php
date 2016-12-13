@@ -5,8 +5,9 @@ namespace App\FrontBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use App\FrontBundle\DataTransformer\RegionsToIdsTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\FrontBundle\DataTransformer\RegionsToIdsTransformer;
+use App\FrontBundle\DataTransformer\ImageToIdsTransformer;
 use App\FrontBundle\Form\AddressType;
 
 class UserType extends AbstractType
@@ -25,6 +26,7 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $regionstoIdsTransformer = new RegionsToIdsTransformer($this->om);
+        $imageTransformer = new ImageToIdsTransformer($this->om);
         
         $builder
             ->add('firstname')
@@ -43,6 +45,11 @@ class UserType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
             ))
+            ->add(
+                $builder->create('images', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($imageTransformer)
+            )
             ->add(
                 $builder->create('regions', 'text', array(
                     'required' => false,

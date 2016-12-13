@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Common\Collections\ArrayCollection;
 use App\FrontBundle\Entity\Product;
 use App\FrontBundle\Form\ProductType;
 use App\FrontBundle\Helper\FormHelper;
@@ -40,6 +41,9 @@ class ProductController extends Controller
             $form->handleRequest($request);
             if($form->isValid()){
                 $product = $form->getData();
+                if($product->getDeliverable() != 2){
+                    $product->setRegions(new ArrayCollection());
+                }
                 $product->setStatus(true);
                 $dm->persist($product);
                 $dm->flush();
@@ -73,6 +77,9 @@ class ProductController extends Controller
             $form->handleRequest($request);
             if($form->isValid()){
                 $product = $form->getData();
+                if($product->getDeliverable() != 2){
+                    $product->setRegions(new ArrayCollection());
+                }
                 $dm->persist($product);
                 $dm->flush();
                 $this->get('session')->getFlashBag()->add('success', 'product.msg.created');
@@ -88,8 +95,14 @@ class ProductController extends Controller
             $keyword_values[] = array('id' => $keyword->getId(), 'name' => $keyword->getKeyword());
         }
         
+        $regions = $product->getRegions()->getValues();
+        $region_values = array();
+        foreach($regions as $region){
+            $region_values[] = array('id' => $region->getId(), 'name' => $region->getRegionName().' ('.$region->getDistrict()->getName().')');
+        }
+        
         $body = $this->renderView('AppFrontBundle:Product:form.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values))
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'region_values' => json_encode($region_values))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
