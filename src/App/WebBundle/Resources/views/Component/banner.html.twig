@@ -9,7 +9,7 @@
 <div id="banner-items" class="slider-navigation sb-none block-98 absolute-centre absolute-pos block-fl-cary font-normal">
     {% for banner in banners %}
         {% set image = banner.getImages()|first %}
-        <div class="block-3 {% if loop.index0 == 0 %}active{% endif %} banner-item" data-image="{{ image.getImage() }}" data-link="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}">
+        <div class="block-3 {% if loop.index0 == 0 %}active{% endif %} banner-item relative-pos" data-image="{{ image.getImage() }}" data-link="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}">
             {{ banner.getDescription()|raw }}
         </div>
     {% endfor %}

@@ -1,12 +1,11 @@
 <ul {% if child == null %}class="main"{% endif %}>
     {% for menu in category.getChilds() %}
         <li>
-            <a href="{{ path('category_menu', {id: menu.getId()}) }}">{{ menu.getCategoryName() }}</a>
-            {% if menu.getChilds()|length > 0 %}
-                <span class="icon-arrow-right"></span>
-                <div>
-                    {{ render(controller('AppWebBundle:Category:index', { 'id': menu.getId(), 'child': 1 })) }}
-                </div>
+            <a href="{{ path('category_menu', {id: menu.getId()}) }}">{{ menu.getCategoryName() }}
+                {% if menu.getChilds()|length > 0 %}<span class="icon-arrow-right"></span>{% endif %}
+            </a>
+            {% if menu.getChilds()|length > 0 %}    
+                {{ render(controller('AppWebBundle:Category:index', { 'id': menu.getId(), 'child': 1 })) }}
             {% endif %}
         </li>
     {% endfor %}
