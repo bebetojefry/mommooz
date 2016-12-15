@@ -1,6 +1,6 @@
 {% for item in items %}
     <div class="block-3 ptrbl-5p mt-10p block-mb-6 sb-block-12">
-        <a href="">
+        <a href="{{ path('item_page', {'id': item.getId()}) }}">
             <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
                 <div class="block-6">
                     {% set image = item.getItem().getImages()|first %}

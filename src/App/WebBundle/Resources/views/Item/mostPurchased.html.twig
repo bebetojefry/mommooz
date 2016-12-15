@@ -1,7 +1,7 @@
 <h5 class="black-txt ptb-5p head relative-pos"> <span> most purchased</span> </h5>
 {% for stockitem in items %}
     <div class="full-width block-fl-cary mt-15p">
-        <a href="{{ path('item_page', {'id': stockitem.getItem().getId()}) }}">
+        <a href="{{ path('item_page', {'id': stockitem.getId()}) }}">
             {% set image = stockitem.getItem().getImages()|first %}
             <div class="block-4"> <img src="{{ image.getImage() }}" class="image-fw" alt="momooz product"> </div>
             <div class="block-8 text-center">

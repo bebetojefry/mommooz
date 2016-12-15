@@ -80,7 +80,7 @@
                 {% for item in product.getItems() %}
                     {% for entry in item.getInStockEntries() %}
                         <div class="block-4 text-center mt-40p block-mb-6 block-sb-12">
-                            <a href="{{ path('item_page', {'id': entry.getItem().getId()}) }}">
+                            <a href="{{ path('item_page', {'id': entry.getId()}) }}">
                                 <div class="block-10">
                                     {% set image = entry.getItem().getImages()|first %}
                                     <div class="block-8"> <img src="{{ image.getImage() }}" class="full-width" alt=""> </div>
