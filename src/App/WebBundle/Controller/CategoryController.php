@@ -11,25 +11,30 @@ use App\FrontBundle\Entity\Category;
 
 class CategoryController extends Controller
 {
-    /**
-     * @Route("/{id}/{child}", name="category_menu", options={"expose"=true})
-     */
+    
     public function indexAction(Category $category, $child = null)
     {
         return $this->render('AppWebBundle:Category:menu.html.twig', array('category' => $category, 'child' => $child));
     }
     
     /**
-     * @Route("/page/category/{id}", name="category_page", options={"expose"=true})
+     * @Route("/{id}/page", name="category_page", options={"expose"=true})
      */
     public function pageAction(Category $category)
     {
-        
+        return $this->render('AppWebBundle:Category:index.html.twig', array(
+            'category' => $category
+        ));
     }
     
     public function popularAction(){
         $categories = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true), null, 4, 0);
         return $this->render('AppWebBundle:Category:popular.html.twig', array('categories' => $categories));
+    }
+    
+    public function popularMenuAction(){
+        $categories = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true), null, 3, 0);
+        return $this->render('AppWebBundle:Category:popular_menu.html.twig', array('categories' => $categories));
     }
         
 }

@@ -113,8 +113,8 @@
         <ul>
             <li class="pointer-csr nav-catg-click"> Category <span class="icon-angle-down"> </span> </li>
             <li class="pointer-csr"> <a href="store.php"> Store </a>  </li>
-            <li class="pointer-csr"> <a href="offer.php">  Offer </a> </li>
-            <li class="pointer-csr"> <a href="recipe.php">  recipe </a> </li>
+            {#<li class="pointer-csr"> <a href="offer.php">  Offer </a> </li>#}
+            {{ render(controller('AppWebBundle:Category:popularMenu')) }}
         </ul>
 
         <div class="full-width nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">

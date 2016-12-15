@@ -193,6 +193,7 @@ class Category
         $this->keywords = new ArrayCollection();
         $this->childs = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
@@ -343,5 +344,14 @@ class Category
     public function getPopular()
     {
         return $this->popular;
+    }
+    
+    public function getAllProducts(){
+        $product = $this->products->toArray();
+        foreach ($this->getChilds() as $cat){
+            $product = array_merge($product, $cat->getProducts()->toArray());
+        }
+        
+        return $product;
     }
 }

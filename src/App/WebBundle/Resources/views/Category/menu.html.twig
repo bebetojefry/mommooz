@@ -1,7 +1,7 @@
 <ul {% if child == null %}class="main"{% endif %}>
     {% for menu in category.getChilds() %}
         <li>
-            <a href="{{ path('category_menu', {id: menu.getId()}) }}">{{ menu.getCategoryName() }}
+            <a href="{{ path('category_page', {id: menu.getId()}) }}">{{ menu.getCategoryName() }}
                 {% if menu.getChilds()|length > 0 %}<span class="icon-arrow-right"></span>{% endif %}
             </a>
             {% if menu.getChilds()|length > 0 %}    

@@ -579,4 +579,15 @@ class Item
     {
         return $this->stock_entries;
     }
+    
+    public function getInStockEntries(){
+        $items = array();
+        foreach($this->stock_entries as $entry){
+            if($entry->getInStock() > 0){
+                $items[] = $entry;
+            }
+        }
+        
+        return $items;
+    }
 }
