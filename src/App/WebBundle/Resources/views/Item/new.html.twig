@@ -3,8 +3,7 @@
         <a href="{{ path('item_page', {'id': item.getId()}) }}">
             <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
                 <div class="block-6">
-                    {% set image = item.getItem().getImages()|first %}
-                    <img src="{{ image.getImage() }}" class="image-fw" alt="momooz product image">
+                    <img src="{{ item.getItem().getPicture() }}" class="image-fw" alt="momooz product image">
                 </div>
                 <div class="block-8 capitalize-txt mt-20p">
                     {{ item.getItem().getName() }}

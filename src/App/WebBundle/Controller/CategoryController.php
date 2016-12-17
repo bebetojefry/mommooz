@@ -22,6 +22,7 @@ class CategoryController extends Controller
      */
     public function pageAction(Category $category)
     {
+       // $category->getInStockEntries(); exit;
         return $this->render('AppWebBundle:Category:index.html.twig', array(
             'category' => $category
         ));

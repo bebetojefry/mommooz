@@ -8,96 +8,69 @@
 
 {% block content %}
     <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
-        <a href=".">Home</a>  - <a href=""> Category </a> - <a href="">  Grocery </a>  -  All Products
+        <a href="{{ path('home') }}">Home</a>  - Category - <a href="{{ path('category_page', {id: category.getId()}) }}">  {{ category.getCategoryName() }} </a>  -  All Products
     </div>
 
     <div class="center-1200px block-fl-cary va-top">
         <div class="filters-left block-3 ptb-15p sb-ptb-5p   block-lb-12 block-fl-cary va-top resposive-filter transition_05s">
             <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
-            <h3 class="mb-20p"> Grocery </h3>
-                    <div class="first-cat-cary mb-25p">
-            <input type="checkbox" name="" class="mr-10p">  All  <div class="count-products-filter mb-10p dispaly-inline-block prl-5p br-5p">150</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Dal   <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Edible Oil    <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Flour    <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Salt & Sugar <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Rice  <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Organic Kitchen  <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Suji    <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Soya Chunks    <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Flour    <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Salt & Sugar <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Rice  <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Organic Kitchen  <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Suji    <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-            <input type="checkbox" name="" class="mr-10p">  Soya Chunks    <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">50</div> <br/>
-                    </div>
+                <h3 class="mb-20p"> {{ category.getCategoryName() }} </h3>
+                <div class="first-cat-cary mb-25p">
+                    <input type="checkbox" name="cat[]" value="0" class="mr-10p">  All  <div class="count-products-filter mb-10p dispaly-inline-block prl-5p br-5p">{{ category.getInStockEntries()|length }}</div> <br/>
+                    {% for cat in category.getChilds() %}
+                        <input type="checkbox" name="cat[]" value="{{ cat.getId() }}" class="mr-10p">  {{ cat.getCategoryName() }}   <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">{{ cat.getInStockEntries()|length }}</div> <br/>
+                    {% endfor %}
+                </div>
                </div>
                <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"> 
                 <h3 class="mb-10p"> Refine By </h3>
                     <div class="none-overx-pro mb-25p">
-            <input type="checkbox" name="" class="mr-10p">   Products on offer  <br/>
-            <input type="checkbox" name="" class="mr-10p">   New Launches   <br/>
+                        <input type="checkbox" name="refine[]" value="offer" class="mr-10p">   Products on offer  <br/>
+                        <input type="checkbox" name="refine[]" value="new" class="mr-10p">   New Launches   <br/>
                     </div>
                 </div>
                 <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
                 <h3 class=""> Brands </h3>
                 <input type="text" placeholder="Search Brand Name Here" class="mb-15p">
                     <div class="none-overx-pro first-cat-cary mb-25p">
-            <input type="checkbox" name="" class="mr-10p">  24 Mantra   <br/>
-            <input type="checkbox" name="" class="mr-10p">  A2b Sweets and savouries   <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aachi  <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aashirvaad    <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aashirvaad Svasti  <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aji-No-Moto <br/>
-            <input type="checkbox" name="" class="mr-10p">  Akar <br/>
-            <input type="checkbox" name="" class="mr-10p">  Akshath   <br/>
-            <input type="checkbox" name="" class="mr-10p">  A2b Sweets and savouries   <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aachi  <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aashirvaad    <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aashirvaad Svasti  <br/>
-            <input type="checkbox" name="" class="mr-10p">  Aji-No-Moto <br/>
-            <input type="checkbox" name="" class="mr-10p">  Akar <br/>
-            <input type="checkbox" name="" class="mr-10p">  Akshath   <br/>
+                    <input type="checkbox" name="brand[]" value="0" class="mr-10p"> All   <br/>
+                    {% for brand in category.getAllBrands() %}
+                        <input type="checkbox" name="brand[]" value="{{ brand.getId() }}" class="mr-10p">  {{ brand.getName() }}   <br/>
+                    {% endfor %}
                     </div>
                 </div>
 
-                <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
+                {#<div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
                  <h3 class="mb-10p"> Price </h3>
                     <div class="none-overx-pro mb-25p">
-            <input type="checkbox" name="" class="mr-10p">  Less than Rs 20  <br/>
-            <input type="checkbox" name="" class="mr-10p">  Rs 21 to Rs 50    <br/>
-            <input type="checkbox" name="" class="mr-10p">  Rs 51 to Rs 100    <br/>
+                    <input type="checkbox" name="" class="mr-10p">  Less than Rs 20  <br/>
+                    <input type="checkbox" name="" class="mr-10p">  Rs 21 to Rs 50    <br/>
+                    <input type="checkbox" name="" class="mr-10p">  Rs 51 to Rs 100    <br/>
                     </div>
-                </div>
+                </div>#}
 
                 <div class="close-filter pointer-csr full-width ptb-5p blue-bg white-txt uppercase-txt pl-10p">
                  <span class="icon-close-x" style="font-size:12px;"></span> Close </div>
         </div>
         <div class="block-9 block-lb-12 productspage-pro ptb-15p block-fl-cary pb-50p lb-border-none">
             <h4 class="pl-25p"> All Products </h4>
-            {% for product in category.getAllProducts() %}
-                {% for item in product.getItems() %}
-                    {% for entry in item.getInStockEntries() %}
-                        <div class="block-4 text-center mt-40p block-mb-6 block-sb-12">
-                            <a href="{{ path('item_page', {'id': entry.getId()}) }}">
-                                <div class="block-10">
-                                    {% set image = entry.getItem().getImages()|first %}
-                                    <div class="block-8"> <img src="{{ image.getImage() }}" class="full-width" alt=""> </div>
-                                    <h5 class="mt-15p block-8">  
-                                        {{ entry.getItem().getName() }}
-                                    </h5>
-                                    <h3 class="mt-10p"> <span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
-                                    <div class="full-width mt-15p">
-                                            <button class="button-product br-5p ptb-10p prl-15p pointer-csr">
-                                            Add to Cart <span class="icon-arrow-right ml-5p"></span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </a>
+            {% for entry in category.getInStockEntries() %}
+                <div class="block-4 text-center mt-40p block-mb-6 block-sb-12">
+                    <a href="{{ path('item_page', {'id': entry.getId()}) }}">
+                        <div class="block-10">
+                            <div class="block-8"> <img src="{{ entry.getItem().getPicture() }}" class="full-width" alt=""> </div>
+                            <h5 class="mt-15p block-8">  
+                                {{ entry.getItem().getName() }}
+                            </h5>
+                            <h3 class="mt-10p"> <span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
+                            <div class="full-width mt-15p">
+                                    <button class="button-product br-5p ptb-10p prl-15p pointer-csr">
+                                    Add to Cart <span class="icon-arrow-right ml-5p"></span>
+                                </button>
+                            </div>
                         </div>
-                    {% endfor %}
-                {% endfor %}
+                    </a>
+                </div>
             {% endfor %}
         </div>
     </div>

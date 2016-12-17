@@ -17,3 +17,13 @@ page_category:
     resource: "@AppWebBundle/Controller/ComponentController.php"
     type:     annotation
     prefix: /components
+    
+page_store:
+    resource: "@AppWebBundle/Controller/StoreController.php"
+    type:     annotation
+    prefix: /store
+    
+page_keyword:
+    resource: "@AppWebBundle/Controller/KeywordController.php"
+    type:     annotation
+    prefix: /keyword

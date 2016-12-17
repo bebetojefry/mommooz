@@ -8,15 +8,24 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\StockEntry;
+use App\FrontBundle\Entity\Item;
 
 class ItemController extends Controller
 {
     /**
-     * @Route("/page/{id}", name="item_page", options={"expose"=true})
+     * @Route("/{id}/page", name="item_page", options={"expose"=true})
      */
     public function pageAction(StockEntry $stockEntry)
     {
         echo get_class($stockEntry); exit;
+    }
+    
+    /**
+     * @Route("/product/page/{id}", name="product_item_page", options={"expose"=true})
+     */
+    public function productitemAction(Item $item)
+    {
+        echo get_class($item); exit;
     }
     
     public function mostPurchasedAction(){

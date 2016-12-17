@@ -18,6 +18,7 @@
         <meta property="og:image" content="">
         <title>Momooz - {% block title %}{% endblock %}</title>
         {% stylesheets
+        'assets/vendor/autocompletelikegoogle/jquery.autocomplete.css'
         'bundles/appweb/css/*'
         filter='cssrewrite' output='css/compiled/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}">
@@ -26,6 +27,7 @@
     {% javascripts
         'assets/vendor/jquery/jquery.min.js'
         'assets/vendor/jquery.easing/js/jquery.easing.min.js'
+        'assets/vendor/autocompletelikegoogle/jquery.autocomplete.js'
         'bundles/appweb/js/*'
         output='js/compiled/main.js' %}
     <script src="{{ asset_url }}"></script>
@@ -63,13 +65,13 @@
     <section class="center-1200px block-fl-cary ptb-25p logo-cart-search va-top">
         <div class="block-2 block-mb-12 mb-text-center">
             <div class="block-mb-5 center-pos">
-                <a href="."> <img src="{{ asset('bundles/appweb/images/icons/logo-image.svg') }}" class="image-fw" alt="momooz"> </a>
+                <a href="{{ path('home') }}"> <img src="{{ asset('bundles/appweb/images/icons/logo-image.svg') }}" class="image-fw" alt="momooz"> </a>
             </div>
         </div>
         <div class="block-6 clearSet block-mb-12">
             <div class="block-10 right-float mb-fn block-mb-12">
                 <form >
-                    <input type="text" placeholder="search product" class="search-main-home">
+                    <input type="text" id="global-search" placeholder="Search Pproduct" class="search-main-home">
                 </form>
             </div>
         </div>
@@ -112,7 +114,7 @@
         <span class="icon-close-x pointer-csr close-main-menu white-txt"></span>
         <ul>
             <li class="pointer-csr nav-catg-click"> Category <span class="icon-angle-down"> </span> </li>
-            <li class="pointer-csr"> <a href="store.php"> Store </a>  </li>
+            <li class="pointer-csr"> <a href="{{ path('stores') }}"> Store </a>  </li>
             {#<li class="pointer-csr"> <a href="offer.php">  Offer </a> </li>#}
             {{ render(controller('AppWebBundle:Category:popularMenu')) }}
         </ul>
@@ -222,7 +224,18 @@
 
     <section class="full-width footer-second mt-20p text-center ptb-10p white-txt"> Copyright Â© 2016, momooz Pvt Ltd, powered by
     <a href="http://primalcodes.com/" target="new"> primalcodes </a> </section>
-    
+    <script type="text/javascript">
+        $(function() {
+            $("#global-search").autocomplete({source:[
+                {
+                 url:"{{ path('keyword_web_autocomplete') }}?q=%QUERY%",
+                 type:'remote'
+                }
+            ]}).on('selected.xdsoft',function(e,val){
+                window.location = "{{ path('keyword_web_search') }}?q="+val;
+            }); 
+        });
+    </script>
     {% block javascript %}{% endblock %}
 </body>
 
