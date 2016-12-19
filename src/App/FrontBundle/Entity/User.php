@@ -181,6 +181,13 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     private $ItemViews;
     
     /**
+     * @var Cart
+     *
+     * @ORM\OneToOne(targetEntity="Cart", mappedBy="user")
+     */
+    private $cart;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -890,5 +897,29 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     public function getItemViews()
     {
         return $this->ItemViews;
+    }
+
+    /**
+     * Set cart
+     *
+     * @param \App\FrontBundle\Entity\Cart $cart
+     *
+     * @return User
+     */
+    public function setCart(\App\FrontBundle\Entity\Cart $cart = null)
+    {
+        $this->cart = $cart;
+
+        return $this;
+    }
+
+    /**
+     * Get cart
+     *
+     * @return \App\FrontBundle\Entity\Cart
+     */
+    public function getCart()
+    {
+        return $this->cart;
     }
 }

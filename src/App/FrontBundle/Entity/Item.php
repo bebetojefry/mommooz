@@ -629,11 +629,13 @@ class Item
         $entries = $this->getInStockEntries();
         $variants = array();
         foreach($entries as $entry){
-            if(!isset($variants[$entry->getVariant()->getVariantType()->getId()])){
-                $variants[$entry->getVariant()->getVariantType()->getId()] = array();
-            }
-            if(!isset($variants[$entry->getVariant()->getVariantType()->getId()][$entry->getVariant()->getId()])){
-                $variants[$entry->getVariant()->getVariantType()->getId()][$entry->getVariant()->getId()] = $entry->getVariant();
+            if($entry->getVariant()){
+                if(!isset($variants[$entry->getVariant()->getVariantType()->getId()])){
+                    $variants[$entry->getVariant()->getVariantType()->getId()] = array();
+                }
+                if(!isset($variants[$entry->getVariant()->getVariantType()->getId()][$entry->getVariant()->getId()])){
+                    $variants[$entry->getVariant()->getVariantType()->getId()][$entry->getVariant()->getId()] = $entry->getVariant();
+                }
             }
         }
         

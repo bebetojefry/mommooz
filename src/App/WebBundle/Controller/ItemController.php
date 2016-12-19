@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\StockEntry;
 use App\FrontBundle\Entity\Item;
 use App\FrontBundle\Entity\ItemView;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\FrontBundle\Entity\Cart;
+use App\FrontBundle\Entity\CartItem;
 
 class ItemController extends Controller
 {
@@ -46,9 +49,22 @@ class ItemController extends Controller
 
         $recently_viewed = $query->getQuery()->getResult();
         
+        if($user = $this->getUser()){
+            $cart = $user->getCart();
+        } else {
+            $cart = $em->getRepository('AppFrontBundle:Cart')->findOneBySessionId(session_id());
+        }
+        
+        $location = null;
+        if($loc_id = $this->get('session')->get('location')){
+            $location = $em->getRepository('AppFrontBundle:Location')->find($loc_id);
+        }
+        
         return $this->render('AppWebBundle:Item:index.html.twig', array(
             'entry' => $stockEntry,
-            'recently_viewed' => $recently_viewed
+            'recently_viewed' => $recently_viewed,
+            'cart' => $cart,
+            'location' => $location
         ));
     }
     
@@ -106,5 +122,110 @@ class ItemController extends Controller
         return $this->render('AppWebBundle:Item:new.html.twig', array(
             'items' => $items
         ));
+    }
+    
+    /**
+     * @Route("/{id}/deliverable", name="item_deliverable", options={"expose"=true})
+     */
+    public function deliverableAction(Request $request, StockEntry $entry){
+        $pin = $request->query->get('pin');
+        $em = $this->getDoctrine()->getManager();
+        $productDeliverablility = $entry->getItem()->getProduct()->getDeliverable();
+        $status = false;
+        $cost = 0;
+        
+        switch ($productDeliverablility){
+            case 0:
+                $regions = $entry->getStock()->getVendor()->getRegions();
+                $status = $this->isDeliverable($regions, $pin);
+                break;
+            case 1:
+                $status = true;
+                break;
+            case 2:
+                $p_regions = $entry->getItem()->getProduct()->getRegions()->toArray();
+                $v_regions = $entry->getStock()->getVendor()->getRegions()->toArray();
+                $regions = array_merge($p_regions, $v_regions);
+                $status = $this->isDeliverable($regions, $pin);
+                break;
+        }
+        
+        $this->get('session')->remove('location');
+        if($status){
+            $location = $em->getRepository('AppFrontBundle:Location')->findOneByPinCode($pin);
+            $this->get('session')->set('location', $location->getId());
+            $pin_region = $location->getRegion();
+            $v_regions = $entry->getStock()->getVendor()->getRegions();
+            foreach($v_regions as $region){
+                if($region->getId() == $pin_region->getId()){
+                    $cost = $location->getLocalServiceCharge();
+                } else {
+                    $cost = $location->getRegionalServiceCharge();
+                }
+            }
+        }
+        
+        return new JsonResponse(array('status' => (int)$status, 'cost' => $cost));
+    }
+    
+    public function isDeliverable($regions, $pin){
+        $status = false;
+        foreach($regions as $region){
+            foreach ($region->getLocations() as $location){
+                if($location->getPinCode() == $pin){
+                    $status = true;
+                    break;
+                }
+            }
+        }
+        
+        return $status;
+    }
+    
+    /**
+     * @Route("/{id}/tocart", name="item_add_to_cart", options={"expose"=true})
+     */
+    public function tocartAction(Request $request, StockEntry $entry){
+        $status = false;
+        $em = $this->getDoctrine()->getManager();
+        if($entry->getInStock() >= $request->query->get('qty')){
+            $cart = null;
+            if($user = $this->getUser()){
+                $cart = $user->getCart();
+                if(!$cart){
+                    $cart = new Cart();
+                    $cart->setUser($user);
+                    $cart->setSessionId(session_id());
+                    $em->persist($cart);
+                    $em->flush();
+                }
+                
+                
+            } else {
+                $cart = $em->getRepository('AppFrontBundle:Cart')->findOneBySessionId(session_id());
+                if(!$cart){
+                    $cart = new Cart();
+                    $cart->setUser($this->getUser());
+                    $cart->setSessionId(session_id());
+                    $em->persist($cart);
+                    $em->flush();
+                }
+            }
+            
+            if($cart){
+                $item = new CartItem();
+                $item->setCart($cart);
+                $item->setEntry($entry);
+                $item->setQuantity($request->query->get('qty'));
+                $item->setPrice($entry->getActualPrice());
+                $item->setStatus(false);
+                $em->persist($item);
+                $em->flush();
+            }
+            
+            $status = true;
+        }
+        
+        return new JsonResponse(array('status' => $status));
     }
 }

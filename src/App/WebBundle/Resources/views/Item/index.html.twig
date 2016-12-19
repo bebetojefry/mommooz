@@ -9,6 +9,12 @@
 {% block content %}
     {% set category = entry.getItem().getProduct().getCategory() %}
     {% set item = entry.getItem() %}
+    
+    {% set inCart = null %}
+    {% if cart %}
+        {% set inCart = cart.inCart(entry) %}
+    {% endif %}
+                        
     <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
 	<a href="{{ path('home') }}">Home</a>  - Category - <a href="{{ path('category_page', {id: category.getId()}) }}">  {{ category.getCategoryName() }} </a>  -  {{ item.getName() }}
     </div>
@@ -69,8 +75,8 @@
             </div>
             <div class="block-6 text-right mt-20p sb-text-left block-sb-12">
                 <div class="block-11 text-left">	
-                   <h2>{{ item.getName() }}</h2>
-                   <div class="full-width ptb-20p">
+                    <h2>{{ item.getName() }}</h2>
+                    <div class="full-width ptb-20p">
                         <div class="block-5">
                             {% if entry.getVariant() %}
                                 <h3> {{ entry.getVariant().getValue() }} </h3>
@@ -82,85 +88,131 @@
                             {#<span class="dim-font"> <strike> <span class="icon-inr"></span> 550 </strike> </span> <br/>
                             <span class="save-font"> Save <span class="icon-inr"></span> 50/- </span>#}
                         </div>
-                   </div>
-                   <div class="full-width mt-10p">
+                    </div>
+                    <div class="full-width mt-10p">
                         {% set addresses = entry.getStock().getVendor().getAddresses() %}
                         <span class="dim-font">Seller:</span> <a href="">  {{ entry.getStock().getVendor().getFullName() }}{% if addresses|length > 0 %}{{ ', '~addresses|first.getStreet() }}{% endif%} </a> <br>
                         <span class="dim-fon dispaly-block pointer-csr change-seller" style="margin-top: 5px;">  Change Seller  </span>
                         <div class="full-width show-change-seller transition_05s">
-                            <form>
-                                <select id="cmb_seller" class="br-5p block-7 brd-L-1p uppercase-txt seller-selectmenu">
-                                    {% for val in item.getInStockEntries() %}
-                                        {% set display = true %}
-                                        {% if entry.getVariant() and val.getVariant() %}
-                                            {% if val.getVariant().getId() != entry.getVariant().getId() %}
-                                                {% set display = false %}
-                                            {% endif %}
+                            <select id="cmb_seller" class="br-5p block-7 brd-L-1p uppercase-txt seller-selectmenu">
+                                {% for val in item.getInStockEntries() %}
+                                    {% set display = true %}
+                                    {% if entry.getVariant() and val.getVariant() %}
+                                        {% if val.getVariant().getId() != entry.getVariant().getId() %}
+                                            {% set display = false %}
                                         {% endif %}
-                                        {% if display %}
-                                            {% set addresses = val.getStock().getVendor().getAddresses() %}
-                                            <option {% if entry.getId() == val.getId() %}selected=""{% endif %} value="{{ val.getId() }}"> {{ val.getStock().getVendor().getFullName() }}{% if addresses|length > 0 %}{{ ', '~addresses|first.getStreet() }}{% endif%} - Rs. {{ val.getActualPrice() }} </option>
-                                        {% endif %}
-                                    {% endfor%}
+                                    {% endif %}
+                                    {% if display %}
+                                        {% set addresses = val.getStock().getVendor().getAddresses() %}
+                                        <option {% if entry.getId() == val.getId() %}selected=""{% endif %} value="{{ val.getId() }}"> {{ val.getStock().getVendor().getFullName() }}{% if addresses|length > 0 %}{{ ', '~addresses|first.getStreet() }}{% endif%} - Rs. {{ val.getActualPrice() }} </option>
+                                    {% endif %}
+                                {% endfor%}
+                            </select>
+                            <script type="text/javascript">
+                                var switch_selleer_path = "{{ path('item_page', {'id': 0}) }}";
+                                $('#cmb_seller').on('change', function(){
+                                    var loc = switch_selleer_path.replace('0', $(this).val());
+                                    window.location = loc;
+                                    return false;
+                                });
+                            </script>
+                        </div>
+                    </div>
+                    <div class="full-width mt-20p">
+                        <h4 class="mb-10p"> Available Quantity  </h4>
+                        {% for variantType in item.getVariantsInStock() %}
+                            {% if variantType|length > 0 %}
+                                <span class="dim-font">{{ variantType|first.getVariantType().getName() }}</span>
+                                <br/>
+                                <select id="cmb_variant" class="br-5p block-7 brd-L-1p uppercase-txt">
+                                    {% for variant in variantType %}
+                                        <option {% if variant.getId() == entry.getVariant().getId() %}selected=""{% endif %} value="{{ variant.getId() }}"> {{ variant.getValue() }} </option>
+                                    {% endfor %}
                                 </select>
                                 <script type="text/javascript">
-                                    var switch_selleer_path = "{{ path('item_page', {'id': 0}) }}";
-                                    $('#cmb_seller').on('change', function(){
-                                        var loc = switch_selleer_path.replace('0', $(this).val());
-                                        window.location = loc;
+                                    var switch_variant_path = "{{ path('item_page_variant', {'id': item.getId()}) }}";
+                                    $('#cmb_variant').on('change', function(){
+                                        window.location = switch_variant_path+'?variant='+$(this).val();
                                         return false;
                                     });
                                 </script>
-                            </form> 
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div class="full-width mt-20p">
+                        <h4 class=""> Check Availability  </h4>
+                        <div class="availChecker">
+                            <input type="text" id="txtCheckAvail" {% if location %}value="{{ location.getPinCode() }}"{% endif %} style="width: 85%;" placeholder="Type Pincode" />
+                            <button class="momz-button" id="btnCheckAvail">Check</button>
                         </div>
-                   </div>
-                    <div class="full-width mt-20p">
-                            <h4 class="mb-10p"> Available Quantity  </h4>
-                        <form>
-                            {% for variantType in item.getVariantsInStock() %}
-                                {% if variantType|length > 0 %}
-                                    <span class="dim-font">{{ variantType|first.getVariantType().getName() }}</span>
-                                    <br/>
-                                    <select id="cmb_variant" class="br-5p block-7 brd-L-1p uppercase-txt">
-                                        {% for variant in variantType %}
-                                            <option {% if variant.getId() == entry.getVariant().getId() %}selected=""{% endif %} value="{{ variant.getId() }}"> {{ variant.getValue() }} </option>
-                                        {% endfor %}
-                                    </select>
-                                    <script type="text/javascript">
-                                        var switch_variant_path = "{{ path('item_page_variant', {'id': item.getId()}) }}";
-                                        $('#cmb_variant').on('change', function(){
-                                            window.location = switch_variant_path+'?variant='+$(this).val();
-                                            return false;
-                                        });
-                                    </script>
-                                {% endif %}
-                            {% endfor %}
-                        </form> 
-                   </div>
-                   <div class="full-width mt-20p">
-                            <h4 class=""> Check Availability  </h4>
-                        <form>
-                            <input type="text" placeholder="Type Pincode & Press Enter" />
-                        </form>
+                        <div class="availDisplay" style="display: none; margin: 10px 0;">
+                            <div></div>
+                            {% if inCart == null %}<a href="javascript:;" style="color: blue; font-size: 12px; text-decoration: underline;">Try Another PIN</a>{% endif %}
+                        </div>
+                        <script type="text/javascript">
+                            $('#btnCheckAvail').on('click', function(){
+                                var pin = $('#txtCheckAvail').val();
+                                $.ajax({
+                                    url: '{{ path('item_deliverable', {'id': entry.getId()}) }}?pin='+pin,
+                                    dataType: 'json',
+                                    success: function(resp){
+                                        if(resp.status){
+                                            $('.availChecker').hide();
+                                            $('.availDisplay div').html(pin+' : <span style="color:green;">Available</span>');
+                                            $('.availDisplay').show();
+                                            $('#add-to-cart').removeAttr('disabled');
+                                        } else {
+                                            $('.availChecker').hide();
+                                            $('.availDisplay div').html(pin+' : <span style="color:red;">Not Available</span>');
+                                            $('.availDisplay').show();
+                                            $('#add-to-cart').attr('disabled', 'disabled');
+                                        }
+                                    }
+                                });
+                                
+                                $('.availDisplay a').on('click', function(){
+                                    $('.availChecker').show();
+                                    $('.availDisplay').hide();
+                                    $('#add-to-cart').attr('disabled', 'disabled');
+                                });
+                            });
+                            
+                            {% if location %}$('#btnCheckAvail').trigger('click');{% endif %}
+                        </script>
                         <span class="extrasmall-dim-font pt-5p dispaly-block"> Standard Delivery: 14/11/2016 - Monday </span>
-
-                   </div>
-
-                    <div class="full-width mt-20p">
-                            <label> Number of Quantity </label>
-                            <input type="text" class="" value="1">
                     </div>
 
-                   <div class="full-width mt-10p ptb-10p">
-                            <button class="momz-button" name=""> Add to Cart <span class="icon-arrow-right"></span> </button>
+                    <div class="full-width mt-20p">
+                        <label> Number of Quantity </label>
+                        <input type="number" {% if inCart %}disabled=""{% endif %} id="purchase-quantity" value="{% if inCart %}{{ inCart.getQuantity() }}{% else %}1{% endif %}" max="{{ entry.getInStock() }}" min="1">
+                    </div>
+
+                    <div class="full-width mt-10p ptb-10p">
+                        <button {% if inCart %}style="display: none;"{% endif %} class="momz-button" id="add-to-cart" disabled=""> Add to Cart <span class="icon-arrow-right"></span> </button>
+                        <span id="in-cart" style="color: green; {% if inCart == null %}display: none;{% endif %}">In Cart</span>
                         <button class="momz-button ml-10p mb-ml-0p mt-10p" name=""> Add to Wishlist <span class="icon-arrow-right"></span> </button>
-                   </div>
-
-
+                        <script type="text/javascript">
+                            $('#add-to-cart').on('click', function(){
+                                var quantity = $('#purchase-quantity').val();
+                                $.ajax({
+                                    url: '{{ path('item_add_to_cart', {'id': entry.getId()}) }}?qty='+quantity,
+                                    dataType: 'json',
+                                    success: function(resp){
+                                        if(resp.status){
+                                            $('#add-to-cart').hide();
+                                            $('#in-cart').show();
+                                            $('.availDisplay a').remove();
+                                            $('#purchase-quantity').attr('disabled', 'disabled');
+                                            alert('Successfully added to cart');
+                                        } else {
+                                            alert('Insufficient stock');
+                                        }
+                                    }
+                                });
+                            });
+                        </script>
+                    </div>
                 </div>
-
-
-
             </div>
 
             <div class="block-12 mt-25p pl-20p  pt-20p border-top ml-20p block-mb-11 mb-text-left">
