@@ -60,7 +60,7 @@
                         <div class="block-10">
                             <div class="block-8"> <img src="{{ entry.getItem().getPicture() }}" class="full-width" alt=""> </div>
                             <h5 class="mt-15p block-8">  
-                                {{ entry.getItem().getName() }}
+                                {{ entry.getItem().getName() }}{% if entry.getVariant() %}{{ ' - '~entry.getVariant().getValue() }}{% endif %}
                             </h5>
                             <h3 class="mt-10p"> <span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
                             <div class="full-width mt-15p">

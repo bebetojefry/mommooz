@@ -21,8 +21,7 @@ class CategoryController extends Controller
      * @Route("/{id}/page", name="category_page", options={"expose"=true})
      */
     public function pageAction(Category $category)
-    {
-       // $category->getInStockEntries(); exit;
+    {       
         return $this->render('AppWebBundle:Category:index.html.twig', array(
             'category' => $category
         ));

@@ -91,6 +91,13 @@ class StockEntry
      */
     private $purchases;
     
+    /**
+     * @var ArrayCollection|ItemView[]
+     *
+     * @ORM\OneToMany(targetEntity="ItemView", mappedBy="entry")
+     */
+    private $ItemViews;
+    
     private $state;
     
     private $commtype;
@@ -282,6 +289,7 @@ class StockEntry
         $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
         $this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
         $this->purchases = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ItemViews = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -438,5 +446,39 @@ class StockEntry
         }
         
         return $in_stock;
+    }
+
+    /**
+     * Add itemView
+     *
+     * @param \App\FrontBundle\Entity\ItemView $itemView
+     *
+     * @return StockEntry
+     */
+    public function addItemView(\App\FrontBundle\Entity\ItemView $itemView)
+    {
+        $this->ItemViews[] = $itemView;
+    
+        return $this;
+    }
+
+    /**
+     * Remove itemView
+     *
+     * @param \App\FrontBundle\Entity\ItemView $itemView
+     */
+    public function removeItemView(\App\FrontBundle\Entity\ItemView $itemView)
+    {
+        $this->ItemViews->removeElement($itemView);
+    }
+
+    /**
+     * Get itemViews
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getItemViews()
+    {
+        return $this->ItemViews;
     }
 }

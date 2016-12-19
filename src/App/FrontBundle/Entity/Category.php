@@ -359,10 +359,8 @@ class Category
         $instock = array();
         
         foreach($this->getAllProducts() as $product){
-            foreach($product->getItems() as $item){
-                if($entry = $item->getLowCostEntry()){
-                    $instock[] = $entry;
-                }
+            foreach($product->getItems() as $item){                
+                $instock = array_merge($instock, $item->getLowCostEntries());
             }
         }
         

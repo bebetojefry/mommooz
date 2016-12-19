@@ -174,6 +174,13 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     private $images;
     
     /**
+     * @var ArrayCollection|ItemView[]
+     *
+     * @ORM\OneToMany(targetEntity="ItemView", mappedBy="user")
+     */
+    private $ItemViews;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -184,6 +191,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
         $this->addresses = new ArrayCollection();
         $this->purchases = new ArrayCollection();
         $this->images = new ArrayCollection();
+        $this->ItemViews = new ArrayCollection();
     }
 
 
@@ -243,6 +251,10 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     public function getLastname()
     {
         return $this->lastname;
+    }
+    
+    public function getFullName() {
+        return $this->getFirstname().' '.$this->getLastname();
     }
 
     /**
@@ -844,5 +856,39 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
         }
         
         return $picture;
+    }
+
+    /**
+     * Add itemView
+     *
+     * @param \App\FrontBundle\Entity\ItemView $itemView
+     *
+     * @return User
+     */
+    public function addItemView(\App\FrontBundle\Entity\ItemView $itemView)
+    {
+        $this->ItemViews[] = $itemView;
+    
+        return $this;
+    }
+
+    /**
+     * Remove itemView
+     *
+     * @param \App\FrontBundle\Entity\ItemView $itemView
+     */
+    public function removeItemView(\App\FrontBundle\Entity\ItemView $itemView)
+    {
+        $this->ItemViews->removeElement($itemView);
+    }
+
+    /**
+     * Get itemViews
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getItemViews()
+    {
+        return $this->ItemViews;
     }
 }

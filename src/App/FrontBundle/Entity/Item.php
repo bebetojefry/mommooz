@@ -591,18 +591,28 @@ class Item
         return $items;
     }
     
-    public function getLowCostEntry(){
+    public function getLowCostEntries(){
         $entries = $this->getInStockEntries();
-        $price = 0;
-        $item = null;
+        $price = array();
+        $items = array();
         foreach($entries as $entry){
-            if($price == 0 || $entry->getActualPrice() < $price){
-                $item = $entry;
+            if($entry->getStock()->getStatus()){
+                $index = $this->getId();
+
+                if($this->getVariants()->count() > 0){
+                    $index = $entry->getVariant()->getId();   
+                }
+
+                $p = isset($price[$index]) ? $price[$index] : 0;
+                if($p == 0 || $entry->getActualPrice() < $p){
+                    $items[$index] = $entry;
+                }
+
+                $price[$index] = $entry->getActualPrice();
             }
-            $price = $entry->getActualPrice();
         }
         
-        return $item;
+        return $items;
     }
     
     public function getPicture(){
@@ -613,5 +623,20 @@ class Item
         }
         
         return $picture;
+    }
+    
+    public function getVariantsInStock(){
+        $entries = $this->getInStockEntries();
+        $variants = array();
+        foreach($entries as $entry){
+            if(!isset($variants[$entry->getVariant()->getVariantType()->getId()])){
+                $variants[$entry->getVariant()->getVariantType()->getId()] = array();
+            }
+            if(!isset($variants[$entry->getVariant()->getVariantType()->getId()][$entry->getVariant()->getId()])){
+                $variants[$entry->getVariant()->getVariantType()->getId()][$entry->getVariant()->getId()] = $entry->getVariant();
+            }
+        }
+        
+        return $variants;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-ob_start();
 session_start();
 
 use Symfony\Component\ClassLoader\ApcClassLoader;

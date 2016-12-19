@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\StockEntry;
 use App\FrontBundle\Entity\Item;
+use App\FrontBundle\Entity\ItemView;
 
 class ItemController extends Controller
 {
@@ -17,7 +18,57 @@ class ItemController extends Controller
      */
     public function pageAction(StockEntry $stockEntry)
     {
-        echo get_class($stockEntry); exit;
+        $em = $this->getDoctrine()->getManager();
+        
+        $view = new ItemView();
+        $view->setSessionId(session_id());
+        $view->setUser($this->getUser());
+        $view->setEntry($stockEntry);
+        
+        $em->persist($view);
+        $em->flush();
+        
+        $query = $em->getRepository('AppFrontBundle:ItemView')->createQueryBuilder('iv');
+        
+        if($user = $this->getUser()){
+            $query->where('iv.user = :user')
+            ->setParameter('user', $user);
+        } else {
+            $query->where('iv.sessionId = :sessionId')
+            ->setParameter('sessionId', session_id());
+        }
+        
+        $query->andWhere('iv.entry <> :entry')
+            ->setParameter('entry', $stockEntry);
+                
+        $query->groupBy('iv.entry')->orderBy('iv.viewedOn', 'DESC')->setMaxResults(3)
+        ->getQuery();
+
+        $recently_viewed = $query->getQuery()->getResult();
+        
+        return $this->render('AppWebBundle:Item:index.html.twig', array(
+            'entry' => $stockEntry,
+            'recently_viewed' => $recently_viewed
+        ));
+    }
+    
+    /**
+     * @Route("/{id}/variant", name="item_page_variant", options={"expose"=true})
+     */
+    public function variantAction(Request $request, Item $item)
+    {
+        $entries = $item->getLowCostEntries();
+        $stockEntry = null;
+        foreach($entries as $entry){
+            if($entry->getItem()->getVariants()->count() > 0 && $entry->getVariant()->getId() == $request->query->get('variant')){
+                $stockEntry = $entry;
+            }
+        }
+        if($stockEntry){
+            return $this->redirect($this->generateUrl('item_page', array('id' => $stockEntry->getId())));
+        }
+        
+        return new Response('No Item Found...');
     }
     
     /**

@@ -96,7 +96,6 @@ class StockEntryType extends AbstractType
         $builder->add('state', 'hidden');
         $builder->add('commtype', 'hidden');
         $builder->add('commvalue', 'hidden');
-        $builder->add('submit', 'submit');
     }
     
     /**
