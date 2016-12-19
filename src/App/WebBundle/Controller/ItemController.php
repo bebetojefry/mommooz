@@ -150,7 +150,6 @@ class ItemController extends Controller
                 break;
         }
         
-        $this->get('session')->remove('location');
         if($status){
             $location = $em->getRepository('AppFrontBundle:Location')->findOneByPinCode($pin);
             $this->get('session')->set('location', $location->getId());
