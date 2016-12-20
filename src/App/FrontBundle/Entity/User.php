@@ -188,6 +188,13 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     private $cart;
     
     /**
+     * @var WishList
+     *
+     * @ORM\OneToOne(targetEntity="WishList", mappedBy="user")
+     */
+    private $Wishlist;
+    
+    /**
      * Constructor
      */
     public function __construct()
@@ -921,5 +928,29 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     public function getCart()
     {
         return $this->cart;
+    }
+
+    /**
+     * Set wishlist
+     *
+     * @param \App\FrontBundle\Entity\WishList $wishlist
+     *
+     * @return User
+     */
+    public function setWishlist(\App\FrontBundle\Entity\WishList $wishlist = null)
+    {
+        $this->Wishlist = $wishlist;
+
+        return $this;
+    }
+
+    /**
+     * Get wishlist
+     *
+     * @return \App\FrontBundle\Entity\WishList
+     */
+    public function getWishlist()
+    {
+        return $this->Wishlist;
     }
 }

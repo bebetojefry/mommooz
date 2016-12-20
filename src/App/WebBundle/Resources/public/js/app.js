@@ -224,14 +224,34 @@ var slider_main = setInterval(slide_show, 4000);
 //---------- Slider function --------------------------
 
 function slide_show(){
-	if(current_slide < totalslides ){
-		current_slide++;
-		}
-		else{
-			current_slide=1;
-			}
-	if($(".slider-cary .slider").hasClass("active")){
-			$(".slider-cary .slider").removeClass("active");
-		}
-	$(".slider-left .slide_"+current_slide).addClass("active");
-	}
+    if(current_slide < totalslides ){
+            current_slide++;
+            }
+            else{
+                    current_slide=1;
+                    }
+    if($(".slider-cary .slider").hasClass("active")){
+                    $(".slider-cary .slider").removeClass("active");
+            }
+    $(".slider-left .slide_"+current_slide).addClass("active");
+}
+
+$(document).ready(function(){
+    $('.add-to-cart').on('click', function(){
+        var that = this;
+        $.ajax({
+            url: to_cart_url.replace('0', $(this).data('entry'))+'?qty=1',
+            dataType: 'json',
+            success: function(resp){
+                if(resp.status){
+                    $(that).hide();
+                    $(that).parent().find('.entry-in-cart').show();
+                    $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
+                    alert('Successfully added to cart');
+                } else {
+                    alert('Insufficient stock');
+                }
+            }
+        });
+    });
+});

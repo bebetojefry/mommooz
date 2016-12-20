@@ -14,6 +14,11 @@
     {% if cart %}
         {% set inCart = cart.inCart(entry) %}
     {% endif %}
+    
+    {% set inWishList = null %}
+    {% if wishlist %}
+        {% set inWishList = wishlist.inWishList(entry) %}
+    {% endif %}
                         
     <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
 	<a href="{{ path('home') }}">Home</a>  - Category - <a href="{{ path('category_page', {id: category.getId()}) }}">  {{ category.getCategoryName() }} </a>  -  {{ item.getName() }}
@@ -189,8 +194,9 @@
 
                     <div class="full-width mt-10p ptb-10p">
                         <button {% if inCart %}style="display: none;"{% endif %} class="momz-button" id="add-to-cart" disabled=""> Add to Cart <span class="icon-arrow-right"></span> </button>
-                        <span id="in-cart" style="color: green; {% if inCart == null %}display: none;{% endif %}">In Cart</span>
-                        <button class="momz-button ml-10p mb-ml-0p mt-10p" name=""> Add to Wishlist <span class="icon-arrow-right"></span> </button>
+                        <span id="in-cart" style="color: green; {% if inCart == null %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
+                        <button {% if inWishList %}style="display: none;"{% endif %} class="momz-button ml-10p mb-ml-0p mt-10p" id="add-to-wishlist"> Add to Wishlist <span class="icon-arrow-right"></span> </button>
+                        <span id="in-wishlist" style="color: green; margin-left: 10px; {% if inWishList == null %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-heart fa-1" aria-hidden="true"></i> In Wishlist</span>
                         <script type="text/javascript">
                             $('#add-to-cart').on('click', function(){
                                 var quantity = $('#purchase-quantity').val();
@@ -203,9 +209,27 @@
                                             $('#in-cart').show();
                                             $('.availDisplay a').remove();
                                             $('#purchase-quantity').attr('disabled', 'disabled');
+                                            $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
                                             alert('Successfully added to cart');
                                         } else {
                                             alert('Insufficient stock');
+                                        }
+                                    }
+                                });
+                            });
+                            
+                            $('#add-to-wishlist').on('click', function(){
+                                $.ajax({
+                                    url: '{{ path('item_add_to_wishlist', {'id': entry.getId()}) }}',
+                                    dataType: 'json',
+                                    success: function(resp){
+                                        if(resp.status){
+                                            $('#add-to-wishlist').hide();
+                                            $('#in-wishlist').show();
+                                            $('#wishlist-badge').html(parseInt($('#wishlist-badge').html()) + 1);
+                                            alert('Successfully added to wishlist');
+                                        } else {
+                                            alert('Unable to add item to wishlist');
                                         }
                                     }
                                 });
@@ -230,20 +254,21 @@
                 {% for viewed in recently_viewed %}
                     {% set entry = viewed.getEntry() %}
                     <div class="block-4 text-center mt-40p  block-mb-6 block-sb-12">
-                        <a href="{{ path('item_page', {'id' : entry.getId()}) }}">
                             <div class="block-10">
-                                <div class="block-8"> <img src="{{ entry.getItem().getPicture() }}" class="full-width" alt=""> </div>
-                                <h5 class="mt-15p block-8">  
-                                    {{ entry.getItem().getName() }}
-                                </h5>
-                                <h3 class="mt-10p"> <span class="icon-inr"></span> {{ entry.getActualPrice() }} </h3>
+                                <a href="{{ path('item_page', {'id' : entry.getId()}) }}">
+                                    <div class="block-8"> <img src="{{ entry.getItem().getPicture() }}" class="full-width" alt=""> </div>
+                                    <h5 class="mt-15p block-8">  
+                                        {{ entry.getItem().getName() }}{% if entry.getVariant() %} - {{ entry.getVariant().getValue() }} {% endif %}
+                                    </h5>
+                                    <h3 class="mt-10p"> <span class="icon-inr"></span> {{ entry.getActualPrice() }} </h3>
+                                </a>
                                 <div class="full-width mt-15p">
-                                    <button class="button-product br-5p ptb-10p prl-15p pointer-csr">
+                                    <button {% if app_web_user.inCart(entry) %}style="display: none;"{% endif %} class="button-product br-5p ptb-10p prl-15p pointer-csr add-to-cart" data-entry="{{ entry.getId() }}">
                                         Add to Cart <span class="icon-arrow-right ml-5p"></span>
                                     </button>
+                                    <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(entry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
                                 </div>
                             </div>
-                        </a>
                     </div>
                 {% endfor %}
 

@@ -13,6 +13,8 @@ use App\FrontBundle\Entity\ItemView;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\FrontBundle\Entity\Cart;
 use App\FrontBundle\Entity\CartItem;
+use App\FrontBundle\Entity\WishList;
+use App\FrontBundle\Entity\WishListItem;
 
 class ItemController extends Controller
 {
@@ -55,6 +57,12 @@ class ItemController extends Controller
             $cart = $em->getRepository('AppFrontBundle:Cart')->findOneBySessionId(session_id());
         }
         
+        if($user = $this->getUser()){
+            $wishlist = $user->getWishlist();
+        } else {
+            $wishlist = $em->getRepository('AppFrontBundle:WishList')->findOneBySessionId(session_id());
+        }
+        
         $location = null;
         if($loc_id = $this->get('session')->get('location')){
             $location = $em->getRepository('AppFrontBundle:Location')->find($loc_id);
@@ -64,6 +72,7 @@ class ItemController extends Controller
             'entry' => $stockEntry,
             'recently_viewed' => $recently_viewed,
             'cart' => $cart,
+            'wishlist' => $wishlist,
             'location' => $location
         ));
     }
@@ -220,7 +229,49 @@ class ItemController extends Controller
                 $item->setStatus(false);
                 $em->persist($item);
                 $em->flush();
+                
+                $status = true;
             }
+        }
+        
+        return new JsonResponse(array('status' => $status));
+    }
+    
+    /**
+     * @Route("/{id}/towinshlist", name="item_add_to_wishlist", options={"expose"=true})
+     */
+    public function towishlistAction(Request $request, StockEntry $entry){
+        $status = false;
+        $em = $this->getDoctrine()->getManager();
+        $wishlist = null;
+        if($user = $this->getUser()){
+            $wishlist = $user->getWishlist();
+            if(!$wishlist){
+                $wishlist = new WishList();
+                $wishlist->setUser($user);
+                $wishlist->setSessionId(session_id());
+                $em->persist($wishlist);
+                $em->flush();
+            }
+
+
+        } else {
+            $wishlist = $em->getRepository('AppFrontBundle:WishList')->findOneBySessionId(session_id());
+            if(!$wishlist){
+                $wishlist = new WishList();
+                $wishlist->setUser($this->getUser());
+                $wishlist->setSessionId(session_id());
+                $em->persist($wishlist);
+                $em->flush();
+            }
+        }
+
+        if($wishlist){
+            $item = new WishListItem();
+            $item->setWishlist($wishlist);
+            $item->setEntry($entry);
+            $em->persist($item);
+            $em->flush();
             
             $status = true;
         }

@@ -19,11 +19,15 @@
         <title>Momooz - {% block title %}{% endblock %}</title>
         {% stylesheets
         'assets/vendor/autocompletelikegoogle/jquery.autocomplete.css'
+        'assets/vendor/font-awesome/css/font-awesome.min.css'
         'bundles/appweb/css/*'
         filter='cssrewrite' output='css/compiled/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}">
         {% endstylesheets %}
     {% block stylesheet %}{% endblock %}
+    <script type="text/javascript">
+        var to_cart_url = "{{ path('item_add_to_cart', {'id': 0}) }}";
+    </script>
     {% javascripts
         'assets/vendor/jquery/jquery.min.js'
         'assets/vendor/jquery.easing/js/jquery.easing.min.js'
@@ -80,10 +84,10 @@
                 <li class="prl-15p responcive-menu-cliker  pointer-csr"> <span class="icon-bars"></span> </li>
                 <li class="prl-15p user-click pointer-csr"> <img src="{{ asset('bundles/appweb/images/icons/user.svg') }}" width="25" alt="user"> </li>
                 <li class="prl-15p relative-pos whish-click pointer-csr"> <img src="{{ asset('bundles/appweb/images/icons/wishlist.svg') }}" width="25" alt="Whishlist">
-                    <div class="badge">0</div>
+                    <div class="badge" id="wishlist-badge">{{ app_web_user.getWishlist().getItems().count() }}</div>
                 </li>
                 <li class="pl-15p relative-pos cart-click "> <img src="{{ asset('bundles/appweb/images/icons/cart.svg') }}" width="25" alt="Cart">
-                    <div class="badge">0</div>
+                    <div class="badge" id="cart-badge">{{ app_web_user.getCart().getItems().count() }}</div>
                 </li>
             </ul>
         </div>
