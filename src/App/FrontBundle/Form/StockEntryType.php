@@ -46,6 +46,7 @@ class StockEntryType extends AbstractType
                 'attr' => array('readonly' => true)
             ))
             ->add('quantity')
+            ->add('mrp')
             ->add('price')
             ->add('actualPrice', 'text', array(
                 'label' => 'Actual Price ('.$equation.')',

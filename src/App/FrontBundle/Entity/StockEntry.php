@@ -52,6 +52,13 @@ class StockEntry
     /**
      * @var float
      *
+     * @ORM\Column(name="mrp", type="float")
+     */
+    private $mrp;
+    
+    /**
+     * @var float
+     *
      * @ORM\Column(name="price", type="float")
      */
     private $price;
@@ -480,5 +487,29 @@ class StockEntry
     public function getItemViews()
     {
         return $this->ItemViews;
+    }
+
+    /**
+     * Set mrp
+     *
+     * @param float $mrp
+     *
+     * @return StockEntry
+     */
+    public function setMrp($mrp)
+    {
+        $this->mrp = $mrp;
+
+        return $this;
+    }
+
+    /**
+     * Get mrp
+     *
+     * @return float
+     */
+    public function getMrp()
+    {
+        return $this->mrp;
     }
 }
