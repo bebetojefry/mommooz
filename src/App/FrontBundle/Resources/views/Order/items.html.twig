@@ -18,9 +18,46 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     {{ 'purchase.items.module_name' | trans }}
+                    <span style="float: right;">Order Id: #{{ purchase.getId() }}</span>
                 </div>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <table class="tbl-purchase-info">
+                                    <tr>
+                                        <td>Ordered By : {{ purchase.getConsumer().getFullname() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date : {{ purchase.getPurchasedOn()|date('d M Y h:i A') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{{ path('change_status', {'id': purchase.getId()}) }}" rel="tooltip" title="purchase.actions.status" class="btn btn-primary btn-xs" role="button" onclick="return openModal(event);" modaltitle="purchase.title.status"><i class="glyphicon glyphicon-edit"></i> {{ 'purchase.actions.status'|trans }}</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4">
+                                <table class="tbl-purchase-info">
+                                    <tr>
+                                        <td>Address</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ purchase.getDeliverTo().getHouse() }}, 
+                                            {{ purchase.getDeliverTo().getStreet() }}, 
+                                            {{ purchase.getDeliverTo().getLandmark() }} <br/>
+                                            {{ purchase.getDeliverTo().getCity() }},
+                                            {{ purchase.getDeliverTo().getState() }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4">
+                                <img style="float: right;" src="{{ qrcode_url(purchase.getId(), { extension: 'png' }) }}" width="85"/>
+                            </div>
+                        </div>
                         {{ datatable_render(itemsDatatable) }}
                     </div>
                 </div>

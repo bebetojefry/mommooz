@@ -43,6 +43,12 @@ class Purchase
     private $status;
 
     /**
+     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\JoinColumn(name="deliver_to", referencedColumnName="id")
+     */
+    private $deliverTo;
+    
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="delivered_on", type="datetime", nullable=true)
@@ -233,5 +239,29 @@ class Purchase
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set deliverTo
+     *
+     * @param \App\FrontBundle\Entity\Address $deliverTo
+     *
+     * @return Purchase
+     */
+    public function setDeliverTo(\App\FrontBundle\Entity\Address $deliverTo = null)
+    {
+        $this->deliverTo = $deliverTo;
+
+        return $this;
+    }
+
+    /**
+     * Get deliverTo
+     *
+     * @return \App\FrontBundle\Entity\Address
+     */
+    public function getDeliverTo()
+    {
+        return $this->deliverTo;
     }
 }

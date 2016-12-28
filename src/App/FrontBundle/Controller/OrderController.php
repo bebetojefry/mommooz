@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Purchase;
+use App\FrontBundle\Form\PurchaseType;
 
 class OrderController extends Controller
 {
@@ -47,6 +48,26 @@ class OrderController extends Controller
      */
     public function statusAction(Request $request, Purchase $purchase)
     {
-        echo 'status'; exit;
+        $dm = $this->getDoctrine()->getManager();
+        $form = $this->createForm(new PurchaseType(), $purchase);
+        $code = FormHelper::FORM;
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $purchase = $form->getData();
+                $dm->persist($purchase);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'purchase.msg.updated');
+                $code = FormHelper::REFRESH;
+            } else {
+                $code = FormHelper::REFRESH_FORM;
+            }
+        }
+        
+        $body = $this->renderView('AppFrontBundle:Order:form.html.twig',
+            array('form' => $form->createView())
+        );
+
+        return new Response(json_encode(array('code' => $code, 'data' => $body)));
     }
 }

@@ -132,3 +132,14 @@ ul.variants li a {
 .navbar-collapse.collapsing {
     clear: left;
 }
+.form-inline select {
+    margin: 0 5px;
+}
+.tbl-purchase-info {
+    display: inline;
+    margin-right: 40px;
+}
+.tbl-purchase-info tr td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ccc;
+}

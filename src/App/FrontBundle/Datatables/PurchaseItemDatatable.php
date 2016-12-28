@@ -18,7 +18,7 @@ class PurchaseItemDatatable extends AbstractDatatableView
     public function buildDatatable(array $options = array())
     {
         $this->topActions->set(array(
-            'start_html' => '<div class="row"><div class="col-sm-3">',
+            'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
             'actions' => array()
         ));
@@ -91,6 +91,12 @@ class PurchaseItemDatatable extends AbstractDatatableView
                 'title' => 'Price',
             ))
         ;
+        
+        $this->callbacks->set(array(
+            'row_callback' => array(
+                'template' => 'AppFrontBundle:DataTable:row_callback.js.twig',
+            )
+        ));
     }
 
     /**
