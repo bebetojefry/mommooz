@@ -117,3 +117,11 @@ services:
     app.front.datatable.stockentry:
          class: App\FrontBundle\Datatables\StockEntryDatatable
          parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.purchase:
+         class: App\FrontBundle\Datatables\PurchaseDatatable
+         parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.purchaseitem:
+         class: App\FrontBundle\Datatables\PurchaseItemDatatable
+         parent: sg_datatables.datatable.abstract

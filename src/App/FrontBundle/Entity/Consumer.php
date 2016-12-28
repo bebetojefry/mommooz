@@ -13,13 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
 class Consumer extends User
 {  
     /**
+     * @var ArrayCollection|Purchase[]
+     *
+     * @ORM\OneToMany(targetEntity="Purchase", mappedBy="consumer")
+     */
+    private $orders;
+    
+    /**
      * Constructor
      */
-    public function __construct($fname = '', $lname = '', $gender = '') {
-        $this->setFirstname($fname);
-        $this->setLastname($lname);
-        $this->setGender($gender);
-        parent::__construct();
+    public function __construct() {
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -30,5 +34,39 @@ class Consumer extends User
     public function getRoles()
     {
         return array('ROLE_CONSUMER', 'ROLE_USER');
+    }
+
+    /**
+     * Add order
+     *
+     * @param \App\FrontBundle\Entity\Purchase $order
+     *
+     * @return Consumer
+     */
+    public function addOrder(\App\FrontBundle\Entity\Purchase $order)
+    {
+        $this->orders[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \App\FrontBundle\Entity\Purchase $order
+     */
+    public function removeOrder(\App\FrontBundle\Entity\Purchase $order)
+    {
+        $this->orders->removeElement($order);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }
