@@ -75,6 +75,9 @@ class PurchaseItemDatatable extends AbstractDatatableView
             ->add('id', 'column', array(
                 'title' => 'Id',
             ))
+            ->add('entry.stock.vendor.firstname', 'column', array(
+                'title' => 'Vendor',
+            ))
             ->add('entry.item.name', 'column', array(
                 'title' => 'Item',
             ))
