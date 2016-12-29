@@ -43,7 +43,7 @@ class Purchase
     private $status;
 
     /**
-     * @ORM\OneToOne(targetEntity="Address")
+     * @ORM\ManyToOne(targetEntity="Address")
      * @ORM\JoinColumn(name="deliver_to", referencedColumnName="id")
      */
     private $deliverTo;
