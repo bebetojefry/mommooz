@@ -1,0 +1,52 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Cart{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+	<a href="{{ path('home') }}">Home</a> - Cart Page
+    </div>
+    <section class="center-1200px cart-page ptb-20p">
+        <h3> Cart Page </h3>
+        <table class="mt-15p cart-table">
+            {% set totalPrice = 0 %}
+            {% if app_web_user.getCart().getItems()|length == 0 %}
+                <div style="color: #aca8b0; font-size: 13px; text-align: center; width: 100%;"> No Items found in your cart. </div>
+            {% endif %}    
+            {% for item in app_web_user.getCart().getItems() %}
+                <tr>
+                    <td> <img src="{{ item.getEntry().getItem().getPicture() }}" width="60" class="dispaly-inline-block" alt="product name"> </td>
+                    <td> 
+                        <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}">  
+                            {{ item.getEntry().getItem().getName() }}
+                            {% if item.getEntry().getVariant() %}
+                                , {{ item.getEntry().getVariant().getValue() }}
+                            {% endif %}
+                        </a>  
+                    </td>
+                    <td> {{ item.getQuantity() }} </td>
+                    <td> <span class="icon-inr"></span> {{ item.getPrice() }}/- </td>
+                    <td class="editcary-td">
+                        <a href="{{ path('cart_delete', {'id': item.getId()}) }}"> <span class="icon-trash-1 ml-15p" title="Delete"></span> </a>
+                    </td>
+                </tr>
+                {% set totalPrice = totalPrice + item.getPrice() %}
+            {% endfor %}
+            <tr>
+                <td colspan="5" class="totalcart-rate text-right">  Total Price : <span class="icon-inr"></span> {{ totalPrice }}  </td>
+            </tr>
+        </table>
+        <div class="full-width mt-10p ptb-20p text-right button-cart">
+            <a href="{{ path('home') }}"><button class="momz-button" name=""> <span class="icon-angle-left"></span>  Continue Shopping </button></a>
+            <a href="address.php"> <button class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button> </a>
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

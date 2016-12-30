@@ -93,4 +93,9 @@ class User {
         return false;
     }
     
+    public function getAllPopularcategories(){
+        $em = $this->container->get('doctrine')->getManager();
+        return $em->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true));
+    }
+    
 }

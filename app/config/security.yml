@@ -95,4 +95,6 @@ security:
       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/[a-z]+, roles: ROLE_ADMIN, host: %domain_admin% }
       - { path: ^/[a-z]+, roles: ROLE_VENDOR, host: %domain_vendor% }
+      - { path: ^/account/cart, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: %domain_consumer% }
+      - { path: ^/account/wishlist, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: %domain_consumer% }
       - { path: ^/account/[a-z]+, roles: ROLE_CONSUMER, host: %domain_consumer% }

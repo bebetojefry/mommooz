@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
-        <a href="{{ path('home') }}">Home</a>  - Category - <a href="{{ path('category_page', {id: category.getId()}) }}">  {{ category.getCategoryName() }} </a>  -  All Products
+        <a href="{{ path('home') }}">Home</a>  - Store - <a href="{{ path('store_items', {id: store.getId()}) }}">  {{ store.getFullName() }} </a>  -  All Products
     </div>
 
     <div class="center-1200px block-fl-cary va-top">

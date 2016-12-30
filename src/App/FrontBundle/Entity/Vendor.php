@@ -63,4 +63,13 @@ class Vendor extends User
     {
         return $this->stocks;
     }
+    
+    public function getInStockEntries(){
+        $items = array();
+        foreach ($this->getStocks() as $stock){
+            $items = array_merge($items, $stock->getInStockEntries());
+        }
+        
+        return $items;
+    }
 }

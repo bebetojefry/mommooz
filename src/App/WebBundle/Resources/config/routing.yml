@@ -27,3 +27,8 @@ page_keyword:
     resource: "@AppWebBundle/Controller/KeywordController.php"
     type:     annotation
     prefix: /keyword
+    
+page_cart:
+    resource: "@AppWebBundle/Controller/AccountController.php"
+    type:     annotation
+    prefix: /account

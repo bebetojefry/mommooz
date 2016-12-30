@@ -12,10 +12,25 @@ use App\FrontBundle\Entity\Vendor;
 class StoreController extends Controller
 {
     /**
-     * @Route("/{id}", name="stores", options={"expose"=true}, defaults={"id" = 0})
+     * @Route("/", name="stores")
      */
-    public function indexAction(Vendor $store = null)
+    public function indexAction()
     {
-        echo get_class($store); exit;
+        $em = $this->getDoctrine()->getManager();
+        $stores = $em->getRepository('AppFrontBundle:Vendor')->findBy(array('status' => true));
+        
+        return $this->render('AppWebBundle:Store:index.html.twig', array(
+            'stores' => $stores
+        ));
+    }
+    
+    /**
+     * @Route("/{id}/items", name="store_items", options={"expose"=true}, defaults={"id" = 0})
+     */
+    public function itemsAction(Vendor $store = null)
+    {
+        return $this->render('AppWebBundle:Store:items.html.twig', array(
+            'store' => $store
+        ));
     }
 }

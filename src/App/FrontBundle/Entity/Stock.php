@@ -245,4 +245,15 @@ class Stock
     {
         return $this->offers;
     }
+    
+    public function getInStockEntries() {
+        $items = array();
+        foreach($this->getItems() as $item){
+            if($item->getInStock() > 0){
+                $items[] = $item;
+            }
+        }
+        
+        return $items;
+    }
 }
