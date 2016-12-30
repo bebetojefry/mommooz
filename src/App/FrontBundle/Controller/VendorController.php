@@ -7,10 +7,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Vendor;
 use App\FrontBundle\Form\UserType;
 use App\FrontBundle\Entity\Address;
+use App\FrontBundle\Entity\Item;
+use App\FrontBundle\Entity\VendorItem;
 
 class VendorController extends Controller
 {
@@ -265,5 +268,55 @@ class VendorController extends Controller
         return $this->render('AppFrontBundle:Vendor:profile.html.twig',
             array('form' => $form->createView())
         );
+    }
+    
+    public function itemsAction(){
+        $vendorItemDatatable = $this->get('app.front.datatable.vendorItem');
+        $vendorItemDatatable->buildDatatable(array('vendor' => $this->getUser()));
+        return $this->render('AppFrontBundle:Vendor:items.html.twig', array(
+            'vendorItemDatatable' => $vendorItemDatatable
+        ));
+    }
+    
+    public function itemautocompleteAction(Request $request) {
+        $q = $request->query->get('q');
+        $repo = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Item');
+        $items = $repo->createQueryBuilder('i')
+                ->where('i.name LIKE :q')
+                ->setParameter('q', '%'.$q.'%')
+                ->getQuery()
+                ->getResult();
+        
+        $result = array();
+        foreach($items as $item){
+            $result[] = array('id' => $item->getId(), 'title' => $item->getName());
+        }
+        
+        return new JsonResponse($result); 
+    }
+    
+    public function itempreviewAction(Request $request, Item $item) {
+        $em = $this->getDoctrine()->getManager();
+        if($request->getMethod() == Request::METHOD_POST){
+            
+            $vendorItem = new VendorItem();
+            $vendorItem->setVendor($this->getUser());
+            $vendorItem->setItem($item);
+            $vendorItem->setStatus(true);
+            $em->persist($vendorItem);
+            $em->flush();
+            
+            
+            $this->get('session')->getFlashBag()->add('success', 'vendor.msg.item.added');
+            
+            return $this->redirect($this->generateUrl('app_front_vendor_items'));
+        }
+        
+        $vendorItem = $em->getRepository('AppFrontBundle:VendorItem')->findOneBy(array('vendor' => $this->getUser(), 'item' => $item));
+        
+        return $this->render('AppFrontBundle:Vendor:items.html.twig', array(
+            'item' => $item,
+            'vendorItem' => $vendorItem
+        ));
     }
 }

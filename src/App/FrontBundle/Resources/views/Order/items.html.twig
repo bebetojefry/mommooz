@@ -1,0 +1,101 @@
+{% extends "AppFrontBundle::layout2.html.twig" %}
+
+{% block title %}{{ 'page_title.purchaseitems' | trans }}{% endblock %}
+
+{% block style %}
+    {% stylesheets
+        'assets/vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'
+        filter='cssrewrite' output='css/compiled/page.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block purchase_active %}active{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'purchase.items.module_name' | trans }}
+                    <span style="float: right;">Order Id: #{{ purchase.getId() }}</span>
+                </div>
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <table class="tbl-purchase-info">
+                                    <tr>
+                                        <td>Ordered By : {{ purchase.getConsumer().getFullname() }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date : {{ purchase.getPurchasedOn()|date('d M Y h:i A') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="{{ path('change_status', {'id': purchase.getId()}) }}" rel="tooltip" title="purchase.actions.status" class="btn btn-primary btn-xs" role="button" onclick="return openModal(event);" modaltitle="purchase.title.status"><i class="glyphicon glyphicon-edit"></i> {{ 'purchase.actions.status'|trans }}</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4">
+                                <table class="tbl-purchase-info">
+                                    <tr>
+                                        <td>Address</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{ purchase.getDeliverTo().getHouse() }}, 
+                                            {{ purchase.getDeliverTo().getStreet() }}, 
+                                            {{ purchase.getDeliverTo().getLandmark() }} <br/>
+                                            {{ purchase.getDeliverTo().getCity() }},
+                                            {{ purchase.getDeliverTo().getState() }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Phone : {{ purchase.getConsumer().getPhone() }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-lg-4">
+                                <img style="float: right;" src="{{ qrcode_url(purchase.getId(), { extension: 'png' }) }}" width="85"/>
+                            </div>
+                        </div>
+                        {{ datatable_render(itemsDatatable) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}
+
+{% block javascript %}
+    {% javascripts
+        'assets/vendor/datatables/media/js/jquery.dataTables.min.js'
+        'assets/vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
+        output='js/compiled/page.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#productsTable').DataTable({
+                "responsive": true,
+                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "language": {
+                    "lengthMenu": "{{ 'table.lengthMenu' | trans }}",
+                    "zeroRecords": "{{ 'table.zeroRecords' | trans }}",
+                    "info": "{{ 'table.info' | trans }}",
+                    "infoEmpty": "{{ 'table.infoEmpty' | trans }}",
+                    "infoFiltered": "{{ 'table.infoFiltered' | trans }}",
+                    "search": "{{ 'table.search' | trans }}",
+                    "paginate": {
+                        "first":      "{{ 'table.first' | trans }}",
+                        "last":       "{{ 'table.last' | trans }}",
+                        "next":       "{{ 'table.next' | trans }}",
+                        "previous":   "{{ 'table.previous' | trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

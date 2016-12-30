@@ -14,6 +14,7 @@
         'assets/vendor/bootstrap3-dialog/src/css/bootstrap-dialog.css'
         'assets/vendor/jquery-tokeninput/styles/token-input.css'
         'assets/vendor/jquery-tokeninput/styles/token-input-facebook.css'
+        'assets/vendor/autocompletelikegoogle/jquery.autocomplete.css'
         'bundles/appfront/css/*'
         filter='cssrewrite' output='css/compiled/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}">
@@ -33,7 +34,8 @@
         'assets/vendor/moment/min/moment.min.js'
         'assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js'
         'assets/vendor/bootstrap-validator/dist/validator.js'
-        'assets/vendor/metisMenu/dist/metisMenu.min.js'       
+        'assets/vendor/metisMenu/dist/metisMenu.min.js'
+        'assets/vendor/autocompletelikegoogle/jquery.autocomplete.js'
         '@AppFrontBundle/Resources/public/js/*'
         output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
@@ -87,6 +89,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
+                        <li class="{% block items_active %}{% endblock %}"><a href="{{ path('app_front_vendor_items') }}">Items</a></li>
                         <li class="{% block stock_active %}{% endblock %}"><a href="{{ path('app_front_vendor_home') }}">Stocks</a></li>
                     </ul>
                 </div>

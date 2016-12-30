@@ -99,6 +99,13 @@ class StockEntry
     private $purchases;
     
     /**
+     * @var ArrayCollection|PurchaseItem[]
+     *
+     * @ORM\OneToMany(targetEntity="PurchaseItem", mappedBy="entry")
+     */
+    private $orders;
+    
+    /**
      * @var ArrayCollection|ItemView[]
      *
      * @ORM\OneToMany(targetEntity="ItemView", mappedBy="entry")
@@ -297,6 +304,7 @@ class StockEntry
         $this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
         $this->purchases = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ItemViews = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -511,5 +519,39 @@ class StockEntry
     public function getMrp()
     {
         return $this->mrp;
+    }
+
+    /**
+     * Add order
+     *
+     * @param \App\FrontBundle\Entity\PurchaseItem $order
+     *
+     * @return StockEntry
+     */
+    public function addOrder(\App\FrontBundle\Entity\PurchaseItem $order)
+    {
+        $this->orders[] = $order;
+
+        return $this;
+    }
+
+    /**
+     * Remove order
+     *
+     * @param \App\FrontBundle\Entity\PurchaseItem $order
+     */
+    public function removeOrder(\App\FrontBundle\Entity\PurchaseItem $order)
+    {
+        $this->orders->removeElement($order);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
     }
 }

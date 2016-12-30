@@ -114,3 +114,13 @@ stfalcon_tinymce:
     theme:
         simple:
             theme: "modern"
+            
+endroid_qr_code:
+    size: 150
+    padding: 20
+    extension: gif
+    error_correction_level: high
+    foreground_color: { r: 0, g: 0, b: 0, a: 0 }
+    background_color: { r: 255, g: 255, b: 255, a: 0 }
+    label: "Scan The Code"
+    label_font_size: 12

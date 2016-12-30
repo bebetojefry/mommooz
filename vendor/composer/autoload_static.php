@@ -62,6 +62,11 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
             'Faker\\' => 6,
             'FOS\\JsRoutingBundle\\' => 20,
         ),
+        'E' => 
+        array (
+            'Endroid\\QrCode\\' => 15,
+            'Endroid\\Bundle\\QrCodeBundle\\' => 28,
+        ),
         'D' => 
         array (
             'Doctrine\\Instantiator\\' => 22,
@@ -157,6 +162,14 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         'FOS\\JsRoutingBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/friendsofsymfony/jsrouting-bundle',
+        ),
+        'Endroid\\QrCode\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/qrcode/src',
+        ),
+        'Endroid\\Bundle\\QrCodeBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/endroid/qrcode-bundle/src',
         ),
         'Doctrine\\Instantiator\\' => 
         array (

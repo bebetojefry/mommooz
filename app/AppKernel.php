@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Sg\DatatablesBundle\SgDatatablesBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle(),
+            new Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
             new App\FrontBundle\AppFrontBundle(),
             new App\WebBundle\AppWebBundle(),
         );

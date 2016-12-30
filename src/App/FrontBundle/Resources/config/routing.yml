@@ -134,6 +134,22 @@ admin_vendor_actions:
     type:     annotation
     prefix: /vendor
 
+
+app_front_admin_order:
+    path:     /order
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:order}
+    
+order_actions:
+    resource: "@AppFrontBundle/Controller/OrderController.php"
+    type:     annotation
+    prefix: /order
+
+order_item_actions:
+    resource: "@AppFrontBundle/Controller/OrderItemController.php"
+    type:     annotation
+    prefix: /order/items
+    
 #########################################################
 
 app_front_vendor_login:
@@ -164,6 +180,21 @@ app_front_vendor_home:
     path:     /dashboard
     host:     "%domain_vendor%"
     defaults: { _controller: AppFrontBundle:Vendor:index}
+    
+app_front_vendor_items:
+    path:     /items
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:items}
+    
+app_front_vendor_items_preview:
+    path:     /items/{id}/preview
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:itempreview}
+
+vendor_item_autocomplete:
+    path:     /autocomplete/items
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:itemautocomplete}
 
 stock_actions:
     resource: "@AppFrontBundle/Controller/StockController.php"
@@ -174,3 +205,8 @@ stockentry_actions:
     resource: "@AppFrontBundle/Controller/StockEntryController.php"
     type:     annotation
     prefix: /stockentry
+    
+vendoritem_actions:
+    resource: "@AppFrontBundle/Controller/VendorItemController.php"
+    type:     annotation
+    prefix: /items
