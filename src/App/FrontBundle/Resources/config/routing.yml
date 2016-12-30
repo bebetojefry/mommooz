@@ -3,11 +3,6 @@ set_lang:
     defaults: { _controller: AppFrontBundle:Default:setlang }
     requirements:
         _locale: de|en
-        
-app_front_consumer_login:
-    path:     /login
-    host:     "%domain_consumer%"
-    defaults: { _controller: AppFrontBundle:User:login }
     
 app_front_consumer_login_check:
     path:     /login_check
@@ -16,7 +11,7 @@ app_front_consumer_login_check:
     
 app_front_consumer_logout:
     host:     "%domain_consumer%"
-    path: /logout
+    path: /account/logout
     
 app_front_consumers_home:
     path:     /home

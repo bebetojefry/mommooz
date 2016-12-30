@@ -98,4 +98,14 @@ class User {
         return $em->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true));
     }
     
+    public function getAllVendors(){
+        $em = $this->container->get('doctrine')->getManager();
+        return $em->getRepository('AppFrontBundle:Vendor')->findAll();
+    }
+    
+    public function getAllRegions(){
+        $em = $this->container->get('doctrine')->getManager();
+        return $em->getRepository('AppFrontBundle:Region')->findAll();
+    }
+    
 }

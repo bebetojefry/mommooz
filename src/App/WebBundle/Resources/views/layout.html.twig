@@ -82,7 +82,11 @@
         <div class="block-4 block-fl-cary block-mb-12 text-right home-page-cart mb-text-center">
             <ul class="mt-25p">
                 <li class="prl-15p responcive-menu-cliker  pointer-csr"> <span class="icon-bars"></span> </li>
-                <li class="prl-15p user-click pointer-csr"> <img src="{{ asset('bundles/appweb/images/icons/user.svg') }}" width="25" alt="user"> </li>
+                <li class="prl-15p {% if app.user == null %}user-click{% endif %} pointer-csr"> 
+                    {% if app.user %}<a href="{{ path('account_home') }}">{% endif %}
+                    <img src="{{ asset('bundles/appweb/images/icons/user.svg') }}" width="25" alt="user"> 
+                    {% if app.user %}</a>{% endif %}
+                </li>
                 <li class="prl-15p relative-pos whish-click pointer-csr"> 
                     <a href="{{ path('wishlist_page') }}">
                         <img src="{{ asset('bundles/appweb/images/icons/wishlist.svg') }}" width="25" alt="Whishlist">
@@ -103,16 +107,17 @@
         <div class="block-8 mt-30p center-pos text-center">
 
             <h4 class="text-center white-txt mt-50p"> - Login - </h4>
-            <form>
+            <form role="form" name="frmlogin" id="frmlogin" method="POST" action="{{ path('app_front_consumer_login_check') }}">
                 <ul>
-                    <li> <input type="text" placeholder="User Name" id="" > </li>
-                    <li> <input type="password" placeholder="Password" id="" > </li>
+                    <li> <input type="text" name="_username" id="username" placeholder="Username"> </li>
+                    <li> <input type="password" name="_password" id="password" placeholder="Password"> </li>
                     <li class="text-center login-butn">
-                        <span class="submit-login mr-5p transition_05s pointer-csr" > Login <span class="icon-arrow-right"></span> </span>  /
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                        <button type="submit" class="submit-login mr-5p transition_05s pointer-csr" > Login <span class="icon-arrow-right"></span> </button>  /
                         <a href=""> <span class="icon-facebook"></span> </a> /
                         <a href=""> <span class="icon-google-plus"></span> </a>
                     </li>
-                    <li class="text-center login-reg-pasword pt-15p"> <a href="register.php"> Register </a> - <a href=""> Forget Password </a>  </li>
+                    <li class="text-center login-reg-pasword pt-15p"> <a href="{{ path('register_page') }}"> Register </a> - <a href=""> Forget Password </a>  </li>
                 </ul>
             </form>
             <span class="close-login icon-close-x pointer-csr white-txt" title="close"></span>
@@ -194,7 +199,9 @@
             <div class="block-6 text-right"> <span class="footer-submenu transition_06s pointer-csr relative-pos pr-15p"> Expand </span> </div>
         </div>
         <div class="full-width mt-15p block-fl-cary sb-text-left">
-            <a href=""> None </a>
+            {% for store in app_web_user.getAllVendors() %}
+                <a href="{{ path('store_items', {id: store.getId()}) }}"> {{ store.getFullName() }} </a>
+            {% endfor %}
         </div>
     </section>
 
@@ -204,7 +211,9 @@
             <div class="block-6 text-right sb-text-left"> <span class="footer-submenu transition_06s  pointer-csr relative-pos pr-15p"> Expand </span> </div>
         </div>
         <div class="full-width mt-15p block-fl-cary sb-text-left">
-            <a href=""> None </a>
+            {% for city in app_web_user.getAllRegions() %}
+                <a href="#"> {{ city.getRegionName() }} </a>
+            {% endfor %}
         </div>
     </section>
 

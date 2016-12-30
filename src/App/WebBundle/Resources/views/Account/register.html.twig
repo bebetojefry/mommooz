@@ -1,0 +1,47 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Register{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+        <a href="{{ path('home') }}">Home</a>  -   Register
+    </div>
+
+    <section class="center-1200px text-center block-fl-cary ptb-25p">
+            <div class="block-6 block-lb-8 block-mb-11 text-left br-4p bs-nrmls ptrbl-40p yellow-bg">
+            <h3> Registration </h3>
+            <div class="full-width ptb-10p uppercase-txt">
+                    <a href=""> <div class="log-social fb"> <span class="icon-facebook"></span>  Signup with facebook  </div> </a>
+                <a href="">  <div class="log-social gp mt-5p"> <span class="icon-google-plus"></span>  Signup with Google  </div> </a>
+            </div>
+            <form name="frmRegister" id="frmRegister" method="post" action="">
+                {{ form_widget(form.firstname) }}
+                {{ form_widget(form.lastname) }}
+                {{ form_widget(form.gender) }}
+                {{ form_widget(form.phone) }}
+                {{ form_widget(form.email) }}
+                {{ form_widget(form.password) }}
+                {% if form.addresses|length > 0 %}
+                    {% for address in form.addresses %}
+                        {{ form_widget(address) }}
+                    {% endfor %}
+                {% else %}
+                    {{ form_widget(form.addresses.vars.prototype) }}
+                {% endif %}
+                {{ form_rest(form) }}
+                <button type="submit" class="momz-button mt-20p"> Sign up <span class="icon-arrow-right-1"></span> </button>
+                <span class="small-text-mmz pt-10p"> By signing up, you agree to our <a href=""> Terms And Conditions. </a> </span>
+            </form>
+
+            <span class="dispaly-block mt-20p" style="font-size:14px;"> Already have an account? <a href="{{ path('login_page') }}" class="prl-10p"> Login </a> </span>
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

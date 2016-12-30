@@ -74,16 +74,16 @@ security:
             pattern: ^/
             host: "%domain_consumer%"
             form_login:
-                login_path: /login
+                login_path: /account/login
                 check_path: /login_check
-                default_target_path: /home
-                always_use_default_target_path: false
+                default_target_path: /
+                always_use_default_target_path: true
                 use_referer: true
                 csrf_provider: security.csrf.token_manager
                 
             logout:
-                path:   /logout
-                target: /login
+                path:   /account/logout
+                target: /account/login
 
             remember_me:
                 key:      "%secret%"
@@ -95,6 +95,8 @@ security:
       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/[a-z]+, roles: ROLE_ADMIN, host: %domain_admin% }
       - { path: ^/[a-z]+, roles: ROLE_VENDOR, host: %domain_vendor% }
+      - { path: ^/account/register, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: %domain_consumer% }
+      - { path: ^/account/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: %domain_consumer% }
       - { path: ^/account/cart, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: %domain_consumer% }
       - { path: ^/account/wishlist, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: %domain_consumer% }
       - { path: ^/account/[a-z]+, roles: ROLE_CONSUMER, host: %domain_consumer% }

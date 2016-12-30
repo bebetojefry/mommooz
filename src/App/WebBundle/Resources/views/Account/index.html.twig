@@ -1,0 +1,56 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Account{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+            <a href="{{ path('home') }}">Home</a>  -  User - Account
+    </div>
+
+    <section class="center-1200px block-fl-cary va-top">
+            <div class="block-3 left-menu-user ptb-20p uppercase-txt block-mb-12">
+            <a href=""> Profile </a> 
+            <a href=""> Delivery Address </a> 
+            <a href=""> My Orders </a> 
+            <a href="{{ path('wishlist_page') }}"> Wishlist </a> 
+            <a href="{{ path('cart_page') }}"> Cart </a> 
+            <a href="{{ path('app_front_consumer_logout') }}" class="logout"> Logout </a> 
+
+        </div>
+        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
+            <div class="block-6 block-lb-12">
+                    <div class="block-10">
+                    <div class="block-3">
+                            <Img src="{{ app.user.getPicture() }}" class="image-fw" alt="user image">
+                    </div>
+                    <div class="block-8 pl-15p">
+                            <h3> {{ app.user.getFullname() }} </h3> 
+                        <p>
+                        <span class="icon-envelope-o"></span> {{ app.user.getEmail() }} <br/>
+                         <span class="icon-phone"></span> {{ app.user.getPhone() }} <br/> </p>
+
+                         <a href="profile.php" class="small-text-mmz"> Edit Profile </a>
+                    </div>
+                </div>
+            </div>
+            <div class="block-6 block-lb-12 lb-mt15">
+                    <div class="block-8">
+                    <h3> Change Password </h3>
+                    <form name="frmChangePwd" method="post" action="">
+                        {{ form_widget(form) }}
+                        <button type="submit" class="momz-button mt-20p"> Change Now <span class="icon-arrow-right-1"></span> </button>
+                        <span style="display:inline; font-size: 13px; margin-left: 5px;">{{ message }}</span>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}
