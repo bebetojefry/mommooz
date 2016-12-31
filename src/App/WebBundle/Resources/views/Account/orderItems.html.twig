@@ -1,0 +1,61 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Account/Orders/Items{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+        <a href="{{ path('home') }}">Home</a>  - <a href="{{ path('account_home') }}">Account</a> - My Orders
+    </div>
+
+    <section class="user-order center-1200px mt-0p block-fl-cary va-top">
+
+        {% include 'AppWebBundle:Account:menu.html.twig' %}
+
+        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
+            {% set flashbag = app.session.flashBag.all %}
+            {% if flashbag|length > 0 %}
+                {% for type, messages in flashbag %}
+                    {% for message in messages %}
+                        <span class="message msg-{{ type }}">{{ message|raw }}</span>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            {% if order.getStatus() == 0 %}
+                <a href="{{ path('order_cancel', {'id': order.getId()}) }}" class="confirmation">Cancel this order</a>
+            {% endif %}
+            {% for item in order.getItems() %}
+                <div class="block-4 text-center mt-15p active block-lb-6 block-sb-12">
+                    <a href="{{ path('item_page', {'id': item.getId()}) }}"> 
+                        <div class="block-11 text-left va-top ptrbl-10p brd-L-1p">
+                                <div class="block-6">
+                                <img src="{{ item.getEntry().getItem().getPicture() }}" class="image-fw">
+                            </div>
+                            <div class="block-6 pl-20p">
+                                <h5> {{ item.getEntry().getItem().getName() }} </h5>
+                                
+                                <p class="mt-10p">
+                                    Quantity : {{ item.getQuantity() }} <br/>
+                                    {% if item.getEntry().getVariant() %}
+                                        {{ item.getEntry().getVariant().getValue() }} <br/>
+                                    {% endif %}
+                                    <span class="icon-inr"></span> {{ item.getPrice() }}
+                                </p>
+                                {% if order.getStatus() == 0 %}
+                                    <a href="{{ path('order_item_remove', {'id': item.getId()}) }}" class="remove-wishlist mt-10p dispaly-block"> <span class="icon-close-x"></span> Remove </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

@@ -50,9 +50,9 @@
                         <span class="icon-map-marker block-1 dispaly-inline-block"></span>
 
                         <select class="top-place-select dispaly-inline-block ml-10p" name="" >
-                            <option > Kozhikode, Feroke </option>
-                            <option > Kozhikode, Ramanattukara </option>
-                            <option > Kozhikode, Meechantha </option>
+                            {% for loc in app_web_user.getExploredLocations() %}
+                                <option {% if loc.getId() == app.session.get('location') %}selected=""{% endif %} value="{{ loc.getId() }}"> {{ loc.getRegion().getRegionName() }}, {{ loc.getLocalName() }} </option>
+                            {% endfor %}
                         </select>
                     </form>
                 </div>

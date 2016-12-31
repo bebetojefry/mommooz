@@ -5,16 +5,25 @@ namespace App\FrontBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
-use App\FrontBundle\Form\AddressType;
+use Doctrine\Common\Persistence\ObjectManager;
+use App\FrontBundle\DataTransformer\ImageToIdsTransformer;
 
-class RegisterType extends AbstractType
+class ProfileType extends AbstractType
 {    
+    private $om;
+    
+    public function __construct(ObjectManager $om)
+    {
+        $this->om = $om;
+    }
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {       
+        $imageTransformer = new ImageToIdsTransformer($this->om);
         $builder
             ->add('firstname', 'text', array('attr' => array('placeholder' => 'Firstname')))
             ->add('lastname', 'text', array('attr' => array('placeholder' => 'Lastname')))
@@ -24,14 +33,11 @@ class RegisterType extends AbstractType
                 'data' => 1
             ))
             ->add('phone', 'text', array('attr' => array('placeholder' => 'Phone')))
-            ->add('email', 'text', array('attr' => array('placeholder' => 'Email')))
-            ->add('password', 'password', array('attr' => array('placeholder' => 'Password')))
-            ->add('addresses', 'collection', array(
-                'type'         => new AddressType(),
-                'allow_add'    => true,
-                'by_reference' => false,
-                'allow_delete' => true,
-            ))
+            ->add(
+                $builder->create('images', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($imageTransformer)
+            )
         ;
     }
     

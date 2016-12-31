@@ -918,3 +918,29 @@ span.pending-user{
 	}
 .nav-submenu > ul li > ul li > ul li > ul li > ul li:hover > ul {
 	display:block;}
+
+/*My Style additions*/
+.image_uploader .real_input{
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    padding: 0;
+}
+.image_uploader .preview_box {
+    padding: 10px 0 0 0;
+}
+.image_uploader .preview_box .img_box {
+    position: relative;    
+    display: inline-block;
+}
+.image_uploader .preview_box .img_box img {
+    height: 80px;
+    border: 1px solid #CCC;
+    padding: 3px;
+    margin: 0px 5px 0 0;
+}
+.image_uploader .preview_box .img_box button {
+    position: absolute;
+    right: 9px;
+    top: 3px;
+}

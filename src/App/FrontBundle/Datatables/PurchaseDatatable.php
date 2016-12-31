@@ -18,13 +18,7 @@ class PurchaseDatatable extends AbstractDatatableView
     public function getLineFormatter()
     {
         $formatter = function($line){
-            $states = array(
-                'Pending',
-                'Confirmed',
-                'Processing',
-                'Delivered',
-                'Cancelled'
-            );
+            $states = array(0 => 'Pening', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled');
             $line['state'] = $states[$line['status']];
 
             return $line;

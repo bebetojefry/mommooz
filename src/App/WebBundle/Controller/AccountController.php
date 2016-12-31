@@ -12,6 +12,10 @@ use App\FrontBundle\Entity\WishListItem;
 use App\FrontBundle\Entity\Consumer;
 use App\FrontBundle\Form\RegisterType;
 use App\FrontBundle\Entity\Address;
+use App\FrontBundle\Entity\Purchase;
+use App\FrontBundle\Entity\PurchaseItem;
+use App\FrontBundle\Form\ProfileType;
+use App\FrontBundle\Form\AddressType;
 
 class AccountController extends Controller
 {
@@ -25,7 +29,9 @@ class AccountController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consumer = $this->get('app.front.entity.consumer');
         $consumer->regenerateSalt();
-        $consumer->addAddress(new Address());
+        $address = new Address();
+        $address->setDefault(true);
+        $consumer->addAddress($address);
         $form = $this->createForm(new RegisterType(), $consumer);
         if($request->isMethod('POST')){
             $form->handleRequest($request);
@@ -157,5 +163,144 @@ class AccountController extends Controller
         $em->flush();
         
         return $this->redirect($this->generateUrl('wishlist_page'));
+    }
+    
+    /**
+     * @Route("/profile", name="profile_page")
+     */
+    public function profileAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $consumer = $this->getUser();
+        $form = $this->createForm(new ProfileType($em), $consumer);
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $consumer = $form->getData();
+                $em->persist($consumer);
+                $em->flush();
+                
+                $this->get('session')->getFlashBag()->add('success', 'Profile updated successfully.');
+                
+                return $this->redirect($this->generateUrl('profile_page'));
+            }
+        }
+        return $this->render('AppWebBundle:Account:profile.html.twig', array('form' => $form->createView()));
+    }
+    
+    /**
+     * @Route("/orders", name="orders_page")
+     */
+    public function ordersAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $orders = $em->getRepository('AppFrontBundle:Purchase')->findByConsumer($this->getUser());
+        return $this->render('AppWebBundle:Account:orders.html.twig',
+            array(
+                'orders' => $orders,
+                'status' => array(0 => 'Pening', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled')
+            )
+        );
+    }
+    
+    /**
+     * @Route("/orders/{id}/items", name="order_detail_page", options={"expose"=true})
+     */
+    public function orderdetailAction(Purchase $order)
+    {        
+        return $this->render('AppWebBundle:Account:orderItems.html.twig',
+            array('order' => $order)
+        );
+    }
+    
+    /**
+     * @Route("/orders/{id}/cancel", name="order_cancel", options={"expose"=true})
+     */
+    public function ordercancelAction(Purchase $order)
+    {        
+        $em = $this->getDoctrine()->getManager();
+        $order->setStatus(5);
+        $order->setCancelledOn(new \DateTime('now'));
+        $em->persist($order);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('success', 'Order cancelled successfully.');
+        
+        return $this->redirect($this->generateUrl('orders_page'));
+    }
+    
+    /**
+     * @Route("/orders/items/{id}/remove", name="order_item_remove", options={"expose"=true})
+     */
+    public function orderitemremoveAction(PurchaseItem $orderItem)
+    {        
+        $orderId = $orderItem->getPurchase()->getId();
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($orderItem);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('success', 'Order item removed successfully.');
+        
+        return $this->redirect($this->generateUrl('order_detail_page', array('id' => $orderId)));
+    }
+    
+    /**
+     * @Route("/addresses", name="address_page")
+     */
+    public function addressAction()
+    {
+        return $this->render('AppWebBundle:Account:address.html.twig');
+    }
+    
+    /**
+     * @Route("/addresses/form/{id}", name="address_form", defaults={"id":0}, options={"expose"=true})
+     */
+    public function addressformAction(Request $request, Address $address = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $mode = $address == null ? 'new' : 'edit';
+        $address = $address == null ? new Address() : $address;
+        $form = $this->createForm(new AddressType(), $address);
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $address = $form->getData();
+                $em->persist($address);
+                $em->flush();
+                                
+                if($mode == 'new'){
+                    $this->getUser()->addAddress($address);
+                    $em->persist($this->getUser());
+                    $em->flush();
+                }
+                
+                $this->get('session')->getFlashBag()->add('success', 'Address updated successfully.');
+                
+                return $this->redirect($this->generateUrl('address_page'));
+            }
+        }
+        return $this->render('AppWebBundle:Account:addressform.html.twig', array('form' => $form->createView()));
+    }
+    
+    /**
+     * @Route("/addresses/default/{id}", name="address_default", options={"expose"=true})
+     */
+    public function addressdefaultAction(Request $request, Address $address)
+    {
+        $em = $this->getDoctrine()->getManager();
+        foreach($this->getUser()->getAddresses() as $addr){
+            if($addr->getId() != $address->getId()){
+                $addr->setDefault(false);
+                $em->persist($addr);
+            }
+        }
+        
+        $address->setDefault(true);
+        $em->persist($address);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('success', 'Default address updated successfully.');
+                
+        return $this->redirect($this->generateUrl('address_page'));
     }
 }

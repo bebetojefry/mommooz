@@ -769,6 +769,20 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     {
         return $this->addresses;
     }
+    
+    /**
+     * Set addresses
+     *
+     * @param \Doctrine\Common\Collections\Collection $addresses
+     * 
+     * @return User
+     */
+    public function setAddresses($addresses)
+    {
+        $this->addresses = $addresses;
+        
+        return $this;
+    }
 
     /**
      * Set email

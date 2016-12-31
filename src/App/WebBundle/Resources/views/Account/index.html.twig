@@ -12,15 +12,7 @@
     </div>
 
     <section class="center-1200px block-fl-cary va-top">
-            <div class="block-3 left-menu-user ptb-20p uppercase-txt block-mb-12">
-            <a href=""> Profile </a> 
-            <a href=""> Delivery Address </a> 
-            <a href=""> My Orders </a> 
-            <a href="{{ path('wishlist_page') }}"> Wishlist </a> 
-            <a href="{{ path('cart_page') }}"> Cart </a> 
-            <a href="{{ path('app_front_consumer_logout') }}" class="logout"> Logout </a> 
-
-        </div>
+        {% include 'AppWebBundle:Account:menu.html.twig' %}
         <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
             <div class="block-6 block-lb-12">
                     <div class="block-10">
@@ -33,7 +25,7 @@
                         <span class="icon-envelope-o"></span> {{ app.user.getEmail() }} <br/>
                          <span class="icon-phone"></span> {{ app.user.getPhone() }} <br/> </p>
 
-                         <a href="profile.php" class="small-text-mmz"> Edit Profile </a>
+                         <a href="{{ path('profile_page') }}" class="small-text-mmz"> Edit Profile </a>
                     </div>
                 </div>
             </div>

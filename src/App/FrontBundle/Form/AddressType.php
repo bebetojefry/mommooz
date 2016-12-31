@@ -19,6 +19,7 @@ class AddressType extends AbstractType
             ->add('street')
             ->add('landmark')
             ->add('city')
+            ->add('pin')
             ->add('state')
         ;
     }

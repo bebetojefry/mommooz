@@ -48,6 +48,13 @@ class Address
      * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pin", type="string", length=255)
+     */
+    private $pin;
 
     /**
      * @var string
@@ -55,6 +62,13 @@ class Address
      * @ORM\Column(name="state", type="string", length=255)
      */
     private $state;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_default", type="boolean", nullable=true)
+     */
+    private $default;
 
     /**
      * Get id
@@ -184,5 +198,53 @@ class Address
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Set default
+     *
+     * @param boolean $default
+     *
+     * @return Address
+     */
+    public function setDefault($default)
+    {
+        $this->default = $default;
+    
+        return $this;
+    }
+
+    /**
+     * Get default
+     *
+     * @return boolean
+     */
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    /**
+     * Set pin
+     *
+     * @param string $pin
+     *
+     * @return Address
+     */
+    public function setPin($pin)
+    {
+        $this->pin = $pin;
+    
+        return $this;
+    }
+
+    /**
+     * Get pin
+     *
+     * @return string
+     */
+    public function getPin()
+    {
+        return $this->pin;
     }
 }

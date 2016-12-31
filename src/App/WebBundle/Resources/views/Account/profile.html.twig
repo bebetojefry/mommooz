@@ -1,0 +1,52 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Profile{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+        <a href="{{ path('home') }}">Home</a>  - <a href="{{ path('account_home') }}">Account</a> - Profile
+    </div>
+
+    <section class="center-1200px block-fl-cary va-top">
+        
+        {% include 'AppWebBundle:Account:menu.html.twig' %}
+        
+        <div class="block-9 pl-30p ptb-20p border_left">
+            {% set flashbag = app.session.flashBag.all %}
+            {% if flashbag|length > 0 %}
+                {% for type, messages in flashbag %}
+                    {% for message in messages %}
+                        <span class="message msg-{{ type }}">{{ message|raw }}</span>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            <div class="edit-profile block-10">
+                <h3> Edit Profile </h3>
+                <form name="frmProfile" method="post" action="">
+                    
+                    {{ form_row(form.images) }}
+                    {{ form_widget(form.firstname) }}
+                    {{ form_widget(form.lastname) }}
+                    {{ form_widget(form.gender) }}
+                    {{ form_widget(form.phone) }}
+                    {{ form_widget(form._token) }}
+                  
+                    <button type="submit" class="momz-button mt-10p"> Upadate <span class="icon-angle-right"></span> </button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+    <script type="text/javascript">
+        $("#{{ form.images.vars.id }}").imageUploader({
+            multiple: false
+        });
+    </script>
+{% endblock %}

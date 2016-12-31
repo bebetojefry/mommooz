@@ -43,6 +43,13 @@ class Purchase
     private $status;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="expected_on", type="datetime")
+     */
+    private $expectedOn;
+    
+    /**
      * @ORM\ManyToOne(targetEntity="Address")
      * @ORM\JoinColumn(name="deliver_to", referencedColumnName="id")
      */
@@ -61,6 +68,13 @@ class Purchase
      * @ORM\Column(name="delivered_by", type="string", length=255, nullable=true)
      */
     private $deliveredBy;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="cancelled_on", type="datetime")
+     */
+    private $cancelledOn;
     
     /**
      * @var ArrayCollection|PurchaseItem[]
@@ -263,5 +277,62 @@ class Purchase
     public function getDeliverTo()
     {
         return $this->deliverTo;
+    }
+
+    /**
+     * Set expectedOn
+     *
+     * @param \DateTime $expectedOn
+     *
+     * @return Purchase
+     */
+    public function setExpectedOn($expectedOn)
+    {
+        $this->expectedOn = $expectedOn;
+    
+        return $this;
+    }
+
+    /**
+     * Get expectedOn
+     *
+     * @return \DateTime
+     */
+    public function getExpectedOn()
+    {
+        return $this->expectedOn;
+    }
+
+    /**
+     * Set cancelledOn
+     *
+     * @param \DateTime $cancelledOn
+     *
+     * @return Purchase
+     */
+    public function setCancelledOn($cancelledOn)
+    {
+        $this->cancelledOn = $cancelledOn;
+    
+        return $this;
+    }
+
+    /**
+     * Get cancelledOn
+     *
+     * @return \DateTime
+     */
+    public function getCancelledOn()
+    {
+        return $this->cancelledOn;
+    }
+    
+    public function getTotalPrice(){
+        $total = 0;
+        foreach($this->items as $item){
+            $total += $item->getPrice();
+        }
+        
+        return $total;
     }
 }

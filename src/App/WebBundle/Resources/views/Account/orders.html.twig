@@ -1,0 +1,71 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Account/Orders{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+        <a href="{{ path('home') }}">Home</a>  - <a href="{{ path('account_home') }}">Account</a> - My Orders
+    </div>
+
+    <section class="user-order center-1200px mt-0p block-fl-cary va-top">
+
+        {% include 'AppWebBundle:Account:menu.html.twig' %}
+
+        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
+            {% set flashbag = app.session.flashBag.all %}
+            {% if flashbag|length > 0 %}
+                {% for type, messages in flashbag %}
+                    {% for message in messages %}
+                        <span class="message msg-{{ type }}">{{ message|raw }}</span>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            <style type="text/css">
+                .my_orders {
+                    border-color: #CCC;
+                }
+                .my_orders tr td, .my_orders tr th {
+                    text-align: left;
+                } 
+            </style>
+            <table class="my_orders" border="1">
+                <tr>
+                    <th>Order Id</th>
+                    <th>Ordered On</th>
+                    <th>Total Items</th>
+                    <th>Total Price</th>
+                    <th>Status</th>
+                    <th>Expected Delivery/Delivered On/Cancelled On</th>
+                </tr>
+                {% for order in orders %}
+                    <tr>
+                        <td><a href="{{ path('order_detail_page', {'id': order.getId()}) }}">#{{ order.getId() }}</a></td>
+                        <td>{{ order.getPurchasedOn()|date('d-M-Y h:i A') }}</td>
+                        <td>{{ order.getItems()|length }}</td>
+                        <td>{{ order.getTotalPrice() }}</td>
+                        <td>{{ status[order.getStatus()] }}</td>
+                        <td>
+                            {% if order.getStatus() == 1 or order.getStatus() == 2 or order.getStatus() == 3 %}
+                                {{ order.getExpectedOn()|date('d-M-Y h:i A') }}
+                            {% elseif order.getStatus() == 4 %}
+                                {{ order.getDeliveredOn()|date('d-M-Y h:i A') }}
+                            {% elseif order.getStatus() == 5 %}
+                                {{ order.getCancelledOn()|date('d-M-Y h:i A') }}
+                            {% else %}
+                                None
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

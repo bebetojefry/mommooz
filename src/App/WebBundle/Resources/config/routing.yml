@@ -2,6 +2,16 @@ home:
     path:     /
     host:     "%domain_consumer%"
     defaults: { _controller: AppWebBundle:Index:index }
+    
+home_explore:
+    path:     /explore
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppWebBundle:Index:explore }
+
+home_explore_skip:
+    path:     /explore/skip
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppWebBundle:Index:exploreskip }
 
 consumer_category:
     resource: "@AppWebBundle/Controller/CategoryController.php"
