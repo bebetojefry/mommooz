@@ -303,4 +303,60 @@ class AccountController extends Controller
                 
         return $this->redirect($this->generateUrl('address_page'));
     }
+    
+    /**
+     * @Route("/order/place", name="place_order")
+     */
+    public function placeorderAction(Request $request)
+    {
+        if($this->getUser()->getCart()->getItems()->count() == 0){
+            return $this->redirect($this->generateUrl('cart_page'));
+        }
+        
+        return $this->render('AppWebBundle:Account:placeOrder.html.twig');
+    }
+    
+    /**
+     * @Route("/order/submit", name="submit_order")
+     */
+    public function submitorderAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $address = $em->getRepository('AppFrontBundle:Address')->find($request->get('address'));
+                
+        $purchase = new Purchase();
+        $purchase->setConsumer($this->getUser());
+        $purchase->setDeliverTo($address);
+        $purchase->setPurchasedOn(new \DateTime('now'));
+        $purchase->setStatus(0);
+        
+        $em->persist($purchase);
+        $em->flush();
+        
+        $cart = $this->getUser()->getCart();
+        
+        foreach($cart->getItems() as $item){
+            $purchaserItem = new PurchaseItem();
+            $purchaserItem->setPurchase($purchase);
+            $purchaserItem->setEntry($item->getEntry());
+            $purchaserItem->setQuantity($item->getQuantity());
+            $purchaserItem->setStatus(0);
+            $purchaserItem->setPrice($item->getQuantity()*$item->getPrice());
+            
+            $em->persist($purchaserItem);
+            $em->remove($item);
+        }
+        
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('order_thanks'));
+    }
+    
+    /**
+     * @Route("/order/thankyou", name="order_thanks")
+     */
+    public function orderthanksAction(Request $request)
+    {
+        return $this->render('AppWebBundle:Account:orderThanks.html.twig');
+    }
 }

@@ -18,7 +18,7 @@
                     <a href=""> <div class="log-social fb"> <span class="icon-facebook"></span>  login with facebook  </div> </a>
                 <a href="">  <div class="log-social gp mt-5p"> <span class="icon-google-plus"></span>  login with Google  </div> </a>
             </div>
-            <form role="form" name="frmlogin" id="frmlogin" method="POST" action="{{ path('app_front_consumer_login_check') }}">
+            <form role="form" name="frmlogin" id="frmlogin" method="POST" action="{{ path('app_front_consumer_login_check') }}{% if app.request.get('cart') %}?cart={{ app.request.get('cart') }}{% endif %}">
                 <input type="text" name="_username" id="username" placeholder="Username" value="{{ last_username }}" autofocus>
                 <input type="password" name="_password" id="password" placeholder="Password">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
@@ -31,6 +31,8 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                <input type="hidden" name="region" value="{{ app.session.get('region') }}" />
+                <input type="hidden" name="locatoin" value="{{ app.session.get('location') }}" />
             </form>
 
             <span class="dispaly-block mt-20p" style="font-size:14px;"> Don't have an account?  <a href="{{ path('register_page') }}" class="prl-10p"> Sign up  </a> </span>

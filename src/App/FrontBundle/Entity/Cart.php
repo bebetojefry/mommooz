@@ -116,6 +116,18 @@ class Cart
     {
         return $this->items;
     }
+    
+    /**
+     * Clear items
+     * 
+     * @return Cart
+     */
+    public function clear()
+    {
+        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+        
+        return $this;
+    }
 
     /**
      * Set user

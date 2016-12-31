@@ -31,21 +31,21 @@ class Purchase
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="purchased_on", type="datetime")
+     * @ORM\Column(name="purchased_on", type="datetime", nullable=true)
      */
     private $purchasedOn;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="integer", nullable=true)
      */
     private $status;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="expected_on", type="datetime")
+     * @ORM\Column(name="expected_on", type="datetime", nullable=true)
      */
     private $expectedOn;
     
@@ -58,7 +58,7 @@ class Purchase
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="delivered_on", type="datetime", nullable=true)
+     * @ORM\Column(name="delivered_on", type="datetime", nullable=true, nullable=true)
      */
     private $deliveredOn;
 
@@ -72,7 +72,7 @@ class Purchase
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="cancelled_on", type="datetime")
+     * @ORM\Column(name="cancelled_on", type="datetime", nullable=true)
      */
     private $cancelledOn;
     

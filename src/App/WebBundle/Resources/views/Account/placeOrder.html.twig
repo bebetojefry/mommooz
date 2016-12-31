@@ -1,0 +1,38 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Cart{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+	<a href="{{ path('home') }}">Home</a> - Place Order
+    </div>
+    <section class="center-1200px cart-page ptb-20p">
+        <h3> Place Your Order </h3>
+        <form name="frmOrderSubmit" method="post" action="{{ path('submit_order') }}" >
+            <div class="block-12 mb-pl2 pl-30p ptb-20p block-mb-12 mb-text-left">
+                {% for address in app.user.getAddresses() %}
+                    <div class="block-4 addresscary br-4p block-lb-6 block-sb-12 text-center">
+                        <div class="block-11  ptrbl-20p brd-L-1p text-left">
+                            <h3><input type="radio" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {{ app.user.getFullname() }}  </h3>
+                            {{ address.getHouse() }}, {{ address.getStreet() }}, {{ address.getLandmark() }}, {{ address.getCity() }}
+                            <br/>Pin: {{ address.getPin() }},  {{ address.getState() }}
+                            <br/>
+                            Ph: {{ app.user.getPhone() }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="full-width mt-10p ptb-20p text-right button-cart">
+                <button type="submit" class="momz-button ml-10p active" name=""> Submit Order <span class="icon-arrow-right"></span> </button>
+            </div>
+        </form>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

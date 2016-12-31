@@ -29,12 +29,12 @@
                         </a>  
                     </td>
                     <td> {{ item.getQuantity() }} </td>
-                    <td> <span class="icon-inr"></span> {{ item.getPrice() }}/- </td>
+                    <td> <span class="icon-inr"></span> {{ item.getQuantity()*item.getPrice() }}/- </td>
                     <td class="editcary-td">
                         <a href="{{ path('cart_delete', {'id': item.getId()}) }}"> <span class="icon-trash-1 ml-15p" title="Delete"></span> </a>
                     </td>
                 </tr>
-                {% set totalPrice = totalPrice + item.getPrice() %}
+                {% set totalPrice = totalPrice + (item.getQuantity()*item.getPrice()) %}
             {% endfor %}
             <tr>
                 <td colspan="5" class="totalcart-rate text-right">  Total Price : <span class="icon-inr"></span> {{ totalPrice }}  </td>
@@ -42,7 +42,9 @@
         </table>
         <div class="full-width mt-10p ptb-20p text-right button-cart">
             <a href="{{ path('home') }}"><button class="momz-button" name=""> <span class="icon-angle-left"></span>  Continue Shopping </button></a>
-            <a href="address.php"> <button class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button> </a>
+            {% if app_web_user.getCart().getItems()|length > 0 %}
+                <a href="{% if app.user %}{{ path('place_order') }}{% else %}{{ path('login_page')~'?cart='~app_web_user.getCart().getId() }}{% endif %}"> <button class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button> </a>
+            {% endif %}
         </div>
     </section>
 {% endblock%}
