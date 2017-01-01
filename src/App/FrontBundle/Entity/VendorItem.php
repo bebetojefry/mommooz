@@ -22,8 +22,10 @@ class VendorItem
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Vendor")
-     * @ORM\JoinColumn(name="vendor", referencedColumnName="id")
+     * @var Vendor
+     * 
+     * @ORM\ManyToOne(targetEntity="Vendor", inversedBy="items")
+     * @ORM\JoinColumn(name="vendor")
      */
     private $vendor;
 

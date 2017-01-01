@@ -51,7 +51,7 @@ class StockEntryController extends Controller
         
         $entry = new StockEntry();
         $entry->setStock($stock);
-        $form = $this->createForm(new StockEntryType($dm, $item), $entry);
+        $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $item), $entry);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -63,7 +63,7 @@ class StockEntryController extends Controller
                     $stockentry->setState($stockentry->getItem()->getId());
                     $stockentry->setCommtype($stockentry->getItem()->getCommType());
                     $stockentry->setCommvalue($stockentry->getItem()->getCommValue());
-                    $form = $this->createForm(new StockEntryType($dm, $stockentry->getItem()), $stockentry);
+                    $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $stockentry->getItem()), $stockentry);
                     $code = FormHelper::REFRESH_FORM;
                 } else {
                     $dm->persist($stockentry);
@@ -95,7 +95,7 @@ class StockEntryController extends Controller
         $stockentry->setState($stockentry->getItem()->getId());
         $stockentry->setCommtype($stockentry->getItem()->getCommType());
         $stockentry->setCommvalue($stockentry->getItem()->getCommValue());
-        $form = $this->createForm(new StockEntryType($dm, $stockentry->getItem()), $stockentry);
+        $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $stockentry->getItem()), $stockentry);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){

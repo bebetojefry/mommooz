@@ -185,6 +185,16 @@ app_front_vendor_items_preview:
     path:     /items/{id}/preview
     host:     "%domain_vendor%"
     defaults: { _controller: AppFrontBundle:Vendor:itempreview}
+    
+app_front_vendor_orders:
+    path:     /orders
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:orders}
+    
+app_front_vendor_orders_result:
+    path:     /orders/{id}/result
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:ordersResult}
 
 vendor_item_autocomplete:
     path:     /autocomplete/items

@@ -74,8 +74,9 @@
         </div>
         <div class="block-6 clearSet block-mb-12">
             <div class="block-10 right-float mb-fn block-mb-12">
-                <form >
-                    <input type="text" id="global-search" placeholder="Search Product" class="search-main-home">
+                <form method="get" action="{{ path('keyword_web_search') }}">
+                    <input type="text" name="q" id="global-search" placeholder="Search Product" class="search-main-home" value="{{ app.request.get('q') }}">
+                    <button type="submit" style="visibility: hidden;">S</button>
                 </form>
             </div>
         </div>

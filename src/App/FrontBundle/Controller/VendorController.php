@@ -319,4 +319,28 @@ class VendorController extends Controller
             'vendorItem' => $vendorItem
         ));
     }
+    
+    public function ordersAction(){
+        $ordersDatatable = $this->get('app.front.datatable.purchaseitem');
+        $ordersDatatable->buildDatatable(array('vendor' => $this->getUser()));
+        return $this->render('AppFrontBundle:Vendor:orders.html.twig', array(
+            'ordersDatatable' => $ordersDatatable
+        ));
+    }
+    
+    public function ordersResultAction(Request $request, Vendor $vendor){
+        $datatable = $this->get('app.front.datatable.purchaseitem');
+        $datatable->buildDatatable(array('vendor' => $vendor));
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
+        $qb = $query->getQuery();
+        if($vendor){
+            $qb->innerJoin('purchase_item.entry','e');
+            $qb->innerJoin('e.stock','s');
+            $qb->andWhere("s.vendor = :v");
+            $qb->setParameter('v', $vendor);
+        }
+        $query->setQuery($qb);
+        return $query->getResponse(false);
+    }
 }

@@ -9,14 +9,17 @@ use App\FrontBundle\Entity\Item;
 use Doctrine\ORM\EntityRepository;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
+use App\FrontBundle\Entity\Vendor;
 
 class StockEntryType extends AbstractType
 {
     private $item;
     private $om;
-
-    public function __construct(ObjectManager $om, Item $item = null)
+    private $vendor;
+    
+    public function __construct(ObjectManager $om, Vendor $vendor, Item $item = null)
     {
+        $this->vendor = $vendor;
         $this->item = $item;
         $this->om = $om;
     }
@@ -39,6 +42,7 @@ class StockEntryType extends AbstractType
             $builder
             ->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
+                'choices' => $this->vendor->getRealItems(),
                 'property' => 'name',
                 'multiple' => false,
                 'expanded' => false,
@@ -88,6 +92,7 @@ class StockEntryType extends AbstractType
         } else {
             $builder->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
+                'choices' => $this->vendor->getRealItems(),
                 'property' => 'name',
                 'multiple' => false,
                 'expanded' => false,

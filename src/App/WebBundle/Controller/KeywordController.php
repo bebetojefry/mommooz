@@ -39,6 +39,36 @@ class KeywordController extends Controller
     public function searchAction(Request $request)
     {
         $q = $request->query->get('q');
-        echo $q; exit;
+        $em = $this->getDoctrine()->getManager();     
+        
+        $qb = $em->createQueryBuilder();
+        $qb->select('e')
+            ->from('AppFrontBundle:StockEntry', 'e')
+            ->leftJoin('e.item', 'i')
+            ->leftJoin('i.keywords','k1')
+            ->leftJoin('i.product','p')
+            ->leftJoin('p.category','c')
+            ->leftJoin('c.keywords','k4')
+            ->leftJoin('p.keywords','k2')
+            ->leftJoin('i.brand','b')
+            ->leftJoin('b.keywords','k3')
+            ->where($qb->expr()->orX(
+                $qb->expr()->like('k1.keyword', '?1'),
+                $qb->expr()->like('k2.keyword', '?1'),
+                $qb->expr()->like('k3.keyword', '?1'),
+                $qb->expr()->like('k4.keyword', '?1'),
+                $qb->expr()->like('c.categoryName', '?1'),
+                $qb->expr()->like('p.name', '?1'),
+                $qb->expr()->like('i.name', '?1'),
+                $qb->expr()->like('b.name', '?1')
+            ))
+            ->orderBy('e.id', 'ASC')
+            ->setParameter(1, $q);
+        
+        $entries = $qb->getQuery()->getResult();
+        
+        return $this->render('AppWebBundle:Search:items.html.twig', array(
+            'entries' => $entries
+        ));
     }
 }

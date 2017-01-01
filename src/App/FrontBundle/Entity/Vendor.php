@@ -21,6 +21,13 @@ class Vendor extends User
     private $stocks;
     
     /**
+     * @var ArrayCollection|VendorItem[]
+     *
+     * @ORM\OneToMany(targetEntity="VendorItem", mappedBy="vendor")
+     */
+    private $items;
+    
+    /**
      * Get roles
      *
      * @return array
@@ -71,5 +78,49 @@ class Vendor extends User
         }
         
         return $items;
+    }
+
+    /**
+     * Add item
+     *
+     * @param \App\FrontBundle\Entity\VendorItem $item
+     *
+     * @return Vendor
+     */
+    public function addItem(\App\FrontBundle\Entity\VendorItem $item)
+    {
+        $this->items[] = $item;
+    
+        return $this;
+    }
+
+    /**
+     * Remove item
+     *
+     * @param \App\FrontBundle\Entity\VendorItem $item
+     */
+    public function removeItem(\App\FrontBundle\Entity\VendorItem $item)
+    {
+        $this->items->removeElement($item);
+    }
+
+    /**
+     * Get items
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getItems()
+    {
+        return $this->items;
+    }
+    
+    public function getRealItems()
+    {
+        $realItems = array();
+        foreach($this->items as $item){
+            $realItems[] = $item->getItem();
+        }
+        
+        return $realItems;
     }
 }

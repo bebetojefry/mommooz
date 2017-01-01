@@ -1,0 +1,65 @@
+{% extends "AppFrontBundle::layout3.html.twig" %}
+
+{% block title %}{{ 'page_title.orders' | trans }}{% endblock %}
+
+{% block style %}
+    {% stylesheets
+        'assets/vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'
+        filter='cssrewrite' output='css/compiled/page.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block orders_active %}active{% endblock %}
+
+{% block content %}
+        {{ datatable_render(ordersDatatable) }}
+{% endblock%}
+
+{% block javascript %}
+    {% javascripts
+        'assets/vendor/datatables/media/js/jquery.dataTables.min.js'
+        'assets/vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
+        output='js/compiled/page.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(function() {
+            $("#item-search").autocomplete({
+                valueKey:'title',
+                source:[
+                {
+                    url:"{{ path('vendor_item_autocomplete') }}?q=%QUERY%",
+                    type:'remote'
+                }
+            ]}).on('selected.xdsoft',function(e,data){
+                var preview_item_path = "{{ path('app_front_vendor_items_preview', {'id': 0}) }}";
+                var loc = preview_item_path.replace('0', data.id);
+                window.location = loc;
+                return false;                
+            }); 
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#productsTable').DataTable({
+                "responsive": true,
+                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "language": {
+                    "lengthMenu": "{{ 'table.lengthMenu' | trans }}",
+                    "zeroRecords": "{{ 'table.zeroRecords' | trans }}",
+                    "info": "{{ 'table.info' | trans }}",
+                    "infoEmpty": "{{ 'table.infoEmpty' | trans }}",
+                    "infoFiltered": "{{ 'table.infoFiltered' | trans }}",
+                    "search": "{{ 'table.search' | trans }}",
+                    "paginate": {
+                        "first":      "{{ 'table.first' | trans }}",
+                        "last":       "{{ 'table.last' | trans }}",
+                        "next":       "{{ 'table.next' | trans }}",
+                        "previous":   "{{ 'table.previous' | trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

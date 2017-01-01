@@ -42,8 +42,16 @@ class PurchaseItemDatatable extends AbstractDatatableView
             'highlight_color' => 'red'
         ));
 
+        if(isset($options['purchase'])){
+            $route = $this->router->generate('purchaseitem_results', array('id' => $options['purchase']->getId()));
+        } else if(isset($options['vendor'])) {
+            $route = $this->router->generate('app_front_vendor_orders_result', array('id' => $options['vendor']->getId()));
+        } else {
+            $route = $this->router->generate('purchaseitem_results');
+        }
+        
         $this->ajax->set(array(
-            'url' => $this->router->generate('purchaseitem_results', array('id' => $options['purchase']->getId())),
+            'url' => $route,
             'type' => 'GET',
             'pipeline' => 0
         ));
@@ -74,11 +82,14 @@ class PurchaseItemDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
-            ))
-            ->add('entry.stock.vendor.firstname', 'column', array(
+            ));
+        
+        if(!isset($options['vendor'])){
+            $this->columnBuilder->add('entry.stock.vendor.firstname', 'column', array(
                 'title' => 'Vendor',
-            ))
-            ->add('entry.item.name', 'column', array(
+            ));
+        }
+            $this->columnBuilder->add('entry.item.name', 'column', array(
                 'title' => 'Item',
             ))
             ->add('entry.item.brand.name', 'column', array(
@@ -92,8 +103,14 @@ class PurchaseItemDatatable extends AbstractDatatableView
             ))
             ->add('price', 'column', array(
                 'title' => 'Price',
-            ))
-        ;
+            ));
+                    
+        if(isset($options['vendor'])){
+            $this->columnBuilder->add('purchase.purchasedOn', 'datetime', array(
+                'title' => 'Purchased On',
+            ));
+        }
+        
         
         $this->callbacks->set(array(
             'row_callback' => array(
