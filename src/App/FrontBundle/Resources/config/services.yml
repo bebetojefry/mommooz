@@ -59,7 +59,12 @@ services:
       arguments:  ["@kernel", "@security.http_utils", {}, "@service_container"]
       tags:
           - { name: 'monolog.logger', channel: 'security' }
-
+    
+    app.kernel_listener:
+        class: App\FrontBundle\EventListener\KernelListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException, priority: 200 }
+            
   #  security.authentication.logout_handler:
   #    class:  App\FrontBundle\EventListener\LogoutListener
   #    tags:

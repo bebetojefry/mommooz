@@ -42,8 +42,8 @@ modal.controller('MainCtrl', function ($scope, $http) {
             $scope.processResponse(response);
             $scope.showModal = !$scope.showModal;
         })
-        .error(function(response){
-            $scope.errorhandler(response);
+        .error(function(response, status){
+            $scope.errorhandler(response, status);
         });
         
         action = obj.target.attributes.formAction;
@@ -53,8 +53,8 @@ modal.controller('MainCtrl', function ($scope, $http) {
             success: function(response) {
                 $scope.processResponse(response);
             },
-            error: function(response){
-                $scope.errorhandler(response);
+            error: function(response, status){
+                $scope.errorhandler(response, status);
             }
         });
     };
@@ -74,8 +74,8 @@ modal.controller('MainCtrl', function ($scope, $http) {
                     .success(function (response) {
                         $scope.processResponse(response);
                     })
-                    .error(function(response){
-                        $scope.errorhandler(response);
+                    .error(function(response, status){
+                        $scope.errorhandler(response, status);
                     });
                 }
                 }, {
@@ -98,18 +98,25 @@ modal.controller('MainCtrl', function ($scope, $http) {
             .success(function (response) {
                 $scope.processResponse(response);
             })
-            .error(function(response){
-                $scope.errorhandler(response);
+            .error(function(response, status){
+                $scope.errorhandler(response, status);
             });
         }
     };
     
-    $scope.errorhandler = function(response){
-        if(response.status == 304){
+    $scope.errorhandler = function(response, status){
+        if(status == 304){
             alert(Translator.trans('globals.session.expired'));
+        } else if(status == 423){
+            if(response.code == 'FOREIGN_INTEGRITY_EXCEPTION'){
+                alert('This entity/action is locked, since its connected to entities in other modules.');
+            } else {
+                alert('This action is locked.');
+            }
         } else {
             alert(Translator.trans('globals.error.something'));
         }
+        
         location.reload(true);
     }
     
