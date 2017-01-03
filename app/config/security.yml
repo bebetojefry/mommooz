@@ -12,6 +12,8 @@ security:
             entity: { class: 'App\FrontBundle\Entity\Admin' }
         vendor:
             entity: { class: 'App\FrontBundle\Entity\Vendor' }
+        fos_userbundle:
+            id: fos_user.user_provider.username_email
         api_key_user_provider:
             id: api_key_user_provider
     acl:
@@ -80,7 +82,17 @@ security:
                 always_use_default_target_path: true
                 use_referer: true
                 csrf_provider: security.csrf.token_manager
-                
+            oauth:
+                resource_owners:
+                    facebook: facebook_login_check
+                    google: google_login_check
+                login_path:        /account/login
+                failure_path:      /account/login
+
+                oauth_user_provider:
+                    #this is my custom user provider, created from FOSUBUserProvider - will manage the
+                    #automatic user registration on your site, with data from the provider (facebook. google, etc.)
+                    service: oauth_user_provider    
             logout:
                 path:   /account/logout
                 target: /account/login
@@ -90,7 +102,7 @@ security:
                 lifetime: 604800 # one week in seconds
                 path: /
                 domain: "%domain_consumer%"
-                
+                    
     access_control:
       - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
       - { path: ^/[a-z]+, roles: ROLE_ADMIN, host: %domain_admin% }

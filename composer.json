@@ -29,7 +29,8 @@
         "sg/datatablesbundle": "^0.13.0",
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "stfalcon/tinymce-bundle": "1.0",
-        "endroid/qrcode-bundle": "^2.0"
+        "endroid/qrcode-bundle": "^2.0",
+        "hwi/oauth-bundle": "^0.5.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

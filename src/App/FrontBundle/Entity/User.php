@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Security\Core\Encoder\EncoderAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * User
@@ -24,7 +25,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * 
  * @ExclusionPolicy("all") 
  */
-abstract class User implements AdvancedUserInterface, EncoderAwareInterface, EquatableInterface, \Serializable
+abstract class User extends BaseUser implements AdvancedUserInterface, EncoderAwareInterface, EquatableInterface, \Serializable
 {
     /**
      * @var integer
@@ -34,7 +35,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Expose
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
@@ -42,7 +43,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @ORM\Column(name="firstname", type="string", length=255)
      * @Expose
      */
-    private $firstname;
+    protected $firstname;
 
     /**
      * @var string
@@ -50,23 +51,23 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @ORM\Column(name="lastname", type="string", length=255)
      * @Expose
      */
-    private $lastname;
+    protected $lastname;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="gender", type="integer")
+     * @ORM\Column(name="gender", type="integer", nullable=true)
      * @Expose
      */
-    private $gender;
+    protected $gender;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="phone", type="string", length=255)
+     * @ORM\Column(name="phone", type="string", length=255, nullable=true)
      * @Expose
      */
-    private $phone;
+    protected $phone;
     
     /**
      * @var string
@@ -74,7 +75,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @ORM\Column(name="email", type="string", length=255)
      * @Expose
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
@@ -83,7 +84,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @Expose
      * @Groups({"Me"})
      */
-    private $username;
+    protected $username;
 
 
     /**
@@ -91,22 +92,34 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      *
      * @ORM\Column(name="password", type="string", length=255)
      */
-    private $password;
+    protected $password;
+    
+    /** @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) */
+    protected $facebook_id;
+    
+    /** @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) */
+    protected $facebook_access_token;
+    
+    /** @ORM\Column(name="google_id", type="string", length=255, nullable=true) */
+    protected $google_id;
+    
+    /** @ORM\Column(name="google_access_token", type="string", length=255, nullable=true) */
+    protected $google_access_token;
 
     /**
      * @var string
      *
      * @ORM\Column(name="salt", type="string", length=255)
      */
-    private $salt;
+    protected $salt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="locale", type="string", length=10)
+     * @ORM\Column(name="locale", type="string", length=10, nullable=true)
      * @Expose
      */
-    private $locale;
+    protected $locale;
 
     /**
      * @var boolean
@@ -114,14 +127,14 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @ORM\Column(name="status", type="boolean")
      * @Expose
      */
-    private $status;
+    protected $status;
 
     /**
      * @var ArrayCollection|Userlock[]
      *
      * @ORM\OneToMany(targetEntity="Userlock", mappedBy="user")
      */
-    private $locks;
+    protected $locks;
 
     /**
      * @var ArrayCollection|Session[]
@@ -129,70 +142,70 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      * @ORM\OneToMany(targetEntity="Session", mappedBy="user")
      * @Expose
      */
-    private $sessions;
+    protected $sessions;
 
     /**
      * @var ArrayCollection|Loginfailure[]
      *
      * @ORM\OneToMany(targetEntity="Loginfailure", mappedBy="user")
      */
-    private $failures;
+    protected $failures;
     
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdOn", type="datetime")
      */
-    private $created_on;
+    protected $created_on;
 
     /**
      * @var ArrayCollection|Region[]
      *
      * @ORM\ManyToMany(targetEntity="Region")
      */
-    private $regions;
+    protected $regions;
     
      /**
      * @var ArrayCollection|Address[]
      *
      * @ORM\ManyToMany(targetEntity="Address", orphanRemoval=true, cascade={"persist"})
      */
-    private $addresses;
+    protected $addresses;
     
     /**
      * @var ArrayCollection|StockPurchase[]
      *
      * @ORM\OneToMany(targetEntity="StockPurchase", mappedBy="user")
      */
-    private $purchases;
+    protected $purchases;
     
     /**
      * @var ArrayCollection|Image[]
      *
-     * @ORM\ManyToMany(targetEntity="Image", orphanRemoval=true)
+     * @ORM\ManyToMany(targetEntity="Image", orphanRemoval=true, cascade={"persist"}))
      */
-    private $images;
+    protected $images;
     
     /**
      * @var ArrayCollection|ItemView[]
      *
      * @ORM\OneToMany(targetEntity="ItemView", mappedBy="user")
      */
-    private $ItemViews;
+    protected $ItemViews;
     
     /**
      * @var Cart
      *
      * @ORM\OneToOne(targetEntity="Cart", mappedBy="user")
      */
-    private $cart;
+    protected $cart;
     
     /**
      * @var WishList
      *
      * @ORM\OneToOne(targetEntity="WishList", mappedBy="user")
      */
-    private $Wishlist;
+    protected $Wishlist;
     
     /**
      * Constructor
@@ -206,6 +219,7 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
         $this->purchases = new ArrayCollection();
         $this->images = new ArrayCollection();
         $this->ItemViews = new ArrayCollection();
+        $this->locks = new ArrayCollection();
     }
 
 
@@ -393,9 +407,11 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
      */
     public function isAccountNonLocked(){
         $locks = $this->getLocks();
-        foreach($locks as $lock){
-            if($lock->getIp() == $_SERVER['REMOTE_ADDR']){
-                return false;
+        if($locks instanceof ArrayCollection){
+            foreach($locks as $lock){
+                if($lock->getIp() == $_SERVER['REMOTE_ADDR']){
+                    return false;
+                }
             }
         }
 
@@ -966,5 +982,101 @@ abstract class User implements AdvancedUserInterface, EncoderAwareInterface, Equ
     public function getWishlist()
     {
         return $this->Wishlist;
+    }
+
+    /**
+     * Set facebookId
+     *
+     * @param string $facebookId
+     *
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebook_id = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookId
+     *
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set facebookAccessToken
+     *
+     * @param string $facebookAccessToken
+     *
+     * @return User
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebook_access_token = $facebookAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get facebookAccessToken
+     *
+     * @return string
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * Set googleId
+     *
+     * @param string $googleId
+     *
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->google_id = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get googleId
+     *
+     * @return string
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * Set googleAccessToken
+     *
+     * @param string $googleAccessToken
+     *
+     * @return User
+     */
+    public function setGoogleAccessToken($googleAccessToken)
+    {
+        $this->google_access_token = $googleAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get googleAccessToken
+     *
+     * @return string
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->google_access_token;
     }
 }

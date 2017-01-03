@@ -56,6 +56,7 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         'H' => 
         array (
             'Hautelook\\AliceBundle\\' => 22,
+            'HWI\\Bundle\\OAuthBundle\\' => 23,
         ),
         'F' => 
         array (
@@ -154,6 +155,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         'Hautelook\\AliceBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/hautelook/alice-bundle/src',
+        ),
+        'HWI\\Bundle\\OAuthBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hwi/oauth-bundle',
         ),
         'Faker\\' => 
         array (
@@ -308,6 +313,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
             array (
                 0 => __DIR__ . '/..' . '/funddy/jstranslations-bundle',
             ),
+            'FOS\\UserBundle' => 
+            array (
+                0 => __DIR__ . '/..' . '/friendsofsymfony/user-bundle',
+            ),
         ),
         'D' => 
         array (
@@ -342,6 +351,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         ),
         'B' => 
         array (
+            'Buzz' => 
+            array (
+                0 => __DIR__ . '/..' . '/kriswallsmith/buzz/lib',
+            ),
             'Behat\\Transliterator' => 
             array (
                 0 => __DIR__ . '/..' . '/behat/transliterator/src',

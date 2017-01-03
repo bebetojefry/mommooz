@@ -115,8 +115,8 @@
                     <li class="text-center login-butn">
                         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
                         <button type="submit" class="submit-login mr-5p transition_05s pointer-csr" > Login <span class="icon-arrow-right"></span> </button>  /
-                        <a href=""> <span class="icon-facebook"></span> </a> /
-                        <a href=""> <span class="icon-google-plus"></span> </a>
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"> <span class="icon-facebook"></span> </a> /
+                        <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}"> <span class="icon-google-plus"></span> </a>
                     </li>
                     <li class="text-center login-reg-pasword pt-15p"> <a href="{{ path('register_page') }}"> Register </a> - <a href=""> Forget Password </a>  </li>
                 </ul>

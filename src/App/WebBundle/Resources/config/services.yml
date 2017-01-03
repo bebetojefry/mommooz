@@ -1,4 +1,10 @@
+parameters:
+    oauth_user_provider.class: App\WebBundle\Security\Core\User\FOSUBUserProvider
 services:
     app.web.user:
         class: App\WebBundle\Service\User
         arguments: ['@service_container']
+    oauth_user_provider:
+        class: "%oauth_user_provider.class%"
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: [@fos_user.user_manager,{facebook: facebook_id, google: google_id}]

@@ -25,6 +25,7 @@ return array(
     'Leafo\\ScssPhp\\' => array($vendorDir . '/leafo/scssphp/src'),
     'Incenteev\\ParameterHandler\\' => array($vendorDir . '/incenteev/composer-parameter-handler'),
     'Hautelook\\AliceBundle\\' => array($vendorDir . '/hautelook/alice-bundle/src'),
+    'HWI\\Bundle\\OAuthBundle\\' => array($vendorDir . '/hwi/oauth-bundle'),
     'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
     'FOS\\JsRoutingBundle\\' => array($vendorDir . '/friendsofsymfony/jsrouting-bundle'),
     'Endroid\\QrCode\\' => array($vendorDir . '/endroid/qrcode/src'),

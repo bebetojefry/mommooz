@@ -124,3 +124,33 @@ endroid_qr_code:
     background_color: { r: 255, g: 255, b: 255, a: 0 }
     label: "Scan The Code"
     label_font_size: 12
+fos_user:
+    db_driver: orm
+    firewall_name: social
+    user_class: App\FrontBundle\Entity\Consumer
+    
+hwi_oauth:
+    #this is my custom user provider, created from FOSUBUserProvider - will manage the 
+    #automatic user registration on your site, with data from the provider (facebook. google, etc.)
+    #and also, the connecting part (get the token and the user_id)
+    connect:
+        account_connector: oauth_user_provider
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_names: [default]
+    fosub:
+        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+            google: google_id
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           "%facebook_app_id%"
+            client_secret:       "%facebook_app_secret%"
+            scope:               "email, public_profile"
+        google:
+            type:                google
+            client_id:           "%google_app_id%"
+            client_secret:       "%google_app_secret%"
+            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"

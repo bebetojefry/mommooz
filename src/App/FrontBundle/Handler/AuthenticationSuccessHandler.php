@@ -9,6 +9,7 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessH
 use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\FrontBundle\Entity\Cart;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler {
 
@@ -56,9 +57,13 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler {
         if($request->isXmlHttpRequest()) {
             $response = new JsonResponse(array('success' => true, 'username' => $token->getUsername()));
         } else {
-            $referer = $request->getSession()->get('_security.'.$token->getProviderKey().'.target_path');
-            if($referer){
-                $response = new RedirectResponse($referer);
+            if($token instanceof UsernamePasswordToken){
+                $referer = $request->getSession()->get('_security.'.$token->getProviderKey().'.target_path');
+                if($referer){
+                    $response = new RedirectResponse($referer);
+                } else {
+                    $response = parent::onAuthenticationSuccess($request, $token);
+                }
             } else {
                 $response = parent::onAuthenticationSuccess($request, $token);
             }
