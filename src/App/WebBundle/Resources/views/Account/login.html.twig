@@ -15,8 +15,8 @@
             <div class="block-6 block-lb-8 block-mb-11 text-left br-4p bs-nrmls ptrbl-40p yellow-bg">
             <h3> Login </h3>
             <div class="full-width ptb-10p uppercase-txt">
-                    <a href=""> <div class="log-social fb"> <span class="icon-facebook"></span>  login with facebook  </div> </a>
-                <a href="">  <div class="log-social gp mt-5p"> <span class="icon-google-plus"></span>  login with Google  </div> </a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"> <div class="log-social fb"> <span class="icon-facebook"></span>  login with facebook  </div> </a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">  <div class="log-social gp mt-5p"> <span class="icon-google-plus"></span>  login with Google  </div> </a>
             </div>
             <form role="form" name="frmlogin" id="frmlogin" method="POST" action="{{ path('app_front_consumer_login_check') }}{% if app.request.get('cart') %}?cart={{ app.request.get('cart') }}{% endif %}">
                 <input type="text" name="_username" id="username" placeholder="Username" value="{{ last_username }}" autofocus>
