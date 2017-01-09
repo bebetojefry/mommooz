@@ -52,7 +52,6 @@ class VendorController extends Controller
                 $vendor->setUsername($username);
                 $vendor->setPassword($password);
                 $vendor->setLocale('en');      
-                $vendor->addStock($stock);
                 $dm->persist($vendor);
                 $dm->flush();
                 
