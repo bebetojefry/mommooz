@@ -52,13 +52,18 @@ class VendorController extends Controller
                 $vendor->setUsername($username);
                 $vendor->setPassword($password);
                 $vendor->setLocale('en');      
-                $stock = new Stock();
-                $stock->setName('My Stock');
-                $stock->setDate(new \DateTime('now'));
-                $stock->setStatus(TRUE);
                 $vendor->addStock($stock);
                 $dm->persist($vendor);
                 $dm->flush();
+                
+                $stock = new Stock();
+                $stock->setName('My Stock');
+                $stock->setVendor($vendor);
+                $stock->setDate(new \DateTime('now'));
+                $stock->setStatus(TRUE);
+                $dm->persist($stock);
+                $dm->flush();
+                
                 $this->get('session')->getFlashBag()->add('success', 'vendor.msg.created');
                 $code = FormHelper::REFRESH;
             } else {
