@@ -49,7 +49,7 @@ class StockEntryDatatable extends AbstractDatatableView
                     'attributes' => array(
                         'rel' => 'tooltip',
                         'title' => $this->translator->trans('stockentry.actions.new'),
-                        'class' => 'btn btn-primary '.($published?'disabled':''),
+                        'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
                         'modalTitle' => $this->translator->trans('stockentry.title.new'),
