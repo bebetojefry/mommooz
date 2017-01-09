@@ -195,4 +195,26 @@ class StockEntryController extends Controller
         
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
+    
+    /**
+     * Displays a form to change price of an existing stockentry entity.
+     *
+     * @Route("/{id}/price", name="stockentry_price", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function priceAction(Request $request, StockEntry $stockentry)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $price = $request->get('val');
+        if(is_numeric($price)){
+            $stockentry->setPrice($price);
+            $em->persist($stockentry);
+            $em->flush();
+            $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.price');
+        } else {
+             $this->get('session')->getFlashBag()->add('error', 'stockentry.msg.invalid_price');
+        }
+        
+        return new Response(json_encode(array('code' => FormHelper::REFRESH)));
+    }
 }

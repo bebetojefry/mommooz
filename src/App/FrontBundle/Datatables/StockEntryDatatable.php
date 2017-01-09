@@ -207,6 +207,25 @@ class StockEntryDatatable extends AbstractDatatableView
                         'render_if' => function($row) use ($published) {                        ;
                             return $published === true;
                         }
+                    ),
+                    array(
+                        'route' => 'stockentry_price',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => 'Change Price',
+                        'icon' => 'glyphicons glyphicons-currency-conversion',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('stockentry.actions.price'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openPrompt(event);',
+                            'promptText' => $this->translator->trans('stockentry.price.prompt'),
+                        ),
+                        'render_if' => function($row) use ($published) {                        ;
+                            return $published === true;
+                        }
                     )
                 )
             ))
