@@ -14,6 +14,7 @@ use App\FrontBundle\Form\UserType;
 use App\FrontBundle\Entity\Address;
 use App\FrontBundle\Entity\Item;
 use App\FrontBundle\Entity\VendorItem;
+use App\FrontBundle\Entity\Stock;
 
 class VendorController extends Controller
 {
@@ -50,7 +51,12 @@ class VendorController extends Controller
                 $password = 'VEND'.time();
                 $vendor->setUsername($username);
                 $vendor->setPassword($password);
-                $vendor->setLocale('en');                
+                $vendor->setLocale('en');      
+                $stock = new Stock();
+                $stock->setName('My Stock');
+                $stock->setDate(new \DateTime('now'));
+                $stock->setStatus(TRUE);
+                $vendor->addStock($stock);
                 $dm->persist($vendor);
                 $dm->flush();
                 $this->get('session')->getFlashBag()->add('success', 'vendor.msg.created');

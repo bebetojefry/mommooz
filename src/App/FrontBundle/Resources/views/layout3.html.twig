@@ -90,7 +90,13 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="{% block items_active %}{% endblock %}"><a href="{{ path('app_front_vendor_items') }}">Items</a></li>
-                        <li class="{% block stock_active %}{% endblock %}"><a href="{{ path('app_front_vendor_home') }}">Stocks</a></li>
+                        {% if app.user.getStocks()|length > 0 %}
+                            {% set stock = app.user.getStocks()|first %}
+                            {% set stock_path = path('stock_items', {id: stock.getId()}) %}
+                        {% else %}
+                            {% set stock_path = path('app_front_vendor_home') %}
+                        {% endif %}
+                        <li class="{% block stock_active %}{% endblock %}"><a href="{{ stock_path }}">Stocks</a></li>
                         <li class="{% block orders_active %}{% endblock %}"><a href="{{ path('app_front_vendor_orders') }}">Orders</a></li>
                     </ul>
                 </div>
