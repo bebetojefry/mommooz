@@ -18,7 +18,7 @@ class PurchaseType extends AbstractType
             ->add('status', 'choice', array(
                 'multiple' => false,
                 'expanded' => false,
-                'choices' => array(0 => 'Pening', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled'),                
+                'choices' => array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled'),                
             ))
             ->add('expectedOn')
             ->add('deliveredOn')

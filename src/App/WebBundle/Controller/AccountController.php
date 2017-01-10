@@ -199,7 +199,7 @@ class AccountController extends Controller
         return $this->render('AppWebBundle:Account:orders.html.twig',
             array(
                 'orders' => $orders,
-                'status' => array(0 => 'Pening', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled')
+                'status' => array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled')
             )
         );
     }
