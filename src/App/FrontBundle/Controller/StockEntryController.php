@@ -207,7 +207,14 @@ class StockEntryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $price = $request->get('val');
         if(is_numeric($price)){
+            if($stockentry->getItem()->getCommType() == 1){
+                $actualPrice = $price + $stockentry->getItem()->getCommValue();
+            } else {
+                $actualPrice = $price + round(($price * $stockentry->getItem()->getCommValue())/100, 2);
+            }
+            
             $stockentry->setPrice($price);
+            $stockentry->setActualPrice($actualPrice);
             $em->persist($stockentry);
             $em->flush();
             $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.price');

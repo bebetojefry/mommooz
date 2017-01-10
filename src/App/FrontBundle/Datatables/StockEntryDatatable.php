@@ -22,7 +22,7 @@ class StockEntryDatatable extends AbstractDatatableView
         $formatter = function($line) use ($repo){
             $entry = $repo->find($line['id']);
             $line['in_stock'] = $entry->getInStock();
-
+            $line['commission'] = $line['actualPrice'] - $line['price']; 
             return $line;
         };
 
@@ -115,15 +115,22 @@ class StockEntryDatatable extends AbstractDatatableView
             ))
             ->add('quantity', 'column', array(
                 'title' => 'Quantity',
+                'visible' => false,
             ))
             ->add('in_stock', 'virtual', array(
-                'title' => 'In Stock',
+                'title' => 'Available Stock',
+            ))
+            ->add('mrp', 'column', array(
+                'title' => 'MRP',
             ))
             ->add('price', 'column', array(
                 'title' => 'Price',
             ))
+            ->add('commission', 'virtual', array(
+                'title' => 'Commission',
+            ))
             ->add('actualPrice', 'column', array(
-                'title' => 'ActualPrice',
+                'title' => 'Display Price',
             ))
             ->add('status', 'boolean', array(
                 'title' => 'Enabled',
@@ -149,7 +156,10 @@ class StockEntryDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
                             'modalTitle' => $this->translator->trans('stockentry.title.edit'),
-                            'style' => 'margin-right:5px;'
+                            'style' => 'margin-right:5px;',
+                            'render_if' => function($row) use($published) {                            ;
+                                return $published === false;
+                            }
                         )
                     ),
                     array(
@@ -166,7 +176,10 @@ class StockEntryDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
                             'cofirmText' => $this->translator->trans('stockentry.delete.confirm'),
-                            'style' => 'margin-right:5px;'
+                            'style' => 'margin-right:5px;',
+                            'render_if' => function($row) {                            ;
+                                return ($row['quantity'] == $row['in_stock']);
+                            }
                         ),
                     ),
                     array(
@@ -207,27 +220,26 @@ class StockEntryDatatable extends AbstractDatatableView
                         'render_if' => function($row) use ($published) {                        ;
                             return $published === true;
                         }
+                    ),
+                    array(
+                        'route' => 'stockentry_price',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => 'Change Price',
+                        'icon' => 'glyphicons glyphicons-currency-conversion',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('stockentry.actions.price'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openPrompt(event);',
+                            'promptText' => $this->translator->trans('stockentry.price.prompt'),
+                        ),
+                        'render_if' => function($row) use ($published) {                        ;
+                            return $published === true;
+                        }
                     )
-//                        ,
-//                    array(
-//                        'route' => 'stockentry_price',
-//                        'route_parameters' => array(
-//                            'id' => 'id'
-//                        ),
-//                        'label' => 'Change Price',
-//                        'icon' => 'glyphicons glyphicons-currency-conversion',
-//                        'attributes' => array(
-//                            'rel' => 'tooltip',
-//                            'title' => $this->translator->trans('stockentry.actions.price'),
-//                            'class' => 'btn btn-primary btn-xs',
-//                            'role' => 'button',
-//                            'onclick' => 'return openPrompt(event);',
-//                            'promptText' => $this->translator->trans('stockentry.price.prompt'),
-//                        ),
-//                        'render_if' => function($row) use ($published) {                        ;
-//                            return $published === true;
-//                        }
-//                    )
                 )
             ))
         ;
