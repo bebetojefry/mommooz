@@ -16,6 +16,7 @@ use App\FrontBundle\Entity\Purchase;
 use App\FrontBundle\Entity\PurchaseItem;
 use App\FrontBundle\Form\ProfileType;
 use App\FrontBundle\Form\AddressType;
+use App\FrontBundle\Entity\StockPurchase;
 
 class AccountController extends Controller
 {
@@ -336,6 +337,7 @@ class AccountController extends Controller
         $cart = $this->getUser()->getCart();
         
         foreach($cart->getItems() as $item){
+            //create purchase item entry
             $purchaserItem = new PurchaseItem();
             $purchaserItem->setPurchase($purchase);
             $purchaserItem->setEntry($item->getEntry());
@@ -343,6 +345,16 @@ class AccountController extends Controller
             $purchaserItem->setStatus(0);
             $purchaserItem->setPrice($item->getQuantity()*$item->getPrice());
             
+            // create stock purchase history
+            $purchase = new StockPurchase();
+            $purchase->setUser($this->getUser());
+            $purchase->setPrice($item->getPrice());
+            $purchase->setQuantity($item->getQuantity());
+            $purchase->setReverse(FALSE);
+            $purchase->setStockItem($item->getEntry());
+            $purchase->setPurchsedOn(new \DateTime('now'));
+            
+            $em->persist($purchase);
             $em->persist($purchaserItem);
             $em->remove($item);
         }
