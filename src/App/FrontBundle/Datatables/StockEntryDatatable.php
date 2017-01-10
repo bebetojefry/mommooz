@@ -216,6 +216,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openPrompt(event);',
                             'promptText' => $this->translator->trans('stockentry.minus.prompt'),
+                            'style' => 'margin-right:5px;'
                         ),
                         'render_if' => function($row) use ($published) {                        ;
                             return $published === true;
