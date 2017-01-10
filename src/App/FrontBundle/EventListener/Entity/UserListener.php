@@ -36,12 +36,10 @@ class UserListener
         $entity = $args->getEntity();
         
         if (null === $token = $this->container->get('security.context')->getToken()) {
-            echo 'no token'; exit;
             return;
         }
         
         if (!is_object($user = $token->getUser())) {
-            echo 'no user'; exit;
             return;
         }
         
@@ -56,7 +54,5 @@ class UserListener
         // grant owner access
         $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
         $aclProvider->updateAcl($acl);
-        
-        echo 'acl created'; exit;
     }
 }
