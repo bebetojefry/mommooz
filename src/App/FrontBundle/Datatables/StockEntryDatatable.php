@@ -156,11 +156,11 @@ class StockEntryDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
                             'modalTitle' => $this->translator->trans('stockentry.title.edit'),
-                            'style' => 'margin-right:5px;',
-                            'render_if' => function($row) use($published) {                            ;
-                                return $published === false;
-                            }
-                        )
+                            'style' => 'margin-right:5px;'
+                        ),
+                        'render_if' => function($row) use($published) {                            ;
+                            return $published === false;
+                        }
                     ),
                     array(
                         'route' => 'stockentry_delete',
