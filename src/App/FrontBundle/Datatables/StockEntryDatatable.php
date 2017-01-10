@@ -158,7 +158,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'modalTitle' => $this->translator->trans('stockentry.title.edit'),
                             'style' => 'margin-right:5px;'
                         ),
-                        'render_if' => function($row) use($published) {                            ;
+                        'render_if' => function($row) use($published) {
                             return $published === false;
                         }
                     ),
@@ -178,7 +178,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'cofirmText' => $this->translator->trans('stockentry.delete.confirm'),
                             'style' => 'margin-right:5px;'
                         ),
-                        'render_if' => function($row) {                            ;
+                        'render_if' => function($row) {
                             return ($row['quantity'] == $row['in_stock']);
                         }
                     ),
@@ -198,7 +198,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'promptText' => $this->translator->trans('stockentry.add.prompt'),
                             'style' => 'margin-right:5px;'
                         ),
-                        'render_if' => function($row) use($published) {                            ;
+                        'render_if' => function($row) use($published) {
                             return $published === true;
                         }
                     ),
@@ -218,7 +218,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'promptText' => $this->translator->trans('stockentry.minus.prompt'),
                             'style' => 'margin-right:5px;'
                         ),
-                        'render_if' => function($row) use ($published) {                        ;
+                        'render_if' => function($row) use ($published) {
                             return $published === true;
                         }
                     ),
@@ -237,7 +237,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'onclick' => 'return openPrompt(event);',
                             'promptText' => $this->translator->trans('stockentry.price.prompt'),
                         ),
-                        'render_if' => function($row) use ($published) {                        ;
+                        'render_if' => function($row) use ($published) {
                             return $published === true;
                         }
                     )
