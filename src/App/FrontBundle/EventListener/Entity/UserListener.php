@@ -35,7 +35,7 @@ class UserListener
     {
         $entity = $args->getEntity();
         
-        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
+        if (null === $token = $this->container->get('security.context')->getToken()) {
             return;
         }
         
