@@ -176,11 +176,11 @@ class StockEntryDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
                             'cofirmText' => $this->translator->trans('stockentry.delete.confirm'),
-                            'style' => 'margin-right:5px;',
-                            'render_if' => function($row) {                            ;
-                                return ($row['quantity'] == $row['in_stock']);
-                            }
+                            'style' => 'margin-right:5px;'
                         ),
+                        'render_if' => function($row) {                            ;
+                            return ($row['quantity'] == $row['in_stock']);
+                        }
                     ),
                     array(
                         'route' => 'stockentry_add',
