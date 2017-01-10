@@ -34,19 +34,25 @@ class UserListener
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-
-        if($entity instanceof Product) {
-            // creating the ACL
-//            $aclProvider = $this->container->get('security.acl.provider');
-//            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-//            $acl = $aclProvider->createAcl($objectIdentity);
-//
-//            // retrieving the security identity of the currently logged-in user
-//            $securityIdentity = UserSecurityIdentity::fromAccount($entity->getUser());
-//
-//            // grant owner access
-//            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-//            $aclProvider->updateAcl($acl);
+        
+        if (null === $token = $this->container->get('security.token_storage')->getToken()) {
+            return;
         }
+        
+        if (!is_object($user = $token->getUser())) {
+            return;
+        }
+        
+        // creating the ACL
+        $aclProvider = $this->container->get('security.acl.provider');
+        $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+        $acl = $aclProvider->createAcl($objectIdentity);
+
+        // retrieving the security identity of the currently logged-in user
+        $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+        // grant owner access
+        $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+        $aclProvider->updateAcl($acl);
     }
 }
