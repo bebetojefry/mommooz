@@ -53,9 +53,17 @@ class RegionController extends Controller
             if($form->isValid()){
                 $region = $form->getData();
                 $region->setStatus(true);
+                $this->get('session')->getFlashBag()->add('success', 'region.msg.created');
+                if($region->getDefault()){
+                    $defaultRegion = $dm->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
+                    if($defaultRegion){
+                        $defaultRegion->setDefault(false);
+                        $dm->persist($defaultRegion);
+                        $dm->flush();
+                    }
+                }
                 $dm->persist($region);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'region.msg.created');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
@@ -85,9 +93,17 @@ class RegionController extends Controller
             $form->handleRequest($request);
             if($form->isValid()){
                 $region = $form->getData();
+                $this->get('session')->getFlashBag()->add('success', 'region.msg.created');
+                if($region->getDefault()){
+                    $defaultRegion = $dm->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
+                    if($defaultRegion){
+                        $defaultRegion->setDefault(false);
+                        $dm->persist($defaultRegion);
+                        $dm->flush();
+                    }
+                }
                 $dm->persist($region);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'region.msg.created');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;

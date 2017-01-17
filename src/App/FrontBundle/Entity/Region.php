@@ -56,6 +56,13 @@ class Region
      * @ORM\OneToMany(targetEntity="Location", mappedBy="region")
      */
     private $locations;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="default_region", type="boolean")
+     */
+    private $default;
 
     /**
      * Constructor
@@ -203,5 +210,29 @@ class Region
     public function getDistrict()
     {
         return $this->district;
+    }
+
+    /**
+     * Set default
+     *
+     * @param boolean $default
+     *
+     * @return Region
+     */
+    public function setDefault($default)
+    {
+        $this->default = $default;
+
+        return $this;
+    }
+
+    /**
+     * Get default
+     *
+     * @return boolean
+     */
+    public function getDefault()
+    {
+        return $this->default;
     }
 }

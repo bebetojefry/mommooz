@@ -22,6 +22,7 @@ class RegionType extends AbstractType
                 'multiple' => false,
                 'expanded' => false,
             ))
+            ->add('default')
         ;
     }
     
