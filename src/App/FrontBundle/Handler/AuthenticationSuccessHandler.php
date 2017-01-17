@@ -10,6 +10,7 @@ use Symfony\Component\Security\Http\HttpUtils;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\FrontBundle\Entity\Cart;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use App\FrontBundle\Entity\Session;
 
 class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler {
 
@@ -21,6 +22,17 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler {
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token) {
         $em = $this->container->get('doctrine')->getManager();
+        
+        // create new session entry.
+        $session = new Session();
+        $session->setUser($token->getUser());
+        $session->setIp($request->server->get('REMOTE_ADDR'));
+        $session->setStatus(true);
+        $session->setLoggedInOn(new \Datetime('now'));
+        $session->setLoggedOutOn(new \Datetime('now'));
+        
+        $em->persist($session);
+        $em->flush();
         
         if($request->get('region') && $request->get('location')){
             $this->container->get('session')->set('region', $request->get('region'));
