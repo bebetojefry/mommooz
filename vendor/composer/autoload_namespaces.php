@@ -21,6 +21,7 @@ return array(
     'JMS\\SerializerBundle' => array($vendorDir . '/jms/serializer-bundle'),
     'JMS\\Serializer' => array($vendorDir . '/jms/serializer/src'),
     'JMS\\' => array($vendorDir . '/jms/parser-lib/src'),
+    'Imagine' => array($vendorDir . '/imagine/imagine/lib'),
     'Gregwar\\ImageBundle' => array($vendorDir . '/gregwar/image-bundle'),
     'Gregwar\\Image' => array($vendorDir . '/gregwar/image'),
     'Gregwar\\Cache' => array($vendorDir . '/gregwar/cache'),

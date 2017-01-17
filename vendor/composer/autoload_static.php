@@ -47,6 +47,7 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         ),
         'L' => 
         array (
+            'Liip\\ImagineBundle\\' => 19,
             'Leafo\\ScssPhp\\' => 14,
         ),
         'I' => 
@@ -143,6 +144,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Liip\\ImagineBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/liip/imagine-bundle',
         ),
         'Leafo\\ScssPhp\\' => 
         array (
@@ -286,6 +291,13 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
             'JMS\\' => 
             array (
                 0 => __DIR__ . '/..' . '/jms/parser-lib/src',
+            ),
+        ),
+        'I' => 
+        array (
+            'Imagine' => 
+            array (
+                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
             ),
         ),
         'G' => 

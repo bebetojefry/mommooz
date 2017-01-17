@@ -30,7 +30,8 @@
         "friendsofsymfony/jsrouting-bundle": "^1.6",
         "stfalcon/tinymce-bundle": "1.0",
         "endroid/qrcode-bundle": "^2.0",
-        "hwi/oauth-bundle": "^0.5.2"
+        "hwi/oauth-bundle": "^0.5.2",
+        "liip/imagine-bundle": "^1.7"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

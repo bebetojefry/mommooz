@@ -43,10 +43,10 @@ monolog:
 
 assetic:
     use_controller: true
-    
+
 hautelook_alice:
     db_drivers:
-        orm: ~      
+        orm: ~
     locale: en_US
     seed: 1
     persist_once: false

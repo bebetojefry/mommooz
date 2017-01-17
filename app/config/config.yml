@@ -114,7 +114,7 @@ stfalcon_tinymce:
     theme:
         simple:
             theme: "modern"
-            
+
 endroid_qr_code:
     size: 150
     padding: 20
@@ -128,9 +128,9 @@ fos_user:
     db_driver: orm
     firewall_name: social
     user_class: App\FrontBundle\Entity\Consumer
-    
+
 hwi_oauth:
-    #this is my custom user provider, created from FOSUBUserProvider - will manage the 
+    #this is my custom user provider, created from FOSUBUserProvider - will manage the
     #automatic user registration on your site, with data from the provider (facebook. google, etc.)
     #and also, the connecting part (get the token and the user_id)
     connect:
@@ -154,3 +154,24 @@ hwi_oauth:
             client_id:           "%google_app_id%"
             client_secret:       "%google_app_secret%"
             scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+liip_imagine :
+    resolvers :
+        default :
+            web_path : ~
+
+    filter_sets :
+        cache : ~
+
+        # the name of the "filter set"
+        my_thumb :
+
+            # adjust the image quality to 75%
+            quality : 75
+
+            # list of transformations to apply (the "filters")
+            filters :
+
+                # create a thumbnail: set size to 120x90 and use the "outbound" mode
+                # to crop the image when the size ratio of the input differs
+                thumbnail  : { size : [120, 90], mode : outbound }

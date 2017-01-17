@@ -22,6 +22,7 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Nelmio\\Alice\\' => array($vendorDir . '/nelmio/alice/src/Nelmio/Alice'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
+    'Liip\\ImagineBundle\\' => array($vendorDir . '/liip/imagine-bundle'),
     'Leafo\\ScssPhp\\' => array($vendorDir . '/leafo/scssphp/src'),
     'Incenteev\\ParameterHandler\\' => array($vendorDir . '/incenteev/composer-parameter-handler'),
     'Hautelook\\AliceBundle\\' => array($vendorDir . '/hautelook/alice-bundle/src'),

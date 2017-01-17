@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new Endroid\Bundle\QrCodeBundle\EndroidQrCodeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new Liip\ImagineBundle\LiipImagineBundle(),
             new App\FrontBundle\AppFrontBundle(),
             new App\WebBundle\AppWebBundle(),
         );
