@@ -146,11 +146,9 @@ class RegionController extends Controller
         
         $locationDatatable = $this->get('app.front.datatable.location');
         $locationDatatable->buildDatatable(array('region' => $region));
-        $body = $this->renderView('AppFrontBundle:Region:detail.html.twig',
+        return $this->render('AppFrontBundle:Region:detail.html.twig',
             array('locationDatatable' => $locationDatatable)
         );
-        
-        return new Response(json_encode(array('code' => $code, 'data' => $body)));
     }
     
     /**

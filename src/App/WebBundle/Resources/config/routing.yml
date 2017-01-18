@@ -7,6 +7,11 @@ home_explore:
     path:     /explore
     host:     "%domain_consumer%"
     defaults: { _controller: AppWebBundle:Index:explore }
+    
+home_switch_location:
+    path:     /location/switch
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppWebBundle:Index:switchLocation }
 
 home_explore_skip:
     path:     /explore/skip

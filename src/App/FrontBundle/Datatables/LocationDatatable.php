@@ -22,7 +22,7 @@ class LocationDatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('location_new'),
+                    'route' => $this->router->generate('location_new', array('id' => $options['region']->getId())),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(

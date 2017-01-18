@@ -299,7 +299,7 @@ class VendorController extends Controller
         
         $result = array();
         foreach($items as $item){
-            $result[] = array('id' => $item->getId(), 'title' => $item->getName());
+            $result[] = array('id' => $item->getId(), 'title' => $item->getBrand()->getName().' '.$item->getName());
         }
         
         return new JsonResponse($result); 
