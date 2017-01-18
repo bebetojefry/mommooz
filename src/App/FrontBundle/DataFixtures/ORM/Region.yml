@@ -3,15 +3,19 @@ App\FrontBundle\Entity\Region:
         district: @district_4
         regionName: Kozhikode City
         status: true
+        default_region: true
     region_2:
         district: @district_4
         regionName: West Hill
         status: true
+        default_region: false
     region_3:
         district: @district_4
         regionName: Thamarasseri
         status: true
+        default_region: false
     region_4:
         district: @district_4
         regionName: Feroke
         status: true
+        default_region: false
