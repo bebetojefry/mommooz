@@ -32,13 +32,15 @@ class LocationController extends Controller
     /**
      * Displays a form to add an existing location entity.
      *
-     * @Route("/new", name="location_new", options={"expose"=true})
+     * @Route("/new/{id}", name="location_new", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Region $region)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new LocationType(), new Location());
+        $location = new Location();
+        $location->setRegion($region);
+        $form = $this->createForm(new LocationType(), $location);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){

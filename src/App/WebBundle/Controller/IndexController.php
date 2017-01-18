@@ -43,6 +43,11 @@ class IndexController extends Controller
         }
     }
 
+    public function switchLocationAction(){
+        $this->get('session')->set('location', $_POST['location']);
+        return $this->redirect($this->generateUrl('home'));
+    }
+    
     public function exploreskipAction(){
         $this->get('session')->set('region', 0);
         $this->get('session')->set('location', 0);

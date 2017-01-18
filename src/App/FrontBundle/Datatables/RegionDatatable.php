@@ -149,9 +149,7 @@ class RegionDatatable extends AbstractDatatableView
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('region.actions.detail'),
                             'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button',
-                            'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('region.title.locations')
+                            'role' => 'button'
                         ),
                     )
                 )

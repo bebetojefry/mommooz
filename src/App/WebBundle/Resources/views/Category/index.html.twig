@@ -62,7 +62,7 @@
                                 <h5 class="mt-15p block-8">  
                                     {{ entry.getItem().getName() }}{% if entry.getVariant() %}{{ ' - '~entry.getVariant().getValue() }}{% endif %}
                                 </h5>
-                                <h3 class="mt-10p"> <span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
+                                <h3 class="mt-10p"> <span style="text-decoration: line-through;font-size: 12px;color: #CCC;margin-bottom: 10px;display: inline-block;">MRP : {{ entry.getMrp() }}</span><br/><span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
                             </a>
                             <div class="full-width mt-15p">
                                 <button {% if app_web_user.inCart(entry) %}style="display: none;"{% endif %} class="button-product br-5p ptb-10p prl-15p pointer-csr add-to-cart" data-entry="{{ entry.getId() }}">
