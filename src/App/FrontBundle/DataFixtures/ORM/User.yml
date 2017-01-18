@@ -5,6 +5,7 @@ App\FrontBundle\Entity\Admin:
         gender: 1
         phone: 9747143513
         username: admin
+        email: admin@mamooz.com
         password: admin
         locale: en
         status: true
