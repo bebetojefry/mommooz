@@ -108,17 +108,10 @@ class User {
         return $em->getRepository('AppFrontBundle:Region')->findAll();
     }
     
-    public function getExploredLocations(){
+    public function getExploredRegion(){
         $em = $this->container->get('doctrine')->getManager();
-        $r = $this->container->get('session')->get('region');
+        $regions = $em->getRepository('AppFrontBundle:Region')->findAll();
         
-        if($r){
-            $region = $em->getRepository('AppFrontBundle:Region')->find($r);
-            $locations = $region->getLocations();
-        } else {
-            $locations = $em->getRepository('AppFrontBundle:Location')->findAll();
-        }
-        
-        return $locations;
+        return $regions;
     }
 }

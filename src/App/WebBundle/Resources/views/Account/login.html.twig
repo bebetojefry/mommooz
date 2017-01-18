@@ -31,8 +31,8 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                <input type="hidden" name="district" value="{{ app.session.get('district') }}" />
                 <input type="hidden" name="region" value="{{ app.session.get('region') }}" />
-                <input type="hidden" name="locatoin" value="{{ app.session.get('location') }}" />
             </form>
 
             <span class="dispaly-block mt-20p" style="font-size:14px;"> Don't have an account?  <a href="{{ path('register_page') }}" class="prl-10p"> Sign up  </a> </span>

@@ -64,9 +64,9 @@ class ItemController extends Controller
         }
 
         $location = null;
-        if($loc_id = $this->get('session')->get('location')){
-            $location = $em->getRepository('AppFrontBundle:Location')->find($loc_id);
-        }
+//        if($loc_id = $this->get('session')->get('location')){
+//            $location = $em->getRepository('AppFrontBundle:Location')->find($loc_id);
+//        }
 
         return $this->render('AppWebBundle:Item:index.html.twig', array(
             'entry' => $stockEntry,
@@ -161,7 +161,6 @@ class ItemController extends Controller
 
         if($status){
             $location = $em->getRepository('AppFrontBundle:Location')->findOneByPinCode($pin);
-            $this->get('session')->set('location', $location->getId());
             $pin_region = $location->getRegion();
             $v_regions = $entry->getStock()->getVendor()->getRegions();
             foreach($v_regions as $region){

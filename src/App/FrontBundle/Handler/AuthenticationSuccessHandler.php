@@ -34,9 +34,9 @@ class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler {
         $em->persist($session);
         $em->flush();
         
-        if($request->get('region') && $request->get('location')){
+        if($request->get('region') && $request->get('district')){
+            $this->container->get('session')->set('district', $request->get('district'));
             $this->container->get('session')->set('region', $request->get('region'));
-            $this->container->get('session')->set('location', $request->get('location'));
         }
         
         if($request->query->get('cart')){

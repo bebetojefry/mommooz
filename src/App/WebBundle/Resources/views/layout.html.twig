@@ -48,14 +48,14 @@
                 <div class="block-6 ptrbl-10p sb-ptb-5p block-fl-cary  change-location block-mb-12">
                     <form method="post" action="{{ path('home_switch_location') }}" id="frmSwitchLocation">
                         <span class="icon-map-marker block-1 dispaly-inline-block"></span>
-                        <select class="top-place-select dispaly-inline-block ml-10p" name="location" id="cmbLocation">
-                            {% for loc in app_web_user.getExploredLocations() %}
-                                <option {% if loc.getId() == app.session.get('location') %}selected=""{% endif %} value="{{ loc.getId() }}"> {{ loc.getRegion().getRegionName() }}, {{ loc.getLocalName() }} </option>
+                        <select class="top-place-select dispaly-inline-block ml-10p" name="region" id="cmbRegion">
+                            {% for region in app_web_user.getExploredRegion() %}
+                                <option {% if region.getId() == app.session.get('region') %}selected=""{% endif %} value="{{ region.getId() }}"> {{ region.getRegionName() }} </option>
                             {% endfor %}
                         </select>
                         <script type="text/javascript">
                             $(document).ready(function(){
-                                $('#cmbLocation').on('change', function(){
+                                $('#cmbRegion').on('change', function(){
                                     $('#frmSwitchLocation').submit();
                                 });
                             });

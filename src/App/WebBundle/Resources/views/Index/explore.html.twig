@@ -15,23 +15,23 @@
                     <tr>
                         <td class="text-right sb-none"> <span class="icon-map-marker"></span> </td>
                         <td>
-                            <select class="" name="region" id="region">
-                                {%for region in regions%}
-                                    <option {% if region.getId() == app.request.get('region') %}selected=""{% endif %} value="{{ region.getId() }}"> {{ region.getRegionName() }} </option>
+                            <select class="" name="district" id="district">
+                                {%for district in districts %}
+                                    <option {% if district.getId() == app.request.get('district') %}selected=""{% endif %} value="{{ district.getId() }}"> {{ district.getName() }} </option>
                                 {% endfor %}
                             </select>
-                            {% if regions|length == 1 %}
-                                <span class="small-text-mmz"> Sorry!,  Now available at {{ regions[0].getRegionName() }} only. </span>
+                            {% if districts|length == 1 %}
+                                <span class="small-text-mmz"> Sorry!,  Now available at {{ districts[0].getName() }} only. </span>
                             {% endif %}
                         </td>
                     </tr>
                     <tr>
                         <td class="text-right sb-none"> <span class="icon-map-marker"></span> </td>
                         <td>
-                            <select class="" name="location" id="location">
+                            <select class="" name="region" id="region">
                                 <option value="0"> Select a Place </option>
-                                {% for loc in locations %}
-                                    <option value="{{ loc.getId() }}"> {{ loc.getLocalName() }} </option>
+                                {% for region in regions %}
+                                    <option value="{{ region.getId() }}"> {{ region.getRegionName() }} </option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -47,7 +47,7 @@
                     </tr>
                 </table>
                 <script type="text/javascript">
-                    $('#region').on('change', function() {
+                    $('#district').on('change', function() {
                         $('#frmExplore').submit();
                     });
                 </script>
