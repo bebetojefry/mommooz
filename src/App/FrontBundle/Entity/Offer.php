@@ -38,16 +38,9 @@ class Offer
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_from", type="date")
+     * @ORM\Column(name="expiry", type="date")
      */
-    private $dateFrom;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date_to", type="date")
-     */
-    private $dateTo;
+    private $expiry;
 
     /**
      * @var string
@@ -57,26 +50,11 @@ class Offer
     private $type;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="value", type="string", length=255)
-     */
-    private $value;
-
-    /**
-     * @var ArrayCollection|Keyword[]
-     *
-     * @ORM\ManyToMany(targetEntity="Keyword"))
-     */
-    private $keywords;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="status", type="boolean")
      */
     private $status;
-
 
     /**
      * Get id
@@ -98,7 +76,7 @@ class Offer
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
@@ -122,7 +100,7 @@ class Offer
     public function setDescription($description)
     {
         $this->description = $description;
-    
+
         return $this;
     }
 
@@ -137,51 +115,27 @@ class Offer
     }
 
     /**
-     * Set dateFrom
+     * Set expiry
      *
-     * @param \DateTime $dateFrom
+     * @param \DateTime $expiry
      *
      * @return Offer
      */
-    public function setDateFrom($dateFrom)
+    public function setExpiry($expiry)
     {
-        $this->dateFrom = $dateFrom;
-    
+        $this->expiry = $expiry;
+
         return $this;
     }
 
     /**
-     * Get dateFrom
+     * Get expiry
      *
      * @return \DateTime
      */
-    public function getDateFrom()
+    public function getExpiry()
     {
-        return $this->dateFrom;
-    }
-
-    /**
-     * Set dateTo
-     *
-     * @param \DateTime $dateTo
-     *
-     * @return Offer
-     */
-    public function setDateTo($dateTo)
-    {
-        $this->dateTo = $dateTo;
-    
-        return $this;
-    }
-
-    /**
-     * Get dateTo
-     *
-     * @return \DateTime
-     */
-    public function getDateTo()
-    {
-        return $this->dateTo;
+        return $this->expiry;
     }
 
     /**
@@ -194,7 +148,7 @@ class Offer
     public function setType($type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
@@ -209,54 +163,6 @@ class Offer
     }
 
     /**
-     * Set value
-     *
-     * @param string $value
-     *
-     * @return Offer
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-    
-        return $this;
-    }
-
-    /**
-     * Get value
-     *
-     * @return string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Set keywords
-     *
-     * @param string $keywords
-     *
-     * @return Offer
-     */
-    public function setKeywords($keywords)
-    {
-        $this->keywords = $keywords;
-    
-        return $this;
-    }
-
-    /**
-     * Get keywords
-     *
-     * @return string
-     */
-    public function getKeywords()
-    {
-        return $this->keywords;
-    }
-
-    /**
      * Set status
      *
      * @param boolean $status
@@ -266,7 +172,7 @@ class Offer
     public function setStatus($status)
     {
         $this->status = $status;
-    
+
         return $this;
     }
 
@@ -278,36 +184,5 @@ class Offer
     public function getStatus()
     {
         return $this->status;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add keyword
-     *
-     * @param \App\FrontBundle\Entity\Keyword $keyword
-     *
-     * @return Offer
-     */
-    public function addKeyword(\App\FrontBundle\Entity\Keyword $keyword)
-    {
-        $this->keywords[] = $keyword;
-    
-        return $this;
-    }
-
-    /**
-     * Remove keyword
-     *
-     * @param \App\FrontBundle\Entity\Keyword $keyword
-     */
-    public function removeKeyword(\App\FrontBundle\Entity\Keyword $keyword)
-    {
-        $this->keywords->removeElement($keyword);
     }
 }

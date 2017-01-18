@@ -1,6 +1,6 @@
 {% extends "AppFrontBundle::layout2.html.twig" %}
 
-{% block title %}{{ 'page_title.region' | trans }}{% endblock %}
+{% block title %}{{ 'page_title.offer' | trans }}{% endblock %}
 
 {% block style %}
     {% stylesheets
@@ -10,7 +10,7 @@
     {% endstylesheets %}
 {% endblock %}
 
-{% block region_active %}active{% endblock %}
+{% block offer_active %}active{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        {{ datatable_render(regionDatatable) }}
+                        {{ datatable_render(offerDatatable) }}
                     </div>
                 </div>
             </div>

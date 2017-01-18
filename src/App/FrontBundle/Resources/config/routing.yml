@@ -145,6 +145,16 @@ order_item_actions:
     type:     annotation
     prefix: /order/items
     
+app_front_admin_offer:
+    path:     /offer
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:offer}
+    
+offer_actions:
+    resource: "@AppFrontBundle/Controller/OfferController.php"
+    type:     annotation
+    prefix: /offer
+    
 #########################################################
 
 app_front_vendor_login:

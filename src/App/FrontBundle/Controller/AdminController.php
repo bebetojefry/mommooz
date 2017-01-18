@@ -119,4 +119,12 @@ class AdminController extends Controller
             array('form' => $form->createView())
         );
     }
+    
+    public function offerAction(Request $request){
+        $offerDatatable = $this->get('app.front.datatable.offer');
+        $offerDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:offer.html.twig', array(
+            'offerDatatable' => $offerDatatable,
+        ));
+    }
 }

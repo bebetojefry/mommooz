@@ -134,3 +134,7 @@ services:
     app.front.datatable.vendorItem:
         class: App\FrontBundle\Datatables\VendorItemDatatable
         parent: sg_datatables.datatable.abstract
+        
+    app.front.datatable.offer:
+        class: App\FrontBundle\Datatables\OfferDatatable
+        parent: sg_datatables.datatable.abstract

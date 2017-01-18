@@ -4,16 +4,30 @@ namespace App\FrontBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
-use App\FrontBundle\Entity\Product;
-use App\FrontBundle\Entity\Brand;
 
 /**
- * Class ItemDatatable
+ * Class OfferDatatable
  *
  * @package App\FrontBundle\Datatables
  */
-class ItemDatatable extends AbstractDatatableView
+class OfferDatatable extends AbstractDatatableView
 {
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getLineFormatter()
+    {
+        $formatter = function($line){
+            $type = array(1 => 'Discount', 2 => 'Bundle Pack');
+            $line['kind'] = $type[$line['type']];
+
+            return $line;
+        };
+
+        return $formatter;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -24,16 +38,16 @@ class ItemDatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('item_new'),
-                    'label' => $this->translator->trans('item.actions.new'),
+                    'route' => $this->router->generate('offer_new'),
+                    'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
-                        'title' => $this->translator->trans('item.actions.new'),
+                        'title' => $this->translator->trans('datatables.actions.new'),
                         'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
-                        'modalTitle' => $this->translator->trans('item.title.new'),
+                        'modalTitle' => $this->translator->trans('offer.title.new'),
                     ),
                 )
             )
@@ -58,10 +72,8 @@ class ItemDatatable extends AbstractDatatableView
             'highlight_color' => 'red'
         ));
 
-        $id = (isset($options['product']) && $options['product'] instanceof Product) ? $options['product']->getId() : 0;
-        $brandId = (isset($options['brand']) && $options['brand'] instanceof Brand) ? $options['brand']->getId() : 0;
         $this->ajax->set(array(
-            'url' => $this->router->generate('item_results', array('id' => $id, 'brand' => $brandId)),
+            'url' => $this->router->generate('offer_results'),
             'type' => 'GET',
             'pipeline' => 0
         ));
@@ -96,11 +108,14 @@ class ItemDatatable extends AbstractDatatableView
             ->add('name', 'column', array(
                 'title' => 'Name',
             ))
-            ->add('product.name', 'column', array(
-                'title' => 'Product',
+            ->add('expiry', 'datetime', array(
+                'title' => 'Expiry',
             ))
-            ->add('brand.name', 'column', array(
-                'title' => 'Brand',
+            ->add('type', 'column', array(
+                'visible' => false,
+            ))
+            ->add('kind', 'virtual', array(
+                'title' => 'Type',
             ))
             ->add('status', 'boolean', array(
                 'title' => 'Status',
@@ -113,40 +128,39 @@ class ItemDatatable extends AbstractDatatableView
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'item_edit',
+                        'route' => 'offer_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('item.actions.edit'),
+                        'label' => $this->translator->trans('offer.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('item.actions.edit'),
+                            'title' => $this->translator->trans('offer.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('item.title.new'),
+                            'modalTitle' => $this->translator->trans('offer.title.edit'),
                             'style' => 'margin-right:5px;'
                         ),
                     ),
                     array(
-                        'route' => 'item_delete',
+                        'route' => 'offer_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('category.actions.delete'),
+                        'label' => $this->translator->trans('offer.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('item.actions.delete'),
+                            'title' => $this->translator->trans('offer.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
-                            'cofirmText' => $this->translator->trans('item.delete.confirm')
+                            'cofirmText' => $this->translator->trans('offer.delete.confirm')
                         ),
                     )
                 )
-                
             ))
         ;
         
@@ -162,7 +176,7 @@ class ItemDatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'App\FrontBundle\Entity\Item';
+        return 'App\FrontBundle\Entity\Offer';
     }
 
     /**
@@ -170,6 +184,6 @@ class ItemDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'item_datatable';
+        return 'offer_datatable';
     }
 }
