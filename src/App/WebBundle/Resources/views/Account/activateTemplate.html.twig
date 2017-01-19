@@ -1,0 +1,15 @@
+<div style="text-align:left">
+
+    <p>Hello {{ consumer.getFullName() }},</p>
+
+    <p>Thanks for registering with Mommooz.</p>
+
+    <p>Please follow the link below to activate your account.</p>
+
+    <p>{{ url('activate_consumer', {'id': nzoEncrypt(consumer.getId())}) }}</p>
+
+    <p>Regards,</p>
+
+    <p>The Mommooz Team</p>
+
+</div>

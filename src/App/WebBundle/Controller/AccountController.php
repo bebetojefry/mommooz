@@ -41,9 +41,23 @@ class AccountController extends Controller
                 $consumer->setUsername($consumer->getEmail());
                 $consumer->setLocale('en');
                 $consumer->setCreatedOn(new \DateTime('now'));
-                $consumer->setStatus(true);
+                $consumer->setStatus(false);
                 $em->persist($consumer);
                 $em->flush();
+                
+                //send verification email to customer
+                $content = $this->renderView('AppWebBundle:Account:activateTemplate.html.twig',
+                    array('consumer' => $consumer)
+                );
+                
+                $message = \Swift_Message::newInstance()
+                ->setSubject('Mommooz Registration Activation')
+                ->setFrom($this->getParameter('email_from'))
+                ->addTo($consumer->getEmail(), $consumer->getFullName())
+                ->setBody($content, 'text/html');
+
+                $this->get('mailer')->send($message);
+                
                 return $this->redirect($this->generateUrl('register_thank_you'));
             }
         }
@@ -60,6 +74,35 @@ class AccountController extends Controller
             return $this->redirect($this->generateUrl('home'));
         }
         return $this->render('AppWebBundle:Account:thankyou.html.twig');
+    }
+    
+    /**
+     * @Route("/activate/{id}", name="activate_consumer")
+     */
+    public function activateAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $id = $this->get('nzo_url_encryptor')->decrypt($id);
+        if(is_numeric($id)){
+            $consumer = $em->getRepository('AppFrontBundle:Consumer')->find($id);
+            if($consumer){
+                if(!$consumer->getStatus()){
+                    $consumer->setStatus(true);
+                    $em->persist($consumer);
+                    $em->flush();
+                    $msg = 'Account activated successfully.';
+                } else {
+                    $msg = 'Account already active.';
+                }
+            } else {
+                $msg = 'Invalid activation link.';
+            }
+        } else {
+            $msg = 'Invalid activation link.';
+        }
+        
+        return $this->render('AppWebBundle:Account:activation.html.twig', array(
+            'msg' => $msg
+        ));
     }
     
     /**
