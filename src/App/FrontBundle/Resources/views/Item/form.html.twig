@@ -44,8 +44,15 @@
             allow_new: true
             {% if keyword_values is defined %},prePopulate: {{ keyword_values|raw }}{% endif %}
         });
+        
+        $("#{{ form.offers.vars.id }}").tokenInput("{{ path('offer_search') }}", {
+            theme: "facebook",
+            allow_new: true
+            {% if offer_values is defined %},prePopulate: {{ offer_values|raw }}{% endif %}
+        });
 
         $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
+        $('#{{ form.offers.vars.id }}').addClass('token-input-real-field');
         
         $("#{{ form.images.vars.id }}").imageUploader();
     });

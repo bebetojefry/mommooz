@@ -50,6 +50,7 @@ class IndexController extends Controller
     }
     
     public function exploreskipAction(){
+        $em = $this->getDoctrine()->getManager();
         $region = $em->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
         if($region){
             $this->get('session')->set('district', $region->getDistrict()->getId());

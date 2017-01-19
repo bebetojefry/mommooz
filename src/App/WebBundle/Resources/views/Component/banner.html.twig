@@ -1,13 +1,13 @@
 <div id="banner-image" class="block-98 slider-cary center-pos">
     {% for banner in banners %}
         {% if loop.index0 == 0 %}
-            <a href="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}"><img src="{{ banner.getPicture() }}" class="image-fw" alt=""></a>
+            <a href="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}"><img src="{{ banner.getRealPicturePath() | imagine_filter('banner') }}" class="image-fw" alt=""></a>
         {% endif %}
     {% endfor %}
 </div>
 <div id="banner-items" class="slider-navigation sb-none block-98 absolute-centre absolute-pos block-fl-cary font-normal">
     {% for banner in banners %}        
-        <div class="block-3 {% if loop.index0 == 0 %}active{% endif %} banner-item relative-pos" data-image="{{ banner.getPicture() }}" data-link="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}">
+        <div class="block-3 {% if loop.index0 == 0 %}active{% endif %} banner-item relative-pos" data-image="{{ banner.getRealPicturePath() | imagine_filter('banner') }}" data-link="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}">
             {{ banner.getDescription()|raw }}
         </div>
     {% endfor %}

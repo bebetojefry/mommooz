@@ -114,8 +114,14 @@ class ItemController extends Controller
             $keyword_values[] = array('id' => $keyword->getId(), 'name' => $keyword->getKeyword());
         }
         
+        $offers = $item->getOffers()->getValues();
+        $offer_values = array();
+        foreach($offers as $offer){
+            $offer_values[] = array('id' => $offer->getId(), 'name' => $offer->getName());
+        }
+        
         $body = $this->renderView('AppFrontBundle:Item:form.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values))
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values))
         );
         
         return new Response(json_encode(array('error' => $error, 'code' => $code, 'data' => $body)));

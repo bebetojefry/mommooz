@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
 use App\FrontBundle\DataTransformer\ImageToIdsTransformer;
+use App\FrontBundle\DataTransformer\OfferToIdsTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\FrontBundle\Form\SpecificationType;
 use App\FrontBundle\Form\ItemVariantType;
@@ -28,6 +29,8 @@ class ItemType extends AbstractType
     {
         $keywordTransformer = new KeywordsToIdsTransformer($this->om);
         $imageTransformer = new ImageToIdsTransformer($this->om);
+        $offerTransformer = new OfferToIdsTransformer($this->om);
+        
         $builder
             ->add('name')
             ->add('description')
@@ -74,7 +77,11 @@ class ItemType extends AbstractType
                 'by_reference' => false,
                 'allow_delete' => true,
             ))
-            ->add('offers')
+            ->add(
+                $builder->create('offers', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($offerTransformer)
+            )
             ->add('status')            
         ;
     }

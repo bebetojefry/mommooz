@@ -25,7 +25,7 @@
                 <div class="block-3 text-center mt-15p block-lb-6 block-sb-12">
                     <a href="{{ path('store_items', {'id': store.getId()}) }}">
                         <div class="block-11 br-5p brd-L-1p pb-40p">
-                            <img src="{{ store.getPicture() }}" class="image-fw" alt="store logo">
+                            <img src="{{ store.getRealPicturePath() | imagine_filter('store') }}" class="image-fw" alt="store logo">
                             <div class="full-width pt-10p prl-15p text-center">
                                 <h4> {{ store.getFullName() }} </h4>
                                 <span class="uppercase-txt">  - {{ store.getInStockEntries()|length }} products - </span>

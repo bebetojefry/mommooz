@@ -17,7 +17,7 @@
             <div class="block-6 block-lb-12">
                     <div class="block-10">
                     <div class="block-3">
-                            <Img src="{{ app.user.getPicture() }}" class="image-fw" alt="user image">
+                            <Img src="{{ app.user.getRealPicturePath() | imagine_filter('user') }}" class="image-fw" alt="user image">
                     </div>
                     <div class="block-8 pl-15p">
                             <h3> {{ app.user.getFullname() }} </h3> 

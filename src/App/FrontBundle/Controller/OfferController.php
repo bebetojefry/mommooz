@@ -35,7 +35,7 @@ class OfferController extends Controller
     public function newAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new OfferType(), new Offer());
+        $form = $this->createForm(new OfferType($dm), new Offer());
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -67,7 +67,7 @@ class OfferController extends Controller
     public function editAction(Request $request, Offer $offer)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new OfferType(), $offer);
+        $form = $this->createForm(new OfferType($dm), $offer);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -104,5 +104,24 @@ class OfferController extends Controller
         
         $this->get('session')->getFlashBag()->add('success', 'offer.msg.removed');
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
+    }
+    
+    /**
+     * @Route("/search", name="offer_search")
+     */
+    public function searchAction(Request $request){
+        $q = $request->query->get('q');
+        $offers = $this->getDoctrine()->getManager()->getRepository("AppFrontBundle:Offer")->createQueryBuilder('o')
+        ->where('o.name LIKE :q')
+        ->setParameter('q', '%'.$q.'%')
+        ->getQuery()
+        ->getResult();
+        
+        $result = array();
+        foreach($offers as $offer){
+            $result[] = array('id' => $offer->getId(), 'name' => $offer->getName());
+        }
+        
+        return new JsonResponse($result);
     }
 }

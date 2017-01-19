@@ -19,7 +19,7 @@
             {% endif %}    
             {% for item in app_web_user.getCart().getItems() %}
                 <tr>
-                    <td> <img src="{{ item.getEntry().getItem().getPicture() }}" width="60" class="dispaly-inline-block" alt="product name"> </td>
+                    <td> <img src="{{ item.getEntry().getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" width="60" class="dispaly-inline-block" alt="product name"> </td>
                     <td> 
                         <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}">  
                             {{ item.getEntry().getItem().getName() }}

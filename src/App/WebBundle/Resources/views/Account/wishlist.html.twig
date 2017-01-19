@@ -21,7 +21,7 @@
                 <div class="block-11 text-left va-top ptrbl-10p brd-L-1p">
                     <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}"> 
                         <div class="block-6">
-                            <img src="{{ item.getEntry().getItem().getPicture() }}" class="image-fw">
+                            <img src="{{ item.getEntry().getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw">
                         </div>
                     </a>
                     <div class="block-6 pl-20p">

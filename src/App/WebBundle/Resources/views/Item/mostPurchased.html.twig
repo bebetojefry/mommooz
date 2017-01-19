@@ -2,8 +2,7 @@
 {% for stockitem in items %}
     <div class="full-width block-fl-cary mt-15p">
         <a href="{{ path('item_page', {'id': stockitem.getId()}) }}">
-            {% set most_purchased_config = {"thumbnail": {"size": [50, 50], "mode" : "outbound"}} %}
-            <div class="block-4"> <img src="{{ stockitem.getItem().getRealPicturePath() | imagine_filter('my_thumb', most_purchased_config) }}" class="image-fw" alt="momooz product"> </div>
+            <div class="block-4"> <img src="{{ stockitem.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="momooz product"> </div>
             <div class="block-8 text-center">
                 <div class="block-10 center-pos text-left">
                     <h5 class="mt-10p">{{ stockitem.getItem().getName() }}</h5>

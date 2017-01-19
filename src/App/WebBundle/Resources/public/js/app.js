@@ -2,6 +2,10 @@
 var current_slide;
 var totalslides;
 
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 $(window).load(function (){
 $(".slider").addClass("transition_02s");
 
@@ -239,12 +243,18 @@ function slide_show(){
 $(document).ready(function(){
     $('.add-to-cart').on('click', function(){
         var that = this;
+        var qty = $(this).parent().find('.txt-item-qty').val();
+        if(!isNumeric(qty)){
+            alert('Invalid Quantity');
+            return; 
+        }
         $.ajax({
-            url: to_cart_url.replace('0', $(this).data('entry'))+'?qty=1',
+            url: to_cart_url.replace('0', $(this).data('entry'))+'?qty='+qty,
             dataType: 'json',
             success: function(resp){
                 if(resp.status){
                     $(that).hide();
+                    $(that).parent().find('.txt-item-qty').hide();
                     $(that).parent().find('.entry-in-cart').show();
                     $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
                     alert('Successfully added to cart');

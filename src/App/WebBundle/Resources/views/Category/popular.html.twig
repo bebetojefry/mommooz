@@ -3,7 +3,7 @@
         <a href="{{ path('category_page', {id: cat.getId()}) }}">
             <div class="block-3 pointer-csr mt-10p block-mb-6 sb-block-12">
                 <div class="block-98 center-pos relative-pos">
-                    <img src="{{ cat.getPicture() }}" class="image-fw" alt="momooz product">
+                    <img src="{{ cat.getRealPicturePath() | imagine_filter('popular_cat') }}" class="image-fw" alt="momooz product">
                     <div class="block-9 absolute-centre absolute-pos outer-div ptrbl-5p">
                         <div class="block-12 inner-div ptrbl-10p text-center">
                             <h4> {{ cat.getCategoryName() }} </h4>

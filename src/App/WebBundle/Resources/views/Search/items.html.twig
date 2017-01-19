@@ -61,7 +61,7 @@
                 <div class="block-4 text-center mt-40p block-mb-6 block-sb-12">
                         <div class="block-10">
                             <a href="{{ path('item_page', {'id': entry.getId()}) }}">
-                                <div class="block-8"> <img src="{{ entry.getItem().getPicture() }}" class="full-width" alt=""> </div>
+                                <div class="block-8"> <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="full-width" alt=""> </div>
                                 <h5 class="mt-15p block-8">  
                                     {{ entry.getItem().getName() }}{% if entry.getVariant() %}{{ ' - '~entry.getVariant().getValue() }}{% endif %}
                                 </h5>
