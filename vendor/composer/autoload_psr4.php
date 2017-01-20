@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Zend\\Json\\' => array($vendorDir . '/zendframework/zend-json/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\' => array($vendorDir . '/symfony/symfony/src/Symfony/Component'),
     'Symfony\\Bundle\\SwiftmailerBundle\\' => array($vendorDir . '/symfony/swiftmailer-bundle'),
@@ -20,6 +21,7 @@ return array(
     'Symfony\\Bridge\\Doctrine\\' => array($vendorDir . '/symfony/symfony/src/Symfony/Bridge/Doctrine'),
     'Sensio\\Bundle\\FrameworkExtraBundle\\' => array($vendorDir . '/sensio/framework-extra-bundle'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
+    'Ob\\HighchartsBundle\\' => array($vendorDir . '/ob/highcharts-bundle'),
     'Nelmio\\Alice\\' => array($vendorDir . '/nelmio/alice/src/Nelmio/Alice'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'Liip\\ImagineBundle\\' => array($vendorDir . '/liip/imagine-bundle'),

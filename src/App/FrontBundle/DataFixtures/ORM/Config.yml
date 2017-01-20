@@ -1,0 +1,15 @@
+App\FrontBundle\Entity\Config:
+    ref_reward:
+        name: 'reference_reward'
+        description: 'Reward point on refer a friend'
+        value: 1
+        
+    pur_reward:
+        name: 'purchase_reward'
+        description: 'How much ned to spend to get a reward point on purchase'
+        value: 100
+        
+    reward_money:
+        name: 'reward_money'
+        description: 'How many reward points equal to 1 virtual money'
+        value: 10    

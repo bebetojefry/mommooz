@@ -138,3 +138,7 @@ services:
     app.front.datatable.offer:
         class: App\FrontBundle\Datatables\OfferDatatable
         parent: sg_datatables.datatable.abstract
+        
+    app.front.datatable.config:
+        class: App\FrontBundle\Datatables\ConfigDatatable
+        parent: sg_datatables.datatable.abstract

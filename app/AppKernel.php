@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Ob\HighchartsBundle\ObHighchartsBundle(),
             new App\FrontBundle\AppFrontBundle(),
             new App\WebBundle\AppWebBundle(),
         );

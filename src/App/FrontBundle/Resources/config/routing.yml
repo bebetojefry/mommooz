@@ -155,6 +155,16 @@ offer_actions:
     type:     annotation
     prefix: /offer
     
+app_front_admin_config:
+    path:     /config
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:config}
+
+config_actions:
+    resource: "@AppFrontBundle/Controller/ConfigController.php"
+    type:     annotation
+    prefix: /config
+    
 #########################################################
 
 app_front_vendor_login:
