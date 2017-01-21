@@ -845,7 +845,7 @@ span.pending-user{
 .nav-submenu > ul li span{
 	display:none;
 	}
-.nav-submenu > ul li:hover span{
+.nav-submenu > ul li a:hover span{
 	display:inline-block;
 	font-size:8px !important;
 	margin-left:2px;
@@ -855,7 +855,7 @@ span.pending-user{
 	height:100%;
 	display:block;
 	}
-.nav-submenu > ul li:hover{
+.nav-submenu > ul li a:hover{
 	background:#f4f4ee;}
 .nav-submenu a{
 	font-size:12px;
