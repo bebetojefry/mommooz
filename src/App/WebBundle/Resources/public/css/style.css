@@ -855,7 +855,7 @@ span.pending-user{
 	height:100%;
 	display:block;
 	}
-.nav-submenu > ul li a:hover{
+.nav-submenu > ul li:hover{
 	background:#f4f4ee;}
 .nav-submenu a{
 	font-size:12px;
