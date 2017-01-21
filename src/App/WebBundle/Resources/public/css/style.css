@@ -428,7 +428,7 @@ nav .nav-submenu.active, nav .nav-submenu:hover{
 	border:2px #e4e2ce solid;
 	max-height:700px;
 	height:auto;
-	top:90%;
+	top:85%;
 	opacity:1;
 	display:block;
 }
@@ -831,7 +831,7 @@ span.pending-user{
 	}	
 .nav-submenu > ul{
 	width:180px;
-	background:#d3e9ef;
+	background:#ebebeb;
 	display:inline-block;
 	border-right:1px #d6d6d6 solid;
 	position:relative;

@@ -141,8 +141,19 @@
             {{ render(controller('AppWebBundle:Category:popularMenu')) }}
         </ul>
 
-        <div class="full-width nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">
+        <div class="full-width clearSet nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">
             {{ render(controller('AppWebBundle:Category:index', { 'id': 1 })) }}
+            <div class="block-3 right-float mt-10p pr-10p menu-preview-box">
+                <a href="">
+                    <img src="images/image-1.jpg" class="image-fw" alt="add">
+                </a>
+            </div>
+            <script type="text/javascript">
+                $('.nav-submenu ul li a').on('mouseover', function(){
+                    $('.menu-preview-box').find('a').attr('href', $(this).data('link'));
+                    $('.menu-preview-box').find('img').attr('src', $(this).data('img'));
+                });
+            </script>
         </div>
     </nav>
     {% block content %}{% endblock%}
