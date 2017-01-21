@@ -127,4 +127,12 @@ class AdminController extends Controller
             'offerDatatable' => $offerDatatable,
         ));
     }
+    
+    public function configAction(Request $request){
+        $configDatatable = $this->get('app.front.datatable.config');
+        $configDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:config.html.twig', array(
+            'configDatatable' => $configDatatable,
+        ));
+    }
 }

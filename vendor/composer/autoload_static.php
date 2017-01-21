@@ -17,6 +17,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
     );
 
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'Zend\\Json\\' => 10,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
@@ -36,6 +40,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+        ),
+        'O' => 
+        array (
+            'Ob\\HighchartsBundle\\' => 20,
         ),
         'N' => 
         array (
@@ -81,6 +89,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
     );
 
     public static $prefixDirsPsr4 = array (
+        'Zend\\Json\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/zendframework/zend-json/src',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -136,6 +148,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         'Psr\\Log\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Ob\\HighchartsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ob/highcharts-bundle',
         ),
         'Nelmio\\Alice\\' => 
         array (

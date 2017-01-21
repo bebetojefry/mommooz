@@ -27,7 +27,7 @@ class OfferController extends Controller
     
    
     /**
-     * Displays a form to add an existing region entity.
+     * Displays a form to add an existing offer entity.
      *
      * @Route("/new", name="offer_new", options={"expose"=true})
      * @Method({"GET", "POST"})
@@ -59,7 +59,7 @@ class OfferController extends Controller
     }
     
     /**
-     * Displays a form to edit an existing region entity.
+     * Displays a form to edit an existing offer entity.
      *
      * @Route("/{id}/edit", name="offer_edit", options={"expose"=true})
      * @Method({"GET", "POST"})
@@ -91,7 +91,7 @@ class OfferController extends Controller
     }
     
     /**
-     * Displays a form to delete an existing region entity.
+     * Displays a form to delete an existing offer entity.
      *
      * @Route("/{id}/delete", name="offer_delete", options={"expose"=true})
      * @Method({"GET", "POST"})
