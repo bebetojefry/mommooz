@@ -358,10 +358,14 @@ class Category
     public function getInStockEntries(){
         $instock = array();
         
-        foreach($this->getAllProducts() as $product){
+        foreach($this->products->toArray() as $product){
             foreach($product->getItems() as $item){                
                 $instock = array_merge($instock, $item->getLowCostEntries());
             }
+        }
+        
+        foreach($this->childs as $cat){
+            $instock = array_merge($instock, $cat->getInStockEntries());
         }
         
         return $instock;
