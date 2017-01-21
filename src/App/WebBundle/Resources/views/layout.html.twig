@@ -145,7 +145,7 @@
             {{ render(controller('AppWebBundle:Category:index', { 'id': 1 })) }}
             <div class="block-3 right-float mt-10p pr-10p menu-preview-box">
                 <a href="">
-                    <img src="images/image-1.jpg" class="image-fw" alt="add">
+                    <img src="" class="image-fw" alt="Category Image">
                 </a>
             </div>
             <script type="text/javascript">
@@ -153,6 +153,10 @@
                     $('.menu-preview-box').find('a').attr('href', $(this).data('link'));
                     $('.menu-preview-box').find('img').attr('src', $(this).data('img'));
                 });
+                
+                var $first_menu = $('.nav-submenu').find('li').eq(0).find('a');
+                $('.menu-preview-box').find('a').attr('href', $first_menu.data('link'));
+                $('.menu-preview-box').find('img').attr('src', $first_menu.data('img'));
             </script>
         </div>
     </nav>
