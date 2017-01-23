@@ -345,3 +345,12 @@ $.fn.imageUploader = function( options ) {
         }
     });
 };
+
+$.fn.itemFilter = function(  ) {
+    var items = [];
+    var categories = [];
+    var brands = [];
+    var on_offer = [];
+    
+    
+}
