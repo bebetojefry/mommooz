@@ -658,4 +658,16 @@ class Item
 
         return $variants;
     }
+    
+    public function onOffer(){
+        foreach($this->offers as $offer){
+            $dt = new \DateTime('now'); $dt->setTime(0, 0, 0);
+            $interval = $offer->getExpiry()->diff($dt);
+            if($offer->getStatus() && $interval->format('%d') >= 0){
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }

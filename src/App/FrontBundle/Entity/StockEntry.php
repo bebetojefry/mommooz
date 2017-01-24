@@ -554,4 +554,16 @@ class StockEntry
     {
         return $this->orders;
     }
+    
+    public function getFilterData(){
+        $data = array();
+        $category = $this->getItem()->getProduct()->getCategory();
+        $data['cat'] = array('id' => $category->getId(), 'name' => $category->getCategoryName());
+        $brand = $this->getItem()->getBrand();
+        $brandName = $brand->getName() == '' ? 'Brandless' : $brand->getName();
+        $data['brand'] = array('id' => $brand->getId(), 'name' => $brandName);
+        $data['offer'] = $this->getItem()->onOffer();
+        
+        return $data;
+    }
 }

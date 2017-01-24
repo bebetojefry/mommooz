@@ -372,3 +372,88 @@ $.fn.itemFilter = function(  ) {
     
     
 }
+
+(function() {
+
+    // Define our constructor
+    this.FilterModal = function() {
+        this.items = [];
+        this.brands = [];
+        this.categories = [];
+        
+        this.brand_items = [];
+        this.category_items = [];
+    }
+
+    FilterModal.prototype.register = function(item) {
+        item = JSON.parse(item);
+        this.items.push(item);
+        if(this.brand_items[item.brand.id] == undefined){
+            this.brand_items[item.brand.id] = [];
+        }
+        this.brands[item.brand.id] = ' '+item.brand.name;
+        this.brand_items[item.brand.id][this.brand_items[item.brand.id].length] = item;
+        
+        if(this.category_items[item.cat.id] == undefined){
+            this.category_items[item.cat.id] = [];
+        }
+        this.categories[item.cat.id] = ' '+item.cat.name;
+        this.category_items[item.cat.id][this.category_items[item.cat.id].length] = item;
+    }
+
+}());
+
+$.fn.ItemFilter = function( FilterModal ) {
+    $(this).addClass('item_page_filter');
+    
+    var checked = [];
+    
+    var that = this;
+    var html = '';
+    
+    if(FilterModal.categories.length > 0){
+        html += '<div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"><h3 class="mb-10p"> Category </h3><div class="first-cat-cary mb-25p">';
+        Object.keys(FilterModal.categories).forEach(function (key) {
+            html += '<input class="filter_field" type="checkbox" name="cat_'+key+'" value="cat_'+key+'" class="mr-10p">'+FilterModal.categories[key]+'<div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">'+FilterModal.category_items[key].length+'</div> <br/>';
+        });
+        
+        html += '</div></div>';
+    }
+    
+    html += '<div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"><h3 class="mb-10p"> Refine By </h3>';
+    html +='<div class="none-overx-pro mb-25p">';
+    html +='<input class="filter_field" type="checkbox" name="on_offer" value="on_offer" class="mr-10p">   Products on offer  <br/>';
+    html +='<input class="filter_field" type="checkbox" name="new" value="new" class="mr-10p">   New Launches   <br/>';
+    html +='</div></div>';
+    
+    if(FilterModal.brands.length > 0){
+        html += '<div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"><h3 class="mb-10p"> Brand </h3><div class="first-cat-cary mb-25p">';
+        Object.keys(FilterModal.brands).forEach(function (key) {
+            html += '<input class="filter_field" type="checkbox" name="brand_'+key+'" value="brand_'+key+'" class="mr-10p">'+FilterModal.brands[key]+'<div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">'+FilterModal.brand_items[key].length+'</div> <br/>';
+        });
+        
+        html += '</div></div>';
+    }
+    
+    $(this).html(html);
+    
+    $(this).find(".filter_field").on('change', function(){
+        if($(this).is(':checked')){
+            checked.push($(this).val());
+        } else {
+            var index = checked.indexOf($(this).val());
+            if (index > -1) {
+               checked.splice(index, 1);
+            }
+        }
+        
+        if(checked.length > 0){
+            $('.item-thumb').hide();
+            checked.forEach(function (val) {
+                $('.'+val).show();
+            });
+        } else {
+            $('.item-thumb').show();
+        }
+    });
+}
