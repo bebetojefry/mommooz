@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\Offer;
 
-class offerController extends Controller
+class OfferController extends Controller
 {
     /**
      * @Route("/", name="offers")
