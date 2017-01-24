@@ -245,7 +245,7 @@ $(document).ready(function(){
         var that = this;
         var qty = $(this).parent().find('.txt-item-qty').val();
         if(!isNumeric(qty)){
-            alert('Invalid Quantity');
+            openAlert('Invalid Quantity', 'error');
             return; 
         }
         $.ajax({
@@ -257,9 +257,9 @@ $(document).ready(function(){
                     $(that).parent().find('.txt-item-qty').hide();
                     $(that).parent().find('.entry-in-cart').show();
                     $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
-                    alert('Successfully added to cart');
+                    openAlert('Successfully added to cart', 'success');
                 } else {
-                    alert('Insufficient stock');
+                    openAlert('Insufficient stock', 'error');
                 }
             }
         });
@@ -345,6 +345,24 @@ $.fn.imageUploader = function( options ) {
         }
     });
 };
+
+function openAlert(message, type){
+    if(type == 'error'){
+        $('.alert-popup-text-cary .success-text').hide();
+        $('.alert-popup-text-cary .error-text').show();
+    } else if(type == 'success'){
+        $('.alert-popup-text-cary .success-text').show();
+        $('.alert-popup-text-cary .error-text').hide();
+    }
+    
+    $('.alert-popup-text-cary .alert-msg').text(message);
+    
+    $(".alert-popup,.alert-popup-text-cary").addClass("active");
+    
+    $('.alert-popup-text-cary .close-alert').on('click', function(){
+        $(".alert-popup,.alert-popup-text-cary").removeClass("active");
+    });
+}
 
 $.fn.itemFilter = function(  ) {
     var items = [];

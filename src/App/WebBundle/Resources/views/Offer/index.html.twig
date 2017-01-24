@@ -1,0 +1,31 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Offers{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+	<a href="{{ path('home') }}">Home</a>  -   Offers
+    </div>
+
+    <section class="center-1200px mt-15p pb-35p block-fl-cary text-left va-top">
+        <h3> Offers </h3>
+        <div class="full-width mt-10p store-carry">
+            {% for offer in offers %}
+                <div class="block-3 relative-pos ptrbl-10p block-mb-12 mb-pl2"> 
+                    <a href="{{ path('offer_items', {id: offer.getid()}) }}"> 
+                        <img src="{{ offer.getRealPicturePath() | imagine_filter('offer') }}" class="image-fw" alt="offer slider"> 
+                        <span class="full-width dispaly-inline-block ptb-5p text-center black-txt"> {{ app_web_user.getOfferItems(offer)|length }} Product(s) </span> 
+                    </a> 
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

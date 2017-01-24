@@ -946,3 +946,16 @@ span.pending-user{
     right: 9px;
     top: 3px;
 }
+
+.alert-popup{background:rgba(0,0,0,0.4);transform:scale(0,0);transition:0s;}
+.alert-popup.active{transform:scale(1,1);transition:0.4s;}
+.alert-popup-text-cary{
+    min-height:80px;
+    height:auto;
+    max-height:25%;
+    transform:scale(0,0);
+    transition:0s;}
+.alert-popup-text-cary.active{transform:scale(1,1);transition:0.5s;}
+.alert-popup-text-cary .success-text{color:#04e609;}
+.alert-popup-text-cary .error-text{color:#FF0000;}
+.close-alert{background:#19d784;color:#fff;}

@@ -47,3 +47,8 @@ page_cart:
     resource: "@AppWebBundle/Controller/AccountController.php"
     type:     annotation
     prefix: /account
+
+page_offer:
+    resource: "@AppWebBundle/Controller/OfferController.php"
+    type:     annotation
+    prefix: /offer

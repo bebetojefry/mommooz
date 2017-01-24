@@ -38,6 +38,16 @@
     {% endjavascripts %}
 </head>
 <body class="relative-pos">
+    {# message popup html #}
+    <div class="alert-popup fixed-pos top-pos left-pos z10 full-wxh transition_05s">
+        <div class="alert-popup-text-cary ptb-25p text-center absolute-middle absolute-pos block-6 br-4p white-bg transition_06s">
+            <h3 class="success-text"> <span style="display:inline-block; font-size:14px;" class="icon-check-square-o"></span> Success! </h3>
+            <h3 class="error-text"> <span style="display:inline-block; font-size:14px;" class="icon-exclamation-triangle"></span> Error! </h3>
+            <p class="prl-20p alert-msg"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer </p>
+            <div class="full-width text-center"> <span style="display:inline-block;" class="prl-10p br-4p pointer-csr ptb-5p close-alert"> Close </span> </div>
+        </div>
+    </div>
+
     <section class="full-width clearSet block-fl-cary top-header va-top">
         <div class="center-1200px clearSet block-fl-cary">
             <div class="block-6 white-txt mt-10p mb-5p block-mb-6 block-sb-12 sb-font-10p sb-text-left">
@@ -137,7 +147,7 @@
         <ul>
             <li class="pointer-csr nav-catg-click"> Category <span class="icon-angle-down"> </span> </li>
             <li class="pointer-csr"> <a href="{{ path('stores') }}"> Store </a>  </li>
-            {#<li class="pointer-csr"> <a href="offer.php">  Offer </a> </li>#}
+            <li class="pointer-csr"> <a href="{{ path('offers') }}">  Offer </a> </li>
             {{ render(controller('AppWebBundle:Category:popularMenu')) }}
         </ul>
 
