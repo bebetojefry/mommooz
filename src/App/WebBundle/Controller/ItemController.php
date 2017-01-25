@@ -111,25 +111,24 @@ class ItemController extends Controller
 
         $result = $em->createQuery($dql)
                 ->setParameter(1, false)
-                ->setMaxResults(3)
                 ->getResult();
 
-        $items = array();
+        $entries = array();
         $repo = $em->getRepository('AppFrontBundle:StockPurchase');
         foreach($result as $res){
             $purchase = $repo->find($res['id']);
-            $items[] = $purchase->getStockItem();
+            $entries[] = $purchase->getStockItem();
         }
 
         return $this->render('AppWebBundle:Item:mostPurchased.html.twig', array(
-            'items' => $items
+            'entries' => $entries
         ));
     }
 
     public function newAction() {
-        $items = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:StockEntry')->findBy(array('status' => true), array(), 4, 0);
+        $entries = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:StockEntry')->findBy(array('status' => true), array('id' => 'DESC'));
         return $this->render('AppWebBundle:Item:new.html.twig', array(
-            'items' => $items
+            'entries' => $entries
         ));
     }
 

@@ -1,16 +1,24 @@
-{% for item in items %}
-    <div class="block-3 ptrbl-5p mt-10p block-mb-6 sb-block-12">
-        <a href="{{ path('item_page', {'id': item.getId()}) }}">
-            <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
-                <div class="block-6">
-                    <img src="{{ item.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="momooz product image">
+{% set break = false %}
+{% set count = 0 %}
+{% for entry in entries if not break %}
+    {% if app_web_user.isDeliverable(entry)  %}
+        {% set count = count + 1 %}
+        <div class="block-3 ptrbl-5p mt-10p block-mb-6 sb-block-12">
+            <a href="{{ path('item_page', {'id': entry.getId()}) }}">
+                <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
+                    <div class="block-6">
+                        <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="momooz product image">
+                    </div>
+                    <div class="block-8 capitalize-txt mt-20p">
+                        {{ entry.getItem().getName() }}
+                        <br>
+                        <strong>RS. {{ entry.getActualPrice() }}</strong>
+                    </div>
                 </div>
-                <div class="block-8 capitalize-txt mt-20p">
-                    {{ item.getItem().getName() }}
-                    <br>
-                    <strong>RS. {{ item.getPrice() }}</strong>
-                </div>
-            </div>
-        </a>
-    </div>
+            </a>
+        </div>
+        {% if count == 4 %}
+            {% set break = true %}
+        {% endif %}
+    {% endif %}
 {% endfor %}

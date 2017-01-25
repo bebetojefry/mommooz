@@ -126,4 +126,38 @@ class User {
             
         return $qb->getQuery()->getResult();
     }
+    
+    public function isDeliverable(StockEntry $entry){
+        $em = $this->container->get('doctrine')->getManager();
+        $region = $em->getRepository('AppFrontBundle:Region')->find($this->container->get('session')->get('region'));
+        if($region){
+            $productDeliverablility = $entry->getItem()->getProduct()->getDeliverable();
+            
+            switch ($productDeliverablility){
+                case 0:
+                    $regions = $entry->getStock()->getVendor()->getRegions();
+                    foreach($regions as $r){
+                        if($r->getId() == $region->getId()){
+                            return true;
+                        }
+                    }
+                    break;
+                case 1:
+                    return true;
+                    break;
+                case 2:
+                    $p_regions = $entry->getItem()->getProduct()->getRegions()->toArray();
+                    $v_regions = $entry->getStock()->getVendor()->getRegions()->toArray();
+                    $regions = array_merge($p_regions, $v_regions);
+                    foreach($regions as $r){
+                        if($r->getId() == $region->getId()){
+                            return true;
+                        }
+                    }
+                    break;
+            }
+        }
+        
+        return false;
+    }
 }
