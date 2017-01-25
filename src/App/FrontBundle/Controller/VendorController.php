@@ -98,6 +98,7 @@ class VendorController extends Controller
             $form->handleRequest($request);
             if($form->isValid()){
                 $vendor = $form->getData();
+                $vendor->setUsername($vendor->getEmail());
                 $dm->persist($vendor);
                 $dm->flush();
                 $this->get('session')->getFlashBag()->add('success', 'vendor.msg.updated');
