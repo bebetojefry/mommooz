@@ -364,15 +364,6 @@ function openAlert(message, type){
     });
 }
 
-$.fn.itemFilter = function(  ) {
-    var items = [];
-    var categories = [];
-    var brands = [];
-    var on_offer = [];
-    
-    
-}
-
 (function() {
 
     // Define our constructor
