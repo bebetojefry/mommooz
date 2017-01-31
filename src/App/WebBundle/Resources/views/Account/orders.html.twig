@@ -46,7 +46,11 @@
                         <td><a href="{{ path('order_detail_page', {'id': order.getId()}) }}">#{{ order.getId() }}</a></td>
                         <td>{{ order.getPurchasedOn()|date('d-M-Y h:i A') }}</td>
                         <td>{{ order.getItems()|length }}</td>
-                        <td>{{ order.getTotalPrice() }}</td>
+                        {% set total_amt = order.getTotalPrice() %}
+                        {% if order.getRewardUse() %}
+                            {% set total_amt = order.getTotalPrice() - order.getRewardUse().getMoney() %}
+                        {% endif %}
+                        <td>{{ total_amt }}</td>
                         <td>{{ status[order.getStatus()] }}</td>
                         <td>
                             {% if order.getStatus() == 1 or order.getStatus() == 2 or order.getStatus() == 3 %}

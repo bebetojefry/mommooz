@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reward
 {
+    const PURCHASE = 'purchase';
+    const REFER = 'refer';
+    
     /**
      * @var integer
      *
@@ -30,7 +33,7 @@ class Reward
     /**
      * @var integer
      *
-     * @ORM\Column(name="point", type="integer")
+     * @ORM\Column(name="point", type="float")
      */
     private $point;
 

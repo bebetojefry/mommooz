@@ -82,6 +82,13 @@ class Purchase
      * @ORM\OneToMany(targetEntity="PurchaseItem", mappedBy="purchase")
      */
     private $items;
+    
+    /**
+     * @var RewardUse
+     *
+     * @ORM\OneToOne(targetEntity="RewardUse", mappedBy="purchase")
+     */
+    private $reward_use;
 
     /*
      * constructor
@@ -334,5 +341,29 @@ class Purchase
         }
         
         return $total;
+    }
+
+    /**
+     * Set rewardUse
+     *
+     * @param \App\FrontBundle\Entity\RewardUse $rewardUse
+     *
+     * @return Purchase
+     */
+    public function setRewardUse(\App\FrontBundle\Entity\RewardUse $rewardUse = null)
+    {
+        $this->reward_use = $rewardUse;
+    
+        return $this;
+    }
+
+    /**
+     * Get rewardUse
+     *
+     * @return \App\FrontBundle\Entity\RewardUse
+     */
+    public function getRewardUse()
+    {
+        return $this->reward_use;
     }
 }

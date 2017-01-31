@@ -101,8 +101,11 @@ class PurchaseItemDatatable extends AbstractDatatableView
             ->add('quantity', 'column', array(
                 'title' => 'Quantity',
             ))
+            ->add('unit_price', 'column', array(
+                'title' => 'Unit Price',
+            ))
             ->add('price', 'column', array(
-                'title' => 'Price',
+                'title' => 'Total Price',
             ));
                     
         if(isset($options['vendor'])){

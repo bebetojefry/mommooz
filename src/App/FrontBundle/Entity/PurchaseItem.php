@@ -45,6 +45,13 @@ class PurchaseItem
     /**
      * @var float
      *
+     * @ORM\Column(name="unit_price", type="float")
+     */
+    private $unit_price;
+    
+    /**
+     * @var float
+     *
      * @ORM\Column(name="price", type="float")
      */
     private $price;
@@ -185,5 +192,29 @@ class PurchaseItem
     public function getEntry()
     {
         return $this->entry;
+    }
+
+    /**
+     * Set unitPrice
+     *
+     * @param float $unitPrice
+     *
+     * @return PurchaseItem
+     */
+    public function setUnitPrice($unitPrice)
+    {
+        $this->unit_price = $unitPrice;
+    
+        return $this;
+    }
+
+    /**
+     * Get unitPrice
+     *
+     * @return float
+     */
+    public function getUnitPrice()
+    {
+        return $this->unit_price;
     }
 }

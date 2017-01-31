@@ -163,4 +163,13 @@ class Cart
         
         return $val;
     }
+    
+    public function getPrice(){
+        $price = 0;
+        foreach($this->getItems() as $item){
+            $price += $item->getQuantity()*$item->getPrice();
+        }
+        
+        return $price;
+    }
 }

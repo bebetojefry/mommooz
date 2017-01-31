@@ -23,7 +23,7 @@
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <table class="tbl-purchase-info">
                                     <tr>
                                         <td>Ordered By : {{ purchase.getConsumer().getFullname() }}</td>
@@ -38,7 +38,7 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <table class="tbl-purchase-info">
                                     <tr>
                                         <td>Address</td>
@@ -57,7 +57,32 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
+                                <table class="tbl-purchase-info">
+                                    <tr>
+                                        <td>
+                                            Order Price : {{ purchase.getTotalPrice() }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {% set reward_amt = 0 %}
+                                            {% set reward_points = 0 %}
+                                            {% if purchase.getRewardUse() %}
+                                                {% set reward_amt = purchase.getRewardUse().getMoney() %}
+                                                {% set reward_points = purchase.getRewardUse().points() %}
+                                            {% endif %}
+                                            Reward Money: {{ reward_amt }} ({{ reward_points }} points)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Net Amount: {{ purchase.getTotalPrice() - reward_amt }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>        
+                            <div class="col-lg-3">
                                 <img style="float: right;" src="{{ qrcode_url(purchase.getId(), { extension: 'png' }) }}" width="85"/>
                             </div>
                         </div>

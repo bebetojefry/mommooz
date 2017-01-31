@@ -17,6 +17,8 @@ use App\FrontBundle\Entity\PurchaseItem;
 use App\FrontBundle\Form\ProfileType;
 use App\FrontBundle\Form\AddressType;
 use App\FrontBundle\Entity\StockPurchase;
+use App\FrontBundle\Entity\Reward;
+use App\FrontBundle\Entity\RewardUse;
 
 class AccountController extends Controller
 {
@@ -357,7 +359,30 @@ class AccountController extends Controller
             return $this->redirect($this->generateUrl('cart_page'));
         }
         
-        return $this->render('AppWebBundle:Account:placeOrder.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $reward_money_config = $em->getRepository('AppFrontBundle:Config')->findOneByName('reward_money');
+        $reward_money = 0;
+        $total_rewards = 0;
+        if($reward_money_config && $this->getUser()){
+            $cart_price = $this->getUser()->getCart()->getPrice();
+            $max_points_needed = round($cart_price*$reward_money_config->getValue(), 2);
+            $rewards = $em->getRepository('AppFrontBundle:Reward')->findByConsumer($this->getUser());
+            foreach($rewards as $reward){
+                $total_rewards += $reward->getPoint();
+                if($total_rewards > $max_points_needed){
+                    $total_rewards = $max_points_needed;
+                    break;
+                }
+            }
+            
+            if($reward_money_config->getValue() > 0){
+                $reward_money = round($total_rewards/$reward_money_config->getValue(), 2);
+            }
+        }
+        
+        return $this->render('AppWebBundle:Account:placeOrder.html.twig', 
+            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards)
+        );
     }
     
     /**
@@ -367,7 +392,7 @@ class AccountController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $address = $em->getRepository('AppFrontBundle:Address')->find($request->get('address'));
-                
+        
         $purchase = new Purchase();
         $purchase->setConsumer($this->getUser());
         $purchase->setDeliverTo($address);
@@ -379,6 +404,7 @@ class AccountController extends Controller
         
         $cart = $this->getUser()->getCart();
         
+        $total_amt = 0;
         foreach($cart->getItems() as $item){
             //create purchase item entry
             $purchaserItem = new PurchaseItem();
@@ -386,20 +412,58 @@ class AccountController extends Controller
             $purchaserItem->setEntry($item->getEntry());
             $purchaserItem->setQuantity($item->getQuantity());
             $purchaserItem->setStatus(0);
+            $purchaserItem->setUnitPrice($item->getPrice());
             $purchaserItem->setPrice($item->getQuantity()*$item->getPrice());
+            $em->persist($purchaserItem);
+            
+            $total_amt += $item->getQuantity()*$item->getPrice();
             
             // create stock purchase history
-            $purchase = new StockPurchase();
-            $purchase->setUser($this->getUser());
-            $purchase->setPrice($item->getPrice());
-            $purchase->setQuantity($item->getQuantity());
-            $purchase->setReverse(FALSE);
-            $purchase->setStockItem($item->getEntry());
-            $purchase->setPurchsedOn(new \DateTime('now'));
+            $stock_purchase = new StockPurchase();
+            $stock_purchase->setUser($this->getUser());
+            $stock_purchase->setPrice($item->getPrice());
+            $stock_purchase->setQuantity($item->getQuantity());
+            $stock_purchase->setReverse(FALSE);
+            $stock_purchase->setStockItem($item->getEntry());
+            $stock_purchase->setPurchsedOn(new \DateTime('now'));
+            $em->persist($stock_purchase);
             
-            $em->persist($purchase);
-            $em->persist($purchaserItem);
             $em->remove($item);
+        }
+        
+        if(isset($_POST['use_reward'])){
+            $reward = new Reward();
+            $reward->setConsumer($this->getUser());
+            $reward->setPoint($_POST['reward_points_used']*-1);
+            $reward->setSource(Reward::PURCHASE);
+            $reward->setCreditedOn(new \DateTime('now'));
+
+            $em->persist($reward);
+            
+            $reward_use = new RewardUse();
+            $reward_use->setConsumer($this->getUser());
+            $reward_use->setPurchase($purchase);
+            $reward_use->setPoints($_POST['reward_points_used']);
+            $reward_use->setMoney($_POST['reward_money']);
+            
+            $em->persist($reward_use);
+        }
+        
+        // configure reward
+        $reward_config = $em->getRepository('AppFrontBundle:Config')->findOneByName('purchase_reward');
+        if($reward_config){
+            $val = $reward_config->getValue();
+            if($val > 0){
+                $points = round($total_amt/$val, 2);
+
+                $reward = new Reward();
+                $reward->setConsumer($this->getUser());
+                $reward->setPoint($points);
+                $reward->setSource(Reward::PURCHASE);
+                $reward->setCreditedOn(new \DateTime('now'));
+
+                $em->persist($reward);
+            }
         }
         
         $em->flush();

@@ -37,7 +37,7 @@
                 {% set totalPrice = totalPrice + (item.getQuantity()*item.getPrice()) %}
             {% endfor %}
             <tr>
-                <td colspan="5" class="totalcart-rate text-right">  Total Price : <span class="icon-inr"></span> {{ totalPrice }}  </td>
+                <td colspan="5" class="totalcart-rate text-right">  Total Price : <span class="icon-inr"></span> <span id="cart-price">{{ totalPrice }}</span>  </td>
             </tr>
         </table>
         <div class="full-width mt-10p ptb-20p text-right button-cart">
