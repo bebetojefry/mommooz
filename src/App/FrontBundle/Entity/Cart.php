@@ -24,7 +24,7 @@ class Cart
     /**
      * @var User
      * 
-     * @ORM\OneToOne(targetEntity="User", inversedBy="Cart")
+     * @ORM\OneToOne(targetEntity="User", inversedBy="cart")
      */
     private $user;
 
