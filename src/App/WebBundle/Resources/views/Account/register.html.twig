@@ -23,8 +23,8 @@
                 {{ form_widget(form.lastname) }}
                 {{ form_widget(form.gender) }}
                 {{ form_widget(form.phone) }}
-                {{ form_widget(form.email) }}
-                {{ form_widget(form.password) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.password) }}
                 {% if form.addresses|length > 0 %}
                     {% for address in form.addresses %}
                         {{ form_widget(address) }}
@@ -33,6 +33,9 @@
                     {{ form_widget(form.addresses.vars.prototype) }}
                 {% endif %}
                 {{ form_rest(form) }}
+                <script type="text/javascript">
+                    $('#frmRegister').validator();
+                </script>
                 <button type="submit" class="momz-button mt-20p"> Sign up <span class="icon-arrow-right-1"></span> </button>
                 <span class="small-text-mmz pt-10p"> By signing up, you agree to our <a href=""> Terms And Conditions. </a> </span>
             </form>

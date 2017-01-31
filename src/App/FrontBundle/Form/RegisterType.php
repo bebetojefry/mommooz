@@ -9,6 +9,13 @@ use App\FrontBundle\Form\AddressType;
 
 class RegisterType extends AbstractType
 {    
+    private $router;
+    
+    public function __construct($router)
+    {
+        $this->router = $router;
+    }
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -24,8 +31,8 @@ class RegisterType extends AbstractType
                 'data' => 1
             ))
             ->add('phone', 'text', array('attr' => array('placeholder' => 'Phone')))
-            ->add('email', 'text', array('attr' => array('placeholder' => 'Email')))
-            ->add('password', 'password', array('attr' => array('placeholder' => 'Password')))
+            ->add('email', 'email', array('attr' => array('placeholder' => 'Email', 'data-remote' => $this->router->generate('consumer_email_validate', array('id' => $builder->getData()->getId())))))
+            ->add('password', 'password', array('attr' => array('placeholder' => 'Password', 'data-minlength' => 6), 'label' => false))
             ->add('addresses', 'collection', array(
                 'type'         => new AddressType(),
                 'allow_add'    => true,

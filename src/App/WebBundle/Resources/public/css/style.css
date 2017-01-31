@@ -959,3 +959,9 @@ span.pending-user{
 .alert-popup-text-cary .success-text{color:#04e609;}
 .alert-popup-text-cary .error-text{color:#FF0000;}
 .close-alert{background:#19d784;color:#fff;}
+
+.form-group.has-error .help-block.with-errors {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

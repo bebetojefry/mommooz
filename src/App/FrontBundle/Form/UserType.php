@@ -13,10 +13,12 @@ use App\FrontBundle\Form\AddressType;
 class UserType extends AbstractType
 {
     private $om;
+    private $router;
     
-    public function __construct(ObjectManager $om)
+    public function __construct(ObjectManager $om, $router)
     {
         $this->om = $om;
+        $this->router = $router;
     }
     
     /**
@@ -37,7 +39,11 @@ class UserType extends AbstractType
                 'data' => 1
             ))
             ->add('phone')
-            ->add('email')
+            ->add('email', 'email', array(
+                'attr' => array(
+                    'data-remote' => $this->router->generate('email_validate', array('id' => $builder->getData()->getId()))
+                )
+            ))
             ->add('status')
             ->add('addresses', 'collection', array(
                 'type'         => new AddressType(),

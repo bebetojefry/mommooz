@@ -40,7 +40,7 @@ class VendorController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $vendor = new Vendor();
         $vendor->addAddress(new Address());
-        $form = $this->createForm(new UserType($dm), $vendor);
+        $form = $this->createForm(new UserType($dm, $this->get('router')), $vendor);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -91,7 +91,7 @@ class VendorController extends Controller
             $vendor->addAddress(new Address());
         }
         
-        $form = $this->createForm(new UserType($dm), $vendor);
+        $form = $this->createForm(new UserType($dm, $this->get('router')), $vendor);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -353,5 +353,33 @@ class VendorController extends Controller
         }
         $query->setQuery($qb);
         return $query->getResponse(false);
+    }
+    
+    /**
+     * @Route("/email/validate/{id}", name="email_validate", defaults={"id":0}, options={"expose"=true})
+     */
+    public function emailValidateAction(Vendor $vendor = null)
+    {
+        $email = $_GET['app_frontbundle_user']['email'];
+        if($vendor){
+            $vendors = $this->getDoctrine()->getManager()->getRepository("AppFrontBundle:Vendor")->createQueryBuilder('v')
+            ->where('v.email = :email and v.id != :id')
+            ->setParameter('email', $email)
+            ->setParameter('id', $vendor->getId())
+            ->getQuery()
+            ->getResult();
+        } else {
+            $vendors = $this->getDoctrine()->getManager()->getRepository("AppFrontBundle:Vendor")->createQueryBuilder('v')
+            ->where('v.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getResult();
+        }
+        
+        if(count($vendors) == 0){
+            return new Response('OK', 200);
+        }
+        
+        return new Response('Invalid', 406);
     }
 }

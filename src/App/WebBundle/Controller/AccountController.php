@@ -35,7 +35,7 @@ class AccountController extends Controller
         $address = new Address();
         $address->setDefault(true);
         $consumer->addAddress($address);
-        $form = $this->createForm(new RegisterType(), $consumer);
+        $form = $this->createForm(new RegisterType($this->get('router')), $consumer);
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if($form->isValid()){
@@ -477,5 +477,24 @@ class AccountController extends Controller
     public function orderthanksAction(Request $request)
     {
         return $this->render('AppWebBundle:Account:orderThanks.html.twig');
+    }
+    
+    /**
+     * @Route("/email/validate", name="consumer_email_validate")
+     */
+    public function emailValidateAction()
+    {
+        $email = $_GET['app_frontbundle_user']['email'];
+        $vendors = $this->getDoctrine()->getManager()->getRepository("AppFrontBundle:Consumer")->createQueryBuilder('c')
+            ->where('c.email = :email')
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getResult();
+        
+        if(count($vendors) == 0){
+            return new Response('OK', 200);
+        }
+        
+        return new Response('Invalid', 406);
     }
 }
