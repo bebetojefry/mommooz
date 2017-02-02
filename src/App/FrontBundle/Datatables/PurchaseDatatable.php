@@ -156,6 +156,9 @@ class PurchaseDatatable extends AbstractDatatableView
                             'onclick' => 'return openConfirm(event);',
                             'cofirmText' => $this->translator->trans('purchase.clear.confirm'),
                         ),
+                        'render_if' => function($row) {                            ;
+                            return $row['status'] == 5;
+                        }
                     )
                 )
             ))

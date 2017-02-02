@@ -142,3 +142,11 @@ services:
     app.front.datatable.config:
         class: App\FrontBundle\Datatables\ConfigDatatable
         parent: sg_datatables.datatable.abstract
+        
+    app.front.datatable.invoice:
+        class: App\FrontBundle\Datatables\InvoiceDatatable
+        parent: sg_datatables.datatable.abstract
+    
+    app.front.datatable.invoiceitem:
+         class: App\FrontBundle\Datatables\InvoiceItemDatatable
+         parent: sg_datatables.datatable.abstract

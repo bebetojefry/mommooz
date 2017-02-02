@@ -135,4 +135,12 @@ class AdminController extends Controller
             'configDatatable' => $configDatatable,
         ));
     }
+    
+    public function invoiceAction(Request $request){
+        $invoiceDatatable = $this->get('app.front.datatable.invoice');
+        $invoiceDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:invoice.html.twig', array(
+            'invoiceDatatable' => $invoiceDatatable,
+        ));
+    }
 }

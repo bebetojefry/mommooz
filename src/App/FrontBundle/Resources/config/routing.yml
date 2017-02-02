@@ -165,6 +165,16 @@ config_actions:
     type:     annotation
     prefix: /config
     
+app_front_admin_invoice:
+    path:     /invoice
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:invoice}
+
+invoice_actions:
+    resource: "@AppFrontBundle/Controller/InvoiceController.php"
+    type:     annotation
+    prefix: /invoice
+    
 #########################################################
 
 app_front_vendor_login:
