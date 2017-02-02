@@ -4,6 +4,7 @@ namespace App\FrontBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
+use App\FrontBundle\Entity\Vendor;
 
 /**
  * Class InvoiceDatatable
@@ -69,8 +70,10 @@ class InvoiceDatatable extends AbstractDatatableView
             'highlight_color' => 'red'
         ));
 
+        $id = isset($options['vendor']) && $options['vendor'] instanceof Vendor ? $options['vendor']->getId() : 0;
+        
         $this->ajax->set(array(
-            'url' => $this->router->generate('invoice_results'),
+            'url' => $this->router->generate('invoice_results', array('id' => $id)),
             'type' => 'GET',
             'pipeline' => 0
         ));

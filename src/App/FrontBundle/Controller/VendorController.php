@@ -382,4 +382,12 @@ class VendorController extends Controller
         
         return new Response('Invalid', 406);
     }
+    
+    public function invoicesAction(){
+        $invoicesDatatable = $this->get('app.front.datatable.invoice');
+        $invoicesDatatable->buildDatatable(array('vendor' => $this->getUser()));
+        return $this->render('AppFrontBundle:Vendor:invoice.html.twig', array(
+            'invoicesDatatable' => $invoicesDatatable
+        ));
+    }
 }

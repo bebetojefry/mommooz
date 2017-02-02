@@ -10,22 +10,30 @@ use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Invoice;
 use App\FrontBundle\Form\InvoiceType;
+use App\FrontBundle\Entity\Vendor;
 
 class InvoiceController extends Controller
 {
     /**
-     * @Route("/results", name="invoice_results")
+     * @Route("/{id}/results", name="invoice_results", defaults={"id":0}, options={"expose"=true})
      */
-    public function indexResultsAction()
+    public function indexResultsAction(Vendor $vendor = null)
     {
         $datatable = $this->get('app.front.datatable.invoice');
-        $datatable->buildDatatable();
+        $datatable->buildDatatable(array('vendor' => $vendor));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
-        return $query->getResponse();
+        $query->buildQuery();
+        $qb = $query->getQuery();
+        if($vendor){
+            $qb->andWhere("invoice.vendor = :v");
+            $qb->setParameter('v', $vendor);
+        }
+        $query->setQuery($qb);
+        return $query->getResponse(false);
     }
     
     /**
-     * @Route("/{id}/results", name="invoice_item_results", options={"expose"=true})
+     * @Route("/{id}/item_results", name="invoice_item_results", options={"expose"=true})
      */
     public function itemResultsAction(Request $request, Invoice $invoice)
     {

@@ -245,3 +245,8 @@ vendoritem_actions:
     resource: "@AppFrontBundle/Controller/VendorItemController.php"
     type:     annotation
     prefix: /items
+    
+app_front_vendor_invoice:
+    path:     /invoices
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:invoices}
