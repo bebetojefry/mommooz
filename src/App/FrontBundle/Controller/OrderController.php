@@ -70,4 +70,29 @@ class OrderController extends Controller
 
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
     }
+    
+    /**
+     * Clear a all stock items in the purchase entity.
+     *
+     * @Route("/{id}/items/clear", name="purchase_clear", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function clearAction(Request $request, Purchase $purchase)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $stockPurchases = $dm->getRepository("AppFrontBundle:StockPurchase")->createQueryBuilder('sp')
+        ->where('sp.purchase = :p')
+        ->setParameter('p', $purchase)
+        ->getQuery()
+        ->getResult();
+        
+        foreach($stockPurchases as $stockPurchase){
+            $dm->remove($stockPurchase);
+        }
+        
+        $dm->flush();
+        
+        $this->get('session')->getFlashBag()->add('success', 'purchase.msg.cleared');
+        return new Response(json_encode(array('code' => FormHelper::REFRESH)));
+    }
 }

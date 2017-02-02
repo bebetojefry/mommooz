@@ -421,6 +421,7 @@ class AccountController extends Controller
             // create stock purchase history
             $stock_purchase = new StockPurchase();
             $stock_purchase->setUser($this->getUser());
+            $stock_purchase->setPurchase($purchase);
             $stock_purchase->setPrice($item->getPrice());
             $stock_purchase->setQuantity($item->getQuantity());
             $stock_purchase->setReverse(FALSE);

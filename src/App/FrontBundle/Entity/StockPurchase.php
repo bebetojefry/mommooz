@@ -29,6 +29,12 @@ class StockPurchase
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Purchase")
+     * @ORM\JoinColumn(name="purchase", referencedColumnName="id", nullable=true)
+     */
+    private $purchase;
+    
+    /**
      * @var StockEntry
      * 
      * @ORM\ManyToOne(targetEntity="StockEntry", inversedBy="purchases")
@@ -216,5 +222,29 @@ class StockPurchase
     public function getStockItem()
     {
         return $this->stockItem;
+    }
+
+    /**
+     * Set purchase
+     *
+     * @param \App\FrontBundle\Entity\Purchase $purchase
+     *
+     * @return StockPurchase
+     */
+    public function setPurchase(\App\FrontBundle\Entity\Purchase $purchase = null)
+    {
+        $this->purchase = $purchase;
+    
+        return $this;
+    }
+
+    /**
+     * Get purchase
+     *
+     * @return \App\FrontBundle\Entity\Purchase
+     */
+    public function getPurchase()
+    {
+        return $this->purchase;
     }
 }

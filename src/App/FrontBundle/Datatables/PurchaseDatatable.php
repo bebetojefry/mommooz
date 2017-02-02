@@ -18,7 +18,7 @@ class PurchaseDatatable extends AbstractDatatableView
     public function getLineFormatter()
     {
         $formatter = function($line){
-            $states = array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled');
+            $states = array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled', 6 => 'Cleared');
             $line['state'] = $states[$line['status']];
 
             return $line;
@@ -138,6 +138,23 @@ class PurchaseDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
                             'modalTitle' => $this->translator->trans('purchase.title.status'),
+                            'style' => 'margin-right:5px;'
+                        ),
+                    ),
+                    array(
+                        'route' => 'purchase_clear',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('purchase.actions.clear'),
+                        'icon' => 'glyphicon glyphicon-th-list',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('purchase.actions.clear'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openConfirm(event);',
+                            'cofirmText' => $this->translator->trans('purchase.clear.confirm'),
                         ),
                     )
                 )
