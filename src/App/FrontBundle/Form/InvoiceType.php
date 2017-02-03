@@ -18,7 +18,7 @@ class InvoiceType extends AbstractType
             ->add('vendor', 'entity', array(
                 'label' => 'Store',
                 'class' => 'AppFrontBundle:Vendor',
-                'property' => 'firstname',
+                'property' => 'fullname',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
