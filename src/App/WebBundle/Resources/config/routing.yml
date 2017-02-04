@@ -52,3 +52,8 @@ page_offer:
     resource: "@AppWebBundle/Controller/OfferController.php"
     type:     annotation
     prefix: /offer
+    
+page_refer:
+    resource: "@AppWebBundle/Controller/ReferController.php"
+    type:     annotation
+    prefix: /refer

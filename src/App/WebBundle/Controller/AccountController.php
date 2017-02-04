@@ -91,6 +91,23 @@ class AccountController extends Controller
                     $consumer->setStatus(true);
                     $em->persist($consumer);
                     $em->flush();
+                    
+                    // check for reference
+                    $refernce = $em->getRepository('AppFrontBundle:Reference')->findOneByEmail($consumer->getEmail(), array('id' => 'ASC'));
+                    if($refernce){
+                        $ref_reward = $em->getRepository('AppFrontBundle:Config')->findOneByName('reference_reward');
+                        if($ref_reward){
+                            $reward = new Reward();
+                            $reward->setConsumer($refernce->getReferedBy());
+                            $reward->setCreditedOn(new \DateTime('now'));
+                            $reward->setPoint($ref_reward->getValue());
+                            $reward->setSource('reference');
+                            
+                            $em->persist($reward);
+                            $em->flush();
+                        }
+                    }
+                    
                     $msg = 'Account activated successfully.';
                 } else {
                     $msg = 'Account already active.';

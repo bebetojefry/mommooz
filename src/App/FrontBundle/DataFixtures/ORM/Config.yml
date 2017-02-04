@@ -4,7 +4,7 @@ App\FrontBundle\Entity\Config:
         description: 'Reward point on refer a friend'
         value: 1
         
-    pur_reward:
+    per_reward:
         name: 'purchase_reward'
         description: 'How much ned to spend to get a reward point on purchase'
         value: 100

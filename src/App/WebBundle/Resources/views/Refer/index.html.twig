@@ -1,0 +1,52 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Refer a friend{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+	<a href="{{ path('home') }}">Home</a>  -   Refer your friends
+    </div>
+    <section class="raf-carry full-width ptrbl-20p mt-5p block-fl-cary va-top white-txt">
+        <div class="center-1200px mt-40p lb-text-center text-left">
+          <div class="block-6 block-lb-12">
+            <div class="block-12">
+              <h2> Refer a Friend </h2>
+              <h5 class="mt-10p"> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. </h5>
+              <p class="mt-10p white-txt"> Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. </p>
+            </div>
+          </div>
+          <div class="block-6 text-right lb-none">
+            <div class="block-10"> <img src="{{ asset('bundles/appweb/images/raf.svg') }}" class="image-fw" alt="about momooz"> </div>
+          </div>
+        </div>
+    </section>
+    <section class="text-center block-fl-cary center-1200px ptb-30p mt-10p">
+        <h3> Refer Now </h3>
+        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+        {% if msg %}
+            <span class="inline-msg">{{ msg }}</span>
+        {% endif %}
+        <form name="frmRefer" action="" method="post">
+            <table class="mt-15p raf-table">
+                <tr>
+                    <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
+                    <td class="pr-10p form-group">{{ form_widget(form.name) }}</td>
+                    <td class="pr-10p form-group">{{ form_widget(form.email) }}</td>
+                    <td class="pr-10p form-group">{{ form_widget(form.phone) }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="text-left"><input type="submit" value="Submit" class="raf-submit mr-5p">
+                      or <span class="icon-plus-circle pointer-csr dispaly-inline-block ml-10p" style="font-size:14px;"> Add more friends </span></td>
+                </tr>
+            </table>
+        </form>
+    </section>    
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

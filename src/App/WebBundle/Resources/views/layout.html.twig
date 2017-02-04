@@ -150,6 +150,7 @@
             <li class="pointer-csr"> <a href="{{ path('stores') }}"> Store </a>  </li>
             <li class="pointer-csr"> <a href="{{ path('offers') }}">  Offer </a> </li>
             {{ render(controller('AppWebBundle:Category:popularMenu')) }}
+            {% if app.user %}<li class="pointer-csr"> <a href="{{ path('refer_a_friend') }}">  Refer a friend </a> </li>{% endif %}
         </ul>
 
         <div class="full-width clearSet nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">
