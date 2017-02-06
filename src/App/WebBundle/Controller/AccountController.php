@@ -288,11 +288,11 @@ class AccountController extends Controller
             $cat = $item->getEntry()->getItem()->getProduct()->getCategory()->getRoot();
             if(isset($categories[$cat->getId()])){
                 $categories[$cat->getId()]['items'][] = $item;
-                $categories[$cat->getId()]['total'] = $item->getPrice();
+                $categories[$cat->getId()]['total'] += $item->getPrice();
             } else {
                 $categories[$cat->getId()]['meta'] = $cat;
                 $categories[$cat->getId()]['items'] = array($item);
-                $categories[$cat->getId()]['total'] += $item->getPrice();
+                $categories[$cat->getId()]['total'] = $item->getPrice();
             }
         }
         
