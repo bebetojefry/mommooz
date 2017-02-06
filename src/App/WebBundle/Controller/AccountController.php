@@ -288,9 +288,11 @@ class AccountController extends Controller
             $cat = $item->getEntry()->getItem()->getProduct()->getCategory()->getRoot();
             if(isset($categories[$cat->getId()])){
                 $categories[$cat->getId()]['items'][] = $item;
+                $categories[$cat->getId()]['total'] = $item->getPrice();
             } else {
                 $categories[$cat->getId()]['meta'] = $cat;
                 $categories[$cat->getId()]['items'] = array($item);
+                $categories[$cat->getId()]['total'] += $item->getPrice();
             }
         }
         
@@ -310,57 +312,20 @@ class AccountController extends Controller
         $ob->tooltip->headerFormat('<span style="font-size:11px">{series.name}</span><br>');
         $ob->tooltip->pointFormat('<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>');
 
-        $data = array(
-            array(
-                'name' => 'Chrome',
-                'y' => 18.73,
-                'drilldown' => 'Chrome',
-                'visible' => true
-            ),
-            array(
-                'name' => 'Microsoft Internet Explorer',
-                'y' => 53.61,
-                'drilldown' => 'Microsoft Internet Explorer',
-                'visible' => true
-            ),
-            array('Firefox', 45.0),
-            array('Opera', 1.5)
-        );
+        $data = array();
+        foreach($categories as $cat){
+            $data[] = array($cat['meta']->getCategoryName(), $cat['total']);
+        }
         
         $ob->series(
             array(
                 array(
-                    'name' => 'Browser share',
+                    'name' => 'Expense',
                     'colorByPoint' => true,
                     'data' => $data
                 )
             )
         );
-
-        $drilldown = array(
-            array(
-                'name' => 'Microsoft Internet Explorer',
-                'id' => 'Microsoft Internet Explorer',
-                'data' => array(
-                    array("v8.0", 26.61),
-                    array("v9.0", 16.96),
-                    array("v6.0", 6.4),
-                    array("v7.0", 3.55),
-                    array("v8.0", 0.09)
-                )
-            ),
-            array(
-                'name' => 'Chrome',
-                'id' => 'Chrome',
-                'data' => array(
-                    array("v19.0", 7.73),
-                    array("v17.0", 1.13),
-                    array("v16.0", 0.45),
-                    array("v18.0", 0.26)
-                )
-            ),
-        );
-        $ob->drilldown->series($drilldown);
 
         return $this->render('AppWebBundle:Account:report.html.twig',
             array(
