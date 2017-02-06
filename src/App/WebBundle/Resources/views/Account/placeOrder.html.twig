@@ -14,10 +14,13 @@
         <h3> Place Your Order </h3>
         <form name="frmOrderSubmit" method="post" action="{{ path('submit_order') }}" >
             <div class="block-12 mb-pl2 pl-30p ptb-20p block-mb-12 mb-text-left">
+                {% if app.user.getAddresses()|length == 0 %}
+                    No Delivery address added.Please add one and try again...
+                {% endif %}
                 {% for address in app.user.getAddresses() %}
                     <div class="block-4 addresscary br-4p block-lb-6 block-sb-12 text-center">
                         <div class="block-11  ptrbl-20p brd-L-1p text-left">
-                            <h3><input type="radio" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {{ app.user.getFullname() }}  </h3>
+                            <h3><input type="radio" required="" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {{ app.user.getFullname() }}  </h3>
                             {{ address.getHouse() }}, {{ address.getStreet() }}, {{ address.getLandmark() }}, {{ address.getCity() }}
                             <br/>Pin: {{ address.getPin() }},  {{ address.getState() }}
                             <br/>
@@ -32,7 +35,11 @@
                     <input type="hidden" name="reward_points_used" value="{{ total_rewards }}" />
                     <input type="hidden" name="reward_money" value="{{ reward_money }}" />
                 {% endif %}
-                <button type="submit" class="momz-button ml-10p active" name=""> Submit Order <span class="icon-arrow-right"></span> </button>
+                {% if app.user.getAddresses()|length == 0 %}
+                    <a href="{{ path('address_form', {'id': 0}) }}"><button type="button" class="momz-button ml-10p active" name=""> Add delivery address </button></a>
+                {% else %}
+                    <button type="submit" class="momz-button ml-10p active" name=""> Submit Order <span class="icon-arrow-right"></span> </button>
+                {% endif %}
             </div>
         </form>
     </section>
