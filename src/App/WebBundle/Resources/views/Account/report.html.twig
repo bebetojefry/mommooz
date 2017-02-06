@@ -53,7 +53,7 @@
                             <td>{{ item.getUnitPrice() }}</td>
                             <td>{{ item.getPrice() }}</td>
                         </tr>
-                        {% set cat_total += item.getPrice() %}
+                        {% set cat_total = cat_total + item.getPrice() %}
                     {% endfor %}
                 </table>
                 <span class="total_spend">Rs.{{ cat_total }}</span>
