@@ -304,7 +304,7 @@ class AccountController extends Controller
             array(
                 'dataLabels' => array(
                     'enabled' => true,
-                    'format' => '{point.name}: {point.y:.1f}%'
+                    'format' => '{point.name}: Rs.{point.y:.1f}'
                 )
             )
         );
