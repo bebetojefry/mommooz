@@ -411,4 +411,32 @@ class Category
 
         return $filename;
     }
+    
+    public function hasChild(Category $child) {
+        foreach($this->childs as $ch){
+            if($ch->getId() == $child->getId()){
+                return true;
+                break;
+            } else {
+                if($ch->hasChild($child)){
+                    return true;
+                    break;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    public function getRoot(){
+        if($this->parent->getId() == 1){
+            return $this;
+        } else {
+            if($this->parent){
+                return $this->parent->getRoot();
+            }
+        }
+       
+        return null;
+    }
 }

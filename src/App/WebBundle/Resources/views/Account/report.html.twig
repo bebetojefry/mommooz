@@ -1,0 +1,67 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Account/Report{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+        <a href="{{ path('home') }}">Home</a>  - <a href="{{ path('account_home') }}">Account</a> - Report
+    </div>
+
+    <section class="user-order center-1200px mt-0p block-fl-cary va-top">
+
+        {% include 'AppWebBundle:Account:menu.html.twig' %}
+
+        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
+            {% set flashbag = app.session.flashBag.all %}
+            {% if flashbag|length > 0 %}
+                {% for type, messages in flashbag %}
+                    {% for message in messages %}
+                        <span class="message msg-{{ type }}">{{ message|raw }}</span>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            <style type="text/css">
+                .my_orders {
+                    border-color: #CCC;
+                }
+                .my_orders tr td, .my_orders tr th {
+                    text-align: left;
+                } 
+            </style>
+            {% for cat in categories %}
+                <span class="report_cat_name">Category: {{ cat['meta'].getCategoryName() }}</span>
+                {% set cat_total = 0 %}
+                <table class="report_cat_items" border="1">
+                    <tr>
+                        <th>Order Id</th>
+                        <th>Ordered On</th>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Price</th>
+                    </tr>
+                    {% for item in cat['items'] %}
+                        <tr>
+                            <td>#{{ item.getPurchase().getId() }}</</td>
+                            <td>{{ item.getPurchase().getPurchasedOn()|date('d-M-Y h:i A') }}</td>
+                            <td>{{ item.getEntry().getItem().getName() }}</td>
+                            <td>{{ item.getQuantity() }}</td>
+                            <td>{{ item.getUnitPrice() }}</td>
+                            <td>{{ item.getPrice() }}</td>
+                        </tr>
+                        {% set cat_total += item.getPrice() %}
+                    {% endfor %}
+                </table>
+                <span class="total_spend">Rs.{{ cat_total }}</span>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

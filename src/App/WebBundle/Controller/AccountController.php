@@ -267,6 +267,40 @@ class AccountController extends Controller
     }
     
     /**
+     * @Route("/report", name="report_page")
+     */
+    public function reportAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $qb->select('pi')
+            ->from('AppFrontBundle:PurchaseItem', 'pi')
+            ->join('pi.purchase', 'p')
+            ->where('p.status = :status and p.consumer = :consumer')
+            ->setParameter('status', 4)
+            ->setParameter('consumer', $this->getUser());
+
+        $items = $qb->getQuery()->getResult();
+        
+        $categories = array();
+        foreach($items as $item){
+            $cat = $item->getEntry()->getItem()->getProduct()->getCategory()->getRoot();
+            if(isset($categories[$cat->getId()])){
+                $categories[$cat->getId()]['items'][] = $item;
+            } else {
+                $categories[$cat->getId()]['meta'] = $cat;
+                $categories[$cat->getId()]['items'] = array($item);
+            }
+        }
+        
+        return $this->render('AppWebBundle:Account:report.html.twig',
+            array(
+                'categories' => $categories,
+            )
+        );
+    }
+    
+    /**
      * @Route("/orders/{id}/items", name="order_detail_page", options={"expose"=true})
      */
     public function orderdetailAction(Purchase $order)
