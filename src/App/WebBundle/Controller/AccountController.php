@@ -310,7 +310,7 @@ class AccountController extends Controller
         );
 
         $ob->tooltip->headerFormat('<span style="font-size:11px">{series.name}</span><br>');
-        $ob->tooltip->pointFormat('<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>');
+        $ob->tooltip->pointFormat('<span style="color:{point.color}">{point.name}</span>: <b>Rs.{point.y:.2f}</b><br/>');
 
         $data = array();
         foreach($categories as $cat){
