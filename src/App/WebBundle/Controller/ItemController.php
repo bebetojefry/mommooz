@@ -160,14 +160,16 @@ class ItemController extends Controller
 
         if($status){
             $location = $em->getRepository('AppFrontBundle:Location')->findOneByPinCode($pin);
-            $pin_region = $location->getRegion();
-            $v_regions = $entry->getStock()->getVendor()->getRegions();
-            foreach($v_regions as $region){
-                if($region->getId() == $pin_region->getId()){
-                    $cost = $location->getLocalServiceCharge();
-                } else {
-                    $cost = $location->getRegionalServiceCharge();
-                }
+            if($location){
+                $pin_region = $location->getRegion();
+                $v_regions = $entry->getStock()->getVendor()->getRegions();
+                foreach($v_regions as $region){
+                    if($region->getId() == $pin_region->getId()){
+                        $cost = $location->getLocalServiceCharge();
+                    } else {
+                        $cost = $location->getRegionalServiceCharge();
+                    }
+                }   
             }
         }
 
