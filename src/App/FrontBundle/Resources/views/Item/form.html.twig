@@ -47,7 +47,6 @@
         
         $("#{{ form.offers.vars.id }}").tokenInput("{{ path('offer_search') }}", {
             theme: "facebook",
-            allow_new: true
             {% if offer_values is defined %},prePopulate: {{ offer_values|raw }}{% endif %}
         });
 
