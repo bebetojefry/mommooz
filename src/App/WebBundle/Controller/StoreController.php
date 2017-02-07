@@ -17,7 +17,15 @@ class StoreController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $stores = $em->getRepository('AppFrontBundle:Vendor')->findBy(array('status' => true));
+        $region = $em->getRepository('AppFrontBundle:Region')->find($this->get('session')->get('region'));
+        $qb = $em->createQueryBuilder();
+        $qb->select('v')
+            ->from('AppFrontBundle:Vendor', 'v')
+            ->where('v.status = :status AND :region MEMBER OF v.regions')
+            ->setParameter('region', $region)
+            ->setParameter('status', true);
+        
+        $stores = $qb->getQuery()->getResult();
         
         return $this->render('AppWebBundle:Store:index.html.twig', array(
             'stores' => $stores
