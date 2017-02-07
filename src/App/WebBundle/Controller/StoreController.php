@@ -18,6 +18,7 @@ class StoreController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $region = $em->getRepository('AppFrontBundle:Region')->find($this->get('session')->get('region'));
+        echo $region->getRegionName(); exit;
         $qb = $em->createQueryBuilder();
         $qb->select('v')
             ->from('AppFrontBundle:Vendor', 'v')
