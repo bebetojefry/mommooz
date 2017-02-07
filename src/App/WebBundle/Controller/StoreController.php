@@ -18,12 +18,11 @@ class StoreController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $region = $em->getRepository('AppFrontBundle:Region')->find($this->get('session')->get('region'));
-        echo $region->getRegionName(); exit;
+
         $qb = $em->createQueryBuilder();
         $qb->select('v')
             ->from('AppFrontBundle:Vendor', 'v')
-            ->where('v.status = :status AND :region MEMBER OF v.regions')
-            ->setParameter('region', $region)
+            ->where('v.status = :status')
             ->setParameter('status', true);
         
         $stores = $qb->getQuery()->getResult();
