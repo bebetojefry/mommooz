@@ -349,7 +349,7 @@ class Category
     public function getAllProducts(){
         $product = $this->products->toArray();
         foreach ($this->getChilds() as $cat){
-            $product = array_merge($product, $cat->getProducts()->toArray());
+            $product = array_merge($product, $cat->getAllProducts()->toArray());
         }
         
         return $product;
