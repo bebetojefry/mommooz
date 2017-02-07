@@ -8,6 +8,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use App\FrontBundle\Entity\Item;
 use Doctrine\ORM\EntityRepository;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
+use App\FrontBundle\DataTransformer\OfferToIdsTransformer;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\FrontBundle\Entity\Vendor;
 
@@ -32,6 +33,8 @@ class StockEntryType extends AbstractType
     {
         if($this->item instanceof Item){
             $keywordTransformer = new KeywordsToIdsTransformer($this->om);
+            $offerTransformer = new OfferToIdsTransformer($this->om);
+            
             $equation = '';
             if($this->item->getCommType() == 1){
                 $equation = '[Price] + '.$this->item->getCommValue();
@@ -82,7 +85,11 @@ class StockEntryType extends AbstractType
                 'required' => true,
                 'attr' => array('readonly' => true)
             ))
-            ->add('offers')
+            ->add(
+                $builder->create('offers', 'text', array(
+                    'required' => false,
+                ))->addModelTransformer($offerTransformer)
+            )
             ->add(
                 $builder->create('keywords', 'text', array(
                     'required' => false,
