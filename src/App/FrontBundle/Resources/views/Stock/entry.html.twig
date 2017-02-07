@@ -22,6 +22,8 @@
                     $("#{{ form.price.vars.id }}").parents('form-group').addClass('has-error');
                     alert('Actual price cannot be greater than MRP.');
                     $("#{{ form.price.vars.id }}").focus();
+                    $("#{{ form.price.vars.id }}").val('0');
+                    $("#{{ form.price.vars.id }}").trigger('keyup');
                 } else {
                     $("#{{ form.price.vars.id }}").parents('form-group').removeClass('has-error');
                 }
