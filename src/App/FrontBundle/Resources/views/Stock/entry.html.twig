@@ -17,6 +17,14 @@
                     actual_price = price + parseFloat((commvalue*price)/100);
                 }
                 $("#{{ form.actualPrice.vars.id }}").val(actual_price);
+                
+                if($("#{{ form.mrp.vars.id }}").val() < $("#{{ form.actualPrice.vars.id }}").val()){
+                    $("#{{ form.price.vars.id }}").parents('form-group').addClass('has-error');
+                    alert('Actual price cannot be greater than MRP.');
+                    $("#{{ form.price.vars.id }}").focus();
+                } else {
+                    $("#{{ form.price.vars.id }}").parents('form-group').removeClass('has-error');
+                }
             });
             
             $("#{{ form.keywords.vars.id }}").tokenInput("{{ path('keyword_search') }}", {
