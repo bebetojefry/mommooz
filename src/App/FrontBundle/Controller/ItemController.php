@@ -46,13 +46,15 @@ class ItemController extends Controller
     /**
      * Displays a form to add a new item entity.
      *
-     * @Route("/new", name="item_new", options={"expose"=true})
+     * @Route("/{id}/new", name="item_new", defaults={"id":0}, options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request, Product $product = null)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new ItemType($dm), new Item());
+        $item = new Item();
+        $item->setProduct($product);
+        $form = $this->createForm(new ItemType($dm), $item);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
