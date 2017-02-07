@@ -22,9 +22,8 @@ class StoreController extends Controller
         $qb = $em->createQueryBuilder();
         $qb->select('v')
             ->from('AppFrontBundle:Vendor', 'v')
-            ->leftJoin('v.regions', 'r')
-            ->where('v.status = :status and r.id = :region')
-            ->setParameter('region', $region->getId())
+            ->where('v.status = :status AND :region MEMBER OF v.regions')
+            ->setParameter('region', $region)
             ->setParameter('status', true);
         
         $stores = $qb->getQuery()->getResult();
