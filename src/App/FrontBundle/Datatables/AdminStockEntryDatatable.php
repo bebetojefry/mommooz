@@ -4,37 +4,44 @@ namespace App\FrontBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
+use App\FrontBundle\Entity\Stock;
 
 /**
- * Class UserDatatable
+ * Class AdminStockEntryDatatable
  *
  * @package App\FrontBundle\Datatables
  */
-class UserDatatable extends AbstractDatatableView
+class AdminStockEntryDatatable extends AbstractDatatableView
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getLineFormatter()
+    {
+        $repo = $this->em->getRepository('AppFrontBundle:StockEntry');
+        
+        $formatter = function($line) use ($repo){
+            $entry = $repo->find($line['id']);
+            $line['in_stock'] = $entry->getInStock();
+            $line['commission'] = $line['actualPrice'] - $line['price']; 
+            return $line;
+        };
+
+        return $formatter;
+    }
+
+    
     /**
      * {@inheritdoc}
      */
     public function buildDatatable(array $options = array())
     {
+        $id = isset($options['stock']) && $options['stock'] instanceof Stock ? $options['stock']->getId() : 0;
+        
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
-            'actions' => array(
-                array(
-                    'route' => $this->router->generate('vendor_new'),
-                    'label' => $this->translator->trans('vendor.actions.new'),
-                    'icon' => 'glyphicon glyphicon-plus',
-                    'attributes' => array(
-                        'rel' => 'tooltip',
-                        'title' => $this->translator->trans('vendor.actions.new'),
-                        'class' => 'btn btn-primary',
-                        'role' => 'button',
-                        'onclick' => 'return openModal(event);',
-                        'modalTitle' => $this->translator->trans('vendor.title.new'),
-                    ),
-                )
-            )
+            'actions' => array()
         ));
 
         $this->features->set(array(
@@ -55,9 +62,9 @@ class UserDatatable extends AbstractDatatableView
             'highlight' => false,
             'highlight_color' => 'red'
         ));
-
+        
         $this->ajax->set(array(
-            'url' => $this->router->generate('user_results'),
+            'url' => $this->router->generate('admin_stockentry_results', array('id' => $id)),
             'type' => 'GET',
             'pipeline' => 0
         ));
@@ -89,85 +96,88 @@ class UserDatatable extends AbstractDatatableView
             ->add('id', 'column', array(
                 'title' => 'Id',
             ))
-            ->add('firstname', 'column', array(
-                'title' => 'Firstname',
+            ->add('item.name', 'column', array(
+                'title' => 'Item Name',
             ))
-            ->add('lastname', 'column', array(
-                'title' => 'Lastname',
+            ->add('quantity', 'column', array(
+                'title' => 'Quantity',
+                'visible' => false,
             ))
-            ->add('phone', 'column', array(
-                'title' => 'Phone',
+            ->add('in_stock', 'virtual', array(
+                'title' => 'Available Stock',
             ))
-            ->add('created_on', 'datetime', array(
-                'title' => 'Created_on',
+            ->add('mrp', 'column', array(
+                'title' => 'MRP',
+            ))
+            ->add('price', 'column', array(
+                'title' => 'Price',
+            ))
+            ->add('commission', 'virtual', array(
+                'title' => 'Commission',
+            ))
+            ->add('actualPrice', 'column', array(
+                'title' => 'Display Price',
+            ))
+            ->add('status', 'boolean', array(
+                'title' => 'Enabled',
+                'true_icon' => 'glyphicon glyphicon-ok',
+                'false_icon' => 'glyphicon glyphicon-remove',
+                'true_label' => 'Yes',
+                'false_label' => 'No'
             ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'vendor_edit',
+                        'route' => 'stockentry_manage',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('vendor.actions.edit'),
+                        'label' => $this->translator->trans('stockentry.actions.manage'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('vendor.actions.edit'),
-                            'class' => 'btn btn-primary btn-xs',
+                            'title' => $this->translator->trans('stockentry.actions.manage'),
+                            'class' => 'btn btn-primary btn-xs ',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('vendor.title.edit'),
+                            'modalTitle' => $this->translator->trans('stockentry.title.manage'),
                             'style' => 'margin-right:5px;'
                         )
                     ),
                     array(
-                        'route' => 'vendor_delete',
+                        'route' => 'stockentry_add',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('vendor.actions.delete'),
-                        'icon' => 'glyphicon glyphicon-trash',
+                        'label' => 'Add Stock',
+                        'icon' => 'glyphicon glyphicon-plus-sign',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('vendor.actions.delete'),
+                            'title' => $this->translator->trans('stockentry.actions.add'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
-                            'onclick' => 'return openConfirm(event);',
-                            'cofirmText' => $this->translator->trans('vendor.delete.confirm'),
+                            'onclick' => 'return openPrompt(event);',
+                            'promptText' => $this->translator->trans('stockentry.add.prompt'),
                             'style' => 'margin-right:5px;'
-                        ),
+                        )                    
                     ),
                     array(
-                        'route' => 'vendor_reset',
+                        'route' => 'stockentry_minus',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('vendor.actions.reset'),
-                        'icon' => 'glyphicon glyphicon-trash',
+                        'label' => 'Minus Stock',
+                        'icon' => 'glyphicon glyphicon-minus-sign',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('vendor.actions.reset'),
+                            'title' => $this->translator->trans('stockentry.actions.minus'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
-                            'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('vendor.title.reset'),
+                            'onclick' => 'return openPrompt(event);',
+                            'promptText' => $this->translator->trans('stockentry.minus.prompt'),
                             'style' => 'margin-right:5px;'
-                        ),
-                    ),
-                    array(
-                        'route' => 'vendor_entries',
-                        'route_parameters' => array(
-                            'id' => 'id'
-                        ),
-                        'label' => $this->translator->trans('vendor.actions.items'),
-                        'icon' => 'glyphicon glyphicon-trash',
-                        'attributes' => array(
-                            'rel' => 'tooltip',
-                            'title' => $this->translator->trans('vendor.actions.items'),
-                            'class' => 'btn btn-primary btn-xs',
-                            'role' => 'button'
-                        ),
+                        )
                     )
                 )
             ))
@@ -185,7 +195,7 @@ class UserDatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'App\FrontBundle\Entity\Vendor';
+        return 'App\FrontBundle\Entity\StockEntry';
     }
 
     /**
@@ -193,6 +203,6 @@ class UserDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'user_datatable';
+        return 'admin_stockentry_datatable';
     }
 }

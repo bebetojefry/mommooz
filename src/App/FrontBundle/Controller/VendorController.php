@@ -390,4 +390,21 @@ class VendorController extends Controller
             'invoicesDatatable' => $invoicesDatatable
         ));
     }
+    
+    /**
+     * @Route("/{id}/entries", name="vendor_entries", defaults={"id":0}, options={"expose"=true})
+     */
+    public function entriesAction(Vendor $vendor = null)
+    {
+        $stock = null;
+        if($vendor){
+            $stock = $vendor->getStocks()->first();
+        }
+        $itemsDatatable = $this->get('app.front.datatable.adminstockentry');
+        $itemsDatatable->buildDatatable(array('stock' => $stock));
+        return $this->render('AppFrontBundle:Stock:adminItems.html.twig', array(
+            'itemsDatatable' => $itemsDatatable,
+            'stock' => $stock
+        ));
+    }
 }

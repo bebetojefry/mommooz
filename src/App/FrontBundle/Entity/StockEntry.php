@@ -555,6 +555,22 @@ class StockEntry
         return $this->orders;
     }
     
+    public function onOffer(){
+        foreach($this->offers as $offer){
+            $dt = new \DateTime('now'); $dt->setTime(0, 0, 0);
+            $interval = $offer->getExpiry()->diff($dt);
+            if($offer->getStatus() && $interval->format('%d') >= 0){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    public function isNew(){
+        return false;
+    }
+    
     public function getFilterData(){
         $data = array();
         $category = $this->getItem()->getProduct()->getCategory();
@@ -562,7 +578,8 @@ class StockEntry
         $brand = $this->getItem()->getBrand();
         $brandName = $brand->getName() == '' ? 'Brandless' : $brand->getName();
         $data['brand'] = array('id' => $brand->getId(), 'name' => $brandName);
-        $data['offer'] = $this->getItem()->onOffer();
+        $data['offer'] = $this->onOffer();
+        $data['new'] = $this->isNew();
         
         return $data;
     }

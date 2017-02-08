@@ -118,9 +118,9 @@ class User {
     public function getOfferItems($offer){
         $em = $this->container->get('doctrine')->getManager();
         $qb = $em->createQueryBuilder();
-        $qb->select('i')
-            ->from('AppFrontBundle:Item', 'i')
-            ->leftJoin('i.offers','o')    
+        $qb->select('e')
+            ->from('AppFrontBundle:StockEntry', 'e')
+            ->leftJoin('e.offers','o')    
             ->where('o.id = :o')
             ->setParameter('o', $offer->getId());
             

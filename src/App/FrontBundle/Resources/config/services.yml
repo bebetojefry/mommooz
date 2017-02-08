@@ -150,3 +150,7 @@ services:
     app.front.datatable.invoiceitem:
          class: App\FrontBundle\Datatables\InvoiceItemDatatable
          parent: sg_datatables.datatable.abstract
+         
+    app.front.datatable.adminstockentry:
+         class: App\FrontBundle\Datatables\AdminStockEntryDatatable
+         parent: sg_datatables.datatable.abstract
