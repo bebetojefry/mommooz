@@ -223,23 +223,21 @@ class StockEntryDatatable extends AbstractDatatableView
                         }
                     ),
                     array(
-                        'route' => 'stockentry_price',
+                        'route' => 'stockentry_manage',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => 'Change Price',
-                        'icon' => 'glyphicons glyphicons-currency-conversion',
+                        'label' => $this->translator->trans('stockentry.actions.manage'),
+                        'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('stockentry.actions.price'),
-                            'class' => 'btn btn-primary btn-xs',
+                            'title' => $this->translator->trans('stockentry.actions.manage'),
+                            'class' => 'btn btn-primary btn-xs ',
                             'role' => 'button',
-                            'onclick' => 'return openPrompt(event);',
-                            'promptText' => $this->translator->trans('stockentry.price.prompt'),
-                        ),
-                        'render_if' => function($row) use ($published) {
-                            return $published === true;
-                        }
+                            'onclick' => 'return openModal(event);',
+                            'modalTitle' => $this->translator->trans('stockentry.title.manage'),
+                            'style' => 'margin-right:5px;'
+                        )
                     )
                 )
             ))
