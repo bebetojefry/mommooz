@@ -171,4 +171,16 @@ class User {
         
         return $result;
     }
+    
+    public function isAddressValidToDeliver($address){
+        $em = $this->container->get('doctrine')->getManager();
+        $region = $em->getRepository('AppFrontBundle:Region')->find($this->container->get('session')->get('region'));
+        foreach($region->getLocations() as $location){
+            if($location->getPinCode() == $address->getPin()){
+                return true;
+            }
+        }
+        
+        return false;
+    }
 }
