@@ -160,4 +160,15 @@ class User {
         
         return false;
     }
+    
+    public function getDeliverables($entries){
+        $result = array();
+        foreach($entries as $entry){
+            if($this->isDeliverable($entry)){
+                $result[] = $entry;
+            }
+        }
+        
+        return $result;
+    }
 }
