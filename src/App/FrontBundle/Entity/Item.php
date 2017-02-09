@@ -596,7 +596,7 @@ class Item
         $price = array();
         $items = array();
         foreach($entries as $entry){
-            if($entry->getStock()->getStatus()){
+            if($entry->getStock()->getStatus() && $entry->getStatus()){
                 $index = $this->getId();
 
                 if($this->getVariants()->count() > 0){
