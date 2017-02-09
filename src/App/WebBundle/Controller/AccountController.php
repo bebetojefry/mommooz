@@ -258,10 +258,14 @@ class AccountController extends Controller
     public function ordersAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $orders = $em->getRepository('AppFrontBundle:Purchase')->findByConsumer($this->getUser());
+        $pending = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => array(0, 1, 2, 3) ));
+        $delivered = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => 4 ));
+        $cancelled = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => 5 ));
         return $this->render('AppWebBundle:Account:orders.html.twig',
             array(
-                'orders' => $orders,
+                'pending' => $pending,
+                'delivered' => $delivered,
+                'cancelled' => $cancelled,
                 'status' => array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled')
             )
         );

@@ -32,6 +32,7 @@
                     text-align: left;
                 } 
             </style>
+            <span>Pending to deliver</span>
             <table class="my_orders" border="1">
                 <tr>
                     <th>Order Id</th>
@@ -39,9 +40,9 @@
                     <th>Total Items</th>
                     <th>Total Price</th>
                     <th>Status</th>
-                    <th>Expected Delivery/Delivered On/Cancelled On</th>
+                    <th>Expected Delivery</th>
                 </tr>
-                {% for order in orders %}
+                {% for order in pending %}
                     <tr>
                         <td><a href="{{ path('order_detail_page', {'id': order.getId()}) }}">#{{ order.getId() }}</a></td>
                         <td>{{ order.getPurchasedOn()|date('d-M-Y h:i A') }}</td>
@@ -55,13 +56,59 @@
                         <td>
                             {% if order.getStatus() == 1 or order.getStatus() == 2 or order.getStatus() == 3 %}
                                 {{ order.getExpectedOn()|date('d-M-Y h:i A') }}
-                            {% elseif order.getStatus() == 4 %}
-                                {{ order.getDeliveredOn()|date('d-M-Y h:i A') }}
-                            {% elseif order.getStatus() == 5 %}
-                                {{ order.getCancelledOn()|date('d-M-Y h:i A') }}
                             {% else %}
                                 None
                             {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <span>Delivered</span>
+            <table class="my_orders" border="1">
+                <tr>
+                    <th>Order Id</th>
+                    <th>Ordered On</th>
+                    <th>Total Items</th>
+                    <th>Total Price</th>
+                    <th>Delivered On</th>
+                </tr>
+                {% for order in delivered %}
+                    <tr>
+                        <td><a href="{{ path('order_detail_page', {'id': order.getId()}) }}">#{{ order.getId() }}</a></td>
+                        <td>{{ order.getPurchasedOn()|date('d-M-Y h:i A') }}</td>
+                        <td>{{ order.getItems()|length }}</td>
+                        {% set total_amt = order.getTotalPrice() %}
+                        {% if order.getRewardUse() %}
+                            {% set total_amt = order.getTotalPrice() - order.getRewardUse().getMoney() %}
+                        {% endif %}
+                        <td>{{ total_amt }}</td>                     
+                        <td>
+                            {{ order.getDeliveredOn()|date('d-M-Y h:i A') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <span>Cancelled</span>
+            <table class="my_orders" border="1">
+                <tr>
+                    <th>Order Id</th>
+                    <th>Ordered On</th>
+                    <th>Total Items</th>
+                    <th>Total Price</th>
+                    <th>Cancelled On</th>
+                </tr>
+                {% for order in cancelled %}
+                    <tr>
+                        <td><a href="{{ path('order_detail_page', {'id': order.getId()}) }}">#{{ order.getId() }}</a></td>
+                        <td>{{ order.getPurchasedOn()|date('d-M-Y h:i A') }}</td>
+                        <td>{{ order.getItems()|length }}</td>
+                        {% set total_amt = order.getTotalPrice() %}
+                        {% if order.getRewardUse() %}
+                            {% set total_amt = order.getTotalPrice() - order.getRewardUse().getMoney() %}
+                        {% endif %}
+                        <td>{{ total_amt }}</td>
+                        <td>
+                            {{ order.getCancelledOn()|date('d-M-Y h:i A') }}
                         </td>
                     </tr>
                 {% endfor %}
