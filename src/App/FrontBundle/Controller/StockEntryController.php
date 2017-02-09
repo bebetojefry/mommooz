@@ -14,6 +14,7 @@ use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Item;
 use Doctrine\ORM\QueryBuilder;
 use App\FrontBundle\Entity\StockPurchase;
+use App\FrontBundle\Form\AdminStockEntryType;
 
 class StockEntryController extends Controller
 {
@@ -23,6 +24,24 @@ class StockEntryController extends Controller
     public function indexResultsAction(Request $request, Stock $stock = null)
     {
         $datatable = $this->get('app.front.datatable.stockentry');
+        $datatable->buildDatatable(array('stock' => $stock));
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
+        $qb = $query->getQuery();
+        if($stock){
+            $qb->andWhere("stock_entry.stock = :s");
+            $qb->setParameter('s', $stock);
+        }
+        $query->setQuery($qb);
+        return $query->getResponse(false);
+    }
+    
+    /**
+     * @Route("/{id}/admin/results", name="admin_stockentry_results", defaults={"id":0}, options={"expose"=true})
+     */
+    public function adminResultsAction(Request $request, Stock $stock = null)
+    {
+        $datatable = $this->get('app.front.datatable.adminstockentry');
         $datatable->buildDatatable(array('stock' => $stock));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
         $query->buildQuery();
@@ -117,7 +136,7 @@ class StockEntryController extends Controller
             $keyword_values[] = array('id' => $keyword->getId(), 'name' => $keyword->getKeyword());
         }
         
-        $offers = $item->getOffers()->getValues();
+        $offers = $stockentry->getOffers()->getValues();
         $offer_values = array();
         foreach($offers as $offer){
             $offer_values[] = array('id' => $offer->getId(), 'name' => $offer->getName());
@@ -125,6 +144,45 @@ class StockEntryController extends Controller
         
         $body = $this->renderView('AppFrontBundle:Stock:entry.html.twig',
             array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values))
+        );
+        
+        return new Response(json_encode(array('code' => $code, 'data' => $body)));
+    }
+    
+    /**
+     * Displays a admin form to edit an existing stockentry entity.
+     *
+     * @Route("/{id}/manage", name="stockentry_manage", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function manageAction(Request $request, StockEntry $stockentry)
+    {
+        $dm = $this->getDoctrine()->getManager();
+
+        $form = $this->createForm(new AdminStockEntryType($dm, $stockentry->getItem()), $stockentry);
+        
+        $code = FormHelper::FORM;
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $stockentry = $form->getData();
+                $dm->persist($stockentry);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.updated');
+                $code = FormHelper::REFRESH;
+            } else {
+                $code = FormHelper::REFRESH_FORM;
+            }
+        }
+        
+        $offers = $stockentry->getOffers()->getValues();
+        $offer_values = array();
+        foreach($offers as $offer){
+            $offer_values[] = array('id' => $offer->getId(), 'name' => $offer->getName());
+        }
+        
+        $body = $this->renderView('AppFrontBundle:Stock:adminEntry.html.twig',
+            array('form' => $form->createView(), 'offer_values' => json_encode($offer_values))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));

@@ -152,6 +152,21 @@ class UserDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
                             'modalTitle' => $this->translator->trans('vendor.title.reset'),
+                            'style' => 'margin-right:5px;'
+                        ),
+                    ),
+                    array(
+                        'route' => 'vendor_entries',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('vendor.actions.items'),
+                        'icon' => 'glyphicon glyphicon-trash',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('vendor.actions.items'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button'
                         ),
                     )
                 )

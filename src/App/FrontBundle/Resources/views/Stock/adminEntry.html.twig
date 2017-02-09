@@ -28,19 +28,11 @@
                     $("#{{ form.price.vars.id }}").parents('form-group').removeClass('has-error');
                 }
             });
-            
-            $("#{{ form.keywords.vars.id }}").tokenInput("{{ path('keyword_search') }}", {
-                theme: "facebook",
-                allow_new: true
-                {% if keyword_values is defined %},prePopulate: {{ keyword_values|raw }}{% endif %}
-            });
-            
+          
             $("#{{ form.offers.vars.id }}").tokenInput("{{ path('offer_search') }}", {
                 theme: "facebook"
                 {% if offer_values is defined %},prePopulate: {{ offer_values|raw }}{% endif %}
             });
-
-            $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
         });
     </script>
 {% endif %}

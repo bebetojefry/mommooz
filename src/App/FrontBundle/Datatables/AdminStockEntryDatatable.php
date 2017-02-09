@@ -4,13 +4,14 @@ namespace App\FrontBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
+use App\FrontBundle\Entity\Stock;
 
 /**
- * Class StockEntryDatatable
+ * Class AdminStockEntryDatatable
  *
  * @package App\FrontBundle\Datatables
  */
-class StockEntryDatatable extends AbstractDatatableView
+class AdminStockEntryDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -35,27 +36,12 @@ class StockEntryDatatable extends AbstractDatatableView
      */
     public function buildDatatable(array $options = array())
     {
-        $id = isset($options['stock']) ? $options['stock']->getId() : 0;
-        $published = isset($options['stock']) ? $options['stock']->getStatus() : 0;
+        $id = isset($options['stock']) && $options['stock'] instanceof Stock ? $options['stock']->getId() : 0;
         
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
-            'actions' => array(
-                array(
-                    'route' => $this->router->generate('stockentry_new', array('id' => $id)),
-                    'label' => $this->translator->trans('datatables.actions.new'),
-                    'icon' => 'glyphicon glyphicon-plus',
-                    'attributes' => array(
-                        'rel' => 'tooltip',
-                        'title' => $this->translator->trans('stockentry.actions.new'),
-                        'class' => 'btn btn-primary',
-                        'role' => 'button',
-                        'onclick' => 'return openModal(event);',
-                        'modalTitle' => $this->translator->trans('stockentry.title.new'),
-                    ),
-                )
-            )
+            'actions' => array()
         ));
 
         $this->features->set(array(
@@ -78,7 +64,7 @@ class StockEntryDatatable extends AbstractDatatableView
         ));
         
         $this->ajax->set(array(
-            'url' => $this->router->generate('stockentry_results', array('id' => $id)),
+            'url' => $this->router->generate('admin_stockentry_results', array('id' => $id)),
             'type' => 'GET',
             'pipeline' => 0
         ));
@@ -143,44 +129,21 @@ class StockEntryDatatable extends AbstractDatatableView
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'stockentry_edit',
+                        'route' => 'stockentry_manage',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('stockentry.actions.edit'),
+                        'label' => $this->translator->trans('stockentry.actions.manage'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('stockentry.actions.edit'),
+                            'title' => $this->translator->trans('stockentry.actions.manage'),
                             'class' => 'btn btn-primary btn-xs ',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('stockentry.title.edit'),
+                            'modalTitle' => $this->translator->trans('stockentry.title.manage'),
                             'style' => 'margin-right:5px;'
-                        ),
-                        'render_if' => function($row) use($published) {
-                            return $published === false;
-                        }
-                    ),
-                    array(
-                        'route' => 'stockentry_delete',
-                        'route_parameters' => array(
-                            'id' => 'id'
-                        ),
-                        'label' => $this->translator->trans('stockentry.actions.delete'),
-                        'icon' => 'glyphicon glyphicon-trash',
-                        'attributes' => array(
-                            'rel' => 'tooltip',
-                            'title' => $this->translator->trans('stockentry.actions.delete'),
-                            'class' => 'btn btn-primary btn-xs ',
-                            'role' => 'button',
-                            'onclick' => 'return openConfirm(event);',
-                            'cofirmText' => $this->translator->trans('stockentry.delete.confirm'),
-                            'style' => 'margin-right:5px;'
-                        ),
-                        'render_if' => function($row) {
-                            return ($row['quantity'] == $row['in_stock']);
-                        }
+                        )
                     ),
                     array(
                         'route' => 'stockentry_add',
@@ -197,10 +160,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'onclick' => 'return openPrompt(event);',
                             'promptText' => $this->translator->trans('stockentry.add.prompt'),
                             'style' => 'margin-right:5px;'
-                        ),
-                        'render_if' => function($row) use($published) {
-                            return $published === true;
-                        }
+                        )                    
                     ),
                     array(
                         'route' => 'stockentry_minus',
@@ -216,26 +176,6 @@ class StockEntryDatatable extends AbstractDatatableView
                             'role' => 'button',
                             'onclick' => 'return openPrompt(event);',
                             'promptText' => $this->translator->trans('stockentry.minus.prompt'),
-                            'style' => 'margin-right:5px;'
-                        ),
-                        'render_if' => function($row) use ($published) {
-                            return $published === true;
-                        }
-                    ),
-                    array(
-                        'route' => 'stockentry_manage',
-                        'route_parameters' => array(
-                            'id' => 'id'
-                        ),
-                        'label' => $this->translator->trans('stockentry.actions.manage'),
-                        'icon' => 'glyphicon glyphicon-edit',
-                        'attributes' => array(
-                            'rel' => 'tooltip',
-                            'title' => $this->translator->trans('stockentry.actions.manage'),
-                            'class' => 'btn btn-primary btn-xs ',
-                            'role' => 'button',
-                            'onclick' => 'return openModal(event);',
-                            'modalTitle' => $this->translator->trans('stockentry.title.manage'),
                             'style' => 'margin-right:5px;'
                         )
                     )
@@ -263,6 +203,6 @@ class StockEntryDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'stockentry_datatable';
+        return 'admin_stockentry_datatable';
     }
 }
