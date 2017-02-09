@@ -26,7 +26,7 @@ class ReferController extends Controller
                     'allow_add'    => true,
                     'by_reference' => false,
                     'allow_delete' => true,
-                ));
+                ))->getForm();
         
         $msg = null;
         if($request->isMethod('POST')){
