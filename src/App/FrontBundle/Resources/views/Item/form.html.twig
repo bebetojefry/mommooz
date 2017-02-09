@@ -46,8 +46,8 @@
         });
         
         $("#{{ form.offers.vars.id }}").tokenInput("{{ path('offer_search') }}", {
-            theme: "facebook",
-            {% if offer_values is defined %}prePopulate: {{ offer_values|raw }}{% endif %}
+            theme: "facebook"
+            {% if offer_values is defined %},prePopulate: {{ offer_values|raw }}{% endif %}
         });
 
         $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
