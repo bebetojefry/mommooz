@@ -52,7 +52,7 @@
                 <tr>
                     <td colspan="5" class="totalcart-rate text-right">  
                         {% if total_rewards > 0 and (totalPrice - reward_money) > 0 %}
-                            <div style="color: #CCC; font-size:12px;">
+                            <div style="color: #333;font-size: 14px;float: left;">
                                 <input type="checkbox" value="1" name="use_reward" id="use_reward" /> You have reward money of <b>Rs.{{ reward_money }}</b>.Do yopu want to use that in this purchase?
                                 <input type="hidden" name="reward_points_used" value="{{ total_rewards }}" />
                                 <input type="hidden" name="reward_money" value="{{ reward_money }}" />
