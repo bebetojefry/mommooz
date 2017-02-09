@@ -30,21 +30,56 @@
         {% if msg %}
             <span class="inline-msg">{{ msg }}</span>
         {% endif %}
+        <div id="refer_prototype" style="display: none;">
+            <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
+            <td class="pr-10p form-group">{{ form_widget(form.refers.name.vars.prototype) }}</td>
+            <td class="pr-10p form-group">{{ form_widget(form.refers.email.vars.prototype) }}</td>
+            <td class="pr-10p form-group">{{ form_widget(form.refers.phone.vars.prototype) }}</td>
+        </div>
         <form name="frmRefer" action="" method="post">
+            <table class="mt-15p raf-table" id="refers-list">
+                {% for refer in form.refers %}
+                    <tr>
+                        <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
+                        <td class="pr-10p form-group">{{ form_widget(refer.name) }}</td>
+                        <td class="pr-10p form-group">{{ form_widget(refer.email) }}</td>
+                        <td class="pr-10p form-group">{{ form_widget(refer.phone) }}</td>
+                    </tr>
+                {% endfor %}
+                
+            </table>
             <table class="mt-15p raf-table">
                 <tr>
-                    <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
-                    <td class="pr-10p form-group">{{ form_widget(form.name) }}</td>
-                    <td class="pr-10p form-group">{{ form_widget(form.email) }}</td>
-                    <td class="pr-10p form-group">{{ form_widget(form.phone) }}</td>
-                </tr>
-                <tr>
                     <td colspan="4" class="text-left"><input type="submit" value="Submit" class="raf-submit mr-5p">
-                      or <span class="icon-plus-circle pointer-csr dispaly-inline-block ml-10p" style="font-size:14px;"> Add more friends </span></td>
+                      or <span id="add-refer" class="icon-plus-circle pointer-csr dispaly-inline-block ml-10p" style="font-size:14px;"> Add more friends </span></td>
                 </tr>
             </table>
-                {{ form_widget(form._token) }}
+            {{ form_widget(form._token) }}
         </form>
+        <script type="text/javascript">
+            // keep track of how many email fields have been rendered
+            var referCount = '{{ form.refers|length }}';
+
+            jQuery(document).ready(function() {
+                jQuery('#add-refer').click(function(e) {
+                    e.preventDefault();
+
+                    var referList = jQuery('#refers-list');
+
+                    // grab the prototype template
+                    var newWidget = $('#refer_prototype').html();
+                    // replace the "__name__" used in the id and name of the prototype
+                    // with a number that's unique to your emails
+                    // end name attribute looks like name="contact[emails][2]"
+                    newWidget = newWidget.replace(/__name__/g, referCount);
+                    referCount++;
+
+                    // create a new list element and add it to the list
+                    var newTr = jQuery('<tr></tr>').html(newWidget);
+                    newTr.appendTo(referList);
+                });
+            })
+        </script>
     </section>    
 {% endblock%}
 

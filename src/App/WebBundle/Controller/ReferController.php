@@ -18,30 +18,41 @@ class ReferController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new ReferenceType(), new Reference());
+        $obj = new \stdClass();
+        $obj->refers = array(new Reference());
+        $form = $this->createFormBuilder($obj)
+                ->add('refers', 'collection', array(
+                    'type'         => new ReferenceType(),
+                    'allow_add'    => true,
+                    'by_reference' => false,
+                    'allow_delete' => true,
+                ));
+        
         $msg = null;
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if($form->isValid()){
-                $reference = $form->getData();
-                $reference->setReferedBy($this->getUser());
-                $em->persist($reference);
+                $obj = $form->getData();
+                foreach($obj->refers as $reference){
+                    $reference->setReferedBy($this->getUser());
+                    $em->persist($reference);
+                    
+                    //send email to friend
+                    $content = $this->renderView('AppWebBundle:Refer:email.html.twig',
+                        array('consumer' => $this->getUser(), 'friend' => $reference)
+                    );
+
+                    $message = \Swift_Message::newInstance()
+                    ->setSubject('Mommooz Reference')
+                    ->setFrom($this->getParameter('email_from'))
+                    ->addTo($reference->getEmail(), $reference->getName())
+                    ->setBody($content, 'text/html');
+
+                    $this->get('mailer')->send($message);
+                }
                 $em->flush();
                 
-                //send email to friend
-                $content = $this->renderView('AppWebBundle:Refer:email.html.twig',
-                    array('consumer' => $this->getUser(), 'friend' => $reference)
-                );
-                
-                $message = \Swift_Message::newInstance()
-                ->setSubject('Mommooz Reference')
-                ->setFrom($this->getParameter('email_from'))
-                ->addTo($reference->getEmail(), $reference->getName())
-                ->setBody($content, 'text/html');
-
-                $this->get('mailer')->send($message);
-                
-                $msg = 'Reference to friend has been successfully sent.';
+                $msg = 'Reference to friend(s) has been successfully sent.';
             }
         }
         return $this->render('AppWebBundle:Refer:index.html.twig', array('form' => $form->createView(), 'msg' => $msg));
