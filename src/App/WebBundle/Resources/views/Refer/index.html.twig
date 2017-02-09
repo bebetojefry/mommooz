@@ -31,10 +31,14 @@
             <span class="inline-msg">{{ msg }}</span>
         {% endif %}
         <div id="refer_prototype" style="display: none;">
-            <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
-            <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.name) }}</td>
-            <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.email) }}</td>
-            <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.phone) }}</td>
+            <table>
+                <tr>
+                    <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
+                    <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.name) }}</td>
+                    <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.email) }}</td>
+                    <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.phone) }}</td>
+                </tr>
+            </table>
         </div>
         <form name="frmRefer" action="" method="post">
             <table class="mt-15p raf-table" id="refers-list">
@@ -67,7 +71,7 @@
                     var referList = jQuery('#refers-list');
 
                     // grab the prototype template
-                    var newWidget = $('#refer_prototype').html();
+                    var newWidget = $('#refer_prototype').find('tr').html();
                     // replace the "__name__" used in the id and name of the prototype
                     // with a number that's unique to your emails
                     // end name attribute looks like name="contact[emails][2]"
