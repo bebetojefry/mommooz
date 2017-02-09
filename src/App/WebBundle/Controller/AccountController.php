@@ -194,7 +194,30 @@ class AccountController extends Controller
      */
     public function cartAction()
     {
-        return $this->render('AppWebBundle:Account:cart.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $reward_money_config = $em->getRepository('AppFrontBundle:Config')->findOneByName('reward_money');
+        $reward_money = 0;
+        $total_rewards = 0;
+        if($reward_money_config && $this->getUser()){
+            $cart_price = $this->getUser()->getCart()->getPrice();
+            $max_points_needed = round($cart_price*$reward_money_config->getValue(), 2);
+            $rewards = $em->getRepository('AppFrontBundle:Reward')->findByConsumer($this->getUser());
+            foreach($rewards as $reward){
+                $total_rewards += $reward->getPoint();
+                if($total_rewards > $max_points_needed){
+                    $total_rewards = $max_points_needed;
+                    break;
+                }
+            }
+            
+            if($reward_money_config->getValue() > 0){
+                $reward_money = round($total_rewards/$reward_money_config->getValue(), 2);
+            }
+        }
+        
+        return $this->render('AppWebBundle:Account:cart.html.twig', 
+            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards)
+        );
     }
     
     /**

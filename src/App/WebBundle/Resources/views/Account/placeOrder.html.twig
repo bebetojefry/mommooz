@@ -34,8 +34,8 @@
                 {% endif %}
             </div>
             <div class="full-width mt-10p ptb-20p text-right button-cart">
-                {% if total_rewards > 0 %}
-                    <input type="checkbox" value="1" name="use_reward" /> You have reward money of <b>Rs.{{ reward_money }}</b>.Do yopu want to use that in this purchase?
+                {% if app.request.get('use_reward') %}
+                    <input type="hidden" value="1" name="use_reward" />
                     <input type="hidden" name="reward_points_used" value="{{ total_rewards }}" />
                     <input type="hidden" name="reward_money" value="{{ reward_money }}" />
                 {% endif %}
