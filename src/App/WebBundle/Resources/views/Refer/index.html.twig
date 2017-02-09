@@ -48,6 +48,7 @@
                         <td class="pr-10p form-group">{{ form_widget(refer.name) }}</td>
                         <td class="pr-10p form-group">{{ form_widget(refer.email) }}</td>
                         <td class="pr-10p form-group">{{ form_widget(refer.phone) }}</td>
+                        <td class="pr-10p form-group"><span class="remove_refer">X</span></td>
                     </tr>
                 {% endfor %}
                 
@@ -81,6 +82,13 @@
                     // create a new list element and add it to the list
                     var newTr = jQuery('<tr></tr>').html(newWidget);
                     newTr.appendTo(referList);
+                    
+                    jQuery('#refers-list').find('tr').eq(0).find('.remove_refer').hide();
+                    
+                    jQuery('#refers-list .remove_refer').on('click', function(){
+                       $(this).parent('tr').remove(); 
+                    });
+                    
                 });
             })
         </script>
