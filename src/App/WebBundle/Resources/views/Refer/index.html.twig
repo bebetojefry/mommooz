@@ -32,9 +32,9 @@
         {% endif %}
         <div id="refer_prototype" style="display: none;">
             <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
-            <td class="pr-10p form-group">{{ form_widget(form.refers.name.vars.prototype) }}</td>
-            <td class="pr-10p form-group">{{ form_widget(form.refers.email.vars.prototype) }}</td>
-            <td class="pr-10p form-group">{{ form_widget(form.refers.phone.vars.prototype) }}</td>
+            <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.name) }}</td>
+            <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.email) }}</td>
+            <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.phone) }}</td>
         </div>
         <form name="frmRefer" action="" method="post">
             <table class="mt-15p raf-table" id="refers-list">
