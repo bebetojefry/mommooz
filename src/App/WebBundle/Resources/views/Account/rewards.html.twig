@@ -40,11 +40,13 @@
                     <th>Credited On</th>
                 </tr>
                 {% for reward in rewards %}
-                    <tr>
-                        <td>{{ reward.getSource() }}</td>
-                        <td>{{ reward.getPoint() }}</td>
-                        <td>{{ reward.getCreditedOn()|date('d-M-Y h:i A') }}</td>
-                    </tr>
+                    {% if reward.getPoint() > 0 %}
+                        <tr>
+                            <td>{{ reward.getSource() }}</td>
+                            <td>{{ reward.getPoint() }}</td>
+                            <td>{{ reward.getCreditedOn()|date('d-M-Y h:i A') }}</td>
+                        </tr>
+                    {% endif %}
                 {% endfor %}
             </table>
             <span>Reward Debits</span>
