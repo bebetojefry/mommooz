@@ -267,7 +267,7 @@
 
     <section class="full-width footer-second mt-20p text-center ptb-10p white-txt"> Copyright © 2016, momooz Pvt Ltd, powered by
     <a href="http://primalcodes.com/" target="new"> primalcodes </a> </section>
-    <script type="text/javascript">
+    {#<script type="text/javascript">
         $(function() {
             $("#global-search").autocomplete({source:[
                 {
@@ -278,7 +278,7 @@
                 window.location = "{{ path('keyword_web_search') }}?q="+val;
             }); 
         });
-    </script>
+    </script>#}
     {% block javascript %}{% endblock %}
 </body>
 
