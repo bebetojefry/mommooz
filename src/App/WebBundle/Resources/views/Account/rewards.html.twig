@@ -1,0 +1,73 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Account/Rewards{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+        <a href="{{ path('home') }}">Home</a>  - <a href="{{ path('account_home') }}">Account</a> - Rewards
+    </div>
+
+    <section class="user-order center-1200px mt-0p block-fl-cary va-top">
+
+        {% include 'AppWebBundle:Account:menu.html.twig' %}
+
+        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
+            {% set flashbag = app.session.flashBag.all %}
+            {% if flashbag|length > 0 %}
+                {% for type, messages in flashbag %}
+                    {% for message in messages %}
+                        <span class="message msg-{{ type }}">{{ message|raw }}</span>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+            <style type="text/css">
+                .my_orders {
+                    border-color: #CCC;
+                }
+                .my_orders tr td, .my_orders tr th {
+                    text-align: left;
+                } 
+            </style>
+            <span>Reward Credits</span>
+            <table class="my_orders" border="1">
+                <tr>
+                    <th>Rewarded For</th>
+                    <th>Points</th>
+                    <th>Credited On</th>
+                </tr>
+                {% for reward in rewards %}
+                    <tr>
+                        <td>{{ reward.getSource() }}</td>
+                        <td>{{ reward.getPoint() }}</td>
+                        <td>{{ reward.getCreditedOn()|date('d-M-Y h:i A') }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <span>Reward Debits</span>
+            <table class="my_orders" border="1">
+                <tr>
+                    <th>Order Id</th>
+                    <th>Ordered On</th>
+                    <th>Points Debited</th>
+                    <th>Reward Money</th>
+                </tr>
+                {% for use in used %}
+                    <tr>
+                        <td>#{{ use.getPurchase().getId() }}</td>
+                        <td>{{ use.getPurchase().getPurchasedOn()|date('d-M-Y h:i A') }}</td>
+                        <td>{{ use.getPoints() }}</td>                     
+                        <td>{{ use.getMoney() }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}

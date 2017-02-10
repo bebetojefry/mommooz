@@ -295,6 +295,22 @@ class AccountController extends Controller
     }
     
     /**
+     * @Route("/rewards", name="rewards_page")
+     */
+    public function rewardsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rewards = $em->getRepository('AppFrontBundle:Reward')->findBy(array('consumer' => $this->getUser()));
+        $used = $em->getRepository('AppFrontBundle:RewardUse')->findBy(array('consumer' => $this->getUser()));
+        return $this->render('AppWebBundle:Account:rewards.html.twig',
+            array(
+                'rewards' => $rewards,
+                'used' => $used,
+            )
+        );
+    }
+    
+    /**
      * @Route("/report", name="report_page")
      */
     public function reportAction()
