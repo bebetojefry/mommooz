@@ -33,7 +33,6 @@
         <div id="refer_prototype" style="display: none;">
             <table>
                 <tr>
-                    <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
                     <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.name) }}</td>
                     <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.email) }}</td>
                     <td class="pr-10p form-group">{{ form_widget(form.refers.vars.prototype.phone) }}</td>
@@ -45,7 +44,6 @@
             <table class="mt-15p raf-table" id="refers-list">
                 {% for refer in form.refers %}
                     <tr>
-                        <td class="pr-10p gray-txt" width="30px" style="font-size:12px;">#1 </td>
                         <td class="pr-10p form-group">{{ form_widget(refer.name) }}</td>
                         <td class="pr-10p form-group">{{ form_widget(refer.email) }}</td>
                         <td class="pr-10p form-group">{{ form_widget(refer.phone) }}</td>
