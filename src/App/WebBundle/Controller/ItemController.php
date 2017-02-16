@@ -170,6 +170,8 @@ class ItemController extends Controller
                         $cost = $location->getRegionalServiceCharge();
                     }
                 }   
+            } else {
+                $status = false;
             }
         }
 

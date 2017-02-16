@@ -60,7 +60,7 @@ class KeywordController extends Controller
                 $qb->expr()->like('c.categoryName', '?1'),
                 $qb->expr()->like('p.name', '?1'),
                 $qb->expr()->like('i.name', '?1'),
-                $qb->expr()->like('b.name', '?1')
+                $qb->expr()->like('b.name', $qb->expr()->literal('%?1%'))
             ))
             ->orderBy('e.id', 'ASC')
             ->setParameter(1, $q);
