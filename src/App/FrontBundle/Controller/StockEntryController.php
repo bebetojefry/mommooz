@@ -85,10 +85,16 @@ class StockEntryController extends Controller
                     $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $stockentry->getItem()), $stockentry);
                     $code = FormHelper::REFRESH_FORM;
                 } else {
-                    $dm->persist($stockentry);
-                    $dm->flush();
-                    $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.created');
-                    $code = FormHelper::REFRESH;
+                    if($stockentry->getMrp() < $stockentry->getActualPrice()){
+                        $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $stockentry->getItem()), $stockentry);
+                        $this->get('session')->getFlashBag()->add('warning', 'Actual Price cannot be more than MRP value.');
+                        $code = FormHelper::REFRESH_FORM;
+                    } else {
+                        $dm->persist($stockentry);
+                        $dm->flush();
+                        $this->get('session')->getFlashBag()->add('success', 'stockentry.msg.created');
+                        $code = FormHelper::REFRESH;
+                    }
                 }
             } else {
                 $code = FormHelper::REFRESH_FORM;

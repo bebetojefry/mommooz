@@ -1,3 +1,22 @@
+{% set flashbag = app.session.flashBag.all %}
+{% if flashbag|length > 0 %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header" style="margin: 0 !important;">
+                {% for type, messages in flashbag %}
+                    {% for message in messages %}
+                        {%if type == 'error'%} {% set type = 'danger' %} {%endif%}
+                        <div class="alert alert-{{ type }}">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <strong>{{ type | capitalize }}!</strong>
+                            {{ message | trans | raw }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {{ form_widget(form) }}
 {% if form.price is defined %}
@@ -18,7 +37,7 @@
                 }
                 $("#{{ form.actualPrice.vars.id }}").val(actual_price);
                 
-                if($("#{{ form.mrp.vars.id }}").val() < $("#{{ form.actualPrice.vars.id }}").val()){
+                {#if($("#{{ form.mrp.vars.id }}").val() < $("#{{ form.actualPrice.vars.id }}").val()){
                     $("#{{ form.price.vars.id }}").parents('form-group').addClass('has-error');
                     alert('Actual price cannot be greater than MRP.');
                     $("#{{ form.price.vars.id }}").focus();
@@ -26,7 +45,7 @@
                     $("#{{ form.price.vars.id }}").trigger('keyup');
                 } else {
                     $("#{{ form.price.vars.id }}").parents('form-group').removeClass('has-error');
-                }
+                }#}
             });
             
             $("#{{ form.keywords.vars.id }}").tokenInput("{{ path('keyword_search') }}", {
