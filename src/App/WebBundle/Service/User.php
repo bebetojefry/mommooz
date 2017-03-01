@@ -7,6 +7,7 @@ use App\FrontBundle\Entity\Cart;
 use App\FrontBundle\Entity\WishList;
 use App\FrontBundle\Entity\User as UserEntity;
 use App\FrontBundle\Entity\StockEntry;
+use App\FrontBundle\Entity\Region;
 
 /**
  * Description of User
@@ -130,7 +131,7 @@ class User {
     public function isDeliverable(StockEntry $entry){
         $em = $this->container->get('doctrine')->getManager();
         $region = $em->getRepository('AppFrontBundle:Region')->find($this->container->get('session')->get('region'));
-        if($region){
+        if($region instanceof Region){
             $productDeliverablility = $entry->getItem()->getProduct()->getDeliverable();
             
             switch ($productDeliverablility){

@@ -128,25 +128,27 @@
                         </div>
                     </div>
                     <div class="full-width mt-20p">
-                        <h4 class="mb-10p"> Available Quantity  </h4>
-                        {% for variantType in item.getVariantsInStock() %}
-                            {% if variantType|length > 0 %}
-                                <span class="dim-font">{{ variantType|first.getVariantType().getName() }}</span>
-                                <br/>
-                                <select id="cmb_variant" class="br-5p block-7 brd-L-1p uppercase-txt">
-                                    {% for variant in variantType %}
-                                        <option {% if variant.getId() == entry.getVariant().getId() %}selected=""{% endif %} value="{{ variant.getId() }}"> {{ variant.getValue() }} </option>
-                                    {% endfor %}
-                                </select>
-                                <script type="text/javascript">
-                                    var switch_variant_path = "{{ path('item_page_variant', {'id': item.getId()}) }}";
-                                    $('#cmb_variant').on('change', function(){
-                                        window.location = switch_variant_path+'?variant='+$(this).val();
-                                        return false;
-                                    });
-                                </script>
-                            {% endif %}
-                        {% endfor %}
+                        {% if item.getVariantsInStock()|length > 0 %}
+                            <h4 class="mb-10p"> Available Quantity  </h4>
+                            {% for variantType in item.getVariantsInStock() %}
+                                {% if variantType|length > 0 %}
+                                    <span class="dim-font">{{ variantType|first.getVariantType().getName() }}</span>
+                                    <br/>
+                                    <select id="cmb_variant" class="br-5p block-7 brd-L-1p uppercase-txt">
+                                        {% for variant in variantType %}
+                                            <option {% if variant.getId() == entry.getVariant().getId() %}selected=""{% endif %} value="{{ variant.getId() }}"> {{ variant.getValue() }} </option>
+                                        {% endfor %}
+                                    </select>
+                                    <script type="text/javascript">
+                                        var switch_variant_path = "{{ path('item_page_variant', {'id': item.getId()}) }}";
+                                        $('#cmb_variant').on('change', function(){
+                                            window.location = switch_variant_path+'?variant='+$(this).val();
+                                            return false;
+                                        });
+                                    </script>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="full-width mt-20p">
                         <h4 class=""> Check Availability  </h4>
