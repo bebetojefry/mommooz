@@ -57,3 +57,8 @@ page_refer:
     resource: "@AppWebBundle/Controller/ReferController.php"
     type:     annotation
     prefix: /refer
+    
+page_static:
+    resource: "@AppWebBundle/Controller/PageController.php"
+    type:     annotation
+    prefix: /content
