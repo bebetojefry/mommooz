@@ -206,6 +206,7 @@ class AccountController extends Controller
                 $cart->setSessionId(session_id());
                 $em->persist($cart);
                 $em->flush();
+                $this->getUser()->setCart($cart);
             }
             
             $cart_price = $this->getUser()->getCart()->getPrice();
