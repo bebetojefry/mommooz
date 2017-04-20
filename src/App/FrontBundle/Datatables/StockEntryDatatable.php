@@ -23,6 +23,7 @@ class StockEntryDatatable extends AbstractDatatableView
             $entry = $repo->find($line['id']);
             $line['in_stock'] = $entry->getInStock();
             $line['commission'] = $line['actualPrice'] - $line['price']; 
+            $line['namewithbrand'] = $line['item']['brand']['name'] . ' '.$line['item']['name'];
             return $line;
         };
 
@@ -115,6 +116,9 @@ class StockEntryDatatable extends AbstractDatatableView
             ))
             ->add('item.brand.name', 'column', array(
                 'title' => 'Item Brand',
+            ))
+            ->add('namewithbrand', 'virtual', array(
+                'title' => 'Item Stock',
             ))
             ->add('quantity', 'column', array(
                 'title' => 'Quantity',
