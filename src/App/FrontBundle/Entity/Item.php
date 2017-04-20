@@ -670,4 +670,8 @@ class Item
         
         return false;
     }
+    
+    public function getNameWithBrand(){
+        return $this->brand->getName().' '.$this->name;
+    }
 }
