@@ -112,13 +112,13 @@ class StockEntryDatatable extends AbstractDatatableView
                 'title' => 'Id',
             ))
             ->add('item.name', 'column', array(
-                'title' => 'Item Name',
+                'visible' => false,
             ))
             ->add('item.brand.name', 'column', array(
-                'title' => 'Item Brand',
+                'visible' => false,
             ))
             ->add('namewithbrand', 'virtual', array(
-                'title' => 'Item Stock',
+                'title' => 'Item',
             ))
             ->add('quantity', 'column', array(
                 'title' => 'Quantity',
