@@ -20,6 +20,7 @@ use App\FrontBundle\Entity\StockPurchase;
 use App\FrontBundle\Entity\Reward;
 use App\FrontBundle\Entity\RewardUse;
 use Ob\HighchartsBundle\Highcharts\Highchart;
+use App\FrontBundle\Entity\Cart;
 
 class AccountController extends Controller
 {
@@ -199,6 +200,14 @@ class AccountController extends Controller
         $reward_money = 0;
         $total_rewards = 0;
         if($reward_money_config && $this->getUser()){
+            if(!$this->getUser()->getCart()){
+                $cart = new Cart();
+                $cart->setUser($this->getUser());
+                $cart->setSessionId(session_id());
+                $em->persist($cart);
+                $em->flush();
+            }
+            
             $cart_price = $this->getUser()->getCart()->getPrice();
             $max_points_needed = round($cart_price*$reward_money_config->getValue(), 2);
             $rewards = $em->getRepository('AppFrontBundle:Reward')->findByConsumer($this->getUser());
