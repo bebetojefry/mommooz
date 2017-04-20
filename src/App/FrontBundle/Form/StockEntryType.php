@@ -100,7 +100,7 @@ class StockEntryType extends AbstractType
             $builder->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
                 'choices' => $this->vendor->getRealItems(),
-                'property' => 'name',
+                'property' => 'nameWithBrand',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
