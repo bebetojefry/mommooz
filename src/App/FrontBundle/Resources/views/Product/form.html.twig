@@ -1,6 +1,13 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
+<div id="tree"></div>
 {{ form_widget(form) }}
 <script type="text/javascript">
+    function getTree() {
+        var tree = {{ treeData|raw }};
+        
+        return tree;
+    }
+    
     $(document).ready(function () {
         $("#{{ form.keywords.vars.id }}").tokenInput("{{ path('keyword_search') }}", {
             theme: "facebook",
@@ -28,5 +35,11 @@
                 $('#{{ form.regions.vars.id }}').parent('.form-group').addClass('hidden_form_field');
             }
         });
+
+        $('#tree').treeview({data: getTree(), onNodeSelected: function(event, data){
+            $("#{{ form.category.vars.id }}").val(data.id);
+        }});
+        $("#{{ form.category.vars.id }}").parent().css('height', '0px');
+        $("#{{ form.category.vars.id }}").parent().css('visibility', 'hidden');
     });
 </script>

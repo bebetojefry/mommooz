@@ -36,6 +36,10 @@ class ProductController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $form = $this->createForm(new ProductType($dm), new Product());
         
+        $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
+        $resultTree = array();
+        $this->getCatTree($resultTree, $rootCategory);
+        
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
             $form->handleRequest($request);
@@ -55,10 +59,33 @@ class ProductController extends Controller
         }
         
         $body = $this->renderView('AppFrontBundle:Product:form.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView(), 'treeData' => json_encode($resultTree))
         );
 
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
+    }
+    
+    private function getCatTree(&$result, $category, $selCat = null){
+        $result[] = array('text' => $category->getCategoryName(), 'id' => $category->getId());
+        
+        $keys = array_keys($result);
+        if($selCat){
+            $result[end($keys)]['state'] = array();
+            if($category->hasChild($selCat)){
+                $result[end($keys)]['state']['expanded'] = 'true'; 
+            }
+            
+            if($category->getId() == $selCat->getId()){
+                $result[end($keys)]['state']['selected'] = 'true'; 
+            }
+        }
+        
+        if(count($category->getChilds()) > 0){
+            $result[end($keys)]['nodes'] = array();
+            foreach($category->getChilds() as $cat){
+                $this->getCatTree($result[end($keys)]['nodes'], $cat, $selCat);
+            }
+        }
     }
     
     /**
@@ -89,6 +116,10 @@ class ProductController extends Controller
             }
         }
         
+        $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
+        $resultTree = array();
+        $this->getCatTree($resultTree, $rootCategory, $product->getCategory());
+        
         $keywords = $product->getKeywords()->getValues();
         $keyword_values = array();
         foreach($keywords as $keyword){
@@ -102,7 +133,7 @@ class ProductController extends Controller
         }
         
         $body = $this->renderView('AppFrontBundle:Product:form.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'region_values' => json_encode($region_values))
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'region_values' => json_encode($region_values), 'treeData' => json_encode($resultTree))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
