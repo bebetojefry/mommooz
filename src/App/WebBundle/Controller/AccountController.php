@@ -533,9 +533,9 @@ class AccountController extends Controller
         $address = $em->getRepository('AppFrontBundle:Address')->find($request->get('address'));
         
         if($address){
-            $merchant_data='';
-            $working_key='3B8AE5C662C3123B31BACF1454781F6B';
-            $access_code='AVSU70ED20AW44USWA';
+            $merchant_data = '';
+            $working_key = '3B8AE5C662C3123B31BACF1454781F6B';
+            $access_code = 'AVSU70ED20AW44USWA';
             
             $total_amt = 0;
             $cart = $this->getUser()->getCart();
@@ -562,6 +562,21 @@ class AccountController extends Controller
                 'billing_state' => 'KL',
                 'billing_zip' => $address->getPin(),
                 'billing_country' => 'India',
+                'payment_option' => 'OPTNBK',
+                'emi_plan_id' => '',
+                'emi_tenure_id' => '',
+                'card_type' => 'NBK',
+                'card_name' => '',
+                'data_accept' => '',
+                'card_number' => '',
+                'expiry_month' => '',
+                'expiry_year' => '',
+                'cvv_number' => '',
+                'issuing_bank' => '',
+                'mobile_number' => '',
+                'mm_id' => '',
+                'otp' => '',
+                'promo_code' => '',
                 'billing_tel' => $this->getUser()->getPhone(),
                 'billing_email' => $this->getUser()->getEmail(),
                 'delivery_name' => $this->getUser()->getFullName(),
