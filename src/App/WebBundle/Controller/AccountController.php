@@ -525,6 +525,76 @@ class AccountController extends Controller
     }
     
     /**
+     * @Route("/order/pay", name="pay_order")
+     */
+    public function payorderAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $address = $em->getRepository('AppFrontBundle:Address')->find($request->get('address'));
+        
+        if($address){
+            $merchant_data='';
+            $working_key='3B8AE5C662C3123B31BACF1454781F6B';
+            $access_code='AVSU70ED20AW44USWA';
+            
+            $total_amt = 0;
+            $cart = $this->getUser()->getCart();
+            foreach($cart->getItems() as $item){
+                $total_amt += $item->getQuantity()*$item->getPrice();
+            }
+            
+            if(isset($_POST['use_reward'])){
+                $total_amt -= $_POST['reward_money'];
+            }
+            
+            $data = array(
+                'tid' => time(),
+                'merchant_id' => '130331',
+                'order_id' => time(),
+                'amount' => $total_amt,
+                'currency' => 'INR',
+                'redirect_url' => $this->generateUrl('submit_order', array(), true),
+                'cancel_url' => $this->generateUrl('submit_order', array(), true),
+                'language' => 'EN',
+                'billing_name' => $this->getUser()->getFullName(),
+                'billing_address' => $address->getHouse(),','.$address->getStreet(),','.$address->getLandmark(),
+                'billing_city' => $address->getCity(),
+                'billing_state' => 'KL',
+                'billing_zip' => $address->getPin(),
+                'billing_country' => 'India',
+                'billing_tel' => $this->getUser()->getPhone(),
+                'billing_email' => $this->getUser()->getEmail(),
+                'delivery_name' => $this->getUser()->getFullName(),
+                'delivery_address' => $address->getHouse(),','.$address->getStreet(),','.$address->getLandmark(),
+                'delivery_city' => $address->getCity(),
+                'delivery_state' => 'KL',
+                'delivery_zip' => $address->getPin(),
+                'delivery_country' => 'India',
+                'delivery_tel' => $this->getUser()->getPhone(),
+                'merchant_param1' => $request->get('address'),
+                'merchant_param2' => $_POST['use_reward'],
+                'merchant_param3' => $_POST['reward_points_used'],
+                'merchant_param4' => $_POST['reward_money']
+            );
+            
+            foreach ($data as $key => $value){
+                    $merchant_data.=$key.'='.urlencode($value).'&';
+            }
+
+            $encrypted_data = $this->get('app.ccavenue.crypt')->encrypt($merchant_data, $working_key);
+            
+            return $this->render('AppWebBundle:Account:orderThanks.html.twig', array(
+                'encrypted_data' => $encrypted_data,
+                'access_code' => $access_code
+            ));
+            
+        } else {
+            return $this->redirect($this->generateUrl('cart_page'));
+        }
+        
+    }
+    
+    /**
      * @Route("/order/submit", name="submit_order")
      */
     public function submitorderAction(Request $request)

@@ -12,7 +12,7 @@
     </div>
     <section class="center-1200px cart-page ptb-20p">
         <h3> Place Your Order </h3>
-        <form name="frmOrderSubmit" method="post" action="{{ path('submit_order') }}" >
+        <form name="frmOrderSubmit" method="post" action="{{ path('pay_order') }}" >
             <div class="block-12 mb-pl2 pl-30p ptb-20p block-mb-12 mb-text-left">
                 {% set valid_addresses = 0 %}
                 {% for address in app.user.getAddresses() %}
@@ -42,7 +42,7 @@
                 {% if valid_addresses == 0 %}
                     <a href="{{ path('address_form', {'id': 0}) }}"><button type="button" class="momz-button ml-10p active" name=""> Add delivery address </button></a>
                 {% else %}
-                    <button type="submit" class="momz-button ml-10p active" name=""> Submit Order <span class="icon-arrow-right"></span> </button>
+                    <button type="submit" class="momz-button ml-10p active" name=""> Proceed to payment <span class="icon-arrow-right"></span> </button>
                 {% endif %}
             </div>
         </form>
