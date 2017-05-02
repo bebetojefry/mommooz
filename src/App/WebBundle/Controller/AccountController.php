@@ -586,13 +586,14 @@ class AccountController extends Controller
                 'delivery_zip' => $address->getPin(),
                 'delivery_country' => 'India',
                 'delivery_tel' => $this->getUser()->getPhone(),
-                'merchant_param1' => $request->get('address')
             );
             
+            $this->get('session')->set('address', $request->get('address'));
+            
             if(isset($_POST['use_reward'])){
-                $data['merchant_param2'] = $_POST['use_reward'];
-                $data['merchant_param3'] = $_POST['reward_points_used'];
-                $data['merchant_param4'] = $_POST['reward_money'];
+                $this->get('session')->set('use_reward', $_POST['use_reward']);
+                $this->get('session')->set('reward_points_used', $_POST['reward_points_used']);
+                $this->get('session')->set('reward_money', $_POST['reward_money']);
             }
             
             foreach ($data as $key => $value){
@@ -627,129 +628,128 @@ class AccountController extends Controller
 
 	for($i = 0; $i < $dataSize; $i++) 
 	{
-		$information=explode('=',$decryptValues[$i]);
-		if($i==3)	$order_status=$information[1];
+            $information=explode('=',$decryptValues[$i]);
+            if($i==3)	$order_status=$information[1];
 	}
 
 	if($order_status==="Success")
 	{
-		echo "<br>Thank you for shopping with us. Your credit card has been charged and your transaction is successful. We will be shipping your order to you soon.";
+            return $this->forward('AppWebBundle:ordersuccess');
 		
 	}
 	else if($order_status==="Aborted")
 	{
-		echo "<br>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail";
+            return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
+                'status' => '<b>Aborted: </b>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail.'
+            ));
 	
 	}
 	else if($order_status==="Failure")
 	{
-		echo "<br>Thank you for shopping with us.However,the transaction has been declined.";
+	    return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
+                'status' => '<b>Failure: </b>Thank you for shopping with us.However,the transaction has been declined.'
+            ));
 	}
 	else
 	{
-		echo "<br>Security Error. Illegal access detected";
+            return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
+                'status' => '<b>Error: </b>Security Error. Illegal access detected.'
+            ));
 	
 	}
-
-	echo "<br><br>";
-
-	echo "<table cellspacing=4 cellpadding=4>";
-	for($i = 0; $i < $dataSize; $i++) 
-	{
-		$information=explode('=',$decryptValues[$i]);
-	    	echo '<tr><td>'.$information[0].'</td><td>'.urldecode($information[1]).'</td></tr>';
-	}
-
-	echo "</table><br>";
-	echo "</center>";
-        exit;
     }
     
     /**
-     * @Route("/order/submit", name="submit_order_bkp")
+     * @Route("/order/success", name="order_success")
      */
-    public function submitorder_bkpAction(Request $request)
+    public function ordersuccessAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-        $address = $em->getRepository('AppFrontBundle:Address')->find($request->get('address'));
-        
-        $purchase = new Purchase();
-        $purchase->setConsumer($this->getUser());
-        $purchase->setDeliverTo($address);
-        $purchase->setPurchasedOn(new \DateTime('now'));
-        $purchase->setStatus(0);
-        
-        $em->persist($purchase);
-        $em->flush();
-        
-        $cart = $this->getUser()->getCart();
-        
-        $total_amt = 0;
-        foreach($cart->getItems() as $item){
-            //create purchase item entry
-            $purchaserItem = new PurchaseItem();
-            $purchaserItem->setPurchase($purchase);
-            $purchaserItem->setEntry($item->getEntry());
-            $purchaserItem->setQuantity($item->getQuantity());
-            $purchaserItem->setStatus(0);
-            $purchaserItem->setUnitPrice($item->getPrice());
-            $purchaserItem->setPrice($item->getQuantity()*$item->getPrice());
-            $em->persist($purchaserItem);
-            
-            $total_amt += $item->getQuantity()*$item->getPrice();
-            
-            // create stock purchase history
-            $stock_purchase = new StockPurchase();
-            $stock_purchase->setUser($this->getUser());
-            $stock_purchase->setPurchase($purchase);
-            $stock_purchase->setPrice($item->getPrice());
-            $stock_purchase->setQuantity($item->getQuantity());
-            $stock_purchase->setReverse(FALSE);
-            $stock_purchase->setStockItem($item->getEntry());
-            $stock_purchase->setPurchsedOn(new \DateTime('now'));
-            $em->persist($stock_purchase);
-            
-            $em->remove($item);
-        }
-        
-        if(isset($_POST['use_reward'])){
-            $reward = new Reward();
-            $reward->setConsumer($this->getUser());
-            $reward->setPoint($_POST['reward_points_used']*-1);
-            $reward->setSource(Reward::PURCHASE);
-            $reward->setCreditedOn(new \DateTime('now'));
+        if($this->getUser()){
+            $em = $this->getDoctrine()->getManager();
+            $address = $em->getRepository('AppFrontBundle:Address')->find($this->get('session')->get('address'));
 
-            $em->persist($reward);
-            
-            $reward_use = new RewardUse();
-            $reward_use->setConsumer($this->getUser());
-            $reward_use->setPurchase($purchase);
-            $reward_use->setPoints($_POST['reward_points_used']);
-            $reward_use->setMoney($_POST['reward_money']);
-            
-            $em->persist($reward_use);
-        }
-        
-        // configure reward
-        $reward_config = $em->getRepository('AppFrontBundle:Config')->findOneByName('purchase_reward');
-        if($reward_config){
-            $val = $reward_config->getValue();
-            if($val > 0){
-                $points = round($total_amt/$val, 2);
+            $purchase = new Purchase();
+            $purchase->setConsumer($this->getUser());
+            $purchase->setDeliverTo($address);
+            $purchase->setPurchasedOn(new \DateTime('now'));
+            $purchase->setStatus(0);
 
+            $em->persist($purchase);
+            $em->flush();
+
+            $cart = $this->getUser()->getCart();
+
+            $total_amt = 0;
+            foreach($cart->getItems() as $item){
+                //create purchase item entry
+                $purchaserItem = new PurchaseItem();
+                $purchaserItem->setPurchase($purchase);
+                $purchaserItem->setEntry($item->getEntry());
+                $purchaserItem->setQuantity($item->getQuantity());
+                $purchaserItem->setStatus(0);
+                $purchaserItem->setUnitPrice($item->getPrice());
+                $purchaserItem->setPrice($item->getQuantity()*$item->getPrice());
+                $em->persist($purchaserItem);
+
+                $total_amt += $item->getQuantity()*$item->getPrice();
+
+                // create stock purchase history
+                $stock_purchase = new StockPurchase();
+                $stock_purchase->setUser($this->getUser());
+                $stock_purchase->setPurchase($purchase);
+                $stock_purchase->setPrice($item->getPrice());
+                $stock_purchase->setQuantity($item->getQuantity());
+                $stock_purchase->setReverse(FALSE);
+                $stock_purchase->setStockItem($item->getEntry());
+                $stock_purchase->setPurchsedOn(new \DateTime('now'));
+                $em->persist($stock_purchase);
+
+                $em->remove($item);
+            }
+
+            if($this->get('session')->get('use_reward')){
                 $reward = new Reward();
                 $reward->setConsumer($this->getUser());
-                $reward->setPoint($points);
+                $reward->setPoint($this->get('session')->get('reward_points_used')*-1);
                 $reward->setSource(Reward::PURCHASE);
                 $reward->setCreditedOn(new \DateTime('now'));
 
                 $em->persist($reward);
+
+                $reward_use = new RewardUse();
+                $reward_use->setConsumer($this->getUser());
+                $reward_use->setPurchase($purchase);
+                $reward_use->setPoints($this->get('session')->get('reward_points_used'));
+                $reward_use->setMoney($this->get('session')->get('reward_money'));
+
+                $em->persist($reward_use);
             }
+
+            // configure reward
+            $reward_config = $em->getRepository('AppFrontBundle:Config')->findOneByName('purchase_reward');
+            if($reward_config){
+                $val = $reward_config->getValue();
+                if($val > 0){
+                    $points = round($total_amt/$val, 2);
+
+                    $reward = new Reward();
+                    $reward->setConsumer($this->getUser());
+                    $reward->setPoint($points);
+                    $reward->setSource(Reward::PURCHASE);
+                    $reward->setCreditedOn(new \DateTime('now'));
+
+                    $em->persist($reward);
+                }
+            }
+
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('order_thanks'));
+        } else {
+            return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
+                'status' => '<b>Error: </b>Your purchase session timed out.'
+            ));
         }
-        
-        $em->flush();
-        
-        return $this->redirect($this->generateUrl('order_thanks'));
     }
     
     /**
