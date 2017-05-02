@@ -571,11 +571,14 @@ class AccountController extends Controller
                 'delivery_zip' => $address->getPin(),
                 'delivery_country' => 'India',
                 'delivery_tel' => $this->getUser()->getPhone(),
-                'merchant_param1' => $request->get('address'),
-                'merchant_param2' => $_POST['use_reward'],
-                'merchant_param3' => $_POST['reward_points_used'],
-                'merchant_param4' => $_POST['reward_money']
+                'merchant_param1' => $request->get('address')
             );
+            
+            if(isset($_POST['use_reward'])){
+                $data['merchant_param2'] = $_POST['use_reward'];
+                $data['merchant_param3'] = $_POST['reward_points_used'];
+                $data['merchant_param4'] = $_POST['reward_money'];
+            }
             
             foreach ($data as $key => $value){
                     $merchant_data.=$key.'='.urlencode($value).'&';
