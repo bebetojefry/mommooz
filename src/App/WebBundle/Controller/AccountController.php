@@ -578,7 +578,7 @@ class AccountController extends Controller
                 'otp' => '',
                 'promo_code' => '',
                 'billing_tel' => $this->getUser()->getPhone(),
-                'billing_email' => $this->getUser()->getEmail() ? $this->getUser()->getEmail() : 'info@momooz.com',
+                'billing_email' => $this->getUser()->getEmail() != '' ? $this->getUser()->getEmail() : 'info@momooz.com',
                 'delivery_name' => $this->getUser()->getFullName(),
                 'delivery_address' => $address->getHouse(),','.$address->getStreet(),','.$address->getLandmark(),
                 'delivery_city' => $address->getCity(),
