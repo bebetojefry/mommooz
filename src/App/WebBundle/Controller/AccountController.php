@@ -586,7 +586,7 @@ class AccountController extends Controller
 
             $encrypted_data = $this->get('app.ccavenue.crypt')->encrypt($merchant_data, $working_key);
             
-            return $this->render('AppWebBundle:Account:orderThanks.html.twig', array(
+            return $this->render('AppWebBundle:Account:pay.html.twig', array(
                 'encrypted_data' => $encrypted_data,
                 'access_code' => $access_code
             ));
