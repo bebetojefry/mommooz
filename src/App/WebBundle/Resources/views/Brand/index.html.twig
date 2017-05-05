@@ -23,38 +23,40 @@
         </script>
         <div class="block-9 block-lb-12 productspage-pro ptb-15p block-fl-cary pb-50p lb-border-none">
             <h4 class="pl-25p"> All Products </h4>
-            {% for entry in brand.getItems().getLowCostEntries() %} 
-                {% if app_web_user.isDeliverable(entry) %}
-                    {% set filterData = entry.getFilterData() %}
-                    {% set brand_class = 'brand_'~filterData['brand']['id'] %}
-                    {% set cat_class = 'cat_'~filterData['cat']['id'] %}
-                    {% set on_offer = '' %}
-                    {% if filterData['offer'] %}
-                        {% set on_offer = 'on_offer' %}
-                    {% endif %}    
-                    <div class="block-4 text-center mt-40p block-mb-6 block-sb-12 item-thumb {{ brand_class~' '~cat_class~' '~on_offer }}">
-                        <div class="block-10">
-                            <a href="{{ path('item_page', {'id': entry.getId()}) }}">
-                                <div class="block-8"> <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="full-width" alt=""> </div>
-                                <h5 class="mt-15p block-8">  
-                                    {{ entry.getItem().getName() }}{% if entry.getVariant() %}{{ ' - '~entry.getVariant().getValue() }}{% endif %}
-                                </h5>
-                                <h3 class="mt-10p"> <span style="text-decoration: line-through;font-size: 12px;color: #CCC;margin-bottom: 10px;display: inline-block;">MRP : {{ entry.getMrp() }}</span><br/><span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
-                            </a>
-                            <div class="full-width mt-15p">
-                                <input  type="number" class="txt-item-qty" value="1" style="width: 45px; {% if app_web_user.inCart(entry) %}display: none;{% endif %}" />
-                                <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
-                                <button {% if app_web_user.inCart(entry) %}style="display: none;"{% endif %} class="button-product br-5p ptb-10p prl-15p pointer-csr add-to-cart" data-entry="{{ entry.getId() }}">
-                                    Add to Cart <span class="icon-arrow-right ml-5p"></span>
-                                </button>
-                                <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(entry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
+            {% for item in brand.getItems() %} 
+                {% for entry in item.getLowCostEntries() %}
+                    {% if app_web_user.isDeliverable(entry) %}
+                        {% set filterData = entry.getFilterData() %}
+                        {% set brand_class = 'brand_'~filterData['brand']['id'] %}
+                        {% set cat_class = 'cat_'~filterData['cat']['id'] %}
+                        {% set on_offer = '' %}
+                        {% if filterData['offer'] %}
+                            {% set on_offer = 'on_offer' %}
+                        {% endif %}    
+                        <div class="block-4 text-center mt-40p block-mb-6 block-sb-12 item-thumb {{ brand_class~' '~cat_class~' '~on_offer }}">
+                            <div class="block-10">
+                                <a href="{{ path('item_page', {'id': entry.getId()}) }}">
+                                    <div class="block-8"> <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="full-width" alt=""> </div>
+                                    <h5 class="mt-15p block-8">  
+                                        {{ entry.getItem().getName() }}{% if entry.getVariant() %}{{ ' - '~entry.getVariant().getValue() }}{% endif %}
+                                    </h5>
+                                    <h3 class="mt-10p"> <span style="text-decoration: line-through;font-size: 12px;color: #CCC;margin-bottom: 10px;display: inline-block;">MRP : {{ entry.getMrp() }}</span><br/><span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
+                                </a>
+                                <div class="full-width mt-15p">
+                                    <input  type="number" class="txt-item-qty" value="1" style="width: 45px; {% if app_web_user.inCart(entry) %}display: none;{% endif %}" />
+                                    <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
+                                    <button {% if app_web_user.inCart(entry) %}style="display: none;"{% endif %} class="button-product br-5p ptb-10p prl-15p pointer-csr add-to-cart" data-entry="{{ entry.getId() }}">
+                                        Add to Cart <span class="icon-arrow-right ml-5p"></span>
+                                    </button>
+                                    <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(entry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
+                                </div>
                             </div>
+                            <script type="text/javascript">
+                                filter_modal.register('{{ filterData|json_encode()|raw }}');
+                            </script>
                         </div>
-                        <script type="text/javascript">
-                            filter_modal.register('{{ filterData|json_encode()|raw }}');
-                        </script>
-                    </div>
-                {% endif %}
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
             <script type="text/javascript">
                 $('#main_filter').ItemFilter(filter_modal);
