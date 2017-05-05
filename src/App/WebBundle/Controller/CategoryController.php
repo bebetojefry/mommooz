@@ -37,8 +37,8 @@ class CategoryController extends Controller
         return $this->render('AppWebBundle:Category:popular_menu.html.twig', array('categories' => $categories));
     }
     
-    public function catSideMenuAction(Category $category)
+    public function catSideMenuAction(Category $category, Category $selected)
     {
-        return $this->render('AppWebBundle:Category:cat_side_menu.html.twig', array('category' => $category));
+        return $this->render('AppWebBundle:Category:cat_side_menu.html.twig', array('category' => $category, 'selected' => $selected));
     }
 }

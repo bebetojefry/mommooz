@@ -988,3 +988,6 @@ table.raf-table tr td{vertical-align: middle;}
     font-size: 12px;
     color: #858585;
 }
+.product_detail_category_menu ul {
+    padding: 15px;
+}

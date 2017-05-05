@@ -29,17 +29,17 @@
             <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
                 {% set rootCat = category.getRoot()  %}
                 <h3 class="mb-20p"> {{ rootCat.getCategoryName() }} </h3>
-                <div class="first-cat-cary mb-25p">
-                    {{ render(controller('AppWebBundle:Category:catSideMenu', { 'id': rootCat.getId() })) }}
+                <div class="first-cat-cary mb-25p product_detail_category_menu">
+                    {{ render(controller('AppWebBundle:Category:catSideMenu', { 'id': rootCat.getId(), 'selected' => category.getId() })) }}
                 </div>
                </div>
-               <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"> 
+               {#<div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"> 
                 <h3 class="mb-10p"> Refine By </h3>
                     <div class="none-overx-pro mb-25p">
                         <input type="checkbox" name="refine[]" value="offer" class="mr-10p">   Products on offer  <br/>
                         <input type="checkbox" name="refine[]" value="new" class="mr-10p">   New Launches   <br/>
                     </div>
-                </div>
+                </div>#}
                 <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
                 <h3 class=""> Brands </h3>
                 <input type="text" placeholder="Search Brand Name Here" class="mb-15p">
