@@ -991,3 +991,7 @@ table.raf-table tr td{vertical-align: middle;}
 .product_detail_category_menu ul {
     padding: 15px;
 }
+
+.product_detail_category_menu ul li a.selected {
+    color: #096 !important;
+}
