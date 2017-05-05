@@ -41,10 +41,8 @@
                     </div>
                 </div>#}
                 <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
-                <h3 class=""> Brands </h3>
-                <input type="text" placeholder="Search Brand Name Here" class="mb-15p">
+                    <h3 class=""> Brands </h3>                
                     <div class="none-overx-pro first-cat-cary mb-25p">
-                    <input type="checkbox" name="brand[]" value="0" class="mr-10p"> All   <br/>
                     {% for brand in category.getAllBrands() %}
                         <a href="{{ path('brand_page', {'id': brand.getId()}) }}">{{ brand.getName() }}</a>   <br/>
                     {% endfor %}
