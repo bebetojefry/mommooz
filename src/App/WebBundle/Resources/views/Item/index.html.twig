@@ -30,7 +30,7 @@
                 {% set rootCat = category.getRoot()  %}
                 <h3 class="mb-20p"> {{ rootCat.getCategoryName() }} </h3>
                 <div class="first-cat-cary mb-25p product_detail_category_menu">
-                    {{ render(controller('AppWebBundle:Category:catSideMenu', { 'id': rootCat.getId(), 'selected' => category.getId() })) }}
+                    {{ render(controller('AppWebBundle:Category:catSideMenu', { 'id': rootCat.getId(), 'selected': category.getId() })) }}
                 </div>
                </div>
                {#<div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"> 
