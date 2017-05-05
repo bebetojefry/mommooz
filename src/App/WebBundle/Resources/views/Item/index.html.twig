@@ -27,11 +27,12 @@
     <div class="center-1200px block-fl-cary va-top">
         <div class="filters-left block-3 ptb-15p sb-ptb-5p   block-lb-12 block-fl-cary va-top resposive-filter transition_05s">
             <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left">
-                <h3 class="mb-20p"> {{ category.getCategoryName() }} </h3>
+                {% set rootCat = category.getRoot()  %}
+                <h3 class="mb-20p"> {{ rootCat.getCategoryName() }} </h3>
                 <div class="first-cat-cary mb-25p">
                     <input type="checkbox" name="cat[]" value="0" class="mr-10p">  All  <div class="count-products-filter mb-10p dispaly-inline-block prl-5p br-5p">{{ category.getInStockEntries()|length }}</div> <br/>
-                    {% for cat in category.getChilds() %}
-                        <input type="checkbox" name="cat[]" value="{{ cat.getId() }}" class="mr-10p">  {{ cat.getCategoryName() }}   <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">{{ cat.getInStockEntries()|length }}</div> <br/>
+                    {% for cat in rootCat.getChilds() %}
+                        <a href="{{ path('category_page', {id: cat.getId()}) }}">{{ cat.getCategoryName() }}</a>   <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">{{ cat.getInStockEntries()|length }}</div> <br/>
                     {% endfor %}
                 </div>
                </div>
