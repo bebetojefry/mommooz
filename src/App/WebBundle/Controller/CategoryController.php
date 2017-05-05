@@ -36,5 +36,9 @@ class CategoryController extends Controller
         $categories = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true), null, 3, 0);
         return $this->render('AppWebBundle:Category:popular_menu.html.twig', array('categories' => $categories));
     }
-        
+    
+    public function catSideMenuAction(Category $category)
+    {
+        return $this->render('AppWebBundle:Category:cat_side_menu.html.twig', array('category' => $category));
+    }
 }

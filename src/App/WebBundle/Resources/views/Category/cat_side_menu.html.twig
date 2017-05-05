@@ -1,0 +1,11 @@
+<ul>
+    {% for cat in category.getChilds() %}
+        <li>
+            <a href="{{ path('category_page', {id: cat.getId()}) }}">{{ cat.getCategoryName() }}</a>   
+            <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">{{ cat.getInStockEntries()|length }}</div> <br/>
+            {% if cat.getChilds()|length > 0 %}    
+                {{ render(controller('AppWebBundle:Category:catSideMenu', { 'id': cat.getId() })) }}
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>

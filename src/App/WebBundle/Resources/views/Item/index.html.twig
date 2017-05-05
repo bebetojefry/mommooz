@@ -30,10 +30,7 @@
                 {% set rootCat = category.getRoot()  %}
                 <h3 class="mb-20p"> {{ rootCat.getCategoryName() }} </h3>
                 <div class="first-cat-cary mb-25p">
-                    <input type="checkbox" name="cat[]" value="0" class="mr-10p">  All  <div class="count-products-filter mb-10p dispaly-inline-block prl-5p br-5p">{{ category.getInStockEntries()|length }}</div> <br/>
-                    {% for cat in rootCat.getChilds() %}
-                        <a href="{{ path('category_page', {id: cat.getId()}) }}">{{ cat.getCategoryName() }}</a>   <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">{{ cat.getInStockEntries()|length }}</div> <br/>
-                    {% endfor %}
+                    {{ render(controller('AppWebBundle:Category:catSideMenu', { 'id': rootCat.getId() })) }}
                 </div>
                </div>
                <div class="block-12 block-lb-3 lb-pl10 block-mb-6 block-sb-12 mb-text-left"> 
