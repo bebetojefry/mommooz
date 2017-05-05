@@ -46,7 +46,7 @@
                     <div class="none-overx-pro first-cat-cary mb-25p">
                     <input type="checkbox" name="brand[]" value="0" class="mr-10p"> All   <br/>
                     {% for brand in category.getAllBrands() %}
-                        <input type="checkbox" name="brand[]" value="{{ brand.getId() }}" class="mr-10p">  {{ brand.getName() }}   <br/>
+                        <a href="{{ path('brand_page', {'id': brand.getId()}) }}">{{ brand.getName() }}</a>   <br/>
                     {% endfor %}
                     </div>
                 </div>

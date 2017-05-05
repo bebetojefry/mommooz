@@ -23,6 +23,11 @@ consumer_category:
     type:     annotation
     prefix: /category
     
+consumer_brand:
+    resource: "@AppWebBundle/Controller/BrandController.php"
+    type:     annotation
+    prefix: /brand
+    
 consumer_item:
     resource: "@AppWebBundle/Controller/ItemController.php"
     type:     annotation
