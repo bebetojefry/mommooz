@@ -7,14 +7,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>{% block title %}{% endblock %}</title>
-    {% stylesheets
-        'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
-        'assets/vendor/metisMenu/dist/metisMenu.min.css'
-        'assets/vendor/font-awesome/css/font-awesome.min.css'
-        'bundles/appfront/css/*'
-        filter='cssrewrite' output='css/compiled/main.css' %}
-        <link rel="stylesheet" href="{{ asset_url }}">
-    {% endstylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/dist/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/metisMenu/dist/metisMenu.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/appfront/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('bundles/appfront/css/theme.css') }}">
     {% block stylesheet %}{% endblock %}
 </head>
 <body>
