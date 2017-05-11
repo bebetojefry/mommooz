@@ -18,12 +18,12 @@
     <div class="container">
         {% block content %}{% endblock %}
     </div>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/modal.js') }}"></script>
+    <script src="{{ asset('assets/vendor/metisMenu/dist/metisMenu.min.js') }}"></script>
     {% javascripts
-        'assets/vendor/jquery/jquery.min.js'
-        'assets/vendor/angular/angular.min.js'
-        'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
-        'assets/vendor/bootstrap/js/modal.js'
-        'assets/vendor/metisMenu/dist/metisMenu.min.js'
         '@AppFrontBundle/Resources/public/js/*'
         output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>

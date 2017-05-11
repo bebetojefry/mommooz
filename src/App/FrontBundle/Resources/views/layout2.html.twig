@@ -23,16 +23,16 @@
         <link rel="stylesheet" href="{{ asset_url }}">
     {% endstylesheets %}
     {% block style %}{% endblock %}
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/angular/angular.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap/js/modal.js') }}"></script>
+    <script src="{{ asset('assets/vendor/moment/min/moment.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-validator/dist/validator.js') }}"></script>
+    <script src="{{ asset('assets/vendor/metisMenu/dist/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/bootstrap-treeview/src/js/bootstrap-treeview.js') }}"></script>
     {% javascripts
-        'assets/vendor/jquery/jquery.min.js'
-        'assets/vendor/angular/angular.min.js'
-        'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
-        'assets/vendor/bootstrap/js/modal.js'
-        'assets/vendor/moment/min/moment.min.js'
-        'assets/vendor/bootstrap3-dialog/src/js/bootstrap-dialog.js'
-        'assets/vendor/bootstrap-validator/dist/validator.js'
-        'assets/vendor/metisMenu/dist/metisMenu.min.js'
-        'assets/vendor/bootstrap-treeview/src/js/bootstrap-treeview.js'
         '@AppFrontBundle/Resources/public/js/*'
         output='js/compiled/main.js' %}
         <script src="{{ asset_url }}"></script>
