@@ -12,7 +12,7 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class RegionDatatable extends AbstractDatatableView
 {
-    private $sl = 0;
+    private $sl = 1;
     
     /**
      * {@inheritdoc}
