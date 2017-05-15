@@ -117,7 +117,7 @@ class ItemController extends Controller
         
         $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
         $resultTree = array();
-        $this->getCatTree($resultTree, $rootCategory, $product->getCategory());
+        $this->getCatTree($resultTree, $rootCategory, $item->getProduct()->getCategory());
         
         $keywords = $item->getKeywords()->getValues();
         $keyword_values = array();
