@@ -12,6 +12,7 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class OfferDatatable extends AbstractDatatableView
 {
+    private $sl = 1;
     
     /**
      * {@inheritdoc}
@@ -21,6 +22,7 @@ class OfferDatatable extends AbstractDatatableView
         $formatter = function($line){
             $type = array(1 => 'Discount', 2 => 'Bundle Pack');
             $line['kind'] = $type[$line['type']];
+            $line['sl'] = $this->sl++;
 
             return $line;
         };
@@ -104,6 +106,10 @@ class OfferDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('name', 'column', array(
                 'title' => 'Name',

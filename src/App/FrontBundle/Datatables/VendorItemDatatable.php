@@ -12,6 +12,22 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class VendorItemDatatable extends AbstractDatatableView
 {
+    private $sl = 1;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getLineFormatter()
+    {
+        $formatter = function($line){
+            $line['sl'] = $this->sl++;
+
+            return $line;
+        };
+
+        return $formatter;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -74,6 +90,10 @@ class VendorItemDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('item.name', 'column', array(
                 'title' => 'Item',

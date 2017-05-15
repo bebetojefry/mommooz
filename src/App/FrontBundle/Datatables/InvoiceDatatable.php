@@ -13,13 +13,16 @@ use App\FrontBundle\Entity\Vendor;
  */
 class InvoiceDatatable extends AbstractDatatableView
 {
+    private $sl = 1;
+    
     /**
      * {@inheritdoc}
      */
     public function getLineFormatter()
     {
         $formatter = function($line){
-            //$line['vendor'] = $line['vendor.firstname'].' '.$line['vendor.lastname'];
+            $line['sl'] = $this->sl++;
+
             return $line;
         };
 
@@ -104,6 +107,10 @@ class InvoiceDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('vendor.firstname', 'column', array(
                 'title' => 'Store',

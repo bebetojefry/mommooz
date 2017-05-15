@@ -12,6 +12,8 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class StockEntryDatatable extends AbstractDatatableView
 {
+    private $sl = 1;
+    
     /**
      * {@inheritdoc}
      */
@@ -24,6 +26,8 @@ class StockEntryDatatable extends AbstractDatatableView
             $line['in_stock'] = $entry->getInStock();
             $line['commission'] = $line['actualPrice'] - $line['price']; 
             $line['namewithbrand'] = $line['item']['brand']['name'] . ' '.$line['item']['name'];
+            $line['sl'] = $this->sl++;
+            
             return $line;
         };
 
@@ -110,6 +114,10 @@ class StockEntryDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('item.name', 'column', array(
                 'visible' => false,

@@ -13,6 +13,8 @@ use App\FrontBundle\Entity\Stock;
  */
 class AdminStockEntryDatatable extends AbstractDatatableView
 {
+    private $sl = 1;
+    
     /**
      * {@inheritdoc}
      */
@@ -24,6 +26,8 @@ class AdminStockEntryDatatable extends AbstractDatatableView
             $entry = $repo->find($line['id']);
             $line['in_stock'] = $entry->getInStock();
             $line['commission'] = $line['actualPrice'] - $line['price']; 
+            $line['sl'] = $this->sl++;
+            
             return $line;
         };
 
@@ -95,6 +99,10 @@ class AdminStockEntryDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('item.name', 'column', array(
                 'title' => 'Item Name',

@@ -12,6 +12,8 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class PurchaseDatatable extends AbstractDatatableView
 {
+    private $sl = 1;
+    
     /**
      * {@inheritdoc}
      */
@@ -20,7 +22,8 @@ class PurchaseDatatable extends AbstractDatatableView
         $formatter = function($line){
             $states = array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled', 6 => 'Cleared');
             $line['state'] = $states[$line['status']];
-
+            $line['sl'] = $this->sl++;
+            
             return $line;
         };
 
@@ -89,6 +92,10 @@ class PurchaseDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('consumer.firstname', 'column', array(
                 'title' => 'Ordered By',
