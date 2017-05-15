@@ -69,6 +69,7 @@ class StockEntryController extends Controller
         }
         
         $entry = new StockEntry();
+        $entry->setStatus(true);
         $entry->setStock($stock);
         $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $item), $entry);
         

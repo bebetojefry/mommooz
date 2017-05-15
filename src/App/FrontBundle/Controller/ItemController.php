@@ -53,6 +53,7 @@ class ItemController extends Controller
     {
         $dm = $this->getDoctrine()->getManager();
         $item = new Item();
+        $item->setStatus(true);
         $item->setProduct($product);
         $form = $this->createForm(new ItemType($dm), $item);
         

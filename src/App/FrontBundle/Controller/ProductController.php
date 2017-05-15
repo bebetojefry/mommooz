@@ -34,7 +34,10 @@ class ProductController extends Controller
     public function newAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new ProductType($dm), new Product());
+        $product = new Product();
+        $product->setStatus(true);
+        $product->setDeliverable(1);
+        $form = $this->createForm(new ProductType($dm), $product);
         
         $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
         $resultTree = array();

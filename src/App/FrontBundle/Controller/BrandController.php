@@ -33,7 +33,9 @@ class BrandController extends Controller
     public function newAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new BrandType($dm), new Brand());
+        $brand = new Brand();
+        $brand->setStatus(true);
+        $form = $this->createForm(new BrandType($dm), $brand);
                 
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){

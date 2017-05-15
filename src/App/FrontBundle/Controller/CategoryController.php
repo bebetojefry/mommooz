@@ -41,6 +41,7 @@ class CategoryController extends Controller
     {
         $dm = $this->getDoctrine()->getManager();
         $category = new Category();
+        $category->setStatus(true);
         $category->setParent($parent);
         $form = $this->createForm(new CategoryType($dm), $category);
         

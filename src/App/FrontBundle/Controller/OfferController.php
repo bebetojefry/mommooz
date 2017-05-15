@@ -35,7 +35,9 @@ class OfferController extends Controller
     public function newAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new OfferType($dm), new Offer());
+        $offer = new Offer();
+        $offer->setStatus(true);
+        $form = $this->createForm(new OfferType($dm), $offer);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
