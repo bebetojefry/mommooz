@@ -1,4 +1,5 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
+<div id="tree"></div>
 <div class="row">
     <div class="col-md-6">
         {{ form_row(form.name) }}
@@ -38,6 +39,11 @@
 </div>
 {{ form_widget(form._token) }}
 <script type="text/javascript">
+    function getTree() {
+        var tree = {{ treeData|raw }};
+        
+        return tree;
+    }
     $(document).ready(function () {
         $("#{{ form.keywords.vars.id }}").tokenInput("{{ path('keyword_search') }}", {
             theme: "facebook",
@@ -182,5 +188,9 @@
             // add a new tag form (see next code block)
             addVarientForm($variantCollectionHolder, $newLinkLi2);
         });
+        
+        $('#tree').treeview({data: getTree(), onNodeSelected: function(event, data){
+            
+        }});
     });
 </script>
