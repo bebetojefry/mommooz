@@ -12,6 +12,22 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class RegionDatatable extends AbstractDatatableView
 {
+    private $sl = 0;
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getLineFormatter()
+    {
+        $formatter = function($line){
+            $line['sl'] = $this->sl++;
+
+            return $line;
+        };
+
+        return $formatter;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -88,6 +104,10 @@ class RegionDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('regionName', 'column', array(
                 'title' => 'Region Name',
