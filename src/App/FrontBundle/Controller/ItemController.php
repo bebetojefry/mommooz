@@ -57,7 +57,7 @@ class ItemController extends Controller
         }
         
         if($category){
-            $products = $dm->getRepository('AppFrontBundle:Product')->findByCategory($category);
+            $products = $category->getAllProducts();
         } else {
             $products = $dm->getRepository('AppFrontBundle:Product')->findAll();
         }

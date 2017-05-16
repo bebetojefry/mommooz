@@ -39,7 +39,7 @@ class ItemType extends AbstractType
         if($builder->getData()->getProduct()){
             $builder->add('product', 'entity', array(
                 'class' => 'AppFrontBundle:Product',
-                'choices' => $builder->getData()->getProduct()->getCategory()->getProducts(),
+                'choices' => $builder->getData()->getProduct()->getCategory()->getAllProducts(),
                 'property' => 'name',
                 'multiple' => false,
                 'expanded' => false,

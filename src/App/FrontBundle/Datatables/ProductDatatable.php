@@ -116,7 +116,7 @@ class ProductDatatable extends AbstractDatatableView
                 'title' => 'Description',
             ))
             ->add('category.categoryName', 'column', array(
-                'title' => 'Category CategoryName',
+                'title' => 'Category',
             ))
             ->add('status', 'boolean', array(
                 'title' => 'Status',
