@@ -194,7 +194,11 @@
                url: '{{ path('item_products') }}?cat='+data.id,
                method: 'get',
                success: function(resp){
-                   $("#{{ form.product.vars.id }}").html(resp);
+                    if(resp != ''){
+                       $("#{{ form.product.vars.id }}").html(resp);
+                    } else {
+                        alert('There is no product in "'+data.text+'" category');
+                    }
                }
             });
         }});
