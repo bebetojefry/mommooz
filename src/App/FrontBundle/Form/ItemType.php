@@ -15,10 +15,13 @@ use App\FrontBundle\Form\ItemVariantType;
 class ItemType extends AbstractType
 {
     private $om;
+    
+    private $category;
 
-    public function __construct(ObjectManager $om)
+    public function __construct(ObjectManager $om, $category)
     {
         $this->om = $om;
+        $this->category = $category;
     }
     
     /**
@@ -34,14 +37,28 @@ class ItemType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('price')
-            ->add('product', 'entity', array(
+            ->add('price');
+        
+        if($this->category){
+            $builder->add('product', 'entity', array(
+                'class' => 'AppFrontBundle:Product',
+                'choices' => $this->category->getProducts(),
+                'property' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'required' => true,
+            ));
+        } else {
+            $builder->add('product', 'entity', array(
                 'class' => 'AppFrontBundle:Product',
                 'property' => 'name',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
-            ))
+            ));
+        }
+                    
+        $builder
             ->add('brand', 'entity', array(
                 'class' => 'AppFrontBundle:Brand',
                 'property' => 'name',

@@ -16,6 +16,7 @@
         {{ form_row(form.comm_value) }}
         {{ form_row(form.status) }}
     </div>
+    <input type="hidden" name="category_submitted" id="category_submitted" value="" /> 
 </div>
 <div class="row">
     <div class="col-md-12">
@@ -190,7 +191,8 @@
         });
         
         $('#tree').treeview({data: getTree(), onNodeSelected: function(event, data){
-            
+            $('#category_submitted').val(data.id);
+            $('#tree').parents('form').submit();
         }});
     });
 </script>
