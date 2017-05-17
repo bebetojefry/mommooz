@@ -71,7 +71,7 @@ class StockEntryController extends Controller
         
         $items = $this->getUser()->getRealItems($category);
         
-        return $this->render('AppFrontBundle:Item:ItemSelect.html.twig',
+        return $this->render('AppFrontBundle:Stock:ItemSelect.html.twig',
             array('items' => $items)
         );
     }
