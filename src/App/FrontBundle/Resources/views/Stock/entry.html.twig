@@ -20,6 +20,28 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 <div id="tree"></div>
 {{ form_widget(form) }}
+<script type="text/javascript">
+    function getTree() {
+        var tree = {{ treeData|raw }};
+
+        return tree;
+    }
+    $(document).ready(function () {
+        $('#tree').treeview({data: getTree(), onNodeSelected: function(event, data){
+            $.ajax({
+                url: '{{ path('entry_items') }}?cat='+data.id,
+                method: 'get',
+                success: function(resp){
+                    if(resp != ''){
+                       $("#{{ form.item.vars.id }}").html(resp);
+                    } else {
+                        alert('There is no product in "'+data.text+'" category');
+                    }
+                }
+            });
+        }});
+    });
+</script>       
 {% if form.price is defined %}
     <script type="text/javascript">
         $(document).ready(function () {
@@ -61,20 +83,6 @@
             });
 
             $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
-            
-            $('#tree').treeview({data: getTree(), onNodeSelected: function(event, data){
-                $.ajax({
-                   url: '{{ path('entry_items') }}?cat='+data.id,
-                   method: 'get',
-                   success: function(resp){
-                        if(resp != ''){
-                           $("#{{ form.item.vars.id }}").html(resp);
-                        } else {
-                            alert('There is no product in "'+data.text+'" category');
-                        }
-                   }
-                });
-            }});
         });
     </script>
 {% endif %}
