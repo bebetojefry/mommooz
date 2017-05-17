@@ -42,6 +42,7 @@ class ItemController extends Controller
         $query->setQuery($qb);
         return $query->getResponse();
     }
+    
     /**
      * Get products for the given category.
      *

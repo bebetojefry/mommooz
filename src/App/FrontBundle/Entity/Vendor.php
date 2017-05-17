@@ -3,7 +3,7 @@
 namespace App\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use App\FrontBundle\Entity\Category;
 /**
  * Vendor
  *
@@ -114,11 +114,15 @@ class Vendor extends User
         return $this->items;
     }
     
-    public function getRealItems()
+    public function getRealItems(Category $category = null)
     {
         $realItems = array();
         foreach($this->items as $item){
-            $realItems[] = $item->getItem();
+            if($category == null){
+                $realItems[] = $item->getItem();
+            } else if($item->getItem()->inCategory($category)){
+                $realItems[] = $item->getItem();
+            }
         }
         
         return $realItems;

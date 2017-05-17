@@ -18,6 +18,7 @@
     </div>
 {% endif %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
+<div id="tree"></div>
 {{ form_widget(form) }}
 {% if form.price is defined %}
     <script type="text/javascript">
@@ -60,6 +61,20 @@
             });
 
             $('#{{ form.keywords.vars.id }}').addClass('token-input-real-field');
+            
+            $('#tree').treeview({data: getTree(), onNodeSelected: function(event, data){
+                $.ajax({
+                   url: '{{ path('entry_items') }}?cat='+data.id,
+                   method: 'get',
+                   success: function(resp){
+                        if(resp != ''){
+                           $("#{{ form.item.vars.id }}").html(resp);
+                        } else {
+                            alert('There is no product in "'+data.text+'" category');
+                        }
+                   }
+                });
+            }});
         });
     </script>
 {% endif %}

@@ -5,7 +5,7 @@ namespace App\FrontBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use App\FrontBundle\Entity\Keyword;
-
+use App\FrontBundle\Entity\Category;
 /**
  * Item
  *
@@ -673,5 +673,15 @@ class Item
     
     public function getNameWithBrand(){
         return $this->brand->getName().' '.$this->name;
+    }
+    
+    public function inCategory(Category $category){
+        if($product = $this->getProduct()){
+            if($product->getCategory()->getId() == $category->getId() || $category->hasChild($product->getCategory())){
+                return true;
+            }
+        }
+        
+        return false;
     }
 }

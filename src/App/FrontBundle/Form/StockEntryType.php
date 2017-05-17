@@ -31,6 +31,8 @@ class StockEntryType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $category = $builder->getData()->getItem() ? $builder->getData()->getItem()->getProduct()->getCategory() : null;
+        
         if($this->item instanceof Item){
             $keywordTransformer = new KeywordsToIdsTransformer($this->om);
             $offerTransformer = new OfferToIdsTransformer($this->om);
@@ -45,7 +47,7 @@ class StockEntryType extends AbstractType
             $builder
             ->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
-                'choices' => $this->vendor->getRealItems(),
+                'choices' => $this->vendor->getRealItems($category),
                 'property' => 'nameWithBrand',
                 'multiple' => false,
                 'expanded' => false,
@@ -99,13 +101,14 @@ class StockEntryType extends AbstractType
         } else {
             $builder->add('item', 'entity', array(
                 'class' => 'AppFrontBundle:Item',
-                'choices' => $this->vendor->getRealItems(),
+                'choices' => $this->vendor->getRealItems($category),
                 'property' => 'nameWithBrand',
                 'multiple' => false,
                 'expanded' => false,
                 'required' => true,
             ));
         }
+        
         $builder->add('state', 'hidden');
         $builder->add('commtype', 'hidden');
         $builder->add('commvalue', 'hidden');

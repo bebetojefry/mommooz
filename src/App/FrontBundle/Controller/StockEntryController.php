@@ -55,6 +55,28 @@ class StockEntryController extends Controller
     }
     
     /**
+     * Get items for the given category.
+     *
+     * @Route("/items", name="entry_items")
+     * @Method({"GET", "POST"})
+     */
+    public function itemsAction(Request $request)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        
+        $category = null;
+        if($request->query->get('cat')){
+            $category = $dm->getRepository('AppFrontBundle:Category')->find($request->query->get('cat'));
+        }
+        
+        $items = $this->getUser()->getRealItems($category);
+        
+        return $this->render('AppFrontBundle:Item:ItemSelect.html.twig',
+            array('items' => $items)
+        );
+    }
+    
+    /**
      * Displays a form to add an existing stockentry entity.
      *
      * @Route("/{id}/new", name="stockentry_new", options={"expose"=true})
@@ -72,6 +94,10 @@ class StockEntryController extends Controller
         $entry->setStatus(true);
         $entry->setStock($stock);
         $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $item), $entry);
+        
+        $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
+        $resultTree = array();
+        $this->getCatTree($resultTree, $rootCategory);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -103,7 +129,7 @@ class StockEntryController extends Controller
         }
         
         $body = $this->renderView('AppFrontBundle:Stock:entry.html.twig',
-            array('form' => $form->createView())
+            array('form' => $form->createView(), 'treeData' => json_encode($resultTree))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
@@ -122,6 +148,10 @@ class StockEntryController extends Controller
         $stockentry->setCommtype($stockentry->getItem()->getCommType());
         $stockentry->setCommvalue($stockentry->getItem()->getCommValue());
         $form = $this->createForm(new StockEntryType($dm, $this->getUser(), $stockentry->getItem()), $stockentry);
+        
+        $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
+        $resultTree = array();
+        $this->getCatTree($resultTree, $rootCategory, $stockentry->getItem()->getProduct()->getCategory());
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
@@ -150,7 +180,7 @@ class StockEntryController extends Controller
         }
         
         $body = $this->renderView('AppFrontBundle:Stock:entry.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values))
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values), 'treeData' => json_encode($resultTree))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
@@ -294,5 +324,28 @@ class StockEntryController extends Controller
         }
         
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
+    }
+    
+    private function getCatTree(&$result, $category, $selCat = null){
+        $result[] = array('text' => $category->getCategoryName(), 'id' => $category->getId());
+        
+        $keys = array_keys($result);
+        if($selCat){
+            $result[end($keys)]['state'] = array();
+            if($category->hasChild($selCat)){
+                $result[end($keys)]['state']['expanded'] = 'true'; 
+            }
+            
+            if($category->getId() == $selCat->getId()){
+                $result[end($keys)]['state']['selected'] = 'true'; 
+            }
+        }
+        
+        if(count($category->getChilds()) > 0){
+            $result[end($keys)]['nodes'] = array();
+            foreach($category->getChilds() as $cat){
+                $this->getCatTree($result[end($keys)]['nodes'], $cat, $selCat);
+            }
+        }
     }
 }
