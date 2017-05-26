@@ -14,9 +14,11 @@ class IndexController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $districts = $em->getRepository('AppFrontBundle:District')->findAll();
+        
+        $district_selected = $em->getRepository('AppFrontBundle:District')->find(35);
         $regions = array();
-        if(count($districts) > 0){
-            $regions = $districts[0]->getRegions();
+        if($district_selected){
+            $regions = $district_selected->getRegions();
         }
         
         return $this->render('AppWebBundle:Index:explore.html.twig', array(
