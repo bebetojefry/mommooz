@@ -17,7 +17,7 @@
                         <td>
                             <select class="" name="district" id="district">
                                 {%for district in districts %}
-                                    <option {% if district.getId() == app.request.get('district') %}selected=""{% endif %} value="{{ district.getId() }}"> {{ district.getName() }} </option>
+                                    <option {% if district.getId() != 35 %}disabled=""{% endif %} {% if district.getId() == app.request.get('district') || district.getId() == 35 %}selected=""{% endif %} value="{{ district.getId() }}"> {{ district.getName() }} </option>
                                 {% endfor %}
                             </select>
                             {% if districts|length == 1 %}

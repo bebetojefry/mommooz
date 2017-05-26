@@ -34,7 +34,8 @@ class IndexController extends Controller
             return $this->redirect($this->generateUrl('home'));
         } else {
             $districts = $em->getRepository('AppFrontBundle:District')->findAll();
-            $district_selected = $em->getRepository('AppFrontBundle:District')->find($_POST['district']);
+            $distid = isset($_POST['district']) ? $_POST['district'] : 35;
+            $district_selected = $em->getRepository('AppFrontBundle:District')->find($distid);
             $regions = $em->getRepository('AppFrontBundle:Region')->findByDistrict($district_selected);
 
             return $this->render('AppWebBundle:Index:explore.html.twig', array(
