@@ -112,8 +112,7 @@ category:
         
 product:
     module_name: Products
-    actions:
-        list: Items
+    items_list: Items
     title:
         new: New Product
         edit: Edit Product
