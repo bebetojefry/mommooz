@@ -98,7 +98,7 @@ class ItemDatatable extends AbstractDatatableView
             'state_duration' => 7200,
             'stripe_classes' => array(),
             'class' => Style::BOOTSTRAP_3_STYLE,
-            'individual_filtering' => false,
+            'individual_filtering' => true,
             'individual_filtering_position' => 'head',
             'use_integration_options' => true,
             'force_dom' => false,
@@ -115,12 +115,15 @@ class ItemDatatable extends AbstractDatatableView
             ))
             ->add('name', 'column', array(
                 'title' => 'Name',
+                'searchable' => true,
             ))
             ->add('product.name', 'column', array(
                 'title' => 'Product',
+                'searchable' => true,
             ))
             ->add('brand.name', 'column', array(
                 'title' => 'Brand',
+                'searchable' => true,
             ))
             ->add('status', 'boolean', array(
                 'title' => 'Status',
