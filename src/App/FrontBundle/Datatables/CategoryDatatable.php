@@ -161,11 +161,11 @@ class CategoryDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('tor->trans.actions.delete'),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('tor->trans.actions.delete'),
+                            'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',

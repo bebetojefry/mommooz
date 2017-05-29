@@ -112,7 +112,8 @@ category:
         
 product:
     module_name: Products
-    items_list: Items
+    actions:
+        items: Items
     title:
         new: New Product
         edit: Edit Product
