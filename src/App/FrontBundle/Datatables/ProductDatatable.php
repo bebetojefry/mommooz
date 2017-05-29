@@ -16,7 +16,7 @@ class ProductDatatable extends AbstractDatatableView
     
     private $container;
     
-    public function __construct($container) {
+    public function setContainer($container) {
         $this->container = $container;
     }
     
