@@ -85,7 +85,7 @@ class ProductDatatable extends AbstractDatatableView
         ));
 
         
-        $length = (int)$this->container->get('session')->get('product_length') ? $this->container->get('session')->get('product_length') : (int)10;
+        $length = $this->container->get('session')->get('product_length') ? $this->container->get('session')->get('product_length') : 10;
         
         $this->options->set(array(
             'display_start' => 0,
@@ -95,7 +95,7 @@ class ProductDatatable extends AbstractDatatableView
             'order_classes' => true,
             'order' => array(array(0, 'asc')),
             'order_multi' => true,
-            'page_length' => $length,
+            'page_length' => (int)$length,
             'paging_type' => Style::FULL_NUMBERS_PAGINATION,
             'renderer' => '',
             'scroll_collapse' => false,
