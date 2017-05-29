@@ -129,11 +129,11 @@ class ProductDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('product.actions.items'),
+                        'label' => $this->translator->trans('product.actions.list'),
                         'icon' => 'glyphicon glyphicon-th-list',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('product.actions.items'),
+                            'title' => $this->translator->trans('product.actions.list'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'style' => 'margin-right:5px;'
