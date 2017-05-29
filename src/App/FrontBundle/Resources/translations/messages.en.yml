@@ -71,3 +71,11 @@ table:
     last: "Last"
     previous: "Previous"
     search: "Search"
+
+region:
+    module_name: Regions
+    actions:
+        new: New Region
+        edit: Edit
+        delete: Delete
+        detail: Locations
