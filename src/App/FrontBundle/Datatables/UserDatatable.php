@@ -181,7 +181,7 @@ class UserDatatable extends AbstractDatatableView
                             'id' => 'id'
                         ),
                         'label' => $this->translator->trans('vendor.actions.items'),
-                        'icon' => 'glyphicon glyphicon-trash',
+                        'icon' => 'glyphicon glyphicon-th-list',
                         'attributes' => array(
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('vendor.actions.items'),
