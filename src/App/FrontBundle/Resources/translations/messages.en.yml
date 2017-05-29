@@ -52,7 +52,7 @@ common:
 page_title:
     login: Login
     products: Products
-    dashboard: Regions
+    region: Regions
     locations: Locations
     category: Categories
     items: Items
