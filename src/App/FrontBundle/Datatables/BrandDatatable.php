@@ -159,11 +159,11 @@ class BrandDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('brand.actions.delete'),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('brand.actions.delete'),
+                            'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',

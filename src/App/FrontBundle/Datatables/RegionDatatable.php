@@ -39,11 +39,11 @@ class RegionDatatable extends AbstractDatatableView
             'actions' => array(
                 array(
                     'route' => $this->router->generate('region_new'),
-                    'label' => $this->translator->trans('region.actions.new'),
+                    'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
-                        'title' => $this->translator->trans('region.actions.new'),
+                        'title' => $this->translator->trans('datatables.actions.new'),
                         'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
@@ -129,11 +129,11 @@ class RegionDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('region.actions.edit'),
+                        'label' => $this->translator->trans('datatables.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('region.actions.edit'),
+                            'title' => $this->translator->trans('datatables.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
@@ -146,11 +146,11 @@ class RegionDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('region.actions.delete'),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('region.actions.delete'),
+                            'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',

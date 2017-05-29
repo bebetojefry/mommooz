@@ -42,11 +42,11 @@ class ItemDatatable extends AbstractDatatableView
             'actions' => array(
                 array(
                     'route' => $this->router->generate('item_new', array('id' => $id)),
-                    'label' => $this->translator->trans('item.actions.new'),
+                    'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
-                        'title' => $this->translator->trans('item.actions.new'),
+                        'title' => $this->translator->trans('datatables.actions.new'),
                         'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
@@ -137,11 +137,11 @@ class ItemDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('item.actions.edit'),
+                        'label' => $this->translator->trans('datatables.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('item.actions.edit'),
+                            'title' => $this->translator->trans('datatables.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
@@ -154,11 +154,11 @@ class ItemDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('category.actions.delete'),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('item.actions.delete'),
+                            'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',

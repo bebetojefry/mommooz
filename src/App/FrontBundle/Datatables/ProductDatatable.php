@@ -122,7 +122,7 @@ class ProductDatatable extends AbstractDatatableView
                 'title' => 'Status',
             ))          
             ->add(null, 'action', array(
-                'title' => $this->translator->trans('product.actions.title'),
+                'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
                         'route' => 'product_items',
@@ -144,11 +144,11 @@ class ProductDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('product.actions.edit'),
+                        'label' => $this->translator->trans('datatables.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('product.actions.edit'),
+                            'title' => $this->translator->trans('datatables.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
@@ -161,11 +161,11 @@ class ProductDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('product.actions.delete'),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('product.actions.delete'),
+                            'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',

@@ -140,18 +140,18 @@ class BannerDatatable extends AbstractDatatableView
                 'title' => 'Banner_name',
             ))            
             ->add(null, 'action', array(
-                'title' => $this->translator->trans('banner.actions.title'),
+                'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
                         'route' => 'banner_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('banner.actions.edit'),
+                        'label' => $this->translator->trans('datatables.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('banner.actions.edit'),
+                            'title' => $this->translator->trans('datatables.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
@@ -164,11 +164,11 @@ class BannerDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('banner.actions.detail'),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('banner.actions.delete'),
+                            'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',

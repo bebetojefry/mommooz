@@ -39,7 +39,7 @@ class VariantTypeDatatable extends AbstractDatatableView
             'actions' => array(
                 array(
                     'route' => $this->router->generate('varianttype_new'),
-                    'label' => $this->translator->trans('variant.actions.new'),
+                    'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
                         'rel' => 'tooltip',
@@ -113,18 +113,18 @@ class VariantTypeDatatable extends AbstractDatatableView
                 'title' => 'Name',
             ))
             ->add(null, 'action', array(
-                'title' => $this->translator->trans('variant.actions.title'),
+                'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
                         'route' => 'varianttype_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('variant.actions.edit'),
+                        'label' => $this->translator->trans('datatables.actions.edit'),
                         'icon' => 'glyphicon glyphicon-edit',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('variant.actions.edit'),
+                            'title' => $this->translator->trans('datatables.actions.edit'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openModal(event);',
@@ -137,11 +137,11 @@ class VariantTypeDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('variant.actions.delete'),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('variant.actions.delete'),
+                            'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',

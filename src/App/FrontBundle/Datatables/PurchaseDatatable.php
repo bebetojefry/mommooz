@@ -121,11 +121,11 @@ class PurchaseDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('purchase.actions.show'),
+                        'label' => $this->translator->trans('datatables.actions.show'),
                         'icon' => 'glyphicon glyphicon-eye-open',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('purchase.actions.show'),
+                            'title' => $this->translator->trans('datatables.actions.show'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'style' => 'margin-right:5px;'

@@ -113,7 +113,7 @@ class CategoryDatatable extends AbstractDatatableView
                 'title' => 'Sl No',
             ))
             ->add('categoryName', 'column', array(
-                'title' => 'CategoryName',
+                'title' => 'Category Name',
             ))
             ->add('parent.categoryName', 'column', array(
                 'title' => 'Parent',
@@ -161,11 +161,11 @@ class CategoryDatatable extends AbstractDatatableView
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
-                        'label' => $this->translator->trans('category.actions.delete'),
+                        'label' => $this->translator->trans('tor->trans.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
                             'rel' => 'tooltip',
-                            'title' => $this->translator->trans('category.actions.delete'),
+                            'title' => $this->translator->trans('tor->trans.actions.delete'),
                             'class' => 'btn btn-primary btn-xs',
                             'role' => 'button',
                             'onclick' => 'return openConfirm(event);',
