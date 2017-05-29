@@ -22,6 +22,13 @@ class ProductController extends Controller
         $datatable = $this->get('app.front.datatable.product');
         $datatable->buildDatatable();
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
+        
+        $query->useQueryCache(true);            // (1)
+        $query->useCountQueryCache(true);       // (2)
+        $query->useResultCache(true, 60);       // (3)
+        $query->useCountResultCache(true, 60);  // (4)
+    
         return $query->getResponse();
     }
     
