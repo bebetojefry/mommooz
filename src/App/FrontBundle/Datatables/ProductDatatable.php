@@ -130,7 +130,7 @@ class ProductDatatable extends AbstractDatatableView
                             'id' => 'id'
                         ),
                         'label' => $this->translator->trans('product.actions.items'),
-                        'icon' => 'glyphicon glyphicon-edit',
+                        'icon' => 'glyphicon glyphicon-th-list',
                         'attributes' => array(
                             'rel' => 'tooltip',
                             'title' => $this->translator->trans('product.actions.items'),
