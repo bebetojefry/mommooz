@@ -14,6 +14,12 @@ class ProductDatatable extends AbstractDatatableView
 {
     private $sl = 1;
     
+    private $container;
+    
+    public function __construct($container) {
+        $this->container = $container;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -78,6 +84,9 @@ class ProductDatatable extends AbstractDatatableView
             'pipeline' => 0
         ));
 
+        
+        $length = $this->container->get('session')->get('product_length') ? $this->container->get('session')->get('product_length') : 10;
+        
         $this->options->set(array(
             'display_start' => 0,
             'defer_loading' => -1,
@@ -86,7 +95,7 @@ class ProductDatatable extends AbstractDatatableView
             'order_classes' => true,
             'order' => array(array(0, 'asc')),
             'order_multi' => true,
-            'page_length' => 10,
+            'page_length' => $length,
             'paging_type' => Style::FULL_NUMBERS_PAGINATION,
             'renderer' => '',
             'scroll_collapse' => false,

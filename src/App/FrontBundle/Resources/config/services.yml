@@ -94,6 +94,7 @@ services:
     app.front.datatable.product:
           class: App\FrontBundle\Datatables\ProductDatatable
           parent: sg_datatables.datatable.abstract
+          arguments:  ["@service_container"]
           
     app.front.datatable.item:
          class: App\FrontBundle\Datatables\ItemDatatable

@@ -17,8 +17,12 @@ class ProductController extends Controller
     /**
      * @Route("/results", name="product_results", options={"expose"=true})
      */
-    public function indexResultsAction()
+    public function indexResultsAction(Request $request)
     {
+        if($length = $request->query->get('length')){
+            $this->get('session')->set('product_length', $length);
+        }
+        
         $datatable = $this->get('app.front.datatable.product');
         $datatable->buildDatatable();
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
