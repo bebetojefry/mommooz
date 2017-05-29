@@ -51,7 +51,7 @@ class InvoiceItemDatatable extends AbstractDatatableView
             'scroll_x' => false,
             'scroll_y' => '',
             'searching' => true,
-            'state_save' => false,
+            'state_save' => true,
             'delay' => 0,
             'extensions' => array(),
             'highlight' => false,

@@ -19,13 +19,6 @@ class ProductController extends Controller
      */
     public function indexResultsAction(Request $request)
     {
-        if($length = $request->query->get('length')){
-            $this->get('session')->set('product_length', $length);
-        }
-        
-        if($start = $request->query->get('start')){
-            $this->get('session')->set('product_start', $start);
-        }
         
         $datatable = $this->get('app.front.datatable.product');
         $datatable->buildDatatable();
