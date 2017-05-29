@@ -138,4 +138,23 @@ class CategoryController extends Controller
             'categoryDatatable' => $categoryDatatable,
         ));
     }
+    
+    /**
+     * @Route("/search", name="category_search")
+     */
+    public function searchAction(Request $request){
+        $q = $request->query->get('q');
+        $categories = $this->getDoctrine()->getManager()->getRepository("AppFrontBundle:Category")->createQueryBuilder('c')
+        ->where('c.categoryName LIKE :q')
+        ->setParameter('q', '%'.$q.'%')
+        ->getQuery()
+        ->getResult();
+        
+        $result = array();
+        foreach($categories as $category){
+            $result[] = array('id' => $category->getId(), 'name' => $category->getCategoryName());
+        }
+        
+        return new JsonResponse($result);
+    }
 }
