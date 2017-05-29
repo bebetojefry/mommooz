@@ -23,6 +23,10 @@ class ProductController extends Controller
             $this->get('session')->set('product_length', $length);
         }
         
+        if($start = $request->query->get('start')){
+            $this->get('session')->set('product_start', $start);
+        }
+        
         $datatable = $this->get('app.front.datatable.product');
         $datatable->buildDatatable();
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);

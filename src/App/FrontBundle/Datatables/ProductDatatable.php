@@ -86,9 +86,10 @@ class ProductDatatable extends AbstractDatatableView
 
         
         $length = $this->container->get('session')->get('product_length') ? $this->container->get('session')->get('product_length') : 10;
+        $start = $this->container->get('session')->get('product_start') ? $this->container->get('session')->get('product_start') : 0;
         
         $this->options->set(array(
-            'display_start' => 1,
+            'display_start' => (int)$start,
             'defer_loading' => -1,
             'dom' => 'lfrtip',
             'length_menu' => array(10, 25, 50, 100),
