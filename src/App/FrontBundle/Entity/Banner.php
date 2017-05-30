@@ -118,13 +118,13 @@ abstract class Banner
         $value = null;
         switch(get_class($this)){
             case 'App\FrontBundle\Entity\CategoryBanner':
-                $value = '<b>'.$this->getEntity()->getCategoryName().'</b>';
+                $value = '<b>'.$this->getBannerName().'</b>';
                 break;
             case 'App\FrontBundle\Entity\ItemBanner';
-                $value = '<b>'.$this->getEntity()->getName().'</b>';
+                $value = '<b>'.$this->getBannerName().'</b>';
                 break;
             case 'App\FrontBundle\Entity\OfferBanner':
-                $value = '<b>'.$this->getEntity()->getName().'</b>';
+                $value = '<b>'.$this->getBannerName().'</b>';
                 break;
         }
         
