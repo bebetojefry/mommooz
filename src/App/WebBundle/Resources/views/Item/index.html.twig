@@ -74,7 +74,7 @@
                     <script type="text/javascript">
                         $('.item-thumb').on('click', function(){
                             $('.item-img-preview').attr('src', $(this).data('imglarge'));
-                            $('.item-img-preview').data('origin', $(this).data('imglarger'));
+                            $('.item-img-preview').attr('data-origin', $(this).data('imglarger'));
                             $('.item-primary-img').imgZoom();
                         });
                     </script>
