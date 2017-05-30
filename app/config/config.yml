@@ -172,6 +172,11 @@ liip_imagine :
             filters :
                 thumbnail  : { size : [387, 493], mode : outbound }
                 
+        item_larger :
+            quality : 100
+            filters :
+                thumbnail  : { size : [750, 1000], mode : outbound }
+                
         banner :
             quality : 75
             filters :
