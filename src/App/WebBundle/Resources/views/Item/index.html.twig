@@ -68,7 +68,7 @@
 
                     <div class="full-width details-page-click-image mt-10p text-center">
                         {% for image in item.getImages() %}
-                            <div class="block-3 prl-10p pointer-csr"> <img src="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_thumb') }}" class="image-fw item-thumb" alt="product name"> </div>
+                            <div class="block-3 prl-10p pointer-csr"> <img data-imglarge="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_large') }}" src="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_thumb') }}" class="image-fw item-thumb" alt="product name"> </div>
                         {% endfor %}
                     </div>
                     <script type="text/javascript">
