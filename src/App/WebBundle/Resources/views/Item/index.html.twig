@@ -191,7 +191,7 @@
 
                     <div class="full-width mt-20p">
                         <label> Number of Quantity </label>
-                        <input type="number" {% if inCart %}disabled=""{% endif %} id="purchase-quantity" value="{% if inCart %}{{ inCart.getQuantity() }}{% else %}1{% endif %}" max="{{ entry.getInStock() }}" min="1">
+                        <input type="number" min="1" {% if inCart %}disabled=""{% endif %} id="purchase-quantity" value="{% if inCart %}{{ inCart.getQuantity() }}{% else %}1{% endif %}" max="{{ entry.getInStock() }}" min="1">
                     </div>
 
                     <div class="full-width mt-10p ptb-10p">
@@ -202,6 +202,10 @@
                         <script type="text/javascript">
                             $('#add-to-cart').on('click', function(){
                                 var quantity = $('#purchase-quantity').val();
+                                if(!isNumeric(quantity) || quantity <= 0){
+                                    openAlert('Invalid Quantity', 'error');
+                                    return; 
+                                }
                                 $.ajax({
                                     url: '{{ path('item_add_to_cart', {'id': entry.getId()}) }}?qty='+quantity,
                                     dataType: 'json',
@@ -212,9 +216,9 @@
                                             $('.availDisplay a').remove();
                                             $('#purchase-quantity').attr('disabled', 'disabled');
                                             $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
-                                            alert('Successfully added to cart');
+                                            openAlert('Successfully added to cart', 'success');
                                         } else {
-                                            alert('Insufficient stock');
+                                            openAlert('Insufficient stock', 'error');
                                         }
                                     }
                                 });
