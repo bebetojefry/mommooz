@@ -42,7 +42,7 @@
                                 <h3 class="mt-10p"> <span style="text-decoration: line-through;font-size: 12px;color: #CCC;margin-bottom: 10px;display: inline-block;">MRP : {{ entry.getMrp() }}</span><br/><span class="icon-inr"></span>{{ entry.getActualPrice() }}</h3>
                             </a>
                             <div class="full-width mt-15p">
-                                <input  type="number" class="txt-item-qty" value="1" style="width: 45px; {% if app_web_user.inCart(entry) %}display: none;{% endif %}" />
+                                <input  type="number" min="1" class="txt-item-qty" value="1" style="width: 45px; {% if app_web_user.inCart(entry) %}display: none;{% endif %}" />
                                 <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
                                 <button {% if app_web_user.inCart(entry) %}style="display: none;"{% endif %} class="button-product br-5p ptb-10p prl-15p pointer-csr add-to-cart" data-entry="{{ entry.getId() }}">
                                     Add to Cart <span class="icon-arrow-right ml-5p"></span>
