@@ -64,11 +64,11 @@
         <div class="block-9 product-details-page ptb-15p block-fl-cary pb-50p block-lb-12">     
             <div class="block-6 text-right mb-text-left block-sb-12">
                     <div class="block-10">
-                    <img src="{{ item.getRealPicturePath() | imagine_filter('item_large') }}" class="image-fw item-img-preview" alt="product name">
+                    <img id="xzoom-default" src="{{ item.getRealPicturePath() | imagine_filter('item_large') }}" class="image-fw item-img-preview xzoom" alt="product name">
 
-                    <div class="full-width details-page-click-image mt-10p text-center">
+                    <div class="full-width details-page-click-image mt-10p text-center xzoom-thumbs">
                         {% for image in item.getImages() %}
-                            <div class="block-3 prl-10p pointer-csr"> <img data-imglarge="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_large') }}" src="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_thumb') }}" class="image-fw item-thumb" alt="product name"> </div>
+                            <div class="block-3 prl-10p pointer-csr"> <a href="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_large') }}"><img data-imglarge="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_large') }}" src="{{ item.getRealPicturePath(loop.index0) | imagine_filter('item_thumb') }}" class="image-fw item-thumb xzoom-gallery" alt="product name"></a> </div>
                         {% endfor %}
                     </div>
                     <script type="text/javascript">
@@ -282,5 +282,9 @@
 {% endblock%}
 
 {% block javascript %}
-
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.xzoom, .xzoom-gallery').xzoom({zoomWidth: 400, title: true, tint: '#333', Xoffset: 15});
+        });
+    </script>
 {% endblock %}
