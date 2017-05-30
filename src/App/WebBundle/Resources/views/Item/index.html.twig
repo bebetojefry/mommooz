@@ -63,8 +63,8 @@
         </div>
         <div class="block-9 product-details-page ptb-15p block-fl-cary pb-50p block-lb-12">     
             <div class="block-6 text-right mb-text-left block-sb-12">
-                    <div class="block-10">
-                    <img id="item-primary-img" data-origin="{{ item.getRealPicturePath() | imagine_filter('item_larger') }}" src="{{ item.getRealPicturePath() | imagine_filter('item_large') }}" class="image-fw item-img-preview" alt="product name">
+                <div class="block-10">
+                    <div class="item-primary-img"><img data-origin="{{ item.getRealPicturePath() | imagine_filter('item_larger') }}" src="{{ item.getRealPicturePath() | imagine_filter('item_large') }}" class="image-fw item-img-preview" alt="product name"></div>
 
                     <div class="full-width details-page-click-image mt-10p text-center">
                         {% for image in item.getImages() %}
@@ -288,7 +288,7 @@
 {% block javascript %}
     <script type="text/javascript">
         $(document).ready(function() {
-           $('#item-primary-img').imgZoom();
+           $('.item-primary-img').imgZoom();
         });
-    </script>}
+    </script>
 {% endblock %}
