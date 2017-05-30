@@ -106,10 +106,6 @@ class ProductDatatable extends AbstractDatatableView
                 'title' => 'Id',
                 'visible' => false,
             ))
-            ->add('items_count', 'column', array(
-                'dql' => '(SELECT COUNT({i}) FROM AppFrontBundle:Item {i} WHERE {i}.product = product)',
-                'visible' => false,
-            ))
             ->add('sl', 'virtual', array(
                 'title' => 'Sl No',
             ))
@@ -176,9 +172,6 @@ class ProductDatatable extends AbstractDatatableView
                             'cofirmText' => $this->translator->trans('product.delete.confirm'),
                             'style' => 'margin-right:5px;'
                         ),
-                        'render_if' => function($row) {                            ;
-                            return $row['items_count'] == 0;
-                        }
                     )
                 )
             ))
