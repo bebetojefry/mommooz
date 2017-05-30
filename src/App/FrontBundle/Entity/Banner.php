@@ -148,6 +148,9 @@ abstract class Banner
             case 'OfferBanner':
                 $route = 'offer_items';
                 break;
+            case 'BrandBanner':
+                $route = 'brand_page';
+                break;
         }
         
         return $route;
