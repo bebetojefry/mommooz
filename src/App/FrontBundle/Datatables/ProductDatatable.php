@@ -107,7 +107,7 @@ class ProductDatatable extends AbstractDatatableView
                 'visible' => false,
             ))
             ->add('items_count', 'column', array(
-                'dql' => 'COUNT(items)',
+                'dql' => '(SELECT COUNT({i}) FROM AppFrontBundle:Item {i} WHERE {i}.product.id = id)',
                 'visible' => false,
             ))
             ->add('sl', 'virtual', array(
