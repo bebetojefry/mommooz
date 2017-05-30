@@ -353,13 +353,25 @@ class Category
         return $this->popular;
     }
     
-    public function getAllProducts(){
-        $product = $this->products->toArray();
-        foreach ($this->getChilds() as $cat){
-            $product = array_merge($product, $cat->getAllProducts());
+    public function getAllProducts(\SplObjectStorage &$refs = null){
+        $products = array();
+        
+        if($refs === null){
+            $refs = new \SplObjectStorage();
         }
         
-        return $product;
+        foreach($this->products as $product){
+            if(!$refs->contains($product)){
+                $products[] = $product;
+                $refs->attach($product);
+            }
+        }
+        
+        foreach ($this->getChilds() as $cat){
+            $products = array_merge($products, $cat->getAllProducts($refs));
+        }
+        
+        return $products;
     }
     
     public function getInStockEntries(\SplObjectStorage &$products = null){
