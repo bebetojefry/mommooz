@@ -208,3 +208,20 @@ invoice:
 vendoritem:
     delete:
         confirm: 'Are you sure, do you want to delete this item?'
+        
+stockentry:
+    module_name: Manage Stock
+    actions:
+        add: Add Stock
+        minus: Reduce Stock
+        manage: Modify
+    add:
+        prompt: Enter quantity you want to add to the stock
+    minus:
+        prompt: Enter quantity you want to reduce from the stock
+    title:
+        new: New Entry
+        edit: Edit Entry
+        manage: Edit stock item properties
+    delete:
+        confirm: 'Are you sure, do you want to delete this entry?'
