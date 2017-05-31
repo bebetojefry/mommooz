@@ -13,67 +13,7 @@
 {% block items_active %}active{% endblock %}
 
 {% block content %}
-    <div class="form-group">
-        <input type="text" class="form-control" id="item-search" {% if item is defined %}value="{{ item.getName() }}"{% endif %} />
-    </div>
-    <hr/>
-    {% if item is defined %}
-        <div class="row">
-            <div class="col-xs-6">
-                <img src="{{ item.getPicture() }}" width="100%" />
-                {% if vendorItem %}
-                    <span style="color: green;">Item already added.</span>
-                {% else %}
-                    <form name="frm_add_item" id="frm_add_item" action="" method="post">
-                        <button type="submit" class="btn btn-primary"> Add this item</button>
-                    </form>
-                {% endif %}
-            </div>
-            <div class="col-xs-6">
-                <table class="tbl-item-preview">
-                    <tr>
-                        <td>Name : {{ item.getName() }}</td>
-                    </tr>
-                    <tr>
-                        <td>Product : {{ item.getProduct().getName() }}</td>
-                    </tr>
-                    <tr>
-                        <td>Brand : {{ item.getBrand().getName() }}</td>
-                    </tr>
-                    <tr>
-                        <td>Category : {{ item.getProduct().getCategory().getCategoryName() }}</td>
-                    </tr>
-                    <tr>
-                        <td>Commision : 
-                            {% if item.getCommType() == 1 %}
-                                Rs.{{ item.getCommValue() }}
-                            {% else %}
-                                {{ item.getCommValue() }}%
-                            {% endif %}
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <hr/>
-        {% if item.getVariants()|length > 0 %}
-            <h5>Variants</h5>
-            <table width="100%" border="1" class="tbl-item-variant">
-                <tr>
-                    <th>Type</th>
-                    <th>Value</th>
-                </tr>
-                {% for variant in item.getVariants() %}
-                    <tr>
-                        <td>{{ variant.getVariantType().getName() }}</td>
-                        <td>{{ variant.getValue()}}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% endif %}
-    {% else %}
-        {{ datatable_render(vendorItemDatatable) }}
-    {% endif %}
+    {{ datatable_render(vendorItemDatatable) }}
 {% endblock%}
 
 {% block javascript %}
@@ -83,23 +23,6 @@
         output='js/compiled/page.js' %}
         <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
-    <script type="text/javascript">
-        $(function() {
-            $("#item-search").autocomplete({
-                valueKey:'title',
-                source:[
-                {
-                    url:"{{ path('vendor_item_autocomplete') }}?q=%QUERY%",
-                    type:'remote'
-                }
-            ]}).on('selected.xdsoft',function(e,data){
-                var preview_item_path = "{{ path('app_front_vendor_items_preview', {'id': 0}) }}";
-                var loc = preview_item_path.replace('0', data.id);
-                window.location = loc;
-                return false;                
-            }); 
-        });
-    </script>
     <script type="text/javascript">
         $(document).ready(function() {
             $('#productsTable').DataTable({

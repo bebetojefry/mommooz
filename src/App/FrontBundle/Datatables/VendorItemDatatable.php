@@ -36,7 +36,20 @@ class VendorItemDatatable extends AbstractDatatableView
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
-            'actions' => array()
+            'actions' => array(array(
+                    'route' => $this->router->generate('add_vendor_item_category', array('id' => $options['vendor']->getId())),
+                    'label' => $this->translator->trans('vendoritem.actions.add_more'),
+                    'icon' => 'glyphicon glyphicon-plus',
+                    'attributes' => array(
+                        'rel' => 'tooltip',
+                        'title' => $this->translator->trans('vendoritem.actions.add_more'),
+                        'class' => 'btn btn-primary',
+                        'role' => 'button',
+                        'onclick' => 'return openModal(event);',
+                        'modalTitle' => $this->translator->trans('vendoritem.title.add_more'),
+                    ),
+                )
+            )
         ));
 
         $this->features->set(array(

@@ -45,4 +45,49 @@ class VendorItemController extends Controller
         $this->get('session')->getFlashBag()->add('success', 'vendoritem.msg.removed');
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
+    
+    /**
+     * Displays category tree to add more items.
+     *
+     * @Route("/{id}/add_more_category", name="add_vendor_item_category", defaults={"id":0}, options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request, Vendor $vendor)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $code = FormHelper::FORM;
+        
+        $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
+        $resultTree = array();
+        $this->getCatTree($resultTree, $rootCategory);
+        
+        $body = $this->renderView('AppFrontBundle:Item:choose_cat.html.twig',
+            array('treeData' => json_encode($resultTree), 'vendor' => $vendor)
+        );
+
+        return new Response(json_encode(array('code' => $code, 'data' => $body)));
+    }
+    
+    private function getCatTree(&$result, $category, $selCat = null){
+        $result[] = array('text' => $category->getCategoryName(), 'id' => $category->getId());
+        
+        $keys = array_keys($result);
+        if($selCat){
+            $result[end($keys)]['state'] = array();
+            if($category->hasChild($selCat)){
+                $result[end($keys)]['state']['expanded'] = 'true'; 
+            }
+            
+            if($category->getId() == $selCat->getId()){
+                $result[end($keys)]['state']['selected'] = 'true'; 
+            }
+        }
+        
+        if(count($category->getChilds()) > 0){
+            $result[end($keys)]['nodes'] = array();
+            foreach($category->getChilds() as $cat){
+                $this->getCatTree($result[end($keys)]['nodes'], $cat, $selCat);
+            }
+        }
+    }
 }
