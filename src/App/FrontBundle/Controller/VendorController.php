@@ -284,6 +284,14 @@ class VendorController extends Controller
     public function itemsAction(){
         $vendorItemDatatable = $this->get('app.front.datatable.vendorItem');
         $vendorItemDatatable->buildDatatable(array('vendor' => $this->getUser()));
+        $query = $this->get('sg_datatables.query')->getQueryFrom($vendorItemDatatable);
+        $qb = $query->getQuery();
+        if($this->getUser()){
+            $qb->andWhere("vendor_item.vendor = :v");
+            $qb->setParameter('v', $this->getUser());
+        }
+        $query->setQuery($qb);
+        
         return $this->render('AppFrontBundle:Vendor:items.html.twig', array(
             'vendorItemDatatable' => $vendorItemDatatable
         ));
