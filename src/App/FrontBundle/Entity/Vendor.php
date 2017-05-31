@@ -114,6 +114,16 @@ class Vendor extends User
         return $this->items;
     }
     
+    public function hasItem($item) {
+        foreach($this->items as $it){
+            if($it->getItem()->getId() == $item->getId()){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
     public function getRealItems(Category $category = null)
     {
         $realItems = array();

@@ -3,7 +3,14 @@
         {% for item in product.getItems() %}
             <li>
                 <img src="{{ item.getRealPicturePath() | imagine_filter('item_thumb') }}" />
-                <span><input type="checkbox" name="items[]" value="{{ item.getId() }}" />{{ item.getName() }}</span>
+                <span>
+                    {% if vendor.hasItem(item) %}
+                        <i class="fa fa-check fa-1" aria-hidden="true" style="color: green;"></i>
+                    {% else %}
+                        <input type="checkbox" name="items[]" value="{{ item.getId() }}" />
+                    {% endif %}
+                    {{ item.getName() }}
+                </span>
             </li>
         {% endfor %}
     {% endfor %}

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\VendorItem;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Vendor;
+use App\FrontBundle\Entity\VendorItem;
+
 class VendorItemController extends Controller
 {
     /**
@@ -57,13 +59,28 @@ class VendorItemController extends Controller
         $dm = $this->getDoctrine()->getManager();
         
         if($request->isMethod('POST')){
-            $category = $dm->getRepository('AppFrontBundle:Category')->find($_POST['vendor_opt_category']);
-            if($category){
-                $body = $this->renderView('AppFrontBundle:Vendor:cat_items.html.twig',
-                    array('category' => $category, 'vendor' => $vendor)
-                );
+            if(isset($_POST['vendor_opt_category'])){
+                $category = $dm->getRepository('AppFrontBundle:Category')->find($_POST['vendor_opt_category']);
+                if($category){
+                    $body = $this->renderView('AppFrontBundle:Vendor:cat_items.html.twig',
+                        array('category' => $category, 'vendor' => $vendor)
+                    );
 
-                return new Response(json_encode(array('code' => FormHelper::REFRESH_FORM, 'data' => $body)));
+                    return new Response(json_encode(array('code' => FormHelper::REFRESH_FORM, 'data' => $body)));
+                }
+            } else if(isset($_POST['items'])){
+                foreach($_POST['items'] as $it){
+                    $item = $dm->getRepository('AppFrontBundle:Item')->find($it);
+                    if($item){
+                        $vendorItem = new VendorItem();
+                        $vendorItem->setVendor($vendor);
+                        $vendorItem->setItem($item);
+                        $vendorItem->setStatus(true);
+                        
+                        $dm->persist($vendorItem);
+                    }
+                }
+                $dm->flush();
             }
         }
         
