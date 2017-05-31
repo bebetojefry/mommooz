@@ -61,7 +61,7 @@ class VendorItemController extends Controller
         $resultTree = array();
         $this->getCatTree($resultTree, $rootCategory);
         
-        $body = $this->renderView('AppFrontBundle:Item:choose_cat.html.twig',
+        $body = $this->renderView('AppFrontBundle:Vendor:choose_cat.html.twig',
             array('treeData' => json_encode($resultTree), 'vendor' => $vendor)
         );
 
