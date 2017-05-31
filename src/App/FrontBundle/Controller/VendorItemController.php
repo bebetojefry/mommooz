@@ -56,8 +56,8 @@ class VendorItemController extends Controller
     {
         $dm = $this->getDoctrine()->getManager();
         
-        if(1){
-            $category = $dm->getRepository('AppFrontBundle:Category')->find(1);
+        if($request->isMethod('POST')){
+            $category = $dm->getRepository('AppFrontBundle:Category')->find($_POST['vendor_opt_category']);
             if($category){
                 $body = $this->renderView('AppFrontBundle:Vendor:cat_items.html.twig',
                     array('category' => $category, 'vendor' => $vendor)
