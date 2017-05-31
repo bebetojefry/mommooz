@@ -152,3 +152,24 @@ ul.variants li a {
 .tbl-item-variant td, .tbl-item-variant th {
     padding: 5px;
 }
+
+ul.item-thumbs {
+    list-style: none;
+}
+ul.item-thumbs li {
+    padding: 10px;
+    margin: 0 15px 15px 0;
+    border: 1px solid #CCC;
+}
+ul.item-thumbs li img {
+    height: 150px;
+    margin-bottom: 5px;
+    display: block;
+}
+ul.item-thumbs li span {
+    display: block;
+    
+}
+ul.item-thumbs li span input {
+    margin-right: 5px;
+}
