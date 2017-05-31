@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Entity\VendorItem;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Vendor;
-use App\FrontBundle\Entity\VendorItem;
 
 class VendorItemController extends Controller
 {
