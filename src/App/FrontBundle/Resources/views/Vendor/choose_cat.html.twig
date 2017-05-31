@@ -1,7 +1,5 @@
 <div id="tree"></div>
-<form method="get" action="{{ path('add_vendor_item_category', {'id': vendor.getId()}) }}" name="frm_vendor_add_item">
-    <input type="hidden" name="vendor_opt_category" id="vendor_opt_category" value="" />
-</form>
+<input type="hidden" name="vendor_opt_category" id="vendor_opt_category" value="" />
 <script type="text/javascript">
     function getTree() {
         var tree = {{ treeData|raw }};
