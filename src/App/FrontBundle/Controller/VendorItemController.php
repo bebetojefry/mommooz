@@ -55,7 +55,17 @@ class VendorItemController extends Controller
     public function newAction(Request $request, Vendor $vendor)
     {
         $dm = $this->getDoctrine()->getManager();
-        $code = FormHelper::FORM;
+        
+        if($request->isMethod('POST')){
+            $category = $dm->getRepository('AppFrontBundle:Category')->find($request->get('vendor_opt_category'));
+            if($category){
+                $body = $this->renderView('AppFrontBundle:Vendor:cat_items.html.twig',
+                    array('category' => $category, 'vendor' => $vendor)
+                );
+
+                return new Response(json_encode(array('code' => FormHelper::REFRESH_FORM, 'data' => $body)));
+            }
+        }
         
         $rootCategory = $dm->getRepository('AppFrontBundle:Category')->find(1);
         $resultTree = array();
@@ -65,7 +75,7 @@ class VendorItemController extends Controller
             array('treeData' => json_encode($resultTree), 'vendor' => $vendor)
         );
 
-        return new Response(json_encode(array('code' => $code, 'data' => $body)));
+        return new Response(json_encode(array('code' => FormHelper::FORM, 'data' => $body)));
     }
     
     private function getCatTree(&$result, $category, $selCat = null){
