@@ -80,6 +80,9 @@ class VendorItemController extends Controller
                     }
                 }
                 $dm->flush();
+                
+                $this->get('session')->getFlashBag()->add('success', 'vendor.msg.item.added');
+                return new Response(json_encode(array('code' => FormHelper::REFRESH, 'data' => '')));
             }
         }
         
