@@ -8,6 +8,15 @@ function isNumeric(n) {
 
 $(window).load(function (){
 $(".slider").addClass("transition_02s");
+    
+$(".nav-submenu").addClass("firstActive");
+    $('.nav-submenu ul').mouseenter(function(){
+	   $(".nav-submenu").removeClass("firstActive");
+    });
+    $('.nav-submenu ul').mouseleave(function(){
+	   $(".nav-submenu").addClass("firstActive");
+    });  
+    
 
 // add elements
 $(".more-cary" ).append( "<div class='a'></div><div class='b'></div><div class='c'></div>" );
@@ -41,6 +50,8 @@ $('.footer-submenu, .footer-bottom-click').click(function(){
 		$(this).addClass("active");
 		}
  });
+
+  
 
 $('.user-click, .close-login').click(function(){
 	$(".login-register-show").toggleClass("active");
