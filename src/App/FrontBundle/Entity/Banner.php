@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="banner_type", type="string")
- * @ORM\DiscriminatorMap({"offer" = "OfferBanner", "item" = "ItemBanner", "category" = "CategoryBanner"})
+ * @ORM\DiscriminatorMap({"offer" = "OfferBanner", "item" = "ItemBanner", "category" = "CategoryBanner", "brand" = "BrandBanner"})
  * 
  */
 abstract class Banner
@@ -118,13 +118,13 @@ abstract class Banner
         $value = null;
         switch(get_class($this)){
             case 'App\FrontBundle\Entity\CategoryBanner':
-                $value = 'Category <br/><b>'.$this->getEntity()->getCategoryName().'</b>';
+                $value = '<b>'.$this->getBannerName().'</b>';
                 break;
             case 'App\FrontBundle\Entity\ItemBanner';
-                $value = 'Item <br/><b>'.$this->getEntity()->getName().'</b>';
+                $value = '<b>'.$this->getBannerName().'</b>';
                 break;
             case 'App\FrontBundle\Entity\OfferBanner':
-                $value = 'Offer <br/><b>'.$this->getEntity()->getName().'</b>';
+                $value = '<b>'.$this->getBannerName().'</b>';
                 break;
         }
         
@@ -147,6 +147,9 @@ abstract class Banner
                 break;
             case 'OfferBanner':
                 $route = 'offer_items';
+                break;
+            case 'BrandBanner':
+                $route = 'brand_page';
                 break;
         }
         

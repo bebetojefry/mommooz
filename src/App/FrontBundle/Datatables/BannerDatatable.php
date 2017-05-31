@@ -76,6 +76,19 @@ class BannerDatatable extends AbstractDatatableView
                         'onclick' => 'return openModal(event);',
                         'modalTitle' => $this->translator->trans('banner.title.new.offer'),
                     ),
+                ),
+                array(
+                    'route' => $this->router->generate('banner_new').'?type=brand',
+                    'label' => $this->translator->trans('banner.actions.new.brand'),
+                    'icon' => 'glyphicon glyphicon-plus',
+                    'attributes' => array(
+                        'rel' => 'tooltip',
+                        'title' => $this->translator->trans('banner.actions.new.brand'),
+                        'class' => 'btn btn-primary',
+                        'role' => 'button',
+                        'onclick' => 'return openModal(event);',
+                        'modalTitle' => $this->translator->trans('banner.title.new.brand'),
+                    ),
                 )
             )
         ));

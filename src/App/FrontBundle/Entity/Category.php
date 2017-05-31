@@ -81,6 +81,13 @@ class Category
     private $popular;
     
     /**
+     * @var ArrayCollection|Product[]
+     * 
+     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
+     */
+    private $tagged_products;
+    
+    /**
      * Get id
      *
      * @return integer
@@ -346,26 +353,56 @@ class Category
         return $this->popular;
     }
     
-    public function getAllProducts(){
-        $product = $this->products->toArray();
-        foreach ($this->getChilds() as $cat){
-            $product = array_merge($product, $cat->getAllProducts());
+    public function getAllProducts(\SplObjectStorage &$refs = null){
+        $products = array();
+        
+        if($refs === null){
+            $refs = new \SplObjectStorage();
         }
         
-        return $product;
+        foreach($this->products as $product){
+            if(!$refs->contains($product)){
+                $products[] = $product;
+                $refs->attach($product);
+            }
+        }
+        
+        foreach ($this->getChilds() as $cat){
+            $products = array_merge($products, $cat->getAllProducts($refs));
+        }
+        
+        return $products;
     }
     
-    public function getInStockEntries(){
+    public function getInStockEntries(\SplObjectStorage &$products = null){
         $instock = array();
         
+        if($products === null){
+            $products = new \SplObjectStorage();
+        }
+        
         foreach($this->products->toArray() as $product){
-            foreach($product->getItems() as $item){                
-                $instock = array_merge($instock, $item->getLowCostEntries());
+            if(!$products->contains($product)){
+                foreach($product->getItems() as $item){                
+                    $instock = array_merge($instock, $item->getLowCostEntries());
+                }
+                
+                $products->attach($product);
+            }
+        }
+        
+        foreach($this->getTaggedProducts()->toArray() as $product){
+            if(!$products->contains($product)){
+                foreach($product->getItems() as $item){               
+                    $instock = array_merge($instock, $item->getLowCostEntries());
+                }
+                
+                $products->attach($product);
             }
         }
         
         foreach($this->childs as $cat){
-            $instock = array_merge($instock, $cat->getInStockEntries());
+            $instock = array_merge($instock, $cat->getInStockEntries($products));
         }
         
         return $instock;
@@ -438,5 +475,39 @@ class Category
         }
        
         return null;
+    }
+
+    /**
+     * Add taggedProduct
+     *
+     * @param \App\FrontBundle\Entity\Product $taggedProduct
+     *
+     * @return Category
+     */
+    public function addTaggedProduct(\App\FrontBundle\Entity\Product $taggedProduct)
+    {
+        $this->tagged_products[] = $taggedProduct;
+
+        return $this;
+    }
+
+    /**
+     * Remove taggedProduct
+     *
+     * @param \App\FrontBundle\Entity\Product $taggedProduct
+     */
+    public function removeTaggedProduct(\App\FrontBundle\Entity\Product $taggedProduct)
+    {
+        $this->tagged_products->removeElement($taggedProduct);
+    }
+
+    /**
+     * Get taggedProducts
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTaggedProducts()
+    {
+        return $this->tagged_products;
     }
 }

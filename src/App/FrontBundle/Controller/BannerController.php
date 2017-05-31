@@ -11,9 +11,11 @@ use App\FrontBundle\Entity\Banner;
 use App\FrontBundle\Entity\CategoryBanner;
 use App\FrontBundle\Entity\ItemBanner;
 use App\FrontBundle\Entity\OfferBanner;
+use App\FrontBundle\Entity\BrandBanner;
 use App\FrontBundle\Form\CategoryBannerType;
 use App\FrontBundle\Form\ItemBannerType;
 use App\FrontBundle\Form\OfferBannerType;
+use App\FrontBundle\Form\BrandBannerType;
 use App\FrontBundle\Helper\FormHelper;
 
 class BannerController extends Controller
@@ -50,6 +52,10 @@ class BannerController extends Controller
             case 'offer':
                 $type = new OfferBannerType($dm);
                 $entity = new OfferBanner();
+                break;
+            case 'brand':
+                $type = new BrandBannerType($dm);
+                $entity = new BrandBanner();
                 break;
         }
         $form = $this->createForm($type, $entity);

@@ -74,7 +74,7 @@ class Product
     /**
      * @var ArrayCollection|Category[]
      *
-     * @ORM\ManyToMany(targetEntity="Category")
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="tagged_products", fetch="EXTRA_LAZY")
      */
     private $categories;
     

@@ -255,7 +255,7 @@ $(document).ready(function(){
     $('.add-to-cart').on('click', function(){
         var that = this;
         var qty = $(this).parent().find('.txt-item-qty').val();
-        if(!isNumeric(qty)){
+        if(!isNumeric(qty) || qty <= 0){
             openAlert('Invalid Quantity', 'error');
             return; 
         }
