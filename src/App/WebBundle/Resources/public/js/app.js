@@ -38,7 +38,7 @@ $(".tab-head .floating-arrow").addClass("transition_1s");
 
 // Click
 
-$('.footer-submenu, .footer-bottom-click').click(function(){
+$('.footer-submenu, .footer-bottom-click, .footer-bottom-click span').click(function(){
 	var content = $(this).parent().parent().parent(".footer-comn-catg").attr("class");
 	$(this).parent().parent().parent(".footer-comn-catg").toggleClass("active");
 	$(this).toggleClass("active");
