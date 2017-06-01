@@ -13,7 +13,7 @@ $(".nav-submenu").addClass("firstActive");
     $('.nav-submenu ul,.nav-submenu ul li, .nav-submenu ul li a').mouseenter(function(){
 	   $(".nav-submenu").removeClass("firstActive");
     });
-    $('.nav-submenu ul,.nav-submenu ul li, .nav-submenu ul li a').mouseleave(function(){
+    $('.nav-submenu').mouseleave(function(){
 	   $(".nav-submenu").addClass("firstActive");
     });  
     
