@@ -431,7 +431,7 @@ nav .nav-submenu.active, nav .nav-submenu:hover{
 	border:1px #ededed solid;
 	max-height:700px;
 	height:auto;
-	top:85%;
+	top:76%;
 	opacity:1;
 	display:block;
     box-shadow: 0px 3px 2px rgba(0,0,0,0.2);
@@ -850,8 +850,9 @@ span.pending-user{
 	position:relative;
 	}
 .nav-submenu > ul.main li{
-    font-weight: bold;
+    /*font-weight: bold;*/
     letter-spacing: 1px;
+    background: #fff;
 }
 .nav-submenu > ul li{
 	width:100%;
@@ -1052,7 +1053,11 @@ table.raf-table tr td{vertical-align: middle;}
     margin-top: 5px;
 }
 
-.nav-submenu.firstActive > ul li:first-child ul, .nav-submenu.firstActive > ul li:first-child ul li:first-child ul {
+/*.nav-submenu.firstActive > ul li:first-child ul, .nav-submenu.firstActive > ul li:first-child ul li:first-child ul {
     display: block;
+}*/
+.nav-submenu.firstActive > ul.main li:first-child ul{
+    display: block;
+    background: #fff;
 }
 .brd-L-1p{border: 1px #ededed solid !important;}
