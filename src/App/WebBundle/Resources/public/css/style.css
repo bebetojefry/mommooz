@@ -585,20 +585,26 @@ nav .nav-submenu ul li:hover, nav .nav-submenu ul li.active{
 	height:38px;
 	overflow:hidden;
 	/*background:#f5f5f5;*/
-	border-bottom:1px #ccc solid;}
+	border-bottom:1px #ccc solid;
+    transition: 0.6s all;}
 .resposive-filter h3{
 	cursor:pointer;}
+ .resposive-filter .close-filter{display: none;}
 .resposive-filter.active{
 	background:#fff;
 	height:auto;
 	max-height:1500px;
 	border-bottom:1px #999 solid;
 	}
+    .resposive-filter.active .close-filter{
+        display: block;
+    }
 .productspage-pro, .product-details-page {
 	border-left:none !important;}
 .close-filter{
 	display:block;
 	background:#46aee9;
+    font-size: 12px;
 	}
 	}
 @media (max-width:480px){

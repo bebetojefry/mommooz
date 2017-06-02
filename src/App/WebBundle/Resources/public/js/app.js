@@ -65,7 +65,7 @@ $('.skip-close').click(function(){
  });
  
  $('.resposive-filter h3').click(function(){
-	$(".resposive-filter").addClass("active");
+	$(".resposive-filter").toggleClass("active");
  });
   $('.resposive-filter .close-filter').click(function(){
 	$(".resposive-filter").removeClass("active");
