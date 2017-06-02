@@ -795,6 +795,15 @@ span.pending-user{
 	}
 
 @media (max-width:768px){
+    .nav-submenu > ul > ul{
+        display: none!important;
+    }
+    .nav-submenu ul{
+        background: #12123f;
+    }
+    .nav-submenu ul li{
+        border-bottom-color: #393966!important;
+    }
 	.left-menu-user{
 		border-bottom:1px #CCC solid;}
 	.left-menu-user a{
@@ -862,7 +871,7 @@ span.pending-user{
 .nav-submenu > ul.main li{
     /*font-weight: bold;*/
     letter-spacing: 1px;
-    background: #fff;
+    background: #12123f;
 }
 .nav-submenu > ul li{
 	width:100%;
