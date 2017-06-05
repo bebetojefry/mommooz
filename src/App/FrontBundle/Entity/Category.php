@@ -85,7 +85,7 @@ class Category
      * 
      * @ORM\ManyToMany(targetEntity="Item", mappedBy="categories")
      */
-    private $tagged_products;
+    private $tagged_items;
     
     /**
      * Get id
@@ -374,35 +374,31 @@ class Category
         return $products;
     }
     
-    public function getInStockEntries(\SplObjectStorage &$products = null){
+    public function getInStockEntries(\SplObjectStorage &$items = null){
         $instock = array();
         
-        if($products === null){
-            $products = new \SplObjectStorage();
+        if($items === null){
+            $items = new \SplObjectStorage();
         }
         
         foreach($this->products->toArray() as $product){
-            if(!$products->contains($product)){
-                foreach($product->getItems() as $item){                
+            foreach($product->getItems() as $item){
+                if(!$items->contains($item)){
                     $instock = array_merge($instock, $item->getLowCostEntries());
+                    $items->attach($item);
                 }
-                
-                $products->attach($product);
             }
         }
         
-        foreach($this->getTaggedProducts()->toArray() as $product){
-            if(!$products->contains($product)){
-                foreach($product->getItems() as $item){               
-                    $instock = array_merge($instock, $item->getLowCostEntries());
-                }
-                
-                $products->attach($product);
+        foreach($this->getTaggedItems() as $item){            
+            if(!$items->contains($item)){
+                $instock = array_merge($instock, $item->getLowCostEntries());
+                $items->attach($item);
             }
         }
         
         foreach($this->childs as $cat){
-            $instock = array_merge($instock, $cat->getInStockEntries($products));
+            $instock = array_merge($instock, $cat->getInStockEntries($items));
         }
         
         return $instock;
@@ -506,8 +502,8 @@ class Category
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getTaggedProducts()
+    public function getTaggedItems()
     {
-        return $this->tagged_products;
+        return $this->tagged_items;
     }
 }
