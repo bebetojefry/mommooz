@@ -81,9 +81,9 @@ class Category
     private $popular;
     
     /**
-     * @var ArrayCollection|Product[]
+     * @var ArrayCollection|Item[]
      * 
-     * @ORM\ManyToMany(targetEntity="Product", mappedBy="categories")
+     * @ORM\ManyToMany(targetEntity="Item", mappedBy="categories")
      */
     private $tagged_products;
     

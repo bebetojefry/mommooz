@@ -120,6 +120,13 @@ class Item
      * @ORM\OneToMany(targetEntity="StockEntry", mappedBy="item")
      */
     private $stock_entries;
+    
+    /**
+     * @var ArrayCollection|Category[]
+     *
+     * @ORM\ManyToMany(targetEntity="Category", inversedBy="tagged_products", fetch="EXTRA_LAZY")
+     */
+    private $categories;
 
     /**
      * Get id
@@ -683,5 +690,53 @@ class Item
         }
         
         return false;
+    }
+    
+    /**
+     * Add category
+     *
+     * @param \App\FrontBundle\Entity\Category $category
+     *
+     * @return Item
+     */
+    public function addCategory(\App\FrontBundle\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \App\FrontBundle\Entity\Category $category
+     */
+    public function removeCategory(\App\FrontBundle\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+    
+    /**
+     * Set categories
+     *
+     * @param \Doctrine\Common\Collections\Collection $categories
+     * 
+     * @return Item
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
+        
+        return $this;
     }
 }

@@ -24,13 +24,6 @@
 
         $('#{{ form.regions.vars.id }}').addClass('token-input-real-field');
         
-        $("#{{ form.categories.vars.id }}").tokenInput("{{ path('category_search') }}", {
-            theme: "facebook"
-            {% if category_values is defined %},prePopulate: {{ category_values|raw }}{% endif %}
-        });
-
-        $('#{{ form.categories.vars.id }}').addClass('token-input-real-field');
-        
         if(parseInt($('#{{ form.deliverable.vars.id }}').val()) != 2){
             $('#{{ form.regions.vars.id }}').parent('.form-group').addClass('hidden_form_field');
         }

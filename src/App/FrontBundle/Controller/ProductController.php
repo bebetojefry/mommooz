@@ -136,14 +136,8 @@ class ProductController extends Controller
             $region_values[] = array('id' => $region->getId(), 'name' => $region->getRegionName().' ('.$region->getDistrict()->getName().')');
         }
         
-        $categories = $product->getCategories()->getValues();
-        $category_values = array();
-        foreach($categories as $category){
-            $category_values[] = array('id' => $category->getId(), 'name' => $category->getCategoryName());
-        }
-        
         $body = $this->renderView('AppFrontBundle:Product:form.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'region_values' => json_encode($region_values), 'category_values' => json_encode($category_values), 'treeData' => json_encode($resultTree))
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'region_values' => json_encode($region_values), 'treeData' => json_encode($resultTree))
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));

@@ -156,8 +156,14 @@ class ItemController extends Controller
             $offer_values[] = array('id' => $offer->getId(), 'name' => $offer->getName());
         }
         
+        $categories = $item->getCategories()->getValues();
+        $category_values = array();
+        foreach($categories as $category){
+            $category_values[] = array('id' => $category->getId(), 'name' => $category->getCategoryName());
+        }
+        
         $body = $this->renderView('AppFrontBundle:Item:form.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values), 'treeData' => json_encode($resultTree))
+            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values), 'category_values' => json_encode($category_values), 'treeData' => json_encode($resultTree))
         );
         
         return new Response(json_encode(array('error' => $error, 'code' => $code, 'data' => $body)));

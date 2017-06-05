@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\FrontBundle\DataTransformer\KeywordsToIdsTransformer;
 use App\FrontBundle\DataTransformer\RegionsToIdsTransformer;
-use App\FrontBundle\DataTransformer\CategoriesToIdsTransformer;
 
 class ProductType extends AbstractType
 {
@@ -27,7 +26,6 @@ class ProductType extends AbstractType
     {
         $keywordTransformer = new KeywordsToIdsTransformer($this->om);
         $regionstoIdsTransformer = new RegionsToIdsTransformer($this->om);
-        $categoriestoIdsTransformer = new CategoriesToIdsTransformer($this->om);
         
         $builder
             ->add('name')
@@ -52,11 +50,6 @@ class ProductType extends AbstractType
                 $builder->create('regions', 'text', array(
                     'required' => false,
                 ))->addModelTransformer($regionstoIdsTransformer)
-            )
-            ->add(
-                $builder->create('categories', 'text', array(
-                    'required' => false,
-                ))->addModelTransformer($categoriestoIdsTransformer)
             )
             ->add('status')
         ;
