@@ -1111,7 +1111,7 @@ transition:0.4s all ease;
 .b2{width:16.66666667% ;display: inline-block;margin-left: -4px;}
 .b4{width:33.33333333% ;display: inline-block;margin-left: -4px;padding: 0 5px;}
 .b6{width:50% ;display: inline-block;margin-left: -4px;}
-.VaM{vertical-align: middle;}
+.VaM{vertical-align: middle!important;}
 .b4 input[type="number"], .b4 input[type="text"]{margin-top: 0px!important;padding:5px 8px!important;background:#f7f7f7!important;border-radius: 2px!important;  }
 
 .VarientShowHover {max-height: 0px;overflow: hidden;width: 99%;position: absolute;top: 100%;transition: 0.2s all;left: 0px;z-index: 5;}
