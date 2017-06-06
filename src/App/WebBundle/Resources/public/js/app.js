@@ -65,11 +65,11 @@ $('.skip-close').click(function(){
  });
     
 $('.first-cat-cary ul li:first-child').addClass("active");
-$('.first-cat-cary ul li a:first-child').click(function(e){
+$('.first-cat-cary ul li a.catClicka').click(function(e){
     $('.first-cat-cary ul li').removeClass("active");
 	$(this).parent().addClass("active");
+    alert(1254);
     e.preventDefault(); 
-    return false;
  });
  
  $('.resposive-filter h3').click(function(){
