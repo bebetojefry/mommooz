@@ -65,7 +65,7 @@ $('.skip-close').click(function(){
  });
     
 $('.first-cat-cary ul li:first-child').addClass("active");
-$('.first-cat-cary ul li a').click(function(e){
+$('.first-cat-cary ul li a:first-child').click(function(e){
     $('.first-cat-cary ul li').removeClass("active");
 	$(this).parent().addClass("active");
     e.preventDefault(); 
