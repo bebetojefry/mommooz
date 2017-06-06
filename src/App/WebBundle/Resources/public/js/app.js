@@ -63,6 +63,12 @@ $('.responcive-menu-cliker, .close-main-menu').click(function(){
 $('.skip-close').click(function(){
 	$(".first-location-popup").toggleClass("active");
  });
+    
+$('.first-cat-cary ul li:first-child').addClass("active");
+$('.first-cat-cary ul li').click(function(){
+    $('.first-cat-cary ul li').removeClass("active");
+	$(this).addClass("active");
+ });
  
  $('.resposive-filter h3').click(function(){
 	$(".resposive-filter").toggleClass("active");

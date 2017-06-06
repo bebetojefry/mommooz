@@ -1068,6 +1068,16 @@ table.raf-table tr td{vertical-align: middle;}
     display: inline-block;
     /*padding-left: 5px;*/
 }
+.first-cat-cary ul li{max-height: 26px;
+overflow: hidden;
+display: block;
+transition: 0s;
+}
+.first-cat-cary ul li.active{
+ max-height: 600px;
+ height: inherit;
+ transition: 0.8s;
+}
 .adrmsg{
     width: 100%;
     display: inline-block;
