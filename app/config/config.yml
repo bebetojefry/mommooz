@@ -187,6 +187,11 @@ liip_imagine :
             filters :
                 thumbnail  : { size : [293, 302], mode : outbound }
                 
+        menu_cat :
+            quality : 75
+            filters :
+                thumbnail  : { size : [488, 375], mode : outbound }
+                
         store :
             quality : 75
             filters :
