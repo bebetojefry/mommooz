@@ -69,6 +69,7 @@ $('.first-cat-cary ul li').click(function(e){
     $('.first-cat-cary ul li').removeClass("active");
 	$(this).addClass("active");
     e.preventDefault(); 
+    return false;
  });
  
  $('.resposive-filter h3').click(function(){

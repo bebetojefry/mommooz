@@ -1071,7 +1071,7 @@ table.raf-table tr td{vertical-align: middle;}
 .first-cat-cary ul li{max-height: 26px;
 overflow: hidden;
 display: block;
-transition:1s all ease;
+transition:0.4s all ease;
 }
 .first-cat-cary ul li.active{
  max-height: 600px;
