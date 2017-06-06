@@ -178,10 +178,17 @@ class ItemController extends Controller
     public function deleteAction(Request $request, Item $item)
     {
         $dm = $this->getDoctrine()->getManager();
-        $dm->remove($item);
-        $dm->flush();
         
-        $this->get('session')->getFlashBag()->add('success', 'item.msg.removed');
+        $entries = $dm->getRepository('AppFrontBundle:StockEntry')->findByItem($item);
+        
+        if(count($entries) > 0){
+            $this->get('session')->getFlashBag()->add('error', 'You can\'t delete this item, since there is around '.count($entries).' stock entries associated to this item.');
+        } else {
+            $dm->remove($item);
+            $dm->flush();
+            $this->get('session')->getFlashBag()->add('success', 'item.msg.removed');
+        }
+        
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
     

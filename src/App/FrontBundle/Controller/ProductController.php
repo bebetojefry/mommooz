@@ -156,7 +156,7 @@ class ProductController extends Controller
         $items = $dm->getRepository('AppFrontBundle:Item')->findByProduct($product);
         
         if(count($items) > 0){
-            $this->get('session')->getFlashBag()->add('error', 'You can\'t delete this product, since there is around '.count($items).' items associated to this product.');
+            $this->get('session')->getFlashBag()->add('error', 'You can\'t delete this product, since there is around '.count($items).' item(s) associated to this product.');
         } else {
             $dm->remove($product);
             $dm->flush();

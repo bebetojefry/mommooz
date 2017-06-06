@@ -105,10 +105,17 @@ class BrandController extends Controller
     public function deleteAction(Request $request, Brand $brand)
     {
         $dm = $this->getDoctrine()->getManager();
-        $dm->remove($brand);
-        $dm->flush();
         
-        $this->get('session')->getFlashBag()->add('success', 'brand.msg.removed');
+        $items = $dm->getRepository('AppFrontBundle:Item')->findByBrand($brand);
+        
+        if(count($items) > 0){
+            $this->get('session')->getFlashBag()->add('error', 'You can\'t delete this brand, since there is around '.count($items).' item(s) associated to this brand.');
+        } else {
+            $dm->remove($brand);
+            $dm->flush();
+            $this->get('session')->getFlashBag()->add('success', 'brand.msg.removed');
+        }
+        
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
     

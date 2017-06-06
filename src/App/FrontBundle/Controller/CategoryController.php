@@ -115,10 +115,17 @@ class CategoryController extends Controller
     public function deleteAction(Request $request, Category $category)
     {
         $dm = $this->getDoctrine()->getManager();
-        $dm->remove($category);
-        $dm->flush();
         
-        $this->get('session')->getFlashBag()->add('success', 'category.msg.removed');
+        $products = $dm->getRepository('AppFrontBundle:Product')->findByCategory($category);
+        
+        if(count($products) > 0){
+            $this->get('session')->getFlashBag()->add('error', 'You can\'t delete this category, since there is around '.count($products).' product(s) associated to this category.');
+        } else {
+            $dm->remove($category);
+            $dm->flush();
+            $this->get('session')->getFlashBag()->add('success', 'category.msg.removed');
+        }
+        
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
     
