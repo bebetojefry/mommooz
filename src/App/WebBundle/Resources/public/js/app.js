@@ -66,9 +66,10 @@ $('.skip-close').click(function(){
     
 $('.first-cat-cary ul li:first-child').addClass("active");
 $('.first-cat-cary ul li').click(function(e){
-    $('.first-cat-cary ul li').removeClass("active");
 	$(this).addClass("active");
+    $('.first-cat-cary ul li').removeClass("active");
     e.preventDefault();
+    return false;
  });
  
  $('.resposive-filter h3').click(function(){
