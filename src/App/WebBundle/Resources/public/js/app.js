@@ -66,8 +66,8 @@ $('.skip-close').click(function(){
     
 $('.first-cat-cary ul li:first-child').addClass("active");
 $('.first-cat-cary ul li').click(function(e){
-	$(this).addClass("active");
     $('.first-cat-cary ul li').removeClass("active");
+	$(this).addClass("active");
     e.preventDefault(); 
  });
  
