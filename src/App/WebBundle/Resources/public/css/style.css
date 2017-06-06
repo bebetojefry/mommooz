@@ -1071,12 +1071,12 @@ table.raf-table tr td{vertical-align: middle;}
 .first-cat-cary ul li{max-height: 26px;
 overflow: hidden;
 display: block;
-transition: 0s;
+transition:1s all ease;
 }
 .first-cat-cary ul li.active{
  max-height: 600px;
  height: inherit;
- transition: 0.8s;
+ transition:1s all ease;
 }
 .adrmsg{
     width: 100%;
@@ -1104,3 +1104,12 @@ transition: 0s;
     background: #fff;
 }
 .brd-L-1p{border: 2px #00e672 dotted !important;}
+
+.item-thumb .block-10{border: #eee 1px solid;padding: 10px;border-radius: 4px;position: relative;}
+.iB{display: inline-block;}.tC{text-align: center;}
+.b10{width: 83.33333333%;display: inline-block;margin-left: -4px;}.b2{width:16.66666667% ;display: inline-block;margin-left: -4px;}
+
+.VarientShowHover {max-height: 0px;overflow: hidden;width: 100%;position: absolute;top: 100%;transition: 0.6s all;}
+.VarientShowHover li{font-family: arial;font-size: 12px;color: #1b1d20;padding: 8px 2px;}
+.VarientShowHover li span{font-size: 10px;color: #1b1d20;}
+.item-thumb .block-10:hover .VarientShowHover {max-height: 600px;height: auto; transition: 1s all;}

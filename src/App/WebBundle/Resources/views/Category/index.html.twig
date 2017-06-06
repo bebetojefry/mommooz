@@ -50,6 +50,26 @@
                                 </button>
                                 <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(entry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
                             </div>
+                            
+                            <ul class="VarientShowHover">
+                            <li> 
+                                <div class="b10"> <span class="iB icon-inr"></span> 333/2kg  </div>
+                                <div class="b2"> <span class="icon-plus iB"></span> </div>
+                            </li>
+                            <li> 
+                                <div class="b10"> <span class="iB icon-inr"></span> 334/2kg  </div>
+                                <div class="b2"> <span class="icon-plus iB"></span> </div>
+                            </li>
+                            <li> 
+                                <div class="b10"> <span class="iB icon-inr"></span> 335/2kg  </div>
+                                <div class="b2"> <span class="icon-plus iB"></span> </div>
+                            </li>
+                                <li> 
+                                <div class="b10"> <span class="iB icon-inr"></span> 336/2kg  </div>
+                                <div class="b2"> <span class="icon-plus iB"></span> </div>
+                            </li>
+                        </ul>
+                            
                         </div>
                         <script type="text/javascript">
                             filter_modal.register('{{ filterData|json_encode()|raw }}');
