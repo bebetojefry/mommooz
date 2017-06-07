@@ -666,6 +666,17 @@ class Item
         return $variants;
     }
     
+    public function getEntryForVariant($variant){
+        $entries = $this->getLowCostEntries();
+        foreach($entries as $entry){
+            if($entry->getItem()->getVariants()->count() > 0 && $entry->getVariant()->getId() == $variant->getId()){
+                return $entry;
+            }
+        }
+        
+        return null;
+    }
+    
     public function onOffer(){
         foreach($this->offers as $offer){
             $dt = new \DateTime('now'); $dt->setTime(0, 0, 0);
