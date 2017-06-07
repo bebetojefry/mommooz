@@ -49,6 +49,25 @@
                                 </button>
                                 <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(entry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
                             </div>
+                            {% if entry.getItem().getVariantsInStock()|length > 0 %}
+                                <ul class="VarientShowHover">
+                                    {% for variantType in entry.getItem().getVariantsInStock() %}
+                                        {% if variantType|length > 0 %}
+                                            {% for variant in variantType %}
+                                                {% set variantEntry = entry.getItem().getEntryForVariant(variant) %}
+                                                {% if variantEntry and variantEntry.getId() != entry.getId() %}
+                                                    <li class="VaM">
+                                                        <div class="b6 VaM text-left"> <span class="iB icon-inr"></span> {{ variantEntry.getActualPrice() }}/{{ variant.getValue() }} </div>
+                                                        <div class="b4 VaM">{% if app_web_user.inCart(variantEntry) == false %}<input type="number" name="" class="txt-item-qty">{% endif %} </div>
+                                                        {% if app_web_user.inCart(variantEntry) == false %}<div class="b2 VaM text-center add-to-cart" data-entry="{{ variantEntry.getId() }}"> <span class="icon-cart-arrow-down iB pointer-csr"></span> </div>{% endif %}
+                                                        <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(variantEntry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif  %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif  %}
                         </div>
                         <script type="text/javascript">
                             filter_modal.register('{{ filterData|json_encode()|raw }}');
