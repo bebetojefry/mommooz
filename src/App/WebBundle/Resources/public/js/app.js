@@ -65,15 +65,10 @@ $('.skip-close').click(function(){
  });
     
 $('.first-cat-cary ul li:first-child').addClass("active");
-/*$('.first-cat-cary ul li a').addClass("catClicka");
-    $('.first-cat-cary ul li > ul li a').removeClass("catClicka");*/
 
-$('.first-cat-cary ul li').click(function(e){
+$('.first-cat-cary ul li span.plusActive').click(function(e){
     $('.first-cat-cary ul li').removeClass("active");
-	$(this).addClass("active");
-   /* $('.first-cat-cary ul li > ul li a').addClass("catClickaNone");
-    if($(".first-cat-cary ul li > ul li a").hasClass("catClickaNone")){};
-    else{e.preventDefault(); };*/
+	$(this).parent("li").addClass("active");
  });
  
  $('.resposive-filter h3').click(function(){
