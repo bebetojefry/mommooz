@@ -1,6 +1,9 @@
 <ul>
     {% for cat in category.getChilds() %}
         <li>
+            {% if cat.getChilds()|length > 0 %}
+                <span class="plusActive"></span>
+            {% endif %}    
             <a href="{{ path('category_page', {id: cat.getId()}) }}" {% if selected.getId() == cat.getId() %}class="selected"{% endif %}>{{ cat.getCategoryName() }}</a>   
             <div class="count-products-filter mb-10p  dispaly-inline-block prl-5p br-5p">{{ cat.getInStockEntries()|length }}</div> <br/>
             {% if cat.getChilds()|length > 0 %}    
