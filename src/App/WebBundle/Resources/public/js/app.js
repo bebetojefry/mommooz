@@ -68,7 +68,7 @@ $('.first-cat-cary ul li:first-child').addClass("active");
 
 $('.first-cat-cary ul li span.plusActive').click(function(e){
     $('.first-cat-cary ul li').removeClass("active");
-	$(this).parent("li").addClass("active");
+	$(this).parent("li").toggleClass("active");
  });
  
  $('.resposive-filter h3').click(function(){
