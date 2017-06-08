@@ -25,6 +25,7 @@ class ItemController extends Controller
         $datatable = $this->get('app.front.datatable.item');
         $datatable->buildDatatable(array('product' => $product));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
         $qb = $query->getQuery();
         if($product){
             $qb->andWhere("item.product = :p");
