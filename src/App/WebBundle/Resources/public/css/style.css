@@ -1062,12 +1062,14 @@ table.raf-table tr td{vertical-align: middle;}
     font-weight: normal!important;
     letter-spacing: 0px!important;
     color: #666666!important;
+    padding-left: 13px!important;
 }
 .first-cat-cary ul li a{
     font-size: 14px;
     font-weight: 400;
     display: inline-block;
     color: #000;
+    padding-left: 0px;
     /*padding-left: 5px;*/
 }
 .first-cat-cary ul li{max-height: 26px;
