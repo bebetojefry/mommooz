@@ -575,6 +575,12 @@ class StockEntry
         $data = array();
         $category = $this->getItem()->getProduct()->getCategory();
         $data['cat'] = array('id' => $category->getId(), 'name' => $category->getCategoryName());
+        
+        $data['tagged_cats'] = array();
+        foreach($this->getItem()->getCategories() as $cat) {
+            $data['tagged_cats'][] = array('id' => $cat->getId(), 'name' => $cat->getCategoryName());
+        }
+        
         $brand = $this->getItem()->getBrand();
         $brandName = $brand->getName() == '' ? 'Brandless' : $brand->getName();
         $data['brand'] = array('id' => $brand->getId(), 'name' => $brandName);

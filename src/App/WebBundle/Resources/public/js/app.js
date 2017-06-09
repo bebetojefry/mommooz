@@ -407,6 +407,11 @@ function openAlert(message, type){
             this.category_items[item.cat.id] = [];
         }
         this.categories[item.cat.id] = ' '+item.cat.name;
+        
+        for(var i=0; i < item.tagged_cats.length; i++){
+            this.categories[item.tagged_cats[i].id] = ' '+item.tagged_cats[i].name;
+        }
+        
         this.category_items[item.cat.id][this.category_items[item.cat.id].length] = item;
     }
 

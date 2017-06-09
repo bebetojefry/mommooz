@@ -280,4 +280,13 @@ class ItemController extends Controller
 
         return new JsonResponse(array('status' => $status));
     }
+    
+    /**
+     * @Route("/{id}/thumb", name="item_thumb", options={"expose"=true})
+     */
+    public function thumbAction(StockEntry $entry) {
+        return $this->render('AppWebBundle:Item:thumb.html.twig', array(
+            'entry' => $entry
+        ));
+    }
 }
