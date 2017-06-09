@@ -150,7 +150,7 @@ class BannerDatatable extends AbstractDatatableView
                 'title' => 'Sl No',
             ))
             ->add('banner_name', 'column', array(
-                'title' => 'Banner_name',
+                'title' => 'Banner Name',
             ))            
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
