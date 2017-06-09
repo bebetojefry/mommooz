@@ -22,8 +22,8 @@ class BannerDatatable extends AbstractDatatableView
     {
         $formatter = function($line){
             $line['sl'] = $this->sl++;
-            var_dump($line);
-            exit;
+            $line['type'] = ucfirst($line['banner_type']);
+            
             return $line;
         };
 
@@ -152,7 +152,10 @@ class BannerDatatable extends AbstractDatatableView
             ))
             ->add('banner_name', 'column', array(
                 'title' => 'Banner Name',
-            ))            
+            ))
+            ->add('type', 'virtual', array(
+                'title' => 'Banner Type',
+            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
