@@ -22,7 +22,8 @@ class BannerDatatable extends AbstractDatatableView
     {
         $formatter = function($line){
             $line['sl'] = $this->sl++;
-
+            var_dump($line);
+            exit;
             return $line;
         };
 
