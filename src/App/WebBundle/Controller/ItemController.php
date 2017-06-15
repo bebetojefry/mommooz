@@ -217,6 +217,7 @@ class ItemController extends Controller
      */
     public function tocartAction(Request $request, StockEntry $entry){
         $status = false;
+        $quantity = 0;
         $em = $this->getDoctrine()->getManager();
         if($entry->getInStock() >= $request->query->get('qty')){
             $cart = null;
@@ -243,20 +244,27 @@ class ItemController extends Controller
             }
 
             if($cart){
-                $item = new CartItem();
-                $item->setCart($cart);
-                $item->setEntry($entry);
-                $item->setQuantity($request->query->get('qty'));
-                $item->setPrice($entry->getActualPrice());
-                $item->setStatus(false);
-                $em->persist($item);
-                $em->flush();
-
-                $status = true;
+                if($item = $cart->inCart($entry)){
+                    $item->setQuantity($item->getQuantity() + $request->query->get('qty'));
+                } else {
+                    $item = new CartItem();
+                    $item->setCart($cart);
+                    $item->setEntry($entry);
+                    $item->setQuantity($request->query->get('qty'));
+                    $item->setPrice($entry->getActualPrice());
+                    $item->setStatus(false);
+                }
+                
+                if($entry->getInStock() >= $item->getQuantity()){
+                    $em->persist($item);
+                    $em->flush();
+                    $quantity = $item->getQuantity();
+                    $status = true;
+                }
             }
         }
 
-        return new JsonResponse(array('status' => $status));
+        return new JsonResponse(array('status' => $status, 'quantity' => $quantity));
     }
 
     /**

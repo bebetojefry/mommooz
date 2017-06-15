@@ -83,6 +83,17 @@ class User {
         return false;
     }
     
+    public function getCart(StockEntry $entry) {
+        $cart = $this->getCart();
+        foreach($cart->getItems() as $item){
+            if($item->getEntry()->getId() == $entry->getId()){
+                return $item->getQuantity();
+            }
+        }
+        
+        return 0;
+    }
+    
     public function inWishList(StockEntry $entry) {
         $wishlist = $this->getWishlist();
         foreach($wishlist->getItems() as $item){

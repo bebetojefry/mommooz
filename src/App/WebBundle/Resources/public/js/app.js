@@ -271,9 +271,8 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(resp){
                 if(resp.status){
-                    $(that).hide();
-                    $(that).parent().find('.txt-item-qty').hide();
-                    $(that).parent().find('.entry-in-cart').show();
+                    $(that).parent().find('.in_cart_count i').text(resp.quantity);
+                    $(that).parent().find('.in_cart_count').show();
                     $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
 //                    openAlert('Successfully added to cart', 'success');
                     alert('Successfully added to cart');

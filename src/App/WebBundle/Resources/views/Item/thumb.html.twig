@@ -15,14 +15,20 @@
             <h3 class="mt-5p"> <span style="text-decoration: line-through;font-size: 12px;color: #CCC;margin-bottom: 10px;display: inline-block;">MRP : {{ entry.getMrp() }}</span>
                 <span class="icon-inr ml-5p" style="font-size:13px;"></span>{{ entry.getActualPrice() }}</h3>
         </a>
-        <div class="full-width mt-5p">
-            <input type="number" class="txt-item-qty mt-0p" value="1" style="width: 45px; {% if app_web_user.inCart(entry) %}display: none;{% endif %}" />
-            <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
-            <button {% if app_web_user.inCart(entry) %}style="display: none;" {% endif %} class="button-product br-5p ptb-5p prl-5p pointer-csr add-to-cart ml-5p" data-entry="{{ entry.getId() }}">
-                            Add to Cart <span class="icon-arrow-right ml-0p" style="font-size:10px;"></span>
-                        </button>
-            <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(entry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
-        </div>
+        {% if entry.getInStock() > 0 %}
+            <div class="full-width mt-5p">
+                <input type="number" class="txt-item-qty mt-0p" value="1" style="width: 45px;" />
+                <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
+                {% set in_cart_count = app_web_user.getCart(entry) %}
+                <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}"><i>{{ in_cart_count }}</i> in cart</span>
+                <button class="button-product br-5p ptb-5p prl-5p pointer-csr add-to-cart ml-5p" data-entry="{{ entry.getId() }}">
+                    Add to Cart <span class="icon-arrow-right ml-0p" style="font-size:10px;"></span>
+                </button>
+            </div>
+        {% else %}
+            <div class="out-of-stock">Out of stock</div>
+        {% endif %}
+        
         {% if entry.getItem().getVariantsInStock()|length > 0 %}
             <ul class="VarientShowHover">
                 {% for variantType in entry.getItem().getVariantsInStock() %}
@@ -30,11 +36,15 @@
                         {% for variant in variantType %}
                             {% set variantEntry = entry.getItem().getEntryForVariant(variant) %}
                             {% if variantEntry and variantEntry.getId() != entry.getId() %}
+                                {% set in_cart_count = app_web_user.getCart(variantEntry) %}
                                 <li class="VaM">
                                     <div class="b6 VaM text-left"> <span class="iB icon-inr"></span> {{ variantEntry.getActualPrice() }}/{{ variant.getValue() }} </div>
-                                    <div class="b4 VaM">{% if app_web_user.inCart(variantEntry) == false %}<input type="number" name="" class="txt-item-qty">{% endif %} </div>
-                                    {% if app_web_user.inCart(variantEntry) == false %}<div class="b2 VaM text-center add-to-cart" data-entry="{{ variantEntry.getId() }}"> <span class="icon-cart-arrow-down iB pointer-csr"></span> </div>{% endif %}
-                                    <span class="entry-in-cart" style="color: green; {% if app_web_user.inCart(variantEntry) == false %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
+                                    {% if variantEntry.getInStock() > 0 %}
+                                        <div class="b4 VaM"><input type="number" name="" class="txt-item-qty"> <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}">(<i>{{ in_cart_count }}</i>)</span></div>
+                                        <div class="b2 VaM text-center add-to-cart" data-entry="{{ variantEntry.getId() }}"> <span class="icon-cart-arrow-down iB pointer-csr"></span> </div>
+                                    {% else %}
+                                        <div class="varient-out-of-stock">Out of stock</div>
+                                    {% endif %}
                                 </li>
                             {% endif %}
                         {% endfor %}
