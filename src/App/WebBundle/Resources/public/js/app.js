@@ -275,9 +275,11 @@ $(document).ready(function(){
                     $(that).parent().find('.txt-item-qty').hide();
                     $(that).parent().find('.entry-in-cart').show();
                     $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
-                    openAlert('Successfully added to cart', 'success');
+//                    openAlert('Successfully added to cart', 'success');
+                    alert('Successfully added to cart');
                 } else {
-                    openAlert('Insufficient stock', 'error');
+//                    openAlert('Insufficient stock', 'error');
+                    alert('Insufficient stock');
                 }
             }
         });
