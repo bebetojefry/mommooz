@@ -83,7 +83,7 @@ class User {
         return false;
     }
     
-    public function getCart(StockEntry $entry) {
+    public function getCartCount(StockEntry $entry) {
         $cart = $this->getCart();
         foreach($cart->getItems() as $item){
             if($item->getEntry()->getId() == $entry->getId()){

@@ -19,7 +19,7 @@
             <div class="full-width mt-5p">
                 <input type="number" class="txt-item-qty mt-0p" value="1" style="width: 45px;" />
                 <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
-                {% set in_cart_count = app_web_user.getCart(entry) %}
+                {% set in_cart_count = app_web_user.getCartCount(entry) %}
                 <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}"><i>{{ in_cart_count }}</i> in cart</span>
                 <button class="button-product br-5p ptb-5p prl-5p pointer-csr add-to-cart ml-5p" data-entry="{{ entry.getId() }}">
                     Add to Cart <span class="icon-arrow-right ml-0p" style="font-size:10px;"></span>
@@ -36,7 +36,7 @@
                         {% for variant in variantType %}
                             {% set variantEntry = entry.getItem().getEntryForVariant(variant) %}
                             {% if variantEntry and variantEntry.getId() != entry.getId() %}
-                                {% set in_cart_count = app_web_user.getCart(variantEntry) %}
+                                {% set in_cart_count = app_web_user.getCartCount(variantEntry) %}
                                 <li class="VaM">
                                     <div class="b6 VaM text-left"> <span class="iB icon-inr"></span> {{ variantEntry.getActualPrice() }}/{{ variant.getValue() }} </div>
                                     {% if variantEntry.getInStock() > 0 %}
