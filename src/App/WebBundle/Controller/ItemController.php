@@ -131,6 +131,26 @@ class ItemController extends Controller
             'entries' => $entries
         ));
     }
+    
+    /**
+     * @Route("/new/more", name="more_new_item")
+     */
+    public function morenewAction() {
+        $entries = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:StockEntry')->findBy(array('status' => true), array('id' => 'DESC'));
+        $result = array();
+        $app_web_user = $this->get('app.web.user');
+        foreach($entries as $entry){
+            if($app_web_user->isDeliverable($entry)){
+                $content = $this->renderView('AppWebBundle:Item:newItem.html.twig', array(
+                    'entry' => $entry
+                ));
+                
+                $result[] = array('id' => $entry->getId(), 'content' => $content);
+            }
+        }
+        
+        return new JsonResponse($result);
+    }
 
     /**
      * @Route("/{id}/deliverable", name="item_deliverable", options={"expose"=true})

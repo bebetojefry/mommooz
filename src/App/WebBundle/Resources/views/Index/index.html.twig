@@ -69,7 +69,29 @@
 
     <section class="whats-new center-1200px block-fl-cary ptb-20p mt-10p mb-20p">
         <h3 class="text-center mb-20p"> What's New  </h3>
-        {{ render(controller('AppWebBundle:Item:new')) }}
+        <div class="new_entries">
+            {{ render(controller('AppWebBundle:Item:new')) }}
+        </div>
+        <a href="javascript:void(0);" class="load_more_new" data-loaded="8">Load More</a>
+        <script type="text/javascript">
+            $('.load_more_new').on('click', function(){
+               $.ajax({
+                  url: '{{ path('more_new_item') }}',
+                  dataType: 'json',
+                  success: function(result) {
+                      var j = 0;
+                      for(var i = 0; i < result.length; i++){
+                          if(j == 8) break;
+                          
+                          if($('.new_entries').find('.new_entry_'+result[i].id).length == 0){
+                              $('.new_entries').append(result[i].content);
+                              j++;
+                          }
+                      }
+                  }
+               });
+            });
+        </script>
     </section>
 
     {#<section class="whats-new center-1200px block-fl-cary ptb-20p mt-10p mb-20p">

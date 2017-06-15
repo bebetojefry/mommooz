@@ -1,0 +1,14 @@
+<div class="block-3 ptrbl-5p mt-10p block-mb-6 block-sb-12 new_entry_{{ entry.getId() }}">
+    <a href="{{ path('item_page', {'id': entry.getId()}) }}">
+        <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
+            <div class="block-6">
+                <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="momooz product image">
+            </div>
+            <div class="block-8 capitalize-txt mt-20p">
+                {{ entry.getItem().getName() }}
+                <br>
+                <strong>RS. {{ entry.getActualPrice() }}</strong>
+            </div>
+        </div>
+    </a>
+</div>

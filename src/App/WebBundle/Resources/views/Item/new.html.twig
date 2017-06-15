@@ -3,7 +3,7 @@
 {% for entry in entries if not break %}
     {% if app_web_user.isDeliverable(entry)  %}
         {% set count = count + 1 %}
-        <div class="block-3 ptrbl-5p mt-10p block-mb-6 block-sb-12">
+        <div class="block-3 ptrbl-5p mt-10p block-mb-6 block-sb-12 new_entry_{{ entry.getId() }}">
             <a href="{{ path('item_page', {'id': entry.getId()}) }}">
                 <div class="block-98 brd-L-1p br-4p center-pos prl-20p ptb-25p text-center">
                     <div class="block-6">
@@ -17,7 +17,7 @@
                 </div>
             </a>
         </div>
-        {% if count == 4 %}
+        {% if count == 8 %}
             {% set break = true %}
         {% endif %}
     {% endif %}
