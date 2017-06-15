@@ -89,6 +89,13 @@ class Purchase
      * @ORM\OneToOne(targetEntity="RewardUse", mappedBy="purchase")
      */
     private $reward_use;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="method", type="string", length=255, nullable=true)
+     */
+    private $method;
 
     /*
      * constructor
@@ -365,5 +372,29 @@ class Purchase
     public function getRewardUse()
     {
         return $this->reward_use;
+    }
+
+    /**
+     * Set method
+     *
+     * @param string $method
+     *
+     * @return Purchase
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * Get method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
     }
 }

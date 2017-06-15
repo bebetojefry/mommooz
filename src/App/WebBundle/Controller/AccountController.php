@@ -529,6 +529,11 @@ class AccountController extends Controller
      */
     public function payorderAction(Request $request)
     {
+        if(isset($_POST['cod'])){
+            $this->get('session')->set('order_method', 'COD');
+            return $this->forward('AppWebBundle:ordersuccess');
+        }
+        
         $em = $this->getDoctrine()->getManager();
         $address = $em->getRepository('AppFrontBundle:Address')->find($request->get('address'));
         
@@ -619,6 +624,7 @@ class AccountController extends Controller
 
 	if($order_status==="Success")
 	{
+            $this->get('session')->set('order_method', 'PAID');
             return $this->forward('AppWebBundle:ordersuccess');
 		
 	}
@@ -657,6 +663,7 @@ class AccountController extends Controller
             $purchase->setConsumer($this->getUser());
             $purchase->setDeliverTo($address);
             $purchase->setPurchasedOn(new \DateTime('now'));
+            $purchase->setMethod($this->get('session')->get('order_method'));
             $purchase->setStatus(0);
 
             $em->persist($purchase);

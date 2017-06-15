@@ -42,7 +42,8 @@
                 {% if valid_addresses == 0 %}
                     <a href="{{ path('address_form', {'id': 0}) }}"><button type="button" class="momz-button ml-10p active" name=""> Add delivery address </button></a>
                 {% else %}
-                    <button type="submit" class="momz-button ml-10p active" name=""> Proceed to payment <span class="icon-arrow-right"></span> </button>
+                    <button type="submit" class="momz-button ml-10p" name="cod"> Cash on Delivery <span class="icon-arrow-right"></span> </button>
+                    <button type="submit" class="momz-button ml-10p active" name="pay"> Proceed to Payment <span class="icon-arrow-right"></span> </button>
                 {% endif %}
             </div>
         </form>
