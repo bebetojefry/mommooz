@@ -54,7 +54,13 @@ class FOSUBUserProvider extends BaseClass
             //modify here with relevant data
             $user->setFirstname($response->getFirstName());
             $user->setLastname($response->getLastName());
-            $user->setEmail($response->getEmail());
+            
+            if(isset($data['email'])){
+                $user->setEmail($data['email']);
+            } else {
+                $user->setEmail($response->getEmail());
+            }
+            
             $user->setUsername($username);            
             $user->setPassword($username);
             $user->setEnabled(true);
