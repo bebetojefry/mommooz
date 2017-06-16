@@ -84,12 +84,12 @@
                 <div class="block-11 text-left">	
                     <h2>{{ item.getName() }}</h2>
                     <div class="full-width ptb-20p">
-                        <div class="block-5">
-                            {% if entry.getVariant() %}
+                        {% if entry.getVariant() %}
+                            <div class="block-5">
                                 <h3> {{ entry.getVariant().getValue() }} </h3>
                                 <span class="dim-font"> in packet </span>
-                            {% endif %}
-                        </div>
+                            </div>
+                        {% endif %}
                         <div class="block-5">
                             <h3> <span class="icon-inr" style="font-size:16px;"></span> {{ entry.getActualPrice() }} </h3>
                             <span class="dim-font"> <strike> <span class="icon-inr"></span> {{ entry.getMrp() }} </strike> </span> <br/>
