@@ -38,7 +38,7 @@ class FOSUBUserProvider extends BaseClass
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
-
+        $data = $response->getResponse();
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
         if (null === $user) {
@@ -54,7 +54,13 @@ class FOSUBUserProvider extends BaseClass
             //modify here with relevant data
             $user->setFirstname($response->getFirstName());
             $user->setLastname($response->getLastName());
-            $user->setEmail($response->getEmail());
+            
+            if(isset($data['email'])){
+                $user->setEmail($data['email']);
+            } else {
+                $user->setEmail($response->getEmail());
+            }
+            
             $user->setUsername($username);
             $user->setEmail($username);
             $user->setPassword($username);
