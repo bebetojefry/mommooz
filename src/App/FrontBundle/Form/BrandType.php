@@ -32,6 +32,7 @@ class BrandType extends AbstractType
                     'required' => false,
                 ))->addModelTransformer($keywordTransformer)
             )
+            ->add('visible')
             ->add('status')
         ;
     }

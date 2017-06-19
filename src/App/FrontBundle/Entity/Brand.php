@@ -55,6 +55,13 @@ class Brand
      * @ORM\Column(name="status", type="boolean")
      */
     private $status;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="visible", type="boolean")
+     */
+    private $visible;
 
 
     /**
@@ -226,5 +233,29 @@ class Brand
     public function getItems()
     {
         return $this->items;
+    }
+
+    /**
+     * Set visible
+     *
+     * @param boolean $visible
+     *
+     * @return Brand
+     */
+    public function setVisible($visible)
+    {
+        $this->visible = $visible;
+
+        return $this;
+    }
+
+    /**
+     * Is visible
+     *
+     * @return boolean
+     */
+    public function isVisible()
+    {
+        return $this->visible;
     }
 }

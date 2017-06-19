@@ -44,7 +44,9 @@
                     <h3 class=""> Brands </h3>                
                     <div class="none-overx-pro first-cat-cary mb-25p">
                     {% for brand in category.getAllBrands() %}
-                        > <a href="{{ path('brand_page', {'id': brand.getId()}) }}">{{ brand.getName() }}</a>   <br/>
+                        {% if brand.isVisible() %}
+                            > <a href="{{ path('brand_page', {'id': brand.getId()}) }}">{{ brand.getName() }}</a>   <br/>
+                        {% endif %}
                     {% endfor %}
                     </div>
                 </div>

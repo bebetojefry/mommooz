@@ -582,8 +582,11 @@ class StockEntry
         }
         
         $brand = $this->getItem()->getBrand();
-        $brandName = $brand->getName() == '' ? 'Brandless' : $brand->getName();
-        $data['brand'] = array('id' => $brand->getId(), 'name' => $brandName);
+        if($brand->isVisible()){
+            $brandName = $brand->getName() == '' ? 'Brandless' : $brand->getName();
+            $data['brand'] = array('id' => $brand->getId(), 'name' => $brandName);
+        }
+        
         $data['offer'] = $this->onOffer();
         $data['new'] = $this->isNew();
         

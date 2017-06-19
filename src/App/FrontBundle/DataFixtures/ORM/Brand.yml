@@ -3,3 +3,4 @@ App\FrontBundle\Entity\Brand:
         name: ''
         description: 'brand less'
         status: 1
+        visible: 0

@@ -35,6 +35,7 @@ class BrandController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $brand = new Brand();
         $brand->setStatus(true);
+        $brand->setVisible(true);
         $form = $this->createForm(new BrandType($dm), $brand);
                 
         $code = FormHelper::FORM;
