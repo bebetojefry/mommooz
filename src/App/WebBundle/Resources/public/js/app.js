@@ -398,11 +398,14 @@ function openAlert(message, type){
     FilterModal.prototype.register = function(item) {
         item = JSON.parse(item);
         this.items.push(item);
-        if(this.brand_items[item.brand.id] == undefined){
-            this.brand_items[item.brand.id] = [];
+        
+        if(item.brand != undefined){
+            if(this.brand_items[item.brand.id] == undefined){
+                this.brand_items[item.brand.id] = [];
+            }
+            this.brands[item.brand.id] = ' '+item.brand.name;
+            this.brand_items[item.brand.id][this.brand_items[item.brand.id].length] = item;
         }
-        this.brands[item.brand.id] = ' '+item.brand.name;
-        this.brand_items[item.brand.id][this.brand_items[item.brand.id].length] = item;
         
         if(this.category_items[item.cat.id] == undefined){
             this.category_items[item.cat.id] = [];
