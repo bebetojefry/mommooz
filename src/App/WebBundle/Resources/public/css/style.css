@@ -614,7 +614,7 @@ nav .nav-submenu ul li:hover, nav .nav-submenu ul li.active{
 .select-alocation{
 	min-height:300px;
 	height:50%;
-	background:url(../images/map-fade.jpg) bottom no-repeat;
+	background:url(../images/map-fade.jpg) #fff bottom no-repeat;
 	}
 .small-text-mmz{
 	font-size:10px;
@@ -638,6 +638,7 @@ nav .nav-submenu ul li:hover, nav .nav-submenu ul li.active{
 	top:-120%;
 	height:0px;
 	overflow:hidden;
+    background: rgba(255,255,255,0.9);
 	}
 	
 .breadcrumb{
