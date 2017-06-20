@@ -531,6 +531,7 @@ class AccountController extends Controller
     {
         if(isset($_POST['cod'])){
             $this->get('session')->set('order_method', 'COD');
+            $this->get('session')->set('address', $request->get('address'));
             return $this->forward('AppWebBundle:ordersuccess');
         }
         
