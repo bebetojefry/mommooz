@@ -532,7 +532,7 @@ class AccountController extends Controller
         if(isset($_POST['cod'])){
             $this->get('session')->set('order_method', 'COD');
             $this->get('session')->set('address', $request->get('address'));
-            return $this->forward('AppWebBundle:ordersuccess');
+            return $this->forward('AppWebBundle:Account:ordersuccess');
         }
         
         $em = $this->getDoctrine()->getManager();
@@ -626,7 +626,7 @@ class AccountController extends Controller
 	if($order_status==="Success")
 	{
             $this->get('session')->set('order_method', 'PAID');
-            return $this->forward('AppWebBundle:ordersuccess');
+            return $this->forward('AppWebBundle:Account:ordersuccess');
 		
 	}
 	else if($order_status==="Aborted")
