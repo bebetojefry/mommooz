@@ -296,7 +296,7 @@
                                     <option {% if district.getId() != 35 %}disabled=""{% endif %} {% if district.getId() == 35 %}selected=""{% endif %} value="{{ district.getId() }}"> {{ district.getName() }} </option>
                                 {% endfor %}
                             </select>
-                            {% if districts|length == 1 %}
+                            {% if app_web_user.getDistricts()|length == 1 %}
                                 <span class="small-text-mmz"> Sorry!,  Now available at {{ districts[0].getName() }} only. </span>
                             {% endif %}
                             <script type="text/javascript">
