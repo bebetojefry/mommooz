@@ -31,7 +31,7 @@ class IndexController extends Controller
         
         $result= array();
         foreach($regions as $region){
-           $result[] = '<option value="'.$region->getId().'">'.$region.getRegionName().'</option>'; 
+           $result[] = '<option value="'.$region->getId().'">'.$region->getRegionName().'</option>'; 
         }
         
         return new Response(implode($result, ''));
