@@ -200,4 +200,9 @@ class User {
         $em = $this->container->get('doctrine')->getManager();
         return $em->getRepository('AppFrontBundle:District')->findAll();
     }
+    
+    public function getDefaultRegion(){
+        $em = $this->container->get('doctrine')->getManager();
+        return $em->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
+    }
 }
