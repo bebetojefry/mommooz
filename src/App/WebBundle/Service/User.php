@@ -204,13 +204,15 @@ class User {
     public function setDefaultRegion(){
         $em = $this->container->get('doctrine')->getManager();
         $region = $em->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
+        if(!$region){
+            $region = $em->getRepository('AppFrontBundle:Region')->findOneByDefault(false);
+        }
+        
         if($region){
             $this->container->get('session')->set('district', $region->getDistrict()->getId());
             $this->container->get('session')->set('region', $region->getId());
-            
-            return true;
         }
         
-        return false;
+        return $region;
     }
 }

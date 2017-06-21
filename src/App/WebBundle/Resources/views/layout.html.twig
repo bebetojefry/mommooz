@@ -36,7 +36,7 @@
 </head>
 <body class="relative-pos">
     {% if app.session.get('region') is null %}
-        {% set region = app_web_user.setDefaultRegion() %}
+        {% set defaultRegion = app_web_user.setDefaultRegion() %}
     {% endif %}
     
     {# message popup html #}
@@ -328,7 +328,7 @@
                             <button type="submit" name="btnSubmit" class="first-go-button">
                                 Explore <span class="icon-arrow-right"></span>
                             </button> 
-                            <a href="{{ path('home_explore_skip') }}" class="small-text-mmz skip-close ml-20p"> Skip & continue </a>
+                            <a href="javascript:void(0);" class="small-text-mmz skip-close ml-20p"> Skip & continue </a>
                         </td>
                     </tr>
                 </table>
@@ -345,9 +345,27 @@
                           + ";domain=momooz.com;path=/"; 
         });
         
+        $('.skip-close').on('click', function(){
+            {% if defaultRegion %}
+                var cookieName = 'region';
+                var cookieValue = '{{ defaultRegion.getId() }}';
+                var myDate = new Date();
+                myDate.setMonth(myDate.getMonth() + 12);
+                document.cookie = cookieName +"=" + cookieValue + ";expires=" + myDate 
+                              + ";domain=momooz.com;path=/"; 
+            {% endif %}
+                
+            window.location = '{{ path('home_explore_skip') }}';
+        });
+        
         var region = getCookie('region');
         if(region){
             $('.first-location-popup').hide();
+            $.ajax({
+                url: '{{ path('home_set_region') }}',
+                method: 'POST',
+                data: 'region='+region
+            });
         }
     </script>                        
 </body>

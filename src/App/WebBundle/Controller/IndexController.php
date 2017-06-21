@@ -36,6 +36,17 @@ class IndexController extends Controller
         
         return new Response(implode($result, ''));
     }
+    
+    public function setRegionAction(){
+        $em = $this->getDoctrine()->getManager();
+        if(isset($_POST['region'])){
+            $region = $em->getRepository('AppFrontBundle:Region')->find($_POST['region']);
+            $this->get('session')->set('district', $region->getDistrict()->getId());
+            $this->get('session')->set('region', $region->getId());
+        }
+        
+        return new Response('1');
+    }
 
     public function switchLocationAction(){
         $this->get('session')->set('region', $_POST['region']);
@@ -43,16 +54,7 @@ class IndexController extends Controller
     }
     
     public function exploreskipAction(){
-        $em = $this->getDoctrine()->getManager();
-        $region = $em->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
-        if($region){
-            $this->get('session')->set('district', $region->getDistrict()->getId());
-            $this->get('session')->set('region', $region->getId());
-        } else {
-            $this->get('session')->set('district', 0);
-            $this->get('session')->set('region', 0);
-        }
-
+        $this->get('app.web.user')->setDefaultRegion();
         return $this->redirect($this->generateUrl('home'));
     }
 }

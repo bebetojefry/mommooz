@@ -13,6 +13,11 @@ home_explore_regions:
     host:     "%domain_consumer%"
     defaults: { _controller: AppWebBundle:Index:regions }
     
+home_set_region:
+    path:     /explore/region/set
+    host:     "%domain_consumer%"
+    defaults: { _controller: AppWebBundle:Index:setRegion }
+    
 home_switch_location:
     path:     /location/switch
     host:     "%domain_consumer%"
