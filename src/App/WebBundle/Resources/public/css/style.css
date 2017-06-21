@@ -634,6 +634,7 @@ nav .nav-submenu ul li:hover, nav .nav-submenu ul li.active{
 	cursor:pointer;}
 .first-go-button span{
 	font-size:12px;}
+.first-location-popup{background: rgba(255,255,255,0.95);}
 .first-location-popup.active{
 	top:-120%;
 	height:0px;
