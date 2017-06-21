@@ -218,6 +218,7 @@ class ItemController extends Controller
     public function tocartAction(Request $request, StockEntry $entry){
         $status = false;
         $quantity = 0;
+        $in_cart = false;
         $em = $this->getDoctrine()->getManager();
         if($entry->getInStock() >= $request->query->get('qty')){
             $cart = null;
@@ -245,6 +246,7 @@ class ItemController extends Controller
 
             if($cart){
                 if($item = $cart->inCart($entry)){
+                    $in_cart = true;
                     $item->setQuantity($item->getQuantity() + $request->query->get('qty'));
                 } else {
                     $item = new CartItem();
@@ -264,7 +266,7 @@ class ItemController extends Controller
             }
         }
 
-        return new JsonResponse(array('status' => $status, 'quantity' => $quantity));
+        return new JsonResponse(array('status' => $status, 'quantity' => $quantity, 'in_cart' => $in_cart));
     }
 
     /**

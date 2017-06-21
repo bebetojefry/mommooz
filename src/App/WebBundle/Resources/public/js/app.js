@@ -273,7 +273,9 @@ $(document).ready(function(){
                 if(resp.status){
                     $(that).parent().find('.in_cart_count i').text(resp.quantity);
                     $(that).parent().find('.in_cart_count').show();
-                    $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
+                    if(!resp.in_cart){
+                        $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
+                    }
 //                    openAlert('Successfully added to cart', 'success');
                     alert('Successfully added to cart');
                 } else {

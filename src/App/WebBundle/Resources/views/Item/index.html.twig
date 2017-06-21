@@ -151,7 +151,7 @@
                         {% endif %}
                     </div>
                     <div class="full-width mt-20p">
-                        <h4 class=""> Check Availability  </h4>
+                        {#<h4 class=""> Check Availability  </h4>
                         <div class="availChecker">
                             <input type="text" id="txtCheckAvail" {% if location %}value="{{ location.getPinCode() }}"{% endif %} style="width: 85%;" placeholder="Type Pincode" />
                             <button class="momz-button" id="btnCheckAvail">Check</button>
@@ -159,7 +159,7 @@
                         <div class="availDisplay" style="display: none; margin: 10px 0;">
                             <div></div>
                             {% if inCart == null %}<a href="javascript:;" style="color: blue; font-size: 12px; text-decoration: underline;">Try Another PIN</a>{% endif %}
-                        </div>
+                        </div> 
                         <script type="text/javascript">
                             $('#btnCheckAvail').on('click', function(){
                                 var pin = $('#txtCheckAvail').val();
@@ -189,25 +189,26 @@
                             });
                             
                             {% if location %}$('#btnCheckAvail').trigger('click');{% endif %}
-                        </script>
-                        <span class="extrasmall-dim-font pt-5p dispaly-block"> Standard Delivery: 14/11/2016 - Monday </span>
+                        </script>#}
+                        {#<span class="extrasmall-dim-font pt-5p dispaly-block"> Standard Delivery: 14/11/2016 - Monday </span>#}
                     </div>
 
                     <div class="full-width mt-20p">
                         <label> Number of Quantity </label>
-                        <input type="number" min="1" {% if inCart %}disabled=""{% endif %} id="purchase-quantity" value="{% if inCart %}{{ inCart.getQuantity() }}{% else %}1{% endif %}" max="{{ entry.getInStock() }}" min="1">
+                        <input type="number" min="1" id="purchase-quantity" value="1" max="{{ entry.getInStock() }}" min="1">
                     </div>
 
                     <div class="full-width mt-10p ptb-10p">
-                        <button {% if inCart %}style="display: none;"{% endif %} class="momz-button" id="add-to-cart" disabled=""> Add to Cart <span class="icon-arrow-right"></span> </button>
-                        <span id="in-cart" style="color: green; {% if inCart == null %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-shopping-cart fa-1" aria-hidden="true"></i> In Cart</span>
+                        {% set in_cart_count = app_web_user.getCartCount(entry) %}
+                        <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}"><i>{{ in_cart_count }}</i> in cart</span>
+                        <button class="momz-button" id="add-to-cart"> Add to Cart <span class="icon-arrow-right"></span> </button>
                         <button {% if inWishList %}style="display: none;"{% endif %} class="momz-button ml-10p mb-ml-0p mt-10p" id="add-to-wishlist"> Add to Wishlist <span class="icon-arrow-right"></span> </button>
                         <span id="in-wishlist" style="color: green; margin-left: 10px; {% if inWishList == null %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-heart fa-1" aria-hidden="true"></i> In Wishlist</span>
                         <script type="text/javascript">
                             $('#add-to-cart').on('click', function(){
                                 var quantity = $('#purchase-quantity').val();
                                 if(!isNumeric(quantity) || quantity <= 0){
-                                    openAlert('Invalid Quantity', 'error');
+                                    alert('Invalid Quantity', 'error');
                                     return; 
                                 }
                                 $.ajax({
@@ -215,14 +216,14 @@
                                     dataType: 'json',
                                     success: function(resp){
                                         if(resp.status){
-                                            $('#add-to-cart').hide();
-                                            $('#in-cart').show();
-                                            $('.availDisplay a').remove();
-                                            $('#purchase-quantity').attr('disabled', 'disabled');
-                                            $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
-                                            openAlert('Successfully added to cart', 'success');
+                                            $('.in_cart_count i').text(resp.quantity);
+                                            if(!resp.in_cart){
+                                                $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
+                                            }
+                                            
+                                            alert('Successfully added to cart', 'success');
                                         } else {
-                                            openAlert('Insufficient stock', 'error');
+                                            alert('Insufficient stock', 'error');
                                         }
                                     }
                                 });
