@@ -1,6 +1,7 @@
 <html>
     <head>
         <title> Momooz | Online retailing company </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <style type="text/css">
             *{margin: 0;padding: 0;}
             body{font-family: arial;}
@@ -9,12 +10,12 @@
             .topHeaderLogoTM{text-align: center;width: 100%;margin-top: 20px;}
             .topHeaderLogoTM img{min-width: 150px;width: 15%;display: inline-block;margin-left: -4px;}
             .textBrand{width: 100%;font-family: arial;font-size: 16px;padding-top: 8px;text-align: center;color: #878886;}
-            .fristCary{width: 100%;background: #96c11f;margin-top: 20px;}
+            .fristCary{width: 100%;background: #339966;margin-top: 20px;padding: 5px 0 15px 0; }
             .centreCary{width: 100%;max-width: 1200px;margin: 20px auto 0 auto; }
             .imageRight{width: 45%;display: inline-block;margin-left: -4px;vertical-align: top;}
             .fristCary{font-family: arial;color: #fff;}
             .textRight{width: 54%;display: inline-block;margin-left: -4px;vertical-align: top;}
-            .text1{display: inline-block;margin-top: 15%;font-size: 15px;padding-left: 20px;line-height: 22px;}
+            .text1{display: inline-block;margin-top: 12%;font-size: 15px;padding-left: 20px;line-height: 22px;}
             .text2{display: inline-block;margin-top: 10px;font-size: 20px;padding-left: 20px;}
             .ImF{width: 100%;}
             
@@ -23,6 +24,8 @@
             .FuD{width: 100%;margin-top: 15px; text-align: center;}
             .caryDivServ{width: 18%;display: inline-block;margin-left: -4px;margin-right: 1%;position: relative;}
             .caryDivServ h2{position: absolute;text-align: center;width: 100%;height: 30px;color: #fff;margin: auto;left: 0;right: 0;top: 0;bottom: 0;}
+            .DelverSpan{background: #cc3300;font-size: 25px;display: inline-block;padding: 0px 2px;border-radius: 4px;}
+            .fontUpSpan{font-size: 24px;display: inline-block;padding-top: 4px;}
             
             .DelveSlot{width: 100%;margin: 40px auto 0 auto;max-width: 1200px;}
             .halfDiv{width: 50%;margin-left: -4px;display: inline-block;text-align: left;padding: 0 2%;vertical-align: top;}
@@ -34,6 +37,16 @@
             
             .bottomDiv{width: 100%;max-width: 1000px;border-top: 1px #e0e0e0 solid;margin: 40px auto 0 auto;text-align: center;padding-top: 25px;padding-bottom: 25px;}
             .bottomDiv h3{color: #555;}.imagePay{width: 250px;display: inline-block;margin-top: 20px;}
+            
+            @media (max-width:980px){ .text1{display: inline-block;margin-top: 5%;} }
+            @media (max-width:768px){ .textRight{width: 100%;text-align: center;margin-bottom: 10px;}
+                .imageRight{width: 50%;}   .centreCary{text-align: center;}br{display: none;}.caryDivServ{width: 26%;}
+                .halfDiv{text-align: center;width: 95%;}.onlPlaceDiv{display: inline-block;}
+            }
+            @media (max-width:480px){
+                .caryDivServ{width: 48%;}.halfDiv{width: 98%;}
+            }
+            
         </style>
     </head>
     <body>
@@ -46,7 +59,7 @@
         <div class="fristCary">
             <div class="centreCary">
                 <div class="imageRight">
-                    <img src="images/fristScreenImageGirl.jpg" class="ImF" alt="Image">
+                    <img src="images/delMan.svg" class="ImF" alt="Image">
                 </div>
                 <div class="textRight">
                     <div class="text1">
@@ -55,9 +68,10 @@ groceries or vegetables without going to the supermarket!!  <br/>
 And here we are. 
                     </div>
                     <div class="text2">
-                        Just relax, and place your order from home <br/>
-on <b> phone 974 948 4848 </b>, and your order <br/>
-will be delivered at your door steps. 
+                        Just relax, and place your order from <br/> <span class="DelverSpan"> home 
+on <b> phone 974 948 4848 </b> </span> and <br/> 
+<span class="fontUpSpan">your order will be delivered <br/>  at your door steps. 
+                   </span>
                     </div>
                 </div>
             </div>
@@ -105,7 +119,7 @@ will be delivered at your door steps.
                    </p>
                </div>
                <div class="halfDiv">
-                   <h3> Normal Delivery  </h3>
+                   <h3> Express delivery  </h3>
                    <p>
                      Order will be taken from 9 to 6 and delivery will be within 90 minutes. <br/>
                        Express delivery charge is <strong> Rs.30 </strong>
