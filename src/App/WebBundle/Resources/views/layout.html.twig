@@ -35,6 +35,7 @@
         <script src="{{ asset('bundles/appweb/js/app.js') }}"></script>
 </head>
 <body class="relative-pos">
+    {% set defaultRegion = null %}
     {% if app.session.get('region') is null %}
         {% set defaultRegion = app_web_user.setDefaultRegion() %}
     {% endif %}
