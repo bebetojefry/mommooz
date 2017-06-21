@@ -3,48 +3,38 @@
 namespace App\WebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class IndexController extends Controller
 {
     public function indexAction()
     {
-        if($this->get('session')->get('district') !== null && $this->get('session')->get('region') !== null){
-            return $this->render('AppWebBundle:Index:index.html.twig');
-        }
-
-        $em = $this->getDoctrine()->getManager();
-        $districts = $em->getRepository('AppFrontBundle:District')->findAll();
-        
-        $district_selected = $em->getRepository('AppFrontBundle:District')->find(35);
-        $regions = array();
-        if($district_selected){
-            $regions = $district_selected->getRegions();
-        }
-        
-        return $this->render('AppWebBundle:Index:explore.html.twig', array(
-            'districts' => $districts,
-            'regions' => $regions
-        ));
+        return $this->render('AppWebBundle:Index:index.html.twig');
     }
 
     public function exploreAction(){
         $em = $this->getDoctrine()->getManager();
         if(isset($_POST['btnSubmit'])){
-            $this->get('session')->set('district', $_POST['district']);
-            $this->get('session')->set('region', $_POST['region']);
-
-            return $this->redirect($this->generateUrl('home'));
-        } else {
-            $districts = $em->getRepository('AppFrontBundle:District')->findAll();
-            $distid = isset($_POST['district']) ? $_POST['district'] : 35;
-            $district_selected = $em->getRepository('AppFrontBundle:District')->find($distid);
-            $regions = $em->getRepository('AppFrontBundle:Region')->findByDistrict($district_selected);
-
-            return $this->render('AppWebBundle:Index:explore.html.twig', array(
-                'districts' => $districts,
-                'regions' => $regions
-            ));
+            $this->get('session')->set('district', $_POST['explore_district']);
+            $this->get('session')->set('region', $_POST['explore_region']);
         }
+        
+        return $this->redirect($this->generateUrl('home'));
+    }
+    
+    public function regionsAction(){
+        $em = $this->getDoctrine()->getManager();
+        $distid = isset($_POST['district']) ? $_POST['district'] : 35;
+        $district_selected = $em->getRepository('AppFrontBundle:District')->find($distid);
+        $regions = $em->getRepository('AppFrontBundle:Region')->findByDistrict($district_selected);
+        
+        $result= array();
+        foreach($regions as $region){
+           $result[] = '<option value="'.$region->getId().'">'.$region.getRegionName().'</option>'; 
+        }
+        
+        return new Response(implode($result, ''));
     }
 
     public function switchLocationAction(){

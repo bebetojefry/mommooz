@@ -60,9 +60,9 @@ $('.user-click, .close-login').click(function(){
 $('.responcive-menu-cliker, .close-main-menu').click(function(){
 	$("nav").toggleClass("active");
  });
-$('.skip-close').click(function(){
+/*$('.skip-close').click(function(){
 	$(".first-location-popup").toggleClass("active");
- });
+});*/
     
 $('.first-cat-cary ul li:first-child').addClass("active");
 

@@ -195,4 +195,9 @@ class User {
         
         return false;
     }
+    
+    public function getDistricts(){
+        $em = $this->container->get('doctrine')->getManager();
+        return $em->getRepository('AppFrontBundle:District')->findAll();
+    }
 }
