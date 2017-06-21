@@ -201,8 +201,16 @@ class User {
         return $em->getRepository('AppFrontBundle:District')->findAll();
     }
     
-    public function getDefaultRegion(){
+    public function setDefaultRegion(){
         $em = $this->container->get('doctrine')->getManager();
-        return $em->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
+        $region = $em->getRepository('AppFrontBundle:Region')->findOneByDefault(true);
+        if($region){
+            $this->container->get('session')->set('district', $region->getDistrict()->getId());
+            $this->container->get('session')->set('region', $region->getId());
+            
+            return true;
+        }
+        
+        return false;
     }
 }

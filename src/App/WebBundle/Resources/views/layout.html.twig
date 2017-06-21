@@ -36,10 +36,7 @@
 </head>
 <body class="relative-pos">
     {% if app.session.get('region') is null %}
-        {% set region = app_web_user.getDefaultRegion() %}
-        {% if region %}
-           
-        {% endif %}
+        {% set region = app_web_user.setDefaultRegion() %}
     {% endif %}
     
     {# message popup html #}
