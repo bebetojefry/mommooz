@@ -35,9 +35,9 @@
         <script src="{{ asset('bundles/appweb/js/app.js') }}"></script>
 </head>
 <body class="relative-pos">
-    {% set defaultRegion = null %}
+    {% set defaultRegion = app_web_user.getDefaultRegion() %}
     {% if app.session.get('region') is null %}
-        {% set defaultRegion = app_web_user.setDefaultRegion() %}
+        {% set temp_region_set = app_web_user.setDefaultRegion() %}
     {% endif %}
     
     {# message popup html #}
