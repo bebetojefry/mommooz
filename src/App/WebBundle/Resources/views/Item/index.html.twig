@@ -217,6 +217,7 @@
                                     success: function(resp){
                                         if(resp.status){
                                             $('.in_cart_count i').text(resp.quantity);
+                                            $('.in_cart_count').show();
                                             if(!resp.in_cart){
                                                 $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
                                             }
