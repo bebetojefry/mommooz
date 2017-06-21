@@ -38,8 +38,7 @@
     {% if app.session.get('region') is null %}
         {% set region = app_web_user.getDefaultRegion() %}
         {% if region %}
-            {% app.session.set('region', region.getId()) %}
-            {% app.session.set('district', region.getDistrict().getId()) %}
+           
         {% endif %}
     {% endif %}
     
