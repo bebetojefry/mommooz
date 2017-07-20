@@ -35,6 +35,9 @@ modal.controller('MainCtrl', function ($scope, $http) {
     $scope.showModal = false;
     $scope.toggleModal = function(obj){
         $scope.modalTitle = obj.target.attributes.modalTitle.value;
+        $('.loading').show();
+        $('.modal-dialog').attr('class', 'modal-dialog');
+        $('.modal-dialog').addClass(obj.target.attributes.modalTitle.value.replace(/ /g,"_").toLowerCase());
         var action = obj.target.attributes.modalUrl;
         action = (action == undefined) ? obj.target.attributes.href : action;
         $http.get(action.value)
@@ -50,6 +53,9 @@ modal.controller('MainCtrl', function ($scope, $http) {
         action = (action == undefined) ? obj.target.attributes.href : action;
         $scope.formAction = action.value;
         $('#modal-form').ajaxForm({
+            beforeSubmit: function(arr, $form, options) {
+                $('.loading').show();
+            },
             success: function(response) {
                 $scope.processResponse(response);
             },
@@ -70,6 +76,7 @@ modal.controller('MainCtrl', function ($scope, $http) {
                 cssClass: 'btn-primary',
                 action: function(dialog) {
                     dialog.close();
+                    $('.loading').show();
                     $http.get(act.value)
                     .success(function (response) {
                         $scope.processResponse(response);
@@ -124,9 +131,11 @@ modal.controller('MainCtrl', function ($scope, $http) {
         try { response = jQuery.parseJSON(response); } catch(err) {}
         switch(response.code){
             case 'FORM':
+                $('.loading').hide();
                 $scope.modalHtml = response.data;
                 break;
             case 'FORM_REFRESH':
+                $('.loading').hide();
                 $scope.$apply(function() {
                     $scope.modalHtml = response.data;
                 });
