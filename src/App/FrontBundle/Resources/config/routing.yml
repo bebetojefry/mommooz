@@ -13,11 +13,6 @@ app_front_consumer_logout:
     host:     "%domain_consumer%"
     path: /account/logout
     
-app_front_consumers_home:
-    path:     /home
-    host:     "%domain_consumer%"
-    defaults: { _controller: AppFrontBundle:Consumer:Index}
-    
 ########################################################
 
 app_front_admin_login:
@@ -128,6 +123,16 @@ admin_vendor_actions:
     resource: "@AppFrontBundle/Controller/VendorController.php"
     type:     annotation
     prefix: /vendor
+
+app_front_admin_consumer:
+    path:     /consumer
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:consumer}
+    
+admin_consumer_actions:
+    resource: "@AppFrontBundle/Controller/ConsumerController.php"
+    type:     annotation
+    prefix: /consumer
 
 
 app_front_admin_order:

@@ -115,6 +115,10 @@ services:
          class: App\FrontBundle\Datatables\UserDatatable
          parent: sg_datatables.datatable.abstract
          
+    app.front.datatable.consumer:
+         class: App\FrontBundle\Datatables\ConsumerDatatable
+         parent: sg_datatables.datatable.abstract
+         
     app.front.datatable.stock:
          class: App\FrontBundle\Datatables\StockDatatable
          parent: sg_datatables.datatable.abstract

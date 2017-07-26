@@ -73,6 +73,14 @@ class AdminController extends Controller
         ));
     }
     
+    public function consumerAction(Request $request){
+        $consumerDatatable = $this->get('app.front.datatable.consumer');
+        $consumerDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:consumer.html.twig', array(
+            'consumerDatatable' => $consumerDatatable,
+        ));
+    }
+    
     public function orderAction(Request $request){
         $purchaseDatatable = $this->get('app.front.datatable.purchase');
         $purchaseDatatable->buildDatatable();
