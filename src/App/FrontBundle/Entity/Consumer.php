@@ -24,6 +24,7 @@ class Consumer extends User
      */
     public function __construct() {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+        parent::__construct();
     }
     
     /**

@@ -10,7 +10,7 @@ use App\FrontBundle\DataTransformer\RegionsToIdsTransformer;
 use App\FrontBundle\DataTransformer\ImageToIdsTransformer;
 use App\FrontBundle\Form\AddressType;
 
-class UserType extends AbstractType
+class ConsumerType extends AbstractType
 {
     private $om;
     private $router;
@@ -56,11 +56,6 @@ class UserType extends AbstractType
                     'required' => false,
                 ))->addModelTransformer($imageTransformer)
             )
-            ->add(
-                $builder->create('regions', 'text', array(
-                    'required' => false,
-                ))->addModelTransformer($regionstoIdsTransformer)
-            )  
         ;
     }
     

@@ -6,7 +6,6 @@
         {{ form_row(form.gender) }}
         {{ form_row(form.phone) }}
         {{ form_row(form.email) }}        
-        {{ form_row(form.regions) }}
         {{ form_row(form.status) }}
     </div>
     <div class="col-md-6">
@@ -23,13 +22,6 @@
 {{ form_widget(form._token) }}
 <script type="text/javascript">
     $(document).ready(function () {
-        $("#{{ form.regions.vars.id }}").tokenInput("{{ path('region_search') }}", {
-            theme: "facebook"
-            {% if region_values is defined %},prePopulate: {{ region_values|raw }}{% endif %}
-        });
-
-        $('#{{ form.regions.vars.id }}').addClass('token-input-real-field');
-        
         $("#{{ form.images.vars.id }}").imageUploader({
             multiple: false
         });
