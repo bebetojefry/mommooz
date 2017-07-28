@@ -1,0 +1,62 @@
+{% extends "AppFrontBundle::layout2.html.twig" %}
+
+{% block title %}{{ 'page_title.purchase' | trans }}{% endblock %}
+
+{% block style %}
+    {% stylesheets
+        'assets/vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css'
+        filter='cssrewrite' output='css/compiled/page.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
+{% endblock %}
+
+{% block consumer_active %}active{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {{ 'purchase.module_name' | trans }} - 
+                    ( {{ consumer.getFullName() }} )
+                </div>
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        {{ datatable_render(purchaseDatatable) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}
+
+{% block javascript %}
+    {% javascripts
+        'assets/vendor/datatables/media/js/jquery.dataTables.min.js'
+        'assets/vendor/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js'
+        output='js/compiled/page.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#productsTable').DataTable({
+                "responsive": true,
+                "lengthMenu": [[5, 10, 25, -1], [5, 10, 25, "All"]],
+                "language": {
+                    "lengthMenu": "{{ 'table.lengthMenu' | trans }}",
+                    "zeroRecords": "{{ 'table.zeroRecords' | trans }}",
+                    "info": "{{ 'table.info' | trans }}",
+                    "infoEmpty": "{{ 'table.infoEmpty' | trans }}",
+                    "infoFiltered": "{{ 'table.infoFiltered' | trans }}",
+                    "search": "{{ 'table.search' | trans }}",
+                    "paginate": {
+                        "first":      "{{ 'table.first' | trans }}",
+                        "last":       "{{ 'table.last' | trans }}",
+                        "next":       "{{ 'table.next' | trans }}",
+                        "previous":   "{{ 'table.previous' | trans }}"
+                    }
+                }
+            });
+        });
+    </script>
+{% endblock %}

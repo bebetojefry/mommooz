@@ -255,3 +255,8 @@ app_front_vendor_invoice:
     path:     /invoices
     host:     "%domain_vendor%"
     defaults: { _controller: AppFrontBundle:Vendor:invoices}
+    
+cart_actions:
+    resource: "@AppFrontBundle/Controller/CartController.php"
+    type:     annotation
+    prefix: /cart

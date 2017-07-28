@@ -4,6 +4,7 @@ namespace App\FrontBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
+use App\FrontBundle\Entity\Consumer;
 
 /**
  * Class PurchaseDatatable
@@ -35,6 +36,7 @@ class PurchaseDatatable extends AbstractDatatableView
      */
     public function buildDatatable(array $options = array())
     {
+        $id = (isset($options['consumer']) && $options['consumer'] instanceof Consumer) ? $options['consumer']->getId() : 0;
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-12">',
             'actions' => array(),
@@ -61,7 +63,7 @@ class PurchaseDatatable extends AbstractDatatableView
         ));
 
         $this->ajax->set(array(
-            'url' => $this->router->generate('purchase_results'),
+            'url' => $this->router->generate('purchase_results', array('id' => $id)),
             'type' => 'GET',
             'pipeline' => 0
         ));

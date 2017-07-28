@@ -157,6 +157,32 @@ class ConsumerDatatable extends AbstractDatatableView
                             'cofirmText' => $this->translator->trans('consumer.delete.confirm'),
                             'style' => 'margin-right:5px;'
                         ),
+                    ),
+                    array(
+                        'route' => 'consumer_cart',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('consumer.actions.cart'),
+                        'icon' => 'glyphicon glyphicon-shopping-cart',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'class' => 'btn btn-primary btn-xs',
+                            'style' => 'margin-right:5px;'
+                        ),
+                    ),
+                    array(
+                        'route' => 'consumer_orders',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('consumer.actions.orders'),
+                        'icon' => 'glyphicon glyphicon-shopping-cart',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'class' => 'btn btn-primary btn-xs',
+                            'style' => 'margin-right:5px;'
+                        ),
                     )
                 )
             ))

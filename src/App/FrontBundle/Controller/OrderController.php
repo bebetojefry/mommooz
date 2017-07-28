@@ -10,18 +10,27 @@ use Symfony\Component\HttpFoundation\Response;
 use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Purchase;
 use App\FrontBundle\Form\PurchaseType;
+use App\FrontBundle\Entity\Consumer;
 
 class OrderController extends Controller
 {
     /**
-     * @Route("/results", name="purchase_results")
+     * @Route("/{id}/results", name="purchase_results", options={"expose"=true})
      */
-    public function indexResultsAction()
+    public function indexResultsAction(Request $request, Consumer $consumer = null)
     {
         $datatable = $this->get('app.front.datatable.purchase');
-        $datatable->buildDatatable();
+        $datatable->buildDatatable(array('consumer' => $consumer));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
-        return $query->getResponse();
+        $query->buildQuery();
+        $qb = $query->getQuery();
+        if($consumer){
+            $qb->andWhere("purchase.consumer = :c");
+            $qb->setParameter('c', $consumer);
+        }
+        
+        $query->setQuery($qb);
+        return $query->getResponse(false);
     }
     
     /**

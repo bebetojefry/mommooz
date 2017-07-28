@@ -11,6 +11,7 @@ use App\FrontBundle\Helper\FormHelper;
 use App\FrontBundle\Entity\Consumer;
 use App\FrontBundle\Form\ConsumerType;
 use App\FrontBundle\Entity\Address;
+use App\FrontBundle\Entity\Cart;
 
 class ConsumerController extends Controller
 {
@@ -117,5 +118,46 @@ class ConsumerController extends Controller
         
         $this->get('session')->getFlashBag()->add('success', 'consumer.msg.removed');
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
+    }
+    
+    
+    /**
+     * Displays consumer cart.
+     *
+     * @Route("/{id}/cart", name="consumer_cart", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function cartAction(Request $request, Consumer $consumer)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if(!$cart = $consumer->getCart()){
+            $cart = new Cart();
+            $cart->setUser($consumer);
+            $cart->setSessionId(session_id());
+            $em->persist($cart);
+            $em->flush();
+        }
+        
+        $cartItemDatatable = $this->get('app.front.datatable.cartitem');
+        $cartItemDatatable->buildDatatable(array('cart' => $cart));
+        return $this->render('AppFrontBundle:Consumer:cart.html.twig', array(
+            'cartItemDatatable' => $cartItemDatatable,
+            'consumer' => $consumer
+        ));
+    }
+    
+    /**
+     * Displays consumer orders.
+     *
+     * @Route("/{id}/orders", name="consumer_orders", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function orderAction(Request $request, Consumer $consumer){
+        $purchaseDatatable = $this->get('app.front.datatable.purchase');
+        $purchaseDatatable->buildDatatable(array('consumer' => $consumer));
+        return $this->render('AppFrontBundle:Consumer:purchase.html.twig', array(
+            'purchaseDatatable' => $purchaseDatatable,
+            'consumer' => $consumer
+        ));
     }
 }
