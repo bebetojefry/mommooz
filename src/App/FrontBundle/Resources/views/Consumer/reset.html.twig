@@ -1,0 +1,9 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% if message %}
+    <div class="alert alert-warning">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>ERROR!</strong>
+        {{ message | raw }}
+    </div>
+{% endif %}
+{{ form_widget(form) }}

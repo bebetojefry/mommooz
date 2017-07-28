@@ -44,7 +44,6 @@ class ConsumerType extends AbstractType
                     'data-remote' => $this->router->generate('email_validate', array('id' => $builder->getData()->getId()))
                 )
             ))
-            ->add('status')
             ->add('addresses', 'collection', array(
                 'type'         => new AddressType(),
                 'allow_add'    => true,

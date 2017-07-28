@@ -5,11 +5,10 @@
         {{ form_row(form.lastname) }}
         {{ form_row(form.gender) }}
         {{ form_row(form.phone) }}
-        {{ form_row(form.email) }}        
-        {{ form_row(form.status) }}
+        {{ form_row(form.email) }}  
+        {{ form_row(form.images) }}
     </div>
     <div class="col-md-6">
-        {{ form_row(form.images) }}
         {% if form.addresses|length > 0 %}
             {% for address in form.addresses %}
                 {{ form_widget(address) }}

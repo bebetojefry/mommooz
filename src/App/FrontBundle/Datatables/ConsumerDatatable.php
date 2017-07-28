@@ -183,6 +183,22 @@ class ConsumerDatatable extends AbstractDatatableView
                             'class' => 'btn btn-primary btn-xs',
                             'style' => 'margin-right:5px;'
                         ),
+                    ),array(
+                        'route' => 'consumer_reset',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('vendor.actions.reset'),
+                        'icon' => 'glyphicon',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('vendor.actions.reset'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openModal(event);',
+                            'modalTitle' => $this->translator->trans('vendor.title.reset'),
+                            'style' => 'margin-right:5px;'
+                        ),
                     )
                 )
             ))

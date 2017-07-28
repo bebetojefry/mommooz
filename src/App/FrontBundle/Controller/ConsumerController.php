@@ -48,7 +48,8 @@ class ConsumerController extends Controller
                 $password = 'CONS'.time();
                 $consumer->setUsername($username);
                 $consumer->setPassword($password);
-                $consumer->setLocale('en');      
+                $consumer->setLocale('en');
+                $consumer->setStatus(true);
                 $dm->persist($consumer);
                 $dm->flush();
                 
@@ -159,5 +160,54 @@ class ConsumerController extends Controller
             'purchaseDatatable' => $purchaseDatatable,
             'consumer' => $consumer
         ));
+    }
+    
+    /**
+     * Displays a form to reset credentials of an existing consumer entity.
+     *
+     * @Route("/{id}/reset", name="consumer_reset", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function resetAction(Request $request, Consumer $consumer)
+    {
+        $dm = $this->getDoctrine()->getManager();
+        $obj = new \stdClass();
+        $obj->password = '';
+        $form = $this->createFormBuilder($obj)
+            ->add('password', 'repeated', array(
+                'type' => 'password',
+                'required' => true,
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->getForm();
+        
+        $code = FormHelper::FORM;
+        $message = '';
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            if($form->isValid()){
+                $obj = $form->getData();
+                $encoder = $this->get('security.encoder_factory')->getEncoder($consumer);
+                $password = $encoder->encodePassword($obj->password, $consumer->getSalt());
+                $consumer->setPassword($password);
+                $dm->persist($consumer);
+                $dm->flush();
+                $this->get('session')->getFlashBag()->add('success', 'consumer.msg.reseted');
+                $code = FormHelper::REFRESH;
+            } else {
+                $message = 'Password doesn\'t match';
+                $code = FormHelper::REFRESH_FORM;
+            }
+        }
+
+        $body = $this->renderView('AppFrontBundle:Consumer:reset.html.twig',
+            array('form' => $form->createView(), 'message' => $message)
+        );
+        
+        return new Response(json_encode(array('code' => $code, 'data' => $body)));
     }
 }

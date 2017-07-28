@@ -191,11 +191,15 @@ consumer:
         edit: Edit
         orders: Orders
         cart: Cart
+        reset: Reset Password
     title:
         new: New Consumer
         edit: Edit Consumer
+        reset: Reset Password
     delete:
         confirm: 'Are you sure, do you want to delete this consumer?'
+    msg:
+        reseted: 'Consumer password changed successfully'
         
 purchase:
     module_name: Orders
