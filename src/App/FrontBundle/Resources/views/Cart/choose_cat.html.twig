@@ -1,0 +1,12 @@
+<div id="tree"></div>
+<input type="hidden" name="vendor_opt_category" id="vendor_opt_category" value="" />
+<script type="text/javascript">
+    function getTree() {
+        var tree = {{ treeData|raw }};
+        
+        return tree;
+    }
+    $('#tree').treeview({data: getTree(), onNodeSelected: function(event, data){
+        $("#vendor_opt_category").val(data.id);
+    }});
+</script>

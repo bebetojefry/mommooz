@@ -47,7 +47,22 @@ class CartItemDatatable extends AbstractDatatableView
                         'rel' => 'tooltip',
                         'title' => $this->translator->trans('cart.title.new_item'),
                         'class' => 'btn btn-primary',
-                        'role' => 'button'
+                        'role' => 'button',
+                        'onclick' => 'return openModal(event);',
+                        'modalTitle' => $this->translator->trans('cart.title.new_item'),
+                    ),
+                ),
+                array(
+                    'route' => $this->router->generate('submit_order', array('id' => $id)),
+                    'label' => $this->translator->trans('cart.actions.submit'),
+                    'icon' => 'glyphicon glyphicon-ok',
+                    'attributes' => array(
+                        'rel' => 'tooltip',
+                        'title' => $this->translator->trans('cart.title.submit'),
+                        'class' => 'btn btn-primary',
+                        'role' => 'button',
+                        'onclick' => 'return openModal(event);',
+                        'modalTitle' => $this->translator->trans('cart.title.submit'),
                     ),
                 )
             )
@@ -126,6 +141,28 @@ class CartItemDatatable extends AbstractDatatableView
             ))
             ->add('addedOn', 'datetime', array(
                 'title' => 'Added On',
+            ))
+            ->add(null, 'action', array(
+                'title' => $this->translator->trans('datatables.actions.title'),
+                'actions' => array(
+                    array(
+                        'route' => 'cart_item_remove',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
+                        'icon' => 'glyphicon glyphicon-trash',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('datatables.actions.delete'),
+                            'class' => 'btn btn-primary btn-xs',
+                            'role' => 'button',
+                            'onclick' => 'return openConfirm(event);',
+                            'cofirmText' => $this->translator->trans('cart.delete.confirm'),
+                            'style' => 'margin-right:5px;'
+                        ),
+                    )
+                )
             ))
         ;
     }

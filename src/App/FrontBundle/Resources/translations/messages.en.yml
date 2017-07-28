@@ -249,5 +249,13 @@ cart:
     module_name: Consumer Cart
     actions:
         add_item: Add Item
+        submit: Submit Order
     title:
         new_item: New Item
+        submit: Submit Order
+    delete:
+        confirm: Are you sure, do you want to remove this item from cart?
+    msg:
+        item:
+            added: Item added to cart successfully
+            removed: Item removed from cart successfully
