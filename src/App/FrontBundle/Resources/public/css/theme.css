@@ -587,3 +587,17 @@ table.dataTable thead .sorting:after {
         transform: rotate(360deg);
     }
 }
+
+.addresses .address-box {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #CCC;
+    margin: 5px 10px 0 0;
+    border-radius: 5px;
+}
+
+.reward-points {
+    padding: 10px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+}

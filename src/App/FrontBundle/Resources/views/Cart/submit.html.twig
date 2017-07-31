@@ -1,0 +1,21 @@
+<h4>Choose Address to Deliver</h4>
+<div class="addresses form-group input">
+    <div class="help-block with-errors"></div>
+    {% for address in addresses %}
+        <div class="address-box">
+            <input type="radio" required="" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {{ user.getFullname() }}
+            <br/>{{ address.getHouse() }}, {{ address.getStreet() }}
+            <br/>{{ address.getLandmark() }}, {{ address.getCity() }}
+            <br/>Pin: {{ address.getPin() }},  {{ address.getState() }}
+            <br/>
+            Ph: {{ user.getPhone() }}
+        </div>
+    {% endfor %}
+</div>
+{% if total_rewards > 0 and (cart.getPrice() - reward_money) > 0 %}
+    <div class="reward-points">
+        <input type="checkbox" value="1" name="use_reward" id="use_reward" /> You have reward money of <b>Rs.{{ reward_money }}</b> Do yopu want to use that in this purchase?
+        <input type="hidden" name="reward_points_used" value="{{ total_rewards }}" />
+        <input type="hidden" name="reward_money" value="{{ reward_money }}" />
+    </div>
+{% endif %}

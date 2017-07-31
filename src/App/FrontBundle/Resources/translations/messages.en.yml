@@ -259,3 +259,5 @@ cart:
         item:
             added: Item added to cart successfully
             removed: Item removed from cart successfully
+        order:
+            submitted: order submitted successfully.

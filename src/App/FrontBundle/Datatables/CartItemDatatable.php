@@ -59,7 +59,8 @@ class CartItemDatatable extends AbstractDatatableView
                     'attributes' => array(
                         'rel' => 'tooltip',
                         'title' => $this->translator->trans('cart.title.submit'),
-                        'class' => 'btn btn-primary',
+                        'class' => 'btn btn-primary submit-order',
+                        'style' => 'display:none',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
                         'modalTitle' => $this->translator->trans('cart.title.submit'),
