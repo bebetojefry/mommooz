@@ -1,0 +1,13 @@
+<div style="text-align:left">
+
+    <p>Hello {{ consumer.getFullName() }},</p>
+
+    <p>Please follow the link below to reset your account password.</p>
+
+    <p>{{ url('reset_consumer_password', {'id': nzoEncrypt(consumer.getId())}) }}</p>
+
+    <p>Regards,</p>
+
+    <p>The Mommooz Team</p>
+
+</div>

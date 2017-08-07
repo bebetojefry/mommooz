@@ -15,9 +15,12 @@
             <div class="block-6 block-lb-8 block-mb-11 text-left br-4p bs-nrmls ptrbl-40p yellow-bg">
             <h3> Registration </h3>
             <div class="full-width ptb-10p uppercase-txt">
-                    <a href=""> <div class="log-social fb"> <span class="icon-facebook"></span>  Signup with facebook  </div> </a>
-                <a href="">  <div class="log-social gp mt-5p"> <span class="icon-google-plus"></span>  Signup with Google  </div> </a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}"> <div class="log-social fb"> <span class="icon-facebook"></span>  Signup with facebook  </div> </a>
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}">  <div class="log-social gp mt-5p"> <span class="icon-google-plus"></span>  Signup with Google  </div> </a>
             </div>
+            {% if msg != '' %}
+                <div style="display: block; padding: 10px; border:1px solid #BBB; margin-top:10px; background: #FFF; color: #333;">{{ msg }}</div>
+            {% endif %}
             <form name="frmRegister" id="frmRegister" method="post" action="">
                 {{ form_widget(form.firstname) }}
                 {{ form_widget(form.lastname) }}

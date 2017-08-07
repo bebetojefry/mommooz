@@ -38,35 +38,41 @@ class AccountController extends Controller
         $address->setDefault(true);
         $consumer->addAddress($address);
         $form = $this->createForm(new RegisterType($this->get('router')), $consumer);
+        $msg = '';
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if($form->isValid()){
                 $consumer = $form->getData();
-                $consumer->setUsername($consumer->getEmail());
-                $consumer->setLocale('en');
-                $consumer->setCreatedOn(new \DateTime('now'));
-                $consumer->setStatus(false);
-                $em->persist($consumer);
-                $em->flush();
-                
-                //send verification email to customer
-                $content = $this->renderView('AppWebBundle:Account:activateTemplate.html.twig',
-                    array('consumer' => $consumer)
-                );
-                
-                $message = \Swift_Message::newInstance()
-                ->setSubject('Mommooz Registration Activation')
-                ->setFrom($this->getParameter('email_from'))
-                ->addTo($consumer->getEmail(), $consumer->getFullName())
-                ->setBody($content, 'text/html');
+                $consumers = $em->getRepository('AppFrontBundle:Consumer')->findByEmail($consumer->getEmail());
+                if(count($consumers) > 0){
+                    $msg = 'Email ID already in use';
+                } else {
+                    $consumer->setUsername($consumer->getEmail());
+                    $consumer->setLocale('en');
+                    $consumer->setCreatedOn(new \DateTime('now'));
+                    $consumer->setStatus(false);
+                    $em->persist($consumer);
+                    $em->flush();
 
-                $this->get('mailer')->send($message);
-                
-                return $this->redirect($this->generateUrl('register_thank_you'));
+                    //send verification email to customer
+                    $content = $this->renderView('AppWebBundle:Account:activateTemplate.html.twig',
+                        array('consumer' => $consumer)
+                    );
+
+                    $message = \Swift_Message::newInstance()
+                    ->setSubject('Mommooz Registration Activation')
+                    ->setFrom($this->getParameter('email_from'))
+                    ->addTo($consumer->getEmail(), $consumer->getFullName())
+                    ->setBody($content, 'text/html');
+
+                    $this->get('mailer')->send($message);
+
+                    return $this->redirect($this->generateUrl('register_thank_you'));
+                }
             }
         }
         
-        return $this->render('AppWebBundle:Account:register.html.twig', array('form' => $form->createView()));
+        return $this->render('AppWebBundle:Account:register.html.twig', array('form' => $form->createView(), 'msg' => $msg));
     }
     
     /**
@@ -124,6 +130,92 @@ class AccountController extends Controller
         return $this->render('AppWebBundle:Account:activation.html.twig', array(
             'msg' => $msg
         ));
+    }
+    
+    /**
+     * @Route("/forgot", name="forgot_consumer_password")
+     */
+    public function forgotAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        if($request->isMethod('POST')) {
+            $consumer = $em->getRepository('AppFrontBundle:Consumer')->findOneByEmail($_POST['email']);
+            if($consumer){
+                //send verification email to customer
+                $content = $this->renderView('AppWebBundle:Account:forgotTemplate.html.twig',
+                    array('consumer' => $consumer)
+                );
+
+                $message = \Swift_Message::newInstance()
+                ->setSubject('Mommooz - Password Reset')
+                ->setFrom($this->getParameter('email_from'))
+                ->addTo($consumer->getEmail(), $consumer->getFullName())
+                ->setBody($content, 'text/html');
+
+                $this->get('mailer')->send($message);
+
+                return $this->redirect($this->generateUrl('forgot_submit'));
+            } else {
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('forgot_error', 'Given email ID doesn\'t exist');
+            }
+        }
+        
+        return $this->render('AppWebBundle:Account:forgot.html.twig');
+    }
+    
+    /**
+     * @Route("/forgot/submit", name="forgot_submit")
+     */
+    public function forgotsubmitAction()
+    {
+        if($this->getUser()){            
+            return $this->redirect($this->generateUrl('home'));
+        }
+        return $this->render('AppWebBundle:Account:forgotsubmit.html.twig');
+    }
+    
+    /**
+     * @Route("/reset/{id}", name="reset_consumer_password")
+     */
+    public function resetAction() {
+        $em = $this->getDoctrine()->getManager();
+        $id = $this->get('nzo_url_encryptor')->decrypt($id);
+        if(is_numeric($id)){
+            $consumer = $em->getRepository('AppFrontBundle:Consumer')->find($id);
+            if($consumer){
+                if($request->isMethod('POST')) {
+                    if($request->get('password') != $request->get('password_confirm')){
+                        $request->getSession()
+                        ->getFlashBag()
+                        ->add('reset_error', 'Given password doesn\'t match');
+                    } else {
+                        $encoder = $this->get('security.encoder_factory')->getEncoder($consumer);
+                        $password = $encoder->encodePassword($request->get('password'), $consumer->getSalt());
+                        $consumer->setPassword($password);
+                        $em->persist($consumer);
+                        $em->flush();
+                        
+                        return $this->redirect($this->generateUrl('reset_submit'));
+                    }
+                }
+                
+                return $this->render('AppWebBundle:Account:reset.html.twig', array('consumer' => $consumer));
+            }
+        }
+        
+        return new Response('Invalid password reset url...', 404);
+    }
+    
+    /**
+     * @Route("/reset/submit", name="reset_submit")
+     */
+    public function resetsubmitAction()
+    {
+        if($this->getUser()){            
+            return $this->redirect($this->generateUrl('home'));
+        }
+        return $this->render('AppWebBundle:Account:resetsubmit.html.twig');
     }
     
     /**

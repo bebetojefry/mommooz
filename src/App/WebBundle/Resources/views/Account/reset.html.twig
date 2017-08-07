@@ -1,0 +1,39 @@
+{% extends "AppWebBundle::layout.html.twig" %}
+
+{% block title %}Online Community of Stores - Reset Password{% endblock %}
+
+{% block styleseet %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
+        <a href="{{ path('home') }}">Home</a>  -  Reset Password
+    </div>
+
+    <section class="center-1200px text-center block-fl-cary ptb-25p">
+            <div class="block-6 block-lb-8 block-mb-11 text-left br-4p bs-nrmls ptrbl-40p yellow-bg">
+            <h3> Reset your password </h3>
+            <form role="form" name="frmReset" id="frmReset" method="POST" action="{{ path('reset_consumer_password', {'id': nzoEncrypt(consumer.getId())}) }}">
+                <input type="password" name="password" required="" id="password" placeholder="Password" autofocus>
+                <input type="password" name="password_confirm" required="" id="password_confirm" placeholder="Confirm Password">
+                <button type="submit" class="momz-button mt-20p"> Submit <span class="icon-arrow-right-1"></span> </button>
+                <script type="text/javascript">
+                    $('#frmReset').validator();
+                </script>
+                {% set errors = app.session.flashbag.get('reset_error') %}
+                {% if errors|length > 0%}
+                    <div class="messages" style="display: inline; margin-left: 10px; color: red; font-size: 13px;">
+                        {% for flashMessage in errors %}
+                            <span>{{ flashMessage | trans }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </section>
+{% endblock%}
+
+{% block javascript %}
+
+{% endblock %}
