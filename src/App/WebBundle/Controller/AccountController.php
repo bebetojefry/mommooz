@@ -178,11 +178,11 @@ class AccountController extends Controller
     /**
      * @Route("/reset/{id}", name="reset_consumer_password")
      */
-    public function resetAction() {
+    public function resetAction(Request $request, $id) {
         $em = $this->getDoctrine()->getManager();
-        $id = $this->get('nzo_url_encryptor')->decrypt($id);
-        if(is_numeric($id)){
-            $consumer = $em->getRepository('AppFrontBundle:Consumer')->find($id);
+        $consumer_id = $this->get('nzo_url_encryptor')->decrypt($id);
+        if(is_numeric($consumer_id)){
+            $consumer = $em->getRepository('AppFrontBundle:Consumer')->find($consumer_id);
             if($consumer){
                 if($request->isMethod('POST')) {
                     if($request->get('password') != $request->get('password_confirm')){
@@ -196,7 +196,7 @@ class AccountController extends Controller
                         $em->persist($consumer);
                         $em->flush();
                         
-                        return $this->redirect($this->generateUrl('reset_submit'));
+                        return $this->redirect($this->generateUrl('reset_submit', array('id' => $id)));
                     }
                 }
                 
@@ -208,13 +208,14 @@ class AccountController extends Controller
     }
     
     /**
-     * @Route("/reset/submit", name="reset_submit")
+     * @Route("/reset/{id}/submit", name="reset_submit")
      */
     public function resetsubmitAction()
     {
         if($this->getUser()){            
             return $this->redirect($this->generateUrl('home'));
         }
+        
         return $this->render('AppWebBundle:Account:resetsubmit.html.twig');
     }
     
