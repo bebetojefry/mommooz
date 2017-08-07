@@ -5,8 +5,8 @@ parameters:
     database_name: momooz
     database_user: root
     database_password: root
-    mailer_transport: mail
-    mailer_host: 127.0.0.1
+    mailer_transport: sendmail
+    mailer_host: null
     mailer_user: null
     mailer_password: null
     secret: ThisTokenIsNotSoSecretChangeIt
@@ -18,4 +18,4 @@ parameters:
     facebook_app_secret: 8f0e87e83167c9051f466cad1fcc1878
     google_app_id: 393835942245-n1lcdsv7r0om7fv0m2uep3p1ln9ltjf5.apps.googleusercontent.com
     google_app_secret: 3b1CTADPG9QW7ZWMlXPTF085
-    email_from: 'bebetojefry@gmail.com'
+    email_from: 'info@momooz.com'
