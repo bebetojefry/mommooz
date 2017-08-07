@@ -65,7 +65,11 @@ class AccountController extends Controller
                     ->addTo($consumer->getEmail(), $consumer->getFullName())
                     ->setBody($content, 'text/html');
 
-                    $this->get('mailer')->send($message);
+                    try {
+                        $this->get('mailer')->send($message);
+                    } catch(\Exception $e) {
+
+                    }
 
                     return $this->redirect($this->generateUrl('register_thank_you'));
                 }
@@ -150,8 +154,12 @@ class AccountController extends Controller
                 ->setFrom($this->getParameter('email_from'))
                 ->addTo($consumer->getEmail(), $consumer->getFullName())
                 ->setBody($content, 'text/html');
-
-                $this->get('mailer')->send($message);
+                
+                try {
+                    $this->get('mailer')->send($message);
+                } catch(\Exception $e) {
+                    
+                }
 
                 return $this->redirect($this->generateUrl('forgot_submit'));
             } else {
