@@ -66,6 +66,16 @@ class OrderController extends Controller
                 $purchase = $form->getData();
                 $dm->persist($purchase);
                 $dm->flush();
+                
+                // delete all stock purchases related to this purchase if its cancelled
+                if($purchase->getStatus() == 5){
+                    $qb = $dm->createQueryBuilder();
+                    $qb->delete('AppFrontBundle:StockPurchase', 'sp');
+                    $qb->where('sp.purchase = :purchase');
+                    $qb->setParameter('purchase', $purchase);
+                    $qb->getQuery()->execute();
+                }
+                
                 $this->get('session')->getFlashBag()->add('success', 'purchase.msg.updated');
                 $code = FormHelper::REFRESH;
             } else {
