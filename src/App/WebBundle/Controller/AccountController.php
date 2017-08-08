@@ -510,6 +510,13 @@ class AccountController extends Controller
         $em->persist($order);
         $em->flush();
         
+        // delete all stock purchases related to this purchase
+        $qb = $em->createQueryBuilder();
+        $qb->delete('AppFrontBundle:StockPurchase', 'sp');
+        $qb->where('sp.purchase = :purchase');
+        $qb->setParameter('purchase', $order);
+        $qb->getQuery()->execute();
+        
         $this->get('session')->getFlashBag()->add('success', 'Order cancelled successfully.');
         
         return $this->redirect($this->generateUrl('orders_page'));
