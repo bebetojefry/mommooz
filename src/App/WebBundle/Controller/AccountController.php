@@ -667,8 +667,8 @@ class AccountController extends Controller
                 'order_id' => time(),
                 'amount' => $total_amt,
                 'currency' => 'INR',
-                'redirect_url' => $this->generateUrl('submit_order', array(), true),
-                'cancel_url' => $this->generateUrl('submit_order', array(), true),
+                'redirect_url' => $this->generateUrl('submit_order_payed', array(), true),
+                'cancel_url' => $this->generateUrl('submit_order_payed', array(), true),
                 'language' => 'EN',
                 'billing_name' => $this->getUser()->getFullName(),
                 'billing_address' => $address->getHouse(),','.$address->getStreet(),','.$address->getLandmark(),
@@ -713,7 +713,7 @@ class AccountController extends Controller
     }
     
     /**
-     * @Route("/order/submit", name="submit_order")
+     * @Route("/order/submit", name="submit_order_payed")
      */
     public function submitorderAction(Request $request)
     {
