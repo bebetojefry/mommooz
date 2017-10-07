@@ -19,3 +19,5 @@ parameters:
     google_app_id: 393835942245-n1lcdsv7r0om7fv0m2uep3p1ln9ltjf5.apps.googleusercontent.com
     google_app_secret: 3b1CTADPG9QW7ZWMlXPTF085
     email_from: 'info@momooz.com'
+    traditional_cat: 4
+    best_deals_cat: 4

@@ -148,7 +148,7 @@
         <span class="icon-close-x pointer-csr close-main-menu white-txt"></span>
         <ul>
             <li class="pointer-csr nav-catg-click"> Category <span class="icon-angle-down"> </span> </li>
-            <li class="pointer-csr"> <a href="{{ path('stores') }}"> Store </a>  </li>
+            {#<li class="pointer-csr"> <a href="{{ path('stores') }}"> Store </a>  </li>#}
             <li class="pointer-csr"> <a href="{{ path('offers') }}">  Offer </a> </li>
             {{ render(controller('AppWebBundle:Category:popularMenu')) }}
             {% if app.user %}<li class="pointer-csr"> <a href="{{ path('refer_a_friend') }}">  Refer a friend </a> </li>{% endif %}
@@ -183,7 +183,7 @@
             <div class="block-2 mt-15p block-mb-4 block-sb-12 sb-text-left">
                 <h4 class="mb-10p"> <strong>site</strong> </h4>
                 <a href="{{ path('about_page') }}"> About Us </a> <br>
-                <a href="{{ path('stores') }}"> Local Shop </a><br>
+                {#<a href="{{ path('stores') }}"> Local Shop </a><br>#}
                 <a href=""> Products </a><br>
             </div>
             <div class="block-2 mt-15p block-mb-4 block-sb-12 sb-text-left">
@@ -232,7 +232,7 @@
         </div>
     </section>
 
-    <section class="footer-comn-catg center-1200px bottom-brd footer-bottom-click pointer-csr transition_05s ptb-10p">
+    {#<section class="footer-comn-catg center-1200px bottom-brd footer-bottom-click pointer-csr transition_05s ptb-10p">
         <div class="full-width block-fl-cary">
             <div class="block-6"> <h5 class="transition_05s sb-text-left"> POPULAR Shopes </h5> </div>
             <div class="block-6 text-right"> <div class="footer-submenu transition_06s pointer-csr relative-pos pr-15p"> Expand </div> </div>
@@ -242,7 +242,7 @@
                 <a href="{{ path('store_items', {id: store.getId()}) }}"> {{ store.getFullName() }} </a>
             {% endfor %}
         </div>
-    </section>
+    </section>#}
 
     <section class="footer-comn-catg center-1200px bottom-brd footer-bottom-click pointer-csr transition_05s ptb-10p">
         <div class="full-width block-fl-cary">

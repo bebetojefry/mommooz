@@ -1,5 +1,8 @@
 {% set filterData = entry.getFilterData() %} 
-{% set brand_class = 'brand_'~filterData['brand']['id'] %} 
+{% set brand_class = '' %} 
+{% if filterData['brand'] is defined %}
+    {% set brand_class = 'brand_'~filterData['brand']['id'] %} 
+{% endif %}
 {% set cat_class = 'cat_'~filterData['cat']['id'] %} 
 {% for t_cat in filterData['tagged_cats'] %}
     {% set cat_class = cat_class ~ ' cat_'~t_cat['id'] %}

@@ -34,3 +34,6 @@ parameters:
 
     #email config
     email_from: 'bebetojefry@gmail.com'
+
+    traditional_cat: 1
+    best_deals_cat: 1

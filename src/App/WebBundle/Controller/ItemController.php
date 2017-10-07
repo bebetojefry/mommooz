@@ -105,19 +105,22 @@ class ItemController extends Controller
     }
 
     public function mostPurchasedAction(){
-        $em = $this->getDoctrine()->getManager();
-        $dql =  "SELECT sp.id AS id, SUM(sp.quantity) AS purchased FROM App\FrontBundle\Entity\StockPurchase sp " .
-                "WHERE sp.reverse = ?1 GROUP BY sp.stockItem ORDER BY purchased DESC";
-
-        $result = $em->createQuery($dql)
-                ->setParameter(1, false)
-                ->getResult();
-
         $entries = array();
-        $repo = $em->getRepository('AppFrontBundle:StockPurchase');
-        foreach($result as $res){
-            $purchase = $repo->find($res['id']);
-            $entries[] = $purchase->getStockItem();
+        $em = $this->getDoctrine()->getManager();
+        $cat = $em->getRepository('AppFrontBundle:Category')->find($this->getParameter('traditional_cat'));
+        if($cat){
+            $qb = $em->createQueryBuilder();
+            $qb->select('se')
+                    ->from('AppFrontBundle:StockEntry', 'se')
+                    ->join('se.item', 'i')
+                    ->join('i.categories', 'c')
+                    ->where('c.id = :cat_id')
+                    ->andWhere('se.status = :status')
+                    ->setParameter('status', true)
+                    ->setParameter('cat_id', $cat->getId());
+                    
+
+            $entries = $qb->getQuery()->getResult();
         }
 
         return $this->render('AppWebBundle:Item:mostPurchased.html.twig', array(
@@ -126,7 +129,24 @@ class ItemController extends Controller
     }
 
     public function newAction() {
-        $entries = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:StockEntry')->findBy(array('status' => true), array('id' => 'DESC'));
+        $entries = array();
+        $em = $this->getDoctrine()->getManager();
+        $cat = $em->getRepository('AppFrontBundle:Category')->find($this->getParameter('best_deals_cat'));
+        if($cat){
+            $qb = $em->createQueryBuilder();
+            $qb->select('se')
+                    ->from('AppFrontBundle:StockEntry', 'se')
+                    ->join('se.item', 'i')
+                    ->join('i.categories', 'c')
+                    ->where('c.id = :cat_id')
+                    ->andWhere('se.status = :status')
+                    ->setParameter('status', true)
+                    ->setParameter('cat_id', $cat->getId());
+                    
+
+            $entries = $qb->getQuery()->getResult();
+        }
+        
         return $this->render('AppWebBundle:Item:new.html.twig', array(
             'entries' => $entries
         ));
@@ -136,7 +156,24 @@ class ItemController extends Controller
      * @Route("/new/more", name="more_new_item")
      */
     public function morenewAction() {
-        $entries = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:StockEntry')->findBy(array('status' => true), array('id' => 'DESC'));
+        $entries = array();
+        $em = $this->getDoctrine()->getManager();
+        $cat = $em->getRepository('AppFrontBundle:Category')->find($this->getParameter('best_deals_cat'));
+        if($cat){
+            $qb = $em->createQueryBuilder();
+            $qb->select('se')
+                    ->from('AppFrontBundle:StockEntry', 'se')
+                    ->join('se.item', 'i')
+                    ->join('i.categories', 'c')
+                    ->where('c.id = :cat_id')
+                    ->andWhere('se.status = :status')
+                    ->setParameter('status', true)
+                    ->setParameter('cat_id', $cat->getId());
+                    
+
+            $entries = $qb->getQuery()->getResult();
+        }
+        
         $result = array();
         $app_web_user = $this->get('app.web.user');
         foreach($entries as $entry){
