@@ -23,15 +23,15 @@ class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {       
         $builder
-            ->add('firstname', 'text', array('attr' => array('placeholder' => 'Firstname')))
-            ->add('lastname', 'text', array('attr' => array('placeholder' => 'Lastname')))
+            ->add('firstname', 'text', array('attr' => array('placeholder' => 'Firstname', "pattern" => "[A-Za-z0-9]+")))
+            ->add('lastname', 'text', array('attr' => array('placeholder' => 'Lastname', "pattern" => "[A-Za-z0-9]+")))
             ->add('gender', 'choice', array(
                 'expanded' => true,
                 'choices' => array(1 => 'Male', 2 => 'Female'),
                 'data' => 1
             ))
             ->add('phone', 'text', array('attr' => array('placeholder' => 'Phone')))
-            ->add('email', 'email', array('attr' => array('placeholder' => 'Email', 'data-remote' => $this->router->generate('consumer_email_validate', array('id' => $builder->getData()->getId())))))
+            ->add('email', 'text', array('attr' => array('placeholder' => 'Email', "pattern" => "[a-z0-9]+@[a-z0-9]+\.[a-z]{2,4}", 'data-remote' => $this->router->generate('consumer_email_validate', array('id' => $builder->getData()->getId())))))
             ->add('password', 'password', array('attr' => array('placeholder' => 'Password', 'data-minlength' => 6), 'label' => false))
             ->add('addresses', 'collection', array(
                 'type'         => new AddressType(),

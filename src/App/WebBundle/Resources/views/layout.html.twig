@@ -103,7 +103,7 @@
                 <li class="prl-15p responcive-menu-cliker  pointer-csr"> <span class="icon-bars"></span> </li>
                 <li class="prl-15p {% if app.user == null %}user-click{% endif %} pointer-csr"> 
                     {% if app.user %}<a href="{{ path('account_home') }}">{% endif %}
-                    <img src="{{ asset('bundles/appweb/images/icons/user.svg') }}" width="25" alt="user"> 
+                    <img src="{% if app.user == null %}{{ asset('bundles/appweb/images/icons/login_in.png') }}{% else %}{{ asset('bundles/appweb/images/icons/user.svg') }}{% endif %}" width="25" alt="user"> 
                     {% if app.user %}</a>{% endif %}
                 </li>
                 <li class="prl-15p relative-pos whish-click pointer-csr"> 
@@ -152,6 +152,10 @@
             <li class="pointer-csr"> <a href="{{ path('offers') }}">  Offer </a> </li>
             {{ render(controller('AppWebBundle:Category:popularMenu')) }}
             {% if app.user %}<li class="pointer-csr"> <a href="{{ path('refer_a_friend') }}">  Refer a friend </a> </li>{% endif %}
+            {% if app.user is null %}
+                <li class="pointer-csr"> <a href="{{ path('login_page') }}">  Sign In </a> </li>
+                <li class="pointer-csr"> <a href="{{ path('register_page') }}">  Sign Up </a> </li>
+            {% endif %}
         </ul>
 
         <div class="full-width clearSet nav-submenu  absolute-pos block-fl-cary text-left overflow-hidden transition_03s">
