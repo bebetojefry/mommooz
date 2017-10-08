@@ -416,6 +416,11 @@ function openAlert(message, type){
         
         for(var i=0; i < item.tagged_cats.length; i++){
             this.categories[item.tagged_cats[i].id] = ' '+item.tagged_cats[i].name;
+            if(this.category_items[item.tagged_cats[i].id] == undefined){
+                this.category_items[item.tagged_cats[i].id] = [];
+            }
+            
+            this.category_items[item.tagged_cats[i].id][this.category_items[item.tagged_cats[i].id].length] = item;
         }
         
         this.category_items[item.cat.id][this.category_items[item.cat.id].length] = item;
