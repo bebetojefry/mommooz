@@ -1,0 +1,15 @@
+<div style="text-align:left">
+
+    <p>Hello {{ order.getConsumer().getFullName() }},</p>
+
+    <p>Thank you for your interest in Momooz products. Your order has been received.</p>
+    
+    <p>To view your order click on the link below:</p>
+
+    <p>{{ url('order_detail_page', {'id': order.getId()}) }}</p>
+
+    <p>Regards,</p>
+
+    <p>The Mommooz Team</p>
+
+</div>

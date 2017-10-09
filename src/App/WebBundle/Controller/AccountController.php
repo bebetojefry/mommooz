@@ -844,6 +844,23 @@ class AccountController extends Controller
             }
 
             $em->flush();
+            
+            //send order email to customer
+            $content = $this->renderView('AppWebBundle:Account:orderTemplate.html.twig',
+                array('order' => $purchase)
+            );
+
+            $message = \Swift_Message::newInstance()
+            ->setSubject('Mommooz Order')
+            ->setFrom($this->getParameter('email_from'))
+            ->addTo($this->getUser()->getEmail(), $this->getUser()->getFullName())
+            ->setBody($content, 'text/html');
+
+            try {
+                $this->get('mailer')->send($message);
+            } catch(\Exception $e) {
+
+            }
 
             return $this->redirect($this->generateUrl('order_thanks'));
         } else {

@@ -67,6 +67,27 @@ class OrderController extends Controller
                 $dm->persist($purchase);
                 $dm->flush();
                 
+                //send order email to customer
+                $statusArr = array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled');
+                $content = $this->renderView('AppWebBundle:Account:orderUpdateTemplate.html.twig',
+                    array(
+                        'order' => $purchase,
+                        'status' => $statusArr[$purchase->getStatus()]
+                    )
+                );
+
+                $message = \Swift_Message::newInstance()
+                ->setSubject('Mommooz Order Update')
+                ->setFrom($this->getParameter('email_from'))
+                ->addTo($purchase->getConsumer()->getEmail(), $purchase->getConsumer()->getFullName())
+                ->setBody($content, 'text/html');
+
+                try {
+                    $this->get('mailer')->send($message);
+                } catch(\Exception $e) {
+
+                }
+                
                 // delete all stock purchases related to this purchase if its cancelled
                 if($purchase->getStatus() == 5){
                     $qb = $dm->createQueryBuilder();
