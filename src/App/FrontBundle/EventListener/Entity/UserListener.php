@@ -44,7 +44,7 @@ class UserListener
         }
         
         // creating the ACL
-        $aclProvider = $this->container->get('security.acl.provider');
+        /*$aclProvider = $this->container->get('security.acl.provider');
         $objectIdentity = ObjectIdentity::fromDomainObject($entity);
         $acl = $aclProvider->createAcl($objectIdentity);
 
@@ -53,6 +53,6 @@ class UserListener
 
         // grant owner access
         $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-        $aclProvider->updateAcl($acl);
+        $aclProvider->updateAcl($acl);*/
     }
 }
