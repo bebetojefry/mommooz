@@ -15,6 +15,7 @@ use App\FrontBundle\Entity\Address;
 use App\FrontBundle\Entity\Item;
 use App\FrontBundle\Entity\VendorItem;
 use App\FrontBundle\Entity\Stock;
+use App\FrontBundle\Entity\Invoice;
 
 class VendorController extends Controller
 {
