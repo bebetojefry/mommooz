@@ -82,7 +82,7 @@ admin_item_actions:
 admin_keyword_pages:
     resource: "@AppFrontBundle/Controller/KeywordController.php"
     type:     annotation
-    prefix: /keyword
+    prefix: /mgr/keyword
 
 app_front_admin_brand:
     path:     /brand
