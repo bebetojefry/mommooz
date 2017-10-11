@@ -339,6 +339,7 @@ class AccountController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consumer = $this->getUser();
         $form = $this->createForm(new ProfileType($em), $consumer);
+        $message = '';
         
         $obj = new \stdClass();
         $obj->password = '';
@@ -383,7 +384,7 @@ class AccountController extends Controller
         }
         
         return $this->render('AppWebBundle:Account:profile.html.twig', 
-            array('form' => $form->createView(), 'form_pwd' => $form_pwd->createView())
+            array('form' => $form->createView(), 'form_pwd' => $form_pwd->createView(), 'message' => $message)
         );
     }
     
