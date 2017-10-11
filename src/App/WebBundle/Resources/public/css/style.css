@@ -1130,3 +1130,6 @@ transition:0.4s all ease;
 .VarientShowHover li .icon-cart-arrow-down {color: #333;width: 20px;height: 20px;padding: 4px 2px 2px 2px;border: 1px #333 solid;border-radius: 50%;transition: 0.8s;}.VarientShowHover li .icon-cart-arrow-down:hover{color: #000;border: 1px #000 solid;}
 .VarientShowHover li span{font-size: 10px;color: #1b1d20;}
 .item-thumb .block-10:hover .VarientShowHover {max-height: 600px;height: auto; transition: 1s all;}
+
+.newNameSpan{display: inline-block;width: 100%;height: 30px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
+a.load_more_new{border: 1px #eee solid;border-radius: 4px;}a.load_more_new span{font-size: 10px;}
