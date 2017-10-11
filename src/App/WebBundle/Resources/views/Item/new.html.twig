@@ -10,7 +10,7 @@
                         <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="momooz product image">
                     </div>
                     <div class="block-8 capitalize-txt mt-20p">
-                        {{ entry.getItem().getName() }}
+                        <span class="newNameSpan">{{ entry.getItem().getName() }}</span>
                         <br>
                         <strong>RS. {{ entry.getActualPrice() }}</strong>
                     </div>
