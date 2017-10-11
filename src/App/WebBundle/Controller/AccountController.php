@@ -255,42 +255,8 @@ class AccountController extends Controller
      * @Route("/", name="account_home")
      */
     public function accountAction(Request $request)
-    {
-        $consumer = $this->getUser();
-        $em = $this->getDoctrine()->getManager();
-        $obj = new \stdClass();
-        $obj->password = '';
-        $form = $this->createFormBuilder($obj)
-            ->add('password', 'repeated', array(
-                'type' => 'password',
-                'required' => true,
-                'invalid_message' => 'The password fields must match.',
-                'options' => array('attr' => array('class' => 'password-field')),
-                'required' => true,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ))
-            ->getForm();
-        
-        $message = '';
-        if($request->isMethod('POST')){
-            $form->handleRequest($request);
-            if($form->isValid()){
-                $obj = $form->getData();
-                $encoder = $this->get('security.encoder_factory')->getEncoder($consumer);
-                $password = $encoder->encodePassword($obj->password, $consumer->getSalt());
-                $consumer->setPassword($password);
-                $em->persist($consumer);
-                $em->flush();
-                $message = 'Password successfully changed.';
-            } else {
-                $message = 'Password doesn\'t match.';
-            }
-        }
-        
-        return $this->render('AppWebBundle:Account:index.html.twig',
-            array('form' => $form->createView(), 'message' => $message)
-        );
+    {        
+        return $this->render('AppWebBundle:Account:index.html.twig');
     }
     
     /**
@@ -373,19 +339,52 @@ class AccountController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consumer = $this->getUser();
         $form = $this->createForm(new ProfileType($em), $consumer);
+        
+        $obj = new \stdClass();
+        $obj->password = '';
+        $form_pwd = $this->createFormBuilder($obj)
+            ->add('password', 'repeated', array(
+                'type' => 'password',
+                'required' => true,
+                'invalid_message' => 'The password fields must match.',
+                'options' => array('attr' => array('class' => 'password-field')),
+                'required' => true,
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
+            ))
+            ->getForm();
+        
         if($request->isMethod('POST')){
-            $form->handleRequest($request);
-            if($form->isValid()){
-                $consumer = $form->getData();
-                $em->persist($consumer);
-                $em->flush();
-                
-                $this->get('session')->getFlashBag()->add('success', 'Profile updated successfully.');
-                
-                return $this->redirect($this->generateUrl('profile_page'));
+            if(isset($_POST['btn_profile'])){
+                $form->handleRequest($request);
+                if($form->isValid()){
+                    $consumer = $form->getData();
+                    $em->persist($consumer);
+                    $em->flush();
+
+                    $this->get('session')->getFlashBag()->add('success', 'Profile updated successfully.');
+
+                    return $this->redirect($this->generateUrl('profile_page'));
+                }
+            } else {
+                $form_pwd->handleRequest($request);
+                if($form_pwd->isValid()){
+                    $obj = $form_pwd->getData();
+                    $encoder = $this->get('security.encoder_factory')->getEncoder($consumer);
+                    $password = $encoder->encodePassword($obj->password, $consumer->getSalt());
+                    $consumer->setPassword($password);
+                    $em->persist($consumer);
+                    $em->flush();
+                    $message = 'Password successfully changed.';
+                } else {
+                    $message = 'Password doesn\'t match.';
+                }
             }
         }
-        return $this->render('AppWebBundle:Account:profile.html.twig', array('form' => $form->createView()));
+        
+        return $this->render('AppWebBundle:Account:profile.html.twig', 
+            array('form' => $form->createView(), 'form_pwd' => $form_pwd->createView())
+        );
     }
     
     /**
