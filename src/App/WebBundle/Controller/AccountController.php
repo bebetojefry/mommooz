@@ -34,8 +34,10 @@ class AccountController extends Controller
         $em = $this->getDoctrine()->getManager();
         $consumer = $this->get('app.front.entity.consumer');
         $consumer->regenerateSalt();
+        $consumer->setGender(1);
         $address = new Address();
         $address->setDefault(true);
+        $address->setState('Kerala');
         $consumer->addAddress($address);
         $form = $this->createForm(new RegisterType($this->get('router')), $consumer);
         $msg = '';
