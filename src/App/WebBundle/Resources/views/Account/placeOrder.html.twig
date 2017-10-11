@@ -12,7 +12,7 @@
     </div>
     <section class="center-1200px cart-page ptb-20p">
         <h3> Place Your Order </h3>
-        <form name="frmOrderSubmit" method="post" action="{{ path('pay_order') }}" >
+        <form name="frmOrderSubmit" id="frmOrderSubmit" method="post" action="{{ path('pay_order') }}" >
             <div class="block-12 mb-pl2 pl-30p ptb-20p block-mb-12 mb-text-left">
                 {% set valid_addresses = 0 %}
                 {% for address in app.user.getAddresses() %}
@@ -20,7 +20,7 @@
                         {% set valid_addresses = valid_addresses + 1 %}
                         <div class="block-4 addresscary br-4p block-lb-6 block-sb-12 text-center">
                             <div class="block-11  ptrbl-20p brd-L-1p text-left">
-                                <h3><input type="radio" required="" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {{ app.user.getFullname() }}  </h3>
+                                <h3><input type="radio" class="addr_radio" required="" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {{ app.user.getFullname() }}  </h3>
                                 {{ address.getHouse() }}, {{ address.getStreet() }}, {{ address.getLandmark() }}, {{ address.getCity() }}
                                 <br/>Pin: {{ address.getPin() }},  {{ address.getState() }}
                                 <br/>
@@ -31,6 +31,11 @@
                 {% endfor %}
                 {% if valid_addresses == 0 %}
                     No Valid Delivery address found.Please add one and try again...
+                {% endif %}
+                {% if valid_addresses == 1 %}
+                    <script type="text/javascript">
+                        $('#frmOrderSubmit').find('.addr_radio').eq(0).attr('checked', 'checked');
+                    </script>
                 {% endif %}
             </div>
             <div class="full-width mt-10p ptb-20p text-right button-cart">
