@@ -16,29 +16,39 @@
         {% include 'AppWebBundle:Account:menu.html.twig' %}
         
         <div class="block-9 pl-30p ptb-20p border_left">
-            {% set flashbag = app.session.flashBag.all %}
-            {% if flashbag|length > 0 %}
-                {% for type, messages in flashbag %}
-                    {% for message in messages %}
-                        <span class="message msg-{{ type }}">{{ message|raw }}</span>
+            <div class="block-6 block-lb-12">
+                {% set flashbag = app.session.flashBag.all %}
+                {% if flashbag|length > 0 %}
+                    {% for type, messages in flashbag %}
+                        {% for message in messages %}
+                            <span class="message msg-{{ type }}">{{ message|raw }}</span>
+                        {% endfor %}
                     {% endfor %}
-                {% endfor %}
-            {% endif %}
-            <div class="edit-profile block-10">
-                <h3> Edit Profile </h3>
-                <form name="frmProfile" method="post" action="">
-                    
-                    {{ form_row(form.images) }}
-                    {{ form_widget(form.firstname) }}
-                    {{ form_widget(form.lastname) }}
-                    {{ form_widget(form.gender) }}
-                    {{ form_widget(form.phone) }}
-                    {{ form_widget(form._token) }}
-                  
-                    <button type="submit" class="momz-button mt-10p"> Upadate <span class="icon-angle-right"></span> </button>
-                </form>
-            </div>
+                {% endif %}
+                <div class="edit-profile block-10">
+                    <h3> Edit Profile </h3>
+                    <form name="frmProfile" method="post" action="">
 
+                        {{ form_row(form.images) }}
+                        {{ form_widget(form.firstname) }}
+                        {{ form_widget(form.lastname) }}
+                        {{ form_widget(form.phone) }}
+                        {{ form_widget(form._token) }}
+
+                        <button name="btn_profile" type="submit" class="momz-button mt-10p"> Upadate <span class="icon-angle-right"></span> </button>
+                    </form>
+                </div>
+            </div>
+            <div class="block-6 block-lb-12 lb-mt15">
+                    <div class="block-8">
+                    <h3> Change Password </h3>
+                    <form name="frmChangePwd" method="post" action="">
+                        {{ form_widget(form_pwd) }}
+                        <button name="btn_pwd" type="submit" class="momz-button mt-20p"> Change Now <span class="icon-arrow-right-1"></span> </button>
+                        <span style="display:inline; font-size: 13px; margin-left: 5px;">{{ message }}</span>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
 {% endblock%}

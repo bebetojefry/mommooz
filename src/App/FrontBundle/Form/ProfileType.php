@@ -27,11 +27,6 @@ class ProfileType extends AbstractType
         $builder
             ->add('firstname', 'text', array('attr' => array('placeholder' => 'Firstname')))
             ->add('lastname', 'text', array('attr' => array('placeholder' => 'Lastname')))
-            ->add('gender', 'choice', array(
-                'expanded' => true,
-                'choices' => array(1 => 'Male', 2 => 'Female'),
-                'data' => 1
-            ))
             ->add('phone', 'text', array('attr' => array('placeholder' => 'Phone')))
             ->add(
                 $builder->create('images', 'text', array(
