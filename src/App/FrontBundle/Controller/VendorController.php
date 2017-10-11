@@ -391,6 +391,15 @@ class VendorController extends Controller
         ));
     }
     
+    public function invoiceDetailsAction(Request $request, Invoice $invoice){
+        $itemsDatatable = $this->get('app.front.datatable.invoiceitem');
+        $itemsDatatable->buildDatatable(array('invoice' => $invoice));
+        return $this->render('AppFrontBundle:Vendor:invoiceItems.html.twig', array(
+            'itemsDatatable' => $itemsDatatable,
+            'invoice' => $invoice
+        ));
+    }
+    
     /**
      * @Route("/{id}/entries", name="vendor_entries", defaults={"id":0}, options={"expose"=true})
      */
