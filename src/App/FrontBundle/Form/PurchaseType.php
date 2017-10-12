@@ -20,10 +20,10 @@ class PurchaseType extends AbstractType
                 'expanded' => false,
                 'choices' => array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled'),                
             ))
-            ->add('expectedOn', 'datatime', array('data' => new \DateTime('now')))
-            ->add('deliveredOn', 'datatime', array('data' => new \DateTime('now')))
-            ->add('deliveredBy', 'datatime', array('data' => new \DateTime('now')))
-            ->add('cancelledOn', 'datatime', array('data' => new \DateTime('now')))
+            ->add('expectedOn', 'datetime', array('data' => new \DateTime('now')))
+            ->add('deliveredOn', 'datetime', array('data' => new \DateTime('now')))
+            ->add('deliveredBy', 'datetime', array('data' => new \DateTime('now')))
+            ->add('cancelledOn', 'datetime', array('data' => new \DateTime('now')))
         ;
     }
     
