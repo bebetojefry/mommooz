@@ -23,7 +23,6 @@
             {% endif %}
             <form name="frmRegister" id="frmRegister" method="post" action="">
                 {{ form_row(form.firstname) }}
-                {{ form_row(form.lastname) }}
                 {{ form_row(form.phone) }}
                 <script type="text/javascript">
                     $('#{{ form.phone.vars.id }}').attr('type', 'number');

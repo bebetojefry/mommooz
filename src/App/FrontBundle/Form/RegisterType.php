@@ -24,7 +24,6 @@ class RegisterType extends AbstractType
     {       
         $builder
             ->add('firstname', 'text', array('attr' => array('placeholder' => 'Firstname', "pattern" => "[A-Za-z0-9]+", 'data-pattern-error' => 'Only alphabets and numbers are accepted')))
-            ->add('lastname', 'text', array('attr' => array('placeholder' => 'Lastname', "pattern" => "[A-Za-z0-9]+", 'data-pattern-error' => 'Only alphabets and numbers are accepted')))
             ->add('phone', 'text', array('attr' => array('placeholder' => 'Phone')))
             ->add('email', 'text', array('attr' => array('placeholder' => 'Email', "pattern" => "[a-z0-9]+@[a-z0-9]+\.[a-z]{2,4}", 'data-pattern-error' => 'Invalid email id format', 'data-remote' => $this->router->generate('consumer_email_validate', array('id' => $builder->getData()->getId())), 'data-remote-error' => 'Email id already exist')))
             ->add('password', 'password', array('attr' => array('placeholder' => 'Password', 'data-minlength' => 6), 'label' => false))
