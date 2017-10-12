@@ -1138,3 +1138,18 @@ transition:0.4s all ease;
 
 .newNameSpan{display: inline-block;width: 100%;height: 30px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
 a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;padding: 3px 8px;}a.load_more_new span{font-size: 10px;}
+
+.dashshadowCary{display: inline-block;margin-right: 20px;padding: 0px 0px 10px 0px;border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.25);margin-bottom: 20px;overflow: hidden;min-height: 50px;}
+.dashshadowCary .head{background: #ddd;font-size: 14px;text-transform: uppercase;}
+.dashshadowCary .lv{display: inline-block;}
+.dashshadowCary.wishlist{width: 78%;}
+.dashshadowCary.wishlist .lv{width: 20%;}
+
+@media (max-width:480px){
+    .dashshadowCary{width: 100%;}
+    .dashshadowCary.wishlist .lv{width: 60%;}
+}
+@media (max-width:768px){
+    .dashshadowCary{width: 80%;}
+    .dashshadowCary.wishlist .lv{width: 40%;margin-bottom: 10px;}

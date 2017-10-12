@@ -65,12 +65,12 @@
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="6">No pending orders found.</td>
+                        <td colspan="6" style="font-size:13px;color:#666;text-align: center;">No pending orders found.</td>
                     </tr>
                 {% endif %}
             </table>
             <span>Delivered</span>
-            <table class="my_orders" border="1">
+            <table class="my_orders">
                 <tr>
                     <th>Order Id</th>
                     <th>Ordered On</th>
@@ -96,12 +96,12 @@
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="5">No orders delivered yet.</td>
+                        <td colspan="5" style="font-size:13px;color:#666;text-align: center;">No orders delivered yet.</td>
                     </tr>
                 {% endif %}
             </table>
             <span>Cancelled</span>
-            <table class="my_orders" border="1">
+            <table class="my_orders">
                 <tr>
                     <th>Order Id</th>
                     <th>Ordered On</th>
@@ -127,7 +127,7 @@
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="5">No orders cancelled yet.</td>
+                        <td colspan="5" style="font-size:13px;color:#666;text-align: center;">No orders cancelled yet.</td>
                     </tr>
                 {% endif %}
             </table>
