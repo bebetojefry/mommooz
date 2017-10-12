@@ -15,7 +15,7 @@
         {% include 'AppWebBundle:Account:menu.html.twig' %}
         <div class="block-9 mb-pl2 pl-30p userRight ptb-20p border_left block-mb-12 mb-text-left">
           
-           <div class="block-8 block-mb-12">
+           <div class="block-8 block-mb-12" style="display:none;">
             <div class="dashshadowCary">
                 <div class="full-width ptb-5p head text-center">
                     My Order
@@ -92,7 +92,7 @@
             
         </div>
             <div class="block-4 block-lb-12">
-                    <div class="block-10">
+                    <div class="block-12">
                     <div class="block-3">
                             <Img src="{{ app.user.getRealPicturePath() | imagine_filter('user') }}" class="image-fw" alt="user image">
                     </div>
