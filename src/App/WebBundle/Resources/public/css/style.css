@@ -1103,7 +1103,8 @@ transition:0.4s all ease;
     margin-top: 5px;
 }
 
-.my_orders th{border-bottom: 1px #ccc solid;font-family: arial;}
+.userRight{min-height: 350px;}
+.my_orders th{border-bottom: 1px #ccc solid;font-family: arial;font-size: 14px;}
 .my_orders td:nth-child(even){background: #ddd;}
 
 /*.nav-submenu.firstActive > ul li:first-child ul, .nav-submenu.firstActive > ul li:first-child ul li:first-child ul {

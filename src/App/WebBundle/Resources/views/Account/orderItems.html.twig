@@ -15,7 +15,7 @@
 
         {% include 'AppWebBundle:Account:menu.html.twig' %}
 
-        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
+        <div class="block-9 userRight mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
             {% set flashbag = app.session.flashBag.all %}
             {% if flashbag|length > 0 %}
                 {% for type, messages in flashbag %}
