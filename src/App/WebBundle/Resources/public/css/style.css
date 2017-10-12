@@ -1153,3 +1153,5 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
 @media (max-width:768px){
     .dashshadowCary{width: 80%;}
     .dashshadowCary.wishlist .lv{width: 40%;margin-bottom: 10px;}
+    
+    .spanWhats{display: inline-block;}
