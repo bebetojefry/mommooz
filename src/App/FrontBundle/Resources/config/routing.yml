@@ -256,6 +256,12 @@ app_front_vendor_invoice:
     host:     "%domain_vendor%"
     defaults: { _controller: AppFrontBundle:Vendor:invoices}
     
+app_front_vendor_invoice_items:
+    path:     /invoices/{id}/items
+    host:     "%domain_vendor%"
+    defaults: { _controller: AppFrontBundle:Vendor:invoiceDetails}
+    options: {expose: true}
+    
 cart_actions:
     resource: "@AppFrontBundle/Controller/CartController.php"
     type:     annotation

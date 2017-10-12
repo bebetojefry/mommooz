@@ -15,7 +15,7 @@
         
         {% include 'AppWebBundle:Account:menu.html.twig' %}
         
-        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left  block-mb-12 mb-text-left">
+        <div class="block-9 userRight mb-pl2 pl-30p ptb-20p border_left  block-mb-12 mb-text-left">
             <h3 class="mb-15p"> Wish List </h3>
             {% if app_web_user.getWishlist().getItems()|length == 0 %}
                 <div style="color: #aca8b0; font-size: 13px; text-align: center; width: 100%;"> No Items found in your wishlist. </div>

@@ -390,6 +390,7 @@ color:#86828a; }
 	border-radius:100px;
 	font-size:13px;
 	text-transform:uppercase;
+    background: #090931;
 	}
 .submit-login:hover{
 	border:1px #fff solid;
@@ -1098,9 +1099,13 @@ transition:0.4s all ease;
     margin-top: 2px;
 }
 .my_orders{
-    margin-bottom: 10px;
+    margin-bottom: 25px;
     margin-top: 5px;
 }
+
+.userRight{min-height: 350px;}
+.my_orders th{border-bottom: 1px #ccc solid;font-family: arial;font-size: 14px;}
+.my_orders td:nth-child(even){background: #ddd;}
 
 /*.nav-submenu.firstActive > ul li:first-child ul, .nav-submenu.firstActive > ul li:first-child ul li:first-child ul {
     display: block;
@@ -1132,4 +1137,4 @@ transition:0.4s all ease;
 .item-thumb .block-10:hover .VarientShowHover {max-height: 600px;height: auto; transition: 1s all;}
 
 .newNameSpan{display: inline-block;width: 100%;height: 30px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
-a.load_more_new{border: 1px #eee solid;border-radius: 4px;}a.load_more_new span{font-size: 10px;}
+a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;padding: 3px 8px;}a.load_more_new span{font-size: 10px;}

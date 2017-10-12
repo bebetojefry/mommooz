@@ -15,7 +15,7 @@
 
         {% include 'AppWebBundle:Account:menu.html.twig' %}
 
-        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left">
+        <div class="block-9 mb-pl2 pl-30p ptb-20p border_left block-mb-12 mb-text-left userRight">
             {% set flashbag = app.session.flashBag.all %}
             {% if flashbag|length > 0 %}
                 {% for type, messages in flashbag %}
@@ -33,7 +33,7 @@
                 } 
             </style>
             <span>Reward Credits</span>
-            <table class="my_orders" border="1">
+            <table class="my_orders">
                 <tr>
                     <th>Rewarded For</th>
                     <th>Points</th>
@@ -50,7 +50,7 @@
                 {% endfor %}
             </table>
             <span>Reward Debits</span>
-            <table class="my_orders" border="1">
+            <table class="my_orders">
                 <tr>
                     <th>Order Id</th>
                     <th>Ordered On</th>

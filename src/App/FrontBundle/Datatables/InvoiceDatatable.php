@@ -75,6 +75,8 @@ class InvoiceDatatable extends AbstractDatatableView
 
         $id = isset($options['vendor']) && $options['vendor'] instanceof Vendor ? $options['vendor']->getId() : 0;
         
+        $details_route = isset($options['vendor']) && $options['vendor'] instanceof Vendor ? 'app_front_vendor_invoice_items' : 'invoice_show';
+        
         $this->ajax->set(array(
             'url' => $this->router->generate('invoice_results', array('id' => $id)),
             'type' => 'GET',
@@ -133,7 +135,7 @@ class InvoiceDatatable extends AbstractDatatableView
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'invoice_show',
+                        'route' => $details_route,
                         'route_parameters' => array(
                             'id' => 'id'
                         ),

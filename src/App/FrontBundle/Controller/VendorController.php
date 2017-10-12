@@ -15,6 +15,7 @@ use App\FrontBundle\Entity\Address;
 use App\FrontBundle\Entity\Item;
 use App\FrontBundle\Entity\VendorItem;
 use App\FrontBundle\Entity\Stock;
+use App\FrontBundle\Entity\Invoice;
 
 class VendorController extends Controller
 {
@@ -388,6 +389,15 @@ class VendorController extends Controller
         $invoicesDatatable->buildDatatable(array('vendor' => $this->getUser()));
         return $this->render('AppFrontBundle:Vendor:invoice.html.twig', array(
             'invoicesDatatable' => $invoicesDatatable
+        ));
+    }
+    
+    public function invoiceDetailsAction(Request $request, Invoice $invoice){
+        $itemsDatatable = $this->get('app.front.datatable.invoiceitem');
+        $itemsDatatable->buildDatatable(array('invoice' => $invoice));
+        return $this->render('AppFrontBundle:Vendor:invoiceItems.html.twig', array(
+            'itemsDatatable' => $itemsDatatable,
+            'invoice' => $invoice
         ));
     }
     
