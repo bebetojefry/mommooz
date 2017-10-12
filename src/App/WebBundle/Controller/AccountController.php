@@ -201,6 +201,9 @@ class AccountController extends Controller
                         ->add('reset_error', 'Given password doesn\'t match');
                     } else {
                         $encoder = $this->get('security.encoder_factory')->getEncoder($consumer);
+                        if($consumer->getSalt() == null){
+                            $consumer->regenerateSalt();
+                        }
                         $password = $encoder->encodePassword($request->get('password'), $consumer->getSalt());
                         $consumer->setPassword($password);
                         $em->persist($consumer);
