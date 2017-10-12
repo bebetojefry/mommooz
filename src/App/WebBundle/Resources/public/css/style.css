@@ -1155,6 +1155,7 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
     .dashshadowCary.wishlist .lv{width: 40%;margin-bottom: 10px;}
     
     .spanWhats{display: inline-block;}
+}
     
 .comn_popUp{position: fixed;width: 100%;height: 100%;background: rgba(0,0,0,20);top: 0px;left: 0px;transition: 0.2s;z-index: -1;opacity: 0;}
 .comn_popUp.active{z-index: 15;opacity: 1;}
