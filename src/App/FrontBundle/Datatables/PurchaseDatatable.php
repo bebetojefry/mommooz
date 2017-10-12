@@ -74,7 +74,7 @@ class PurchaseDatatable extends AbstractDatatableView
             'dom' => 'lfrtip',
             'length_menu' => array(10, 25, 50, 100),
             'order_classes' => true,
-            'order' => array(array(0, 'desc')),
+            'order' => array(array(2, 'desc')),
             'order_multi' => true,
             'page_length' => 10,
             'paging_type' => Style::FULL_NUMBERS_PAGINATION,
