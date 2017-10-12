@@ -49,7 +49,7 @@ class VendorController extends Controller
             if($form->isValid()){
                 $vendor = $form->getData();
                 $username = $vendor->getEmail();
-                $password = 'VEND'.time();
+                $password = 'momooz_vend';
                 $vendor->setUsername($username);
                 $vendor->setPassword($password);
                 $vendor->setLocale('en');      
