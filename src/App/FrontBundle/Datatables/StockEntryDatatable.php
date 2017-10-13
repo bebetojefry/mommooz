@@ -198,7 +198,10 @@ class StockEntryDatatable extends AbstractDatatableView
                         }
                     ),
                     array(
-                        'route' => NULL,
+                        'route' => 'stockentry_delete',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
                         'label' => $this->translator->trans('datatables.actions.delete'),
                         'icon' => 'glyphicon glyphicon-trash',
                         'attributes' => array(
