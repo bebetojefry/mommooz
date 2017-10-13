@@ -1138,3 +1138,26 @@ transition:0.4s all ease;
 
 .newNameSpan{display: inline-block;width: 100%;height: 30px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
 a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;padding: 3px 8px;}a.load_more_new span{font-size: 10px;}
+
+.dashshadowCary{display: inline-block;margin-right: 20px;padding: 0px 0px 10px 0px;border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.25);margin-bottom: 20px;overflow: hidden;min-height: 50px;}
+.dashshadowCary .head{background: #ddd;font-size: 14px;text-transform: uppercase;}
+.dashshadowCary .lv{display: inline-block;}
+.dashshadowCary.wishlist{width: 78%;}
+.dashshadowCary.wishlist .lv{width: 20%;}
+
+@media (max-width:480px){
+    .dashshadowCary{width: 100%;}
+    .dashshadowCary.wishlist .lv{width: 60%;}
+}
+@media (max-width:768px){
+    .dashshadowCary{width: 80%;}
+    .dashshadowCary.wishlist .lv{width: 40%;margin-bottom: 10px;}
+    
+    .spanWhats{display: inline-block;}
+}
+    
+.comn_popUp{position: fixed;width: 100%;height: 100%;background: rgba(0,0,0,.55);top: 0px;left: 0px;transition: 0.2s;z-index: -1;opacity: 0;}
+.comn_popUp.active{z-index: 15;opacity: 1;}
+.comn_popUp .contentPopUp{max-width: 400px;min-width: 280px;height: 200px;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;background: #fff;font-family: sans-serif;box-shadow: 1px 1px 3px rgba(0,0,0,0.5);vertical-align: middle;padding-top: 5.6%;border-radius: 5px;}
+.comn_popUp .contentPopUp span{display: inline-block;vertical-align: middle;text-align: center;width: 100%;}

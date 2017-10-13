@@ -208,7 +208,7 @@
                             $('#add-to-cart').on('click', function(){
                                 var quantity = $('#purchase-quantity').val();
                                 if(!isNumeric(quantity) || quantity <= 0){
-                                    alert('Invalid Quantity', 'error');
+                                    openAlert('Invalid Quantity', 'error');
                                     return; 
                                 }
                                 $.ajax({
@@ -222,9 +222,9 @@
                                                 $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
                                             }
                                             
-                                            alert('Successfully added to cart', 'success');
+                                            openAlert('Successfully added to cart', 'success');
                                         } else {
-                                            alert('Insufficient stock', 'error');
+                                            openAlert('Insufficient stock', 'error');
                                         }
                                     }
                                 });
