@@ -18,6 +18,12 @@ function openConfirm(obj){
     return false;
 }
 
+function openAlert(obj){    
+    obj.preventDefault();
+    angular.element(obj.target).scope().alert(obj);
+    return false;
+}
+
 function openPrompt(obj){    
     obj.preventDefault();
     angular.element(obj.target).scope().promptExecuteUrl(obj);
@@ -92,6 +98,13 @@ modal.controller('MainCtrl', function ($scope, $http) {
                     dialog.close();
                 }
             }]
+        });
+    };
+    
+    $scope.alert = function(obj){
+        BootstrapDialog.show({
+            title: 'Alert',
+            message: obj.target.attributes.alertText.value,
         });
     };
     
