@@ -109,6 +109,12 @@ class PurchaseItemDatatable extends AbstractDatatableView
                 'title' => 'Vendor',
             ));
         }
+        
+        if(isset($options['vendor'])){
+            $this->columnBuilder->add('purchase.consumer.firstname', 'column', array(
+                'title' => 'Consumer',
+            ));
+        }
             $this->columnBuilder->add('entry.item.name', 'column', array(
                 'title' => 'Item',
             ))
