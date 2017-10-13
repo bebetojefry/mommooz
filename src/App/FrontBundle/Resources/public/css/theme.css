@@ -250,6 +250,7 @@ body {
 .dataTables_wrapper {
     position: relative;
     clear: both;
+    overflow-x: auto;
 }
 
 table.dataTable thead .sorting,
