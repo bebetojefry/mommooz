@@ -31,7 +31,7 @@ class Stock
     /**
      * @var Vendor
      * 
-     * @ORM\ManyToOne(targetEntity="Vendor", inversedBy="stocks")
+     * @ORM\ManyToOne(targetEntity="Vendor", inversedBy="stocks", onDelete="CASCADE")
      */
     private $vendor;
 
