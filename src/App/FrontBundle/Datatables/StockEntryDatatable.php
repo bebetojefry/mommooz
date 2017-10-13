@@ -189,10 +189,33 @@ class StockEntryDatatable extends AbstractDatatableView
                             'title' => $this->translator->trans('datatables.actions.delete'),
                             'class' => 'btn btn-primary btn-xs ',
                             'role' => 'button',
-                            'onclick' => (($row['quantity'] == $row['in_stock']) ? 'return openConfirm(event);' : 'return openAlert(event);'),
+                            'onclick' => 'return openAlert(event);',
+                            'alertText' => 'Since there is purchase associated to this item.You cant delete this.',
+                            'style' => 'margin-right:5px;'
+                        ),
+                        'render_if' => function($row) {
+                            return ($row['quantity'] != $row['in_stock']);
+                        }
+                    ),
+                    array(
+                        'route' => 'stockentry_delete',
+                        'route_parameters' => array(
+                            'id' => 'id'
+                        ),
+                        'label' => $this->translator->trans('datatables.actions.delete'),
+                        'icon' => 'glyphicon glyphicon-trash',
+                        'attributes' => array(
+                            'rel' => 'tooltip',
+                            'title' => $this->translator->trans('datatables.actions.delete'),
+                            'class' => 'btn btn-primary btn-xs ',
+                            'role' => 'button',
+                            'onclick' => 'return openConfirm(event);',
                             'cofirmText' => $this->translator->trans('stockentry.delete.confirm'),
                             'style' => 'margin-right:5px;'
-                        )
+                        ),
+                        'render_if' => function($row) {
+                            return ($row['quantity'] == $row['in_stock']);
+                        }
                     ),
                     array(
                         'route' => 'stockentry_add',
