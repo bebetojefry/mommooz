@@ -194,7 +194,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'style' => 'margin-right:5px;'
                         ),
                         'render_if' => function($row) {
-                            return ($row['quantity'] == $row['in_stock']);
+                            return ($row['quantity'] != $row['in_stock']);
                         }
                     ),
                     array(
@@ -214,7 +214,7 @@ class StockEntryDatatable extends AbstractDatatableView
                             'style' => 'margin-right:5px;'
                         ),
                         'render_if' => function($row) {
-                            return ($row['quantity'] != $row['in_stock']);
+                            return ($row['quantity'] == $row['in_stock']);
                         }
                     ),
                     array(
