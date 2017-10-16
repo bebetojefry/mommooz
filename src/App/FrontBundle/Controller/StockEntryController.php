@@ -249,7 +249,8 @@ class StockEntryController extends Controller
      */
     public function cantdeleteAction(Request $request, StockEntry $stockentry)
     {
-	return new Response('Cant Delete');
+        $this->get('session')->getFlashBag()->add('error', 'stockentry.msg.cant_delete');
+	return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
     
     /**
