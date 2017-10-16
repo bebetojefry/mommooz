@@ -130,7 +130,6 @@ class StockEntryDatatable extends AbstractDatatableView
             ))
             ->add('quantity', 'column', array(
                 'title' => 'Quantity',
-                'visible' => false,
             ))
             ->add('in_stock', 'virtual', array(
                 'title' => 'Available Stock',
@@ -178,7 +177,7 @@ class StockEntryDatatable extends AbstractDatatableView
                         }
                     ),
                     array(
-                        'route' => 'stockentry_delete',
+                        'route' => 'stockentry_cant_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),

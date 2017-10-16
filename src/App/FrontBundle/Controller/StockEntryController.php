@@ -241,6 +241,17 @@ class StockEntryController extends Controller
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
     
+     /**
+     * Displays a form to block delete an existing stockentry entity.
+     *
+     * @Route("/{id}/cant_delete", name="stockentry_cant_delete", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     */
+    public function cantdeleteAction(Request $request, StockEntry $stockentry)
+    {
+	return new Response('Cant Delete');
+    }
+    
     /**
      * Displays a form to add stock to an existing stockentry entity.
      *
