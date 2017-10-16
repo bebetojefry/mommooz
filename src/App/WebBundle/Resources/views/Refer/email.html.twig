@@ -1,6 +1,37 @@
-Hi {{ friend.getName() }},<br/><br/>
+<table cellpadding="0" cellspacing="0" style="font-family:Arial, Helvetica, sans-serif; width:550px;margin: 0 auto;">
+	<tr>
+    	<td>
+            <img src="{{ app.request.scheme ~ '://' ~ app.request.httpHost ~ asset('images/mail_header.png') }}" width="600" height="86" alt="header image" />
+        </td>
+    </tr>
+    <tr>
+    	<td style="font-size:12px; border-bottom:1px #dcdcd6 solid; padding:5px 0;">
+        	Momooz : Reference
+        </td>
+    </tr>
+    
+    <tr>
+    	<td style="font-size:14px; padding:30px 0 30px 50px; line-height:24px; color:#767676;">
+        	
+            Dear {{ friend.getName() }}, <br />
 
-<div>
-    <p>I am {{ consumer.getFullName() }}.</p>
-    <p>I am glad to introduce a new online market called <a href="">mommooz</a>.</p>
-</div>
+            <p>I am {{ consumer.getFullName() }}.</p>
+            <p>I am glad to introduce a new online market called <a href="{{ url('home') }}">mommooz</a>.</p>
+
+            Regards, <br />
+
+            The Mommooz Team
+
+        </td>
+    </tr>
+    
+     <tr>
+    	<td style="font-size:12px; background:#00723e; color:#FFFFFF; padding:15px 0; text-align:center;">
+        	
+            <a style="color: #FFFFFF"  href="{{ url('about_page') }}"> About </a> - 
+            <a style="color: #FFFFFF" href="{{ url('faq_page') }}">  FAQ </a> 
+            - <a style="color: #FFFFFF" href="{{ url('contact_page') }}"> Contact </a> <br />
+            all rights reserved, &copy; momooz.in
+        </td>
+    </tr>
+</table>
