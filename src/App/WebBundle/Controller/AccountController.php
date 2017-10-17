@@ -177,7 +177,7 @@ class AccountController extends Controller
     /**
      * @Route("/request_email", name="request_consumer_email")
      */
-    public function forgotAction(Request $request) {
+    public function requestEmailAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         if($request->isMethod('POST')) {
             $consumer = $em->getRepository('AppFrontBundle:Consumer')->findOneByEmail($_POST['email']);
