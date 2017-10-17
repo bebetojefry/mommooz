@@ -177,6 +177,7 @@ vendor:
     actions:
         reset: Reset Password
         items: Items
+        new: New
     title:
         new: New Vendor
         edit: Edit Vendor
@@ -225,6 +226,8 @@ invoice:
         new: New Invoice
         
 vendoritem:
+    actions:
+        add_more: 'Add More Items'
     delete:
         confirm: 'Are you sure, do you want to delete this item?'
         
