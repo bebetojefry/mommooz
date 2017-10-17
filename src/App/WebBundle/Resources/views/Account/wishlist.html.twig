@@ -21,14 +21,14 @@
                 <div style="color: #aca8b0; font-size: 13px; text-align: center; width: 100%;"> No Items found in your wishlist. </div>
             {% endif %}    
             {% for item in app_web_user.getWishlist().getItems() %}
-                <div class="block-3 text-center mt-15p block-lb-4 block-mb-6 block-sb-12">
+                <div class="block-4 text-center mt-15p block-lb-4 block-mb-6 block-sb-12">
                     <div class="block-11 text-left va-top ptrbl-10p brd-L-1p">
                         <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}"> 
-                            <div class="block-6">
+                            <div class="block-4">
                                 <img src="{{ item.getEntry().getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw">
                             </div>
                         </a>
-                        <div class="block-6 pl-20p">
+                        <div class="block-8 pl-20p">
                             <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}"> 
                                 <h5> {{ item.getEntry().getItem().getName() }} </h5>
                                 <p class="mt-10p">
@@ -39,6 +39,7 @@
                                 </p>
                             </a>
                             <a href="{{ path('wishlist_delete', {'id': item.getId()}) }}" class="remove-wishlist mt-10p dispaly-block"> <span class="icon-close-x"></span> Remove </a>
+                            <input type="hidden" value="1" class="txt-item-qty">
                             <a href="javascript:void(0);" class="remove-wishlist mt-10p dispaly-block add-to-cart" data-entry="{{ item.getEntry().getId() }}"> <span class="icon-close-x"></span> Add To Cart </a>
                         </div>
                     </div>
