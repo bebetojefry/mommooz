@@ -57,7 +57,12 @@ class FOSUBUserProvider extends BaseClass
             $user->setEmail($response->getEmail());
             $user->setUsername($username);            
             $user->setPassword($username);
-            $user->setEnabled(true);
+            if($response->getEmail()){
+                $user->setEnabled(true);
+            } else {
+                $user->setEnabled(false);
+            }
+            
             $user->setStatus(true);
             $user->regenerateSalt();
             $user->setCreatedOn(new \DateTime('now'));
