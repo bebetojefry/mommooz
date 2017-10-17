@@ -39,6 +39,7 @@
                                 </p>
                             </a>
                             <a href="{{ path('wishlist_delete', {'id': item.getId()}) }}" class="remove-wishlist mt-10p dispaly-block"> <span class="icon-close-x"></span> Remove </a>
+                            <a href="javascript:void(0);" class="remove-wishlist mt-10p dispaly-block add-to-cart" data-entry="{{ item.getEntry().getId() }}"> <span class="icon-close-x"></span> Add To Cart </a>
                         </div>
                     </div>
                 </div>
