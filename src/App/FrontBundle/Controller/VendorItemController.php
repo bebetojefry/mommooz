@@ -28,7 +28,7 @@ class VendorItemController extends Controller
         }
         $query->setQuery($qb);
         
-        return $query->getResponse();
+        return $query->getResponse(false);
     }
     
     /**
