@@ -66,16 +66,19 @@
                     <div class="full-width ptb-5p head text-center">
                        <a href=""> Wishlist </a>
                     </div>
-                    <p style="color:#666;text-align:center;" class="prl-15p"> No Items found in your wishlist  </p>
-                    <div class="full-width pt-10p prl-5p text-center">
-                        {% for item in app_web_user.getWishlist().getItems() %}
-                            <div class="lv prl-15p">
-                                <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}">
-                                    <img src="{{ item.getEntry().getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="item image"  title="{{ item.getEntry().getItem().getName() }}">
-                                </a>
-                            </div>
-                        {% endfor %}
-                    </div>
+                    {% if app_web_user.getWishlist().getItems()|length == 0 %}
+                        <p style="color:#666;text-align:center;" class="prl-15p"> No Items found in your wishlist  </p>
+                    {% else %}
+                        <div class="full-width pt-10p prl-5p text-center">
+                            {% for item in app_web_user.getWishlist().getItems() %}
+                                <div class="lv prl-15p">
+                                    <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}">
+                                        <img src="{{ item.getEntry().getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="item image"  title="{{ item.getEntry().getItem().getName() }}">
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             
