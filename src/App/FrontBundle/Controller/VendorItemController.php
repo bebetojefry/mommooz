@@ -21,6 +21,7 @@ class VendorItemController extends Controller
         $datatable = $this->get('app.front.datatable.vendorItem');
         $datatable->buildDatatable(array('vendor' => $vendor));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
         $qb = $query->getQuery();
         if($vendor){
             $qb->andWhere("vendor_item.vendor = :v");
