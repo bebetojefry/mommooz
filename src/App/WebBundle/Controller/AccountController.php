@@ -284,7 +284,33 @@ class AccountController extends Controller
      */
     public function accountAction(Request $request)
     {        
-        return $this->render('AppWebBundle:Account:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $pending = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => array(0, 1, 2, 3) ));
+        $delivered = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => 4 ));
+        $cancelled = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => 5 ));
+        
+        $rewards = $em->getRepository('AppFrontBundle:Reward')->findBy(array('consumer' => $this->getUser()));
+        $used = $em->getRepository('AppFrontBundle:RewardUse')->findBy(array('consumer' => $this->getUser()));
+        
+        $credit = 0;
+        foreach($rewards as $reward){
+            $credit += $reward->getPoint();
+        }
+        
+        $debit = 0;
+        foreach($used as $use){
+            $debit += $use->getPoints();
+        }
+        
+        return $this->render('AppWebBundle:Account:index.html.twig',
+            array(
+                'pending' => $pending,
+                'delivered' => $delivered,
+                'cancelled' => $cancelled,
+                'credit' => $credit,
+                'debit' => $debit
+            )
+        );
     }
     
     /**
