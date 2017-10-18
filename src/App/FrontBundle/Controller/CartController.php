@@ -76,7 +76,7 @@ class CartController extends Controller
                 
                 $dm->flush();
                 
-                $this->get('session')->getFlashBag()->add('success', 'cart.msg.item.added');
+                $this->get('session')->getFlashBag()->add('success', 'Item added to cart');
                 return new Response(json_encode(array('code' => FormHelper::REFRESH, 'data' => '')));
             }
         }
@@ -124,7 +124,7 @@ class CartController extends Controller
         $dm->remove($item);
         $dm->flush();
         
-        $this->get('session')->getFlashBag()->add('success', 'cart.msg.item.removed');
+        $this->get('session')->getFlashBag()->add('success', 'Item removed from cart');
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
     
@@ -213,7 +213,7 @@ class CartController extends Controller
 
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('success', 'cart.msg.order.submitted');
+            $this->get('session')->getFlashBag()->add('success', 'Order submitted');
             return new Response(json_encode(array('code' => FormHelper::REDIRECT, 'data' => '', 'url' => $this->generateUrl('purchase_show', array('id' => $purchase->getId())))));
         }
         

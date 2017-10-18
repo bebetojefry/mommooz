@@ -45,7 +45,7 @@ class BrandController extends Controller
                 $brand = $form->getData();
                 $dm->persist($brand);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'brand.msg.updated');
+                $this->get('session')->getFlashBag()->add('success', 'Brand Updated');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
@@ -77,7 +77,7 @@ class BrandController extends Controller
                 $brand = $form->getData();
                 $dm->persist($brand);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'brand.msg.created');
+                $this->get('session')->getFlashBag()->add('success', 'Brand created');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
@@ -114,7 +114,7 @@ class BrandController extends Controller
         } else {
             $dm->remove($brand);
             $dm->flush();
-            $this->get('session')->getFlashBag()->add('success', 'brand.msg.removed');
+            $this->get('session')->getFlashBag()->add('success', 'Brand removed');
         }
         
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));

@@ -117,7 +117,7 @@ class AdminController extends Controller
                 $user->setPassword($password);
                 $dm->persist($user);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'admin.msg.reseted');
+                $this->get('session')->getFlashBag()->add('success', 'Password changed successfully');
             } else {
                 $this->get('session')->getFlashBag()->add('warning', 'Password doesn\'t match');
             }

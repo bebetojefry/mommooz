@@ -54,7 +54,7 @@ class CategoryController extends Controller
                 $category->setStatus(true);
                 $dm->persist($category);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'category.msg.updated');
+                $this->get('session')->getFlashBag()->add('success', 'Category Updated');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
@@ -86,7 +86,7 @@ class CategoryController extends Controller
                 $category = $form->getData();
                 $dm->persist($category);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'category.msg.created');
+                $this->get('session')->getFlashBag()->add('success', 'Category created');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
@@ -123,7 +123,7 @@ class CategoryController extends Controller
         } else {
             $dm->remove($category);
             $dm->flush();
-            $this->get('session')->getFlashBag()->add('success', 'category.msg.removed');
+            $this->get('session')->getFlashBag()->add('success', 'Category removed');
         }
         
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));

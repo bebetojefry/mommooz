@@ -67,7 +67,7 @@ class BannerController extends Controller
                 $banner = $form->getData();
                 $dm->persist($banner);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'banner.msg.created');
+                $this->get('session')->getFlashBag()->add('success', 'Banner created');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
@@ -103,7 +103,7 @@ class BannerController extends Controller
                 $banner = $form->getData();
                 $dm->persist($banner);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'banner.msg.updated');
+                $this->get('session')->getFlashBag()->add('success', 'Banner Updated');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
@@ -129,7 +129,7 @@ class BannerController extends Controller
         $dm->remove($banner);
         $dm->flush();
         
-        $this->get('session')->getFlashBag()->add('success', 'banner.msg.removed');
+        $this->get('session')->getFlashBag()->add('success', 'Banner removed');
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
     }
 }
