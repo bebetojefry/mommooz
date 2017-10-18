@@ -66,6 +66,7 @@ page_title:
     config: Configurations
     invoice: Invoices
     cart: Consumer Cart
+    orders: Orders
 globals:
     confirm: Confirmation
     yes: Yes
@@ -208,7 +209,7 @@ purchase:
         status: Order Status
         clear: Clear Order
     title:
-        status: New Offer
+        status: Order Status
     clear:
         confirm: 'Are you sure, do you want to clear this order?'
         
