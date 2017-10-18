@@ -16,7 +16,7 @@ class Vendor extends User
     /**
      * @var ArrayCollection|Stock[]
      *
-     * @ORM\OneToMany(targetEntity="Stock", mappedBy="vendor", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Stock", mappedBy="vendor", cascade={"all"})
      */
     private $stocks;
     

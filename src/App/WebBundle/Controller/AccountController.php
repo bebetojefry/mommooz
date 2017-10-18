@@ -175,6 +175,31 @@ class AccountController extends Controller
     }
     
     /**
+     * @Route("/request_email", name="request_consumer_email")
+     */
+    public function requestEmailAction(Request $request) {
+        $em = $this->getDoctrine()->getManager();
+        if($request->isMethod('POST')) {
+            $consumer = $em->getRepository('AppFrontBundle:Consumer')->findOneByEmail($_POST['email']);
+            if($consumer == null){
+                $user = $this->getUser();
+                $user->setEmail($_POST['email']);
+                $user->setEnabled(true);
+                $em->persist();
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('home'));
+            } else {
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('email_request_error', 'Given email ID already in use.');
+            }
+        }
+        
+        return $this->render('AppWebBundle:Account:email_request.html.twig');
+    }
+    
+    /**
      * @Route("/forgot/submit", name="forgot_submit")
      */
     public function forgotsubmitAction()
@@ -259,7 +284,33 @@ class AccountController extends Controller
      */
     public function accountAction(Request $request)
     {        
-        return $this->render('AppWebBundle:Account:index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $pending = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => array(0, 1, 2, 3) ));
+        $delivered = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => 4 ));
+        $cancelled = $em->getRepository('AppFrontBundle:Purchase')->findBy(array('consumer' => $this->getUser(), 'status' => 5 ));
+        
+        $rewards = $em->getRepository('AppFrontBundle:Reward')->findBy(array('consumer' => $this->getUser()));
+        $used = $em->getRepository('AppFrontBundle:RewardUse')->findBy(array('consumer' => $this->getUser()));
+        
+        $credit = 0;
+        foreach($rewards as $reward){
+            $credit += $reward->getPoint();
+        }
+        
+        $debit = 0;
+        foreach($used as $use){
+            $debit += $use->getPoints();
+        }
+        
+        return $this->render('AppWebBundle:Account:index.html.twig',
+            array(
+                'pending' => $pending,
+                'delivered' => $delivered,
+                'cancelled' => $cancelled,
+                'credit' => $credit,
+                'debit' => $debit
+            )
+        );
     }
     
     /**

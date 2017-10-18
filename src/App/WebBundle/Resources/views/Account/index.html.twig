@@ -8,89 +8,80 @@
 
 {% block content %}
     <div class="center-1200px breadcrumb ptb-15p uppercase-txt">
-            <a href="{{ path('home') }}">Home</a>  -  User - Account
+        <a href="{{ path('home') }}">Home</a>  -  User - Account
     </div>
 
     <section class="center-1200px block-fl-cary va-top">
         {% include 'AppWebBundle:Account:menu.html.twig' %}
         <div class="block-9 mb-pl2 pl-30p userRight ptb-20p border_left block-mb-12 mb-text-left">
           
-           <div class="block-7 block-mb-12" style="display:none;">
-            <div class="dashshadowCary">
-                <div class="full-width ptb-5p head text-center">
-                    My Order
-                </div>
-                <div class="full-width pt-10p prl-10p text-center">
-                    <div class="lv prl-15p">
-                       <a href="">
-                        <h3> 02 </h3>
-                        <p style="color:#666;" class="mt-0p"> Pending </p>
-                        </a>
+            <div class="block-7 block-mb-12">
+                <div class="dashshadowCary">
+                    <div class="full-width ptb-5p head text-center">
+                        My Order
                     </div>
-                    <div class="lv prl-15p">
-                       <a href="">
-                        <h3> 02 </h3>
-                        <p style="color:#666;" class="mt-0p"> Delivered </p>
-                        </a>
-                    </div>
-                    <div class="lv prl-15p">
-                       <a href="">
-                        <h3> 02 </h3>
-                        <p style="color:#666;" class="mt-0p"> Cancelled </p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="dashshadowCary">
-                <div class="full-width ptb-5p head text-center">
-                   Reward
-                </div>
-                <div class="full-width pt-10p prl-10p text-center">
-                    <div class="lv prl-15p">
-                       <a href="">
-                        <h3> 02 </h3>
-                        <p style="color:#666;" class="mt-0p"> Credits </p>
-                        </a>
-                    </div>
-                    <div class="lv prl-15p">
-                       <a href="">
-                        <h3> 02 </h3>
-                        <p style="color:#666;" class="mt-0p"> Debits </p>
-                        </a>
+                    <div class="full-width pt-10p prl-10p text-center">
+                        <div class="lv prl-15p">
+                           <a href="{{ path('orders_page') }}">
+                            <h3> {{ pending|length }} </h3>
+                            <p style="color:#666;" class="mt-0p"> Pending </p>
+                            </a>
+                        </div>
+                        <div class="lv prl-15p">
+                           <a href="{{ path('orders_page') }}">
+                            <h3> {{ delivered|length }} </h3>
+                            <p style="color:#666;" class="mt-0p"> Delivered </p>
+                            </a>
+                        </div>
+                        <div class="lv prl-15p">
+                           <a href="{{ path('orders_page') }}">
+                            <h3> {{ cancelled|length }} </h3>
+                            <p style="color:#666;" class="mt-0p"> Cancelled </p>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <div class="dashshadowCary wishlist">
-                <div class="full-width ptb-5p head text-center">
-                   <a href=""> Wishlist </a>
+
+                <div class="dashshadowCary">
+                    <div class="full-width ptb-5p head text-center">
+                       Reward
+                    </div>
+                    <div class="full-width pt-10p prl-10p text-center">
+                        <div class="lv prl-15p">
+                           <a href="{{ path('rewards_page') }}">
+                            <h3> {{ credit }} </h3>
+                            <p style="color:#666;" class="mt-0p"> Credits </p>
+                            </a>
+                        </div>
+                        <div class="lv prl-15p">
+                           <a href="{{ path('rewards_page') }}">
+                            <h3> {{ debit }} </h3>
+                            <p style="color:#666;" class="mt-0p"> Debits </p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <p style="color:#666;text-align:center;" class="prl-15p"> No Items found in your wishlist  </p>
-                <div class="full-width pt-10p prl-5p text-center">
-                    <div class="lv prl-15p">
-                        <Img src="../images/product.png" class="image-fw" alt="user image"  title="product name">
+
+                <div class="dashshadowCary wishlist">
+                    <div class="full-width ptb-5p head text-center">
+                       <a href=""> Wishlist </a>
                     </div>
-                    <div class="lv prl-15p">
-                       <a href="" title="product Name">
-                            <Img src="../images/product.png" class="image-fw" alt="user image">
-                        </a>
-                    </div>
-                    <div class="lv prl-15p">
-                       <a href="" title="product Name">
-                            <Img src="../images/product.png" class="image-fw" alt="user image">
-                        </a>
-                    </div>
-                    <div class="lv prl-15p">
-                       <a href="" title="product Name">
-                            <Img src="../images/product.png" class="image-fw" alt="user image">
-                        </a>
-                    </div>
+                    {% if app_web_user.getWishlist().getItems()|length == 0 %}
+                        <p style="color:#666;text-align:center;" class="prl-15p"> No Items found in your wishlist  </p>
+                    {% else %}
+                        <div class="full-width pt-10p prl-5p text-center">
+                            {% for item in app_web_user.getWishlist().getItems() %}
+                                <div class="lv prl-15p">
+                                    <a href="{{ path('item_page', {'id': item.getEntry().getId()}) }}">
+                                        <img src="{{ item.getEntry().getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="item image"  title="{{ item.getEntry().getItem().getName() }}">
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             
-            
-        </div>
             <div class="block-5 block-lb-12">
                     <div class="block-12">
                     <div class="block-3">

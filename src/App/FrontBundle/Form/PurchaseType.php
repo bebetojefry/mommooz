@@ -22,7 +22,7 @@ class PurchaseType extends AbstractType
             ))
             ->add('expectedOn', 'datetime', array('data' => new \DateTime('now')))
             ->add('deliveredOn', 'datetime', array('data' => new \DateTime('now')))
-            ->add('deliveredBy', 'datetime', array('data' => new \DateTime('now')))
+            ->add('deliveredBy')
             ->add('cancelledOn', 'datetime', array('data' => new \DateTime('now')))
         ;
     }

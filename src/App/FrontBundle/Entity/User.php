@@ -72,7 +72,7 @@ abstract class User extends BaseUser implements AdvancedUserInterface, EncoderAw
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      * @Expose
      */
     protected $email;
