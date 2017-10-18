@@ -101,7 +101,7 @@ class ItemController extends Controller
      */
     public function buyNowAction(StockEntry $stockEntry)
     {
-        return new Response('Buy Now');
+        return new Response('Under Construction...');
     }
 
     /**
