@@ -95,6 +95,14 @@ class ItemController extends Controller
 
         return new Response('No Item Found...');
     }
+    
+    /**
+     * @Route("/{id}/buy_now", name="item_buy_now", options={"expose"=true})
+     */
+    public function buyNowAction(StockEntry $stockEntry)
+    {
+        return new Response('Buy Now');
+    }
 
     /**
      * @Route("/product/page/{id}", name="product_item_page", options={"expose"=true})
