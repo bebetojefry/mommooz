@@ -840,7 +840,7 @@ class AccountController extends Controller
             
             if($entry_id = $this->get('session')->get('buy_now')){
                 $this->get('session')->remove('buy_now');
-                $entry = $em->getRepository('AppFrontBundle:Address')->find($entry_id);
+                $entry = $em->getRepository('AppFrontBundle:StockEntry')->find($entry_id);
                 $cart = new Cart();
                 $cart_item = new CartItem();
                 $cart_item->setEntry($entry);
