@@ -98,7 +98,7 @@ $('.faq-div').click(function(){
 
 $('.nav-catg-click').hover(function(){
 	if($(".nav-submenu").hasClass("active")){
-	setTimeout(function(){$(".nav-submenu").removeClass("active"); }, 2000);
+	setTimeout(function(){$(".nav-submenu").removeClass("active"); }, 4000);
 		}
 	else
 	{
