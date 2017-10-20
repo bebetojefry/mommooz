@@ -1161,3 +1161,21 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
 .comn_popUp.active{z-index: 15;top: 0%;}
 .comn_popUp .contentPopUp{max-width:600px;min-width: 280px;height: auto;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;background: #fff;font-family: sans-serif;box-shadow: 1px 1px 3px rgba(0,0,0,0.5);vertical-align: middle;border-radius: 5px;padding: 6px;}
 .comn_popUp .contentPopUp span{display: inline-block;vertical-align: middle;text-align: center;width: 100%;}
+
+
+.cheakout_popup{position: fixed;width: 100%;background: #333;bottom: -105%;left: 0px; opacity: 1;height: 60px;z-index: 5;
+    transition: 0.5s;}.cheakout_popup.active{bottom: 0%;}
+.cheakout_popup .cartText{font-size: 16px;}
+.cheakout_popup .cartText span{font-size: 12px;}
+.checkoutBut{font-family: 'Roboto', sans-serif;background: #ffcc00;text-transform: uppercase;font-size: 17px;box-shadow: 1px 1px 2px rgba(0,0,0,0.6);}
+.checkoutBut span{font-size: 14px;}
+@media (max-width:480px){
+    .cheakout_popup{height: 80px;}
+}
+body{transition: 06s;}
+body.paddBtm60{
+    padding-bottom: 60px;
+}
+.logAfterClick{width: 125px;color: #fff;max-height: 0px; text-align: left;padding: 0px;top: 140%;font-size: 14px;z-index: 3;border-radius: 5px;background: #fff;transition: 0.4s;}.logAfterClick a{color: #fff;padding: 5px 0;display: inline-block;}.logAfterClick a span{color: #fff;font-size: 12px;}
+.logAfterClick.active{padding: 10px;height: auto;max-height: 400px;background: #333;}
+

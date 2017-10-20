@@ -105,7 +105,18 @@ $('.nav-catg-click').hover(function(){
 		$(".nav-submenu, .main-sub-nav").addClass("active");
 		}
  });
+    
+    
+$('.clickY').click(function(){
+    $(".cheakout_popup").addClass("active");
+    $("body").addClass("paddBtm60");
+ });
+ 
+$('.user-click2').click(function(){
+	$(".logAfterClick").toggleClass("active");
+ });
 
+    
  $('.main-sub-nav ul li').hover(function(){
   var dataId = $(this).attr("data_id");
   if ($('.main-sub-nav ul li').hasClass('active')){
