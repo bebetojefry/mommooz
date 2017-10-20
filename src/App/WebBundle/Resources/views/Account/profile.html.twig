@@ -40,13 +40,15 @@
                 </div>
             </div>
             <div class="block-6 block-lb-12 lb-mt15">
-                    <div class="block-8">
-                    <h3> Change Password </h3>
-                    <form name="frmChangePwd" method="post" action="">
-                        {{ form_widget(form_pwd) }}
-                        <button name="btn_pwd" type="submit" class="momz-button mt-20p"> Change Now <span class="icon-arrow-right-1"></span> </button>
-                        <span style="display:inline; font-size: 13px; margin-left: 5px;">{{ message }}</span>
-                    </form>
+                    {% if app.user.getFacebookId() == null and app.user.getGoogleId() == null %}
+                        <div class="block-8">
+                        <h3> Change Password </h3>
+                        <form name="frmChangePwd" method="post" action="">
+                            {{ form_widget(form_pwd) }}
+                            <button name="btn_pwd" type="submit" class="momz-button mt-20p"> Change Now <span class="icon-arrow-right-1"></span> </button>
+                            <span style="display:inline; font-size: 13px; margin-left: 5px;">{{ message }}</span>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
