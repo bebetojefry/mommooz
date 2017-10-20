@@ -46,7 +46,11 @@
                 <button type="submit" class="momz-button mt-20p"> Sign up <span class="icon-arrow-right-1"></span> </button>
                 <span class="small-text-mmz pt-10p"> By signing up, you agree to our <a href="{{ path('terms_page') }}"> Terms And Conditions. </a> </span>
             </form>
-
+            <script type="text/javascript">
+                $('#frmRegister').find('label[class="required"]').each(function(){
+                   $(this).html($(this).html()+'<span style="color:red;padding-left:3px;">*</span>');
+                });
+            </script>
             <span class="dispaly-block mt-20p" style="font-size:14px;"> Already have an account? <a href="{{ path('login_page') }}" class="prl-10p"> Login </a> </span>
         </div>
     </section>

@@ -78,7 +78,7 @@ security:
             form_login:
                 login_path: /account/login
                 check_path: /login_check
-                default_target_path: /
+                default_target_path: /account
                 always_use_default_target_path: true
                 use_referer: true
                 csrf_provider: security.csrf.token_manager
