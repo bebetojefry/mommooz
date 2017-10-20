@@ -286,6 +286,8 @@ $(document).ready(function(){
                     $(that).parent().find('.in_cart_count').show();
                     if(!resp.in_cart){
                         $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
+                        $('.cheakout_popup').addClass('active');
+                        $('.cheakout_popup .count').html(parseInt($('.cheakout_popup .count').html()) + 1);
                     }
                     openAlert('Successfully added to cart', 'success');
                 } else {

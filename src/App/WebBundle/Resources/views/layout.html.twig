@@ -397,22 +397,23 @@
     </div>
     
     
-<!--<div class="cheakout_popup prl-20p ptb-10p sb-ptb-5p va-middle">
-   <div class="center-1200px text-right sb-text-center">
-      <div class="va-middle white-txt dispaly-inline-block prl-15p cartText">
-         <a href="" class="dispaly-inline-block white-txt">
-          <span class="dispaly-inline-block icon-cart-arrow-down mr-5p"></span> 15 Items 
-          </a>
-          <span class="dispaly-inline-block icon-inr mr-5p ml-15p"></span> 3250/-
+<div class="cheakout_popup prl-20p ptb-10p sb-ptb-5p va-middle {% if app_web_user.getCart().getItems()|length > 0 %}active{% endif %}">
+    <div class="center-1200px text-right sb-text-center">
+        <div class="va-middle white-txt dispaly-inline-block prl-15p cartText">
+            <a href="" class="dispaly-inline-block white-txt">
+                <span class="dispaly-inline-block icon-cart-arrow-down mr-5p"></span> <span class="count">{{ app_web_user.getCart().getItems().count() }}</span> Item(s) 
+            </a>
+            <!--<span class="dispaly-inline-block icon-inr mr-5p ml-15p"></span> 3250/-->
           
-      </div>
-       <span class="dispaly-inline-block checkoutBut sb-mt-5p text-center br-6p va-middle ptb-10p prl-20p pointer-csr">
-            Checkout
-            <span class="dispaly-inline-block icon-arrow-right black-txt white-txt mr-5p"></span>
-        </span>
-    
-   </div>
-</div>-->
+        </div>
+        <a href="{% if app.user %}{{ path('place_order') }}{% else %}{{ path('login_page')~'?cart='~app_web_user.getCart().getId() }}{% endif %}">
+            <span class="dispaly-inline-block checkoutBut sb-mt-5p text-center br-6p va-middle ptb-10p prl-20p pointer-csr">
+                Checkout
+                <span class="dispaly-inline-block icon-arrow-right black-txt white-txt mr-5p"></span>
+            </span>
+        </a>
+    </div>
+</div>
     
 </body>
 
