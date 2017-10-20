@@ -87,6 +87,7 @@ security:
                     facebook: facebook_login_check
                     google: google_login_check
                 login_path:        /account/login
+                default_target_path: /account
                 failure_path:      /account/login
 
                 oauth_user_provider:
