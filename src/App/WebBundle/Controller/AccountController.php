@@ -930,9 +930,20 @@ class AccountController extends Controller
             ->setFrom($this->getParameter('email_from'))
             ->addTo($this->getUser()->getEmail(), $this->getUser()->getFullName())
             ->setBody($content, 'text/html');
+            
+            $admin_content = $this->renderView('AppWebBundle:Account:orderAdminTemplate.html.twig',
+                array('order' => $purchase)
+            );
+
+            $admin_message = \Swift_Message::newInstance()
+            ->setSubject('Mommooz New Order')
+            ->setFrom($this->getParameter('email_from'))
+            ->addTo('info@momooz.com', 'Momooz Admin')
+            ->setBody($admin_content, 'text/html');
 
             try {
                 $this->get('mailer')->send($message);
+                $this->get('mailer')->send($admin_message);
             } catch(\Exception $e) {
 
             }
