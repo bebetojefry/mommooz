@@ -197,6 +197,10 @@ class Address
      */
     public function getState()
     {
+        if($this->state == null){
+            return 'Kerala';
+        }
+        
         return $this->state;
     }
 
