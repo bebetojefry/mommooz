@@ -73,7 +73,7 @@
                     </tr>
                 </table>
                 <div class="full-width mt-10p ptb-20p text-right button-cart">
-                    <a href="{{ path('home') }}"><button class="momz-button" name=""> <span class="icon-angle-left"></span>  Continue Shopping </button></a>
+                    <a href="{{ path('home') }}"><button type="button" class="momz-button" name=""> <span class="icon-angle-left"></span>  Continue Shopping </button></a>
                     {% if app_web_user.getCart().getItems()|length > 0 %}
                         {% if app.user %}
                             <button type="submit" class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button>
