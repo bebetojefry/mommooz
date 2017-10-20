@@ -184,6 +184,9 @@ class Purchase
      */
     public function getDeliveredOn()
     {
+        if($this->deliveredOn == null) {
+            return new \DateTime('now');
+        }
         return $this->deliveredOn;
     }
 
@@ -314,6 +317,9 @@ class Purchase
      */
     public function getExpectedOn()
     {
+        if($this->expectedOn == null) {
+            return new \DateTime('now');
+        }
         return $this->expectedOn;
     }
 
@@ -338,6 +344,9 @@ class Purchase
      */
     public function getCancelledOn()
     {
+        if($this->cancelledOn == null) {
+            return new \DateTime('now');
+        }
         return $this->cancelledOn;
     }
     
