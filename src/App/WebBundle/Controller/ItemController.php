@@ -100,8 +100,35 @@ class ItemController extends Controller
      * @Route("/{id}/buy_now", name="item_buy_now", options={"expose"=true})
      */
     public function buyNowAction(StockEntry $stockEntry)
-    {
-        return new Response('Under Construction...');
+    {    
+        if(!$this->getUser()){
+            return $this->redirect($this->generateUrl('login_page'));
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $reward_money_config = $em->getRepository('AppFrontBundle:Config')->findOneByName('reward_money');
+        $reward_money = 0;
+        $total_rewards = 0;
+        if($reward_money_config && $this->getUser()){
+            $cart_price = $this->getUser()->getCart()->getPrice();
+            $max_points_needed = round($cart_price*$reward_money_config->getValue(), 2);
+            $rewards = $em->getRepository('AppFrontBundle:Reward')->findByConsumer($this->getUser());
+            foreach($rewards as $reward){
+                $total_rewards += $reward->getPoint();
+                if($total_rewards > $max_points_needed){
+                    $total_rewards = $max_points_needed;
+                    break;
+                }
+            }
+            
+            if($reward_money_config->getValue() > 0){
+                $reward_money = round($total_rewards/$reward_money_config->getValue(), 2);
+            }
+        }
+        
+        return $this->render('AppWebBundle:Item:buyNow.html.twig', 
+            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards, 'entry' => $stockEntry)
+        );
     }
 
     /**

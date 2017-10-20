@@ -693,6 +693,10 @@ class AccountController extends Controller
      */
     public function payorderAction(Request $request)
     {
+        if(isset($_POST['buy_now'])){
+            $this->get('session')->set('buy_now', $_POST['buy_now']);
+        }
+        
         if(isset($_POST['cod'])){
             $this->get('session')->set('order_method', 'COD');
             $this->get('session')->set('address', $request->get('address'));
@@ -833,8 +837,20 @@ class AccountController extends Controller
 
             $em->persist($purchase);
             $em->flush();
-
-            $cart = $this->getUser()->getCart();
+            
+            if($entry_id = $this->get('session')->get('buy_now')){
+                $this->get('session')->remove('buy_now');
+                $entry = $em->getRepository('AppFrontBundle:StockEntry')->find($entry_id);
+                $cart = new Cart();
+                $cart_item = new CartItem();
+                $cart_item->setEntry($entry);
+                $cart_item->setQuantity(1);
+                $cart_item->setPrice($entry->getActualPrice());
+                $cart_item->setStatus(false);
+                $cart->addItem($cart_item);
+            } else {
+                $cart = $this->getUser()->getCart();
+            }
 
             $total_amt = 0;
             foreach($cart->getItems() as $item){
@@ -860,8 +876,11 @@ class AccountController extends Controller
                 $stock_purchase->setStockItem($item->getEntry());
                 $stock_purchase->setPurchsedOn(new \DateTime('now'));
                 $em->persist($stock_purchase);
-
-                $em->remove($item);
+                
+                // remove from user cart if its real
+                if($item->getId() !== null){
+                    $em->remove($item);
+                }
             }
 
             if($this->get('session')->get('use_reward')){

@@ -46,7 +46,7 @@ class VendorItemDatatable extends AbstractDatatableView
                         'class' => 'btn btn-primary',
                         'role' => 'button',
                         'onclick' => 'return openModal(event);',
-                        'modalTitle' => $this->translator->trans('vendoritem.title.add_more'),
+                        'modalTitle' => 'Add more items',
                     ),
                 )
             )
