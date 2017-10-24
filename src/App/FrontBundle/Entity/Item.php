@@ -11,6 +11,7 @@ use App\FrontBundle\Entity\Category;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Item
 {
