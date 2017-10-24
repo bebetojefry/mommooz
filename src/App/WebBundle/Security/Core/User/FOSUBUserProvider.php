@@ -80,6 +80,11 @@ class FOSUBUserProvider extends BaseClass
             $this->userManager->updateUser($user);
             return $user;
         }
+        
+        if(!$user->getStatus()) {
+            return null;
+        }
+        
         //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
         $serviceName = $response->getResourceOwner()->getName();
