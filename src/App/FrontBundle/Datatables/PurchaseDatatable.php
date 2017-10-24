@@ -13,17 +13,25 @@ use App\FrontBundle\Entity\Consumer;
  */
 class PurchaseDatatable extends AbstractDatatableView
 {
+    public $requestStack;
+    private $start = 0;
     private $sl = 1;
+    
+    protected function getRequest()
+    {
+        return $this->requestStack->getCurrentRequest();
+    }
     
     /**
      * {@inheritdoc}
      */
     public function getLineFormatter()
     {
+        $this->start = $this->getRequest()->query->get('start', 0);
         $formatter = function($line){
             $states = array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled', 6 => 'Cleared');
             $line['state'] = $states[$line['status']];
-            $line['sl'] = $this->sl++;
+            $line['sl'] = $this->start + $this->sl++;
             
             return $line;
         };

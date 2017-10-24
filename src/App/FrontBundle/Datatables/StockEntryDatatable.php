@@ -12,7 +12,14 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class StockEntryDatatable extends AbstractDatatableView
 {
+    public $requestStack;
+    private $start = 0;
     private $sl = 1;
+    
+    protected function getRequest()
+    {
+        return $this->requestStack->getCurrentRequest();
+    }
     
     /**
      * {@inheritdoc}
@@ -20,13 +27,14 @@ class StockEntryDatatable extends AbstractDatatableView
     public function getLineFormatter()
     {
         $repo = $this->em->getRepository('AppFrontBundle:StockEntry');
+        $this->start = $this->getRequest()->query->get('start', 0);
         
         $formatter = function($line) use ($repo){
             $entry = $repo->find($line['id']);
             $line['in_stock'] = $entry->getInStock();
             $line['commission'] = $line['actualPrice'] - $line['price']; 
             $line['namewithbrand'] = $line['item']['brand']['name'] . ' '.$line['item']['name'];
-            $line['sl'] = $this->sl++;
+            $line['sl'] = $this->start + $this->sl++;
             
             return $line;
         };
