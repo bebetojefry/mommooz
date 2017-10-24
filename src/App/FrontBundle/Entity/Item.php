@@ -432,7 +432,7 @@ class Item
     }
     
     /**
-     * @ORM\OnFlush
+     * @ORM\PreFlush
      */
     public function setOnFlushValues()
     {
