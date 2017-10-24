@@ -45,11 +45,10 @@ class ConsumerController extends Controller
             if($form->isValid()){
                 $consumer = $form->getData();
                 $username = $consumer->getEmail();
-                $password = 'CONS'.time();
+                $password = 'momooz_cons';
                 $consumer->setUsername($username);
                 $consumer->setPassword($password);
                 $consumer->setLocale('en');
-                $consumer->setStatus(true);
                 $dm->persist($consumer);
                 $dm->flush();
                 
