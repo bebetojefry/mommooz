@@ -90,6 +90,8 @@ services:
     app.front.datatable.category:
           class: App\FrontBundle\Datatables\CategoryDatatable
           parent: sg_datatables.datatable.abstract
+          properties:
+             requestStack: '@request_stack'
           
     app.front.datatable.product:
           class: App\FrontBundle\Datatables\ProductDatatable
