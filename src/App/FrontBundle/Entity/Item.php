@@ -22,13 +22,20 @@ class Item
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=255, nullable=true)
+     */
+    private $code;
 
     /**
      * @var string
@@ -399,6 +406,41 @@ class Item
     {
         return $this->images;
     }
+    
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Item
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+    
+    /**
+     * @ORM\OnFlush
+     */
+    public function setOnFlushValues()
+    {
+        if($this->code == null){
+            $this->code = 'MOM_'.$this->id;
+        }
+    }
+
 
     /**
      * Set name

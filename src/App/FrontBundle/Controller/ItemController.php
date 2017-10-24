@@ -164,7 +164,7 @@ class ItemController extends Controller
         }
         
         $body = $this->renderView('AppFrontBundle:Item:form.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values), 'category_values' => json_encode($category_values), 'treeData' => json_encode($resultTree))
+            array('form' => $form->createView(), 'item' => $item, 'keyword_values' => json_encode($keyword_values), 'offer_values' => json_encode($offer_values), 'category_values' => json_encode($category_values), 'treeData' => json_encode($resultTree))
         );
         
         return new Response(json_encode(array('error' => $error, 'code' => $code, 'data' => $body)));
