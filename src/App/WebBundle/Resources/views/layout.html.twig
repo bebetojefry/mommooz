@@ -400,7 +400,7 @@
 <div class="cheakout_popup prl-20p ptb-10p sb-ptb-5p va-middle {% if app_web_user.getCart().getItems()|length > 0 %}active{% endif %}">
     <div class="center-1200px text-right sb-text-center">
         <div class="va-middle white-txt dispaly-inline-block prl-15p cartText">
-            <a href="" class="dispaly-inline-block white-txt">
+            <a href="{{ path('cart_page') }}" class="dispaly-inline-block white-txt">
                 <span class="dispaly-inline-block icon-cart-arrow-down mr-5p"></span> <span class="count">{{ app_web_user.getCart().getItems().count() }}</span> Item(s) 
             </a>
             <!--<span class="dispaly-inline-block icon-inr mr-5p ml-15p"></span> 3250/-->
