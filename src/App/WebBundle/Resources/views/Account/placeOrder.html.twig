@@ -20,7 +20,8 @@
                         {% set valid_addresses = valid_addresses + 1 %}
                         <div class="block-4 addresscary br-4p block-lb-6 block-sb-12 text-center">
                             <div class="block-11  ptrbl-20p brd-L-1p text-left">
-                                <h3><input type="radio" class="addr_radio" required="" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {{ app.user.getFullname() }}  </h3>
+                                <h3>
+                                    {% if app_web_user.isAddressValidToDeliver(address) %}<input type="radio" class="addr_radio" required="" {% if address.getDefault() %}checked=""{% endif %} name="address" value="{{ address.getId() }}" />  {% endif %} {{ app.user.getFullname() }}  </h3>
                                 {{ address.getHouse() }}, {{ address.getStreet() }}, {{ address.getLandmark() }}, {{ address.getCity() }}
                                 <br/>Pin: {{ address.getPin() }},  {{ address.getState() }}
                                 <br/>
