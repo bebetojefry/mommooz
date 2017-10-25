@@ -15,6 +15,7 @@ menu:
     switch_user: Switch User
     switch_user_exit: Back to admin
     logout: Logout
+    reset: Change Password
   
 user:
     slno: Sl No
