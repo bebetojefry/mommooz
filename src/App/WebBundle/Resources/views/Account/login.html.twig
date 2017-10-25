@@ -23,7 +23,7 @@
                 <input type="password" name="_password" id="password" placeholder="Password">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
                 <button type="submit" class="momz-button mt-20p"> Login <span class="icon-arrow-right-1"></span> </button>
-                <a href="{{ path('forgot_consumer_password') }}"> Forget Password </a>
+                <a href="{{ path('forgot_consumer_password') }}"> Forgot Password </a>
                 {% set errors = app.session.flashbag.get('login_error') %}
                 {% if errors|length > 0%}
                     <div class="messages" style="display: inline; margin-left: 10px; color: red; font-size: 13px;">
