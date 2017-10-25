@@ -16,7 +16,7 @@
             <div class="block-12 mb-pl2 pl-30p ptb-20p block-mb-12 mb-text-left">
                 {% set valid_addresses = 0 %}
                 {% for address in app.user.getAddresses() %}
-                    {% if app_web_user.isAddressValidToDeliver(address) %}
+                    
                         {% set valid_addresses = valid_addresses + 1 %}
                         <div class="block-4 addresscary br-4p block-lb-6 block-sb-12 text-center">
                             <div class="block-11  ptrbl-20p brd-L-1p text-left">
@@ -26,8 +26,10 @@
                                 <br/>
                                 Ph: {{ app.user.getPhone() }}
                             </div>
+                            {% if app_web_user.isAddressValidToDeliver(address) %}
+                                <span>Delivery not available to this pincode - <a href="{{ path('address_form', {'id': address.getId()}) }}?cart=1">Change Pincode</a></span>
+                            {% endif %}
                         </div>
-                    {% endif %}
                 {% endfor %}
                 {% if valid_addresses == 0 %}
                     No Valid Delivery address found.Please add one and try again...
