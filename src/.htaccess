@@ -6,6 +6,6 @@
     Deny from all
 </IfModule>
 
-RewriteCond %{HTTPS} on
-RewriteCond %{HTTP_HOST} !^www\.(.*)$ [NC]
-RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^momooz.com
+RewriteRule (.*) http://www.momooz.com/$1 [R=301,L]
