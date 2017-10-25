@@ -11,7 +11,6 @@ use App\FrontBundle\Entity\Category;
  *
  * @ORM\Table()
  * @ORM\Entity
- * @ORM\HasLifecycleCallbacks()
  */
 class Item
 {
@@ -431,17 +430,6 @@ class Item
     {
         return $this->code;
     }
-    
-    /**
-     * @ORM\PreFlush
-     */
-    public function setOnFlushValues()
-    {
-        if($this->code == null){
-            $this->code = 'MOM_'.$this->id;
-        }
-    }
-
 
     /**
      * Set name
