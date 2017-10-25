@@ -89,7 +89,8 @@ security:
                 login_path:        /account/login
                 default_target_path: /account
                 failure_path:      /account/login
-
+                use_referer: true
+                
                 oauth_user_provider:
                     #this is my custom user provider, created from FOSUBUserProvider - will manage the
                     #automatic user registration on your site, with data from the provider (facebook. google, etc.)
