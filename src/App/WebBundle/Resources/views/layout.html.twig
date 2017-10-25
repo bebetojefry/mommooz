@@ -168,6 +168,8 @@
             {% if app.user is null %}
                 <li class="pointer-csr"> <a href="{{ path('login_page') }}">  Sign In </a> </li>
                 <li class="pointer-csr"> <a href="{{ path('register_page') }}">  Sign Up </a> </li>
+            {% else %}
+                <li class="pointer-csr"> <a href="{{ path('app_front_consumer_logout') }}">  Logout </a> </li>
             {% endif %}
         </ul>
 
