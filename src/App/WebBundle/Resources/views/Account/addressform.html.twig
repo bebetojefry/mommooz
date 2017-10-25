@@ -17,6 +17,7 @@
         <div class="block-6 block-lb-8 block-mb-11 brd-L-1p mt-20p ptrbl-25p br-6p text-left">
             <form name="frmAddress" id="frmAddress" method="post" action="">
                 {{ form_widget(form) }}
+                <input type="hidden" name="from_cart" value="{{ app.request.get('cart') }}" />
                 <input class="mt-15p" type="submit" value="Add Address">
             </form>
             <script type="text/javascript">

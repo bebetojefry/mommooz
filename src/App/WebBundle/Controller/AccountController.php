@@ -626,6 +626,10 @@ class AccountController extends Controller
                 
                 $this->get('session')->getFlashBag()->add('success', 'Address updated successfully.');
                 
+                if(isset($_POST['from_cart'])){
+                    return $this->redirect($this->generateUrl('place_order'));
+                }
+                
                 return $this->redirect($this->generateUrl('address_page'));
             }
         }
