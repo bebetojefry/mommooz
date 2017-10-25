@@ -7,7 +7,4 @@
 </IfModule>
 
 
-RewriteEngine On 
-RewriteCond %{HTTP_HOST} ^www.momooz.com [NC] 
-RewriteRule ^(.*)$ http://momooz.com/$1 [L,R=301]
 
