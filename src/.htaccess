@@ -6,7 +6,8 @@
     Deny from all
 </IfModule>
 
-RewriteEngine on
-RewriteCond %{HTTP_HOST} ^momooz.com/ [NC]
-RewriteRule ^(.*)$ http://www.momooz.com/$1 [L,R=301,NC]
+
+RewriteEngine On 
+RewriteCond %{HTTP_HOST} ^www.momooz.com [NC] 
+RewriteRule ^(.*)$ http://momooz.com/$1 [L,R=301]
 
