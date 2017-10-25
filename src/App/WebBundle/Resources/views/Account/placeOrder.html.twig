@@ -25,10 +25,10 @@
                                 <br/>Pin: {{ address.getPin() }},  {{ address.getState() }}
                                 <br/>
                                 Ph: {{ app.user.getPhone() }}
+                                {% if app_web_user.isAddressValidToDeliver(address) %}
+                                    <span>Delivery not available to this pincode - <a href="{{ path('address_form', {'id': address.getId()}) }}?cart=1">Change Pincode</a></span>
+                                {% endif %}
                             </div>
-                            {% if app_web_user.isAddressValidToDeliver(address) %}
-                                <span>Delivery not available to this pincode - <a href="{{ path('address_form', {'id': address.getId()}) }}?cart=1">Change Pincode</a></span>
-                            {% endif %}
                         </div>
                 {% endfor %}
                 {% if valid_addresses == 0 %}
