@@ -66,3 +66,7 @@ DirectoryIndex app_svr.php
         # RedirectTemp cannot be used instead
     </IfModule>
 </IfModule>
+
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^momooz.com
+RewriteRule (.*) http://www.momooz.com/$1 [R=301,L]
