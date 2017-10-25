@@ -19,7 +19,7 @@ class AddressType extends AbstractType
             ->add('street')
             ->add('landmark')
             ->add('city')
-            ->add('pin', 'text', array('attr' => array("pattern" => "[0-9]+{4,6}", 'data-pattern-error' => 'Invalid pin code')))
+            ->add('pin', 'text', array('attr' => array("pattern" => "[0-9]{4,6}", 'data-pattern-error' => 'Invalid pin code')))
             ->add('state')
         ;
     }
