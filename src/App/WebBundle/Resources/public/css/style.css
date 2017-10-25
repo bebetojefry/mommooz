@@ -1175,6 +1175,7 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
     .cheakout_popup{height: 80px;}
     .userRight #pie{min-width: 290px!important;}
     .item-primary-img div{display: none!important;}
+    .userRight{padding-left:0px!important;}
 }
 body{transition: 06s;}
 body.paddBtm60{

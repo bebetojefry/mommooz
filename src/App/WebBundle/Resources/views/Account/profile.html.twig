@@ -41,7 +41,7 @@
             </div>
             <div class="block-6 block-lb-12 lb-mt15">
                     {#{% if app.user.getFacebookId() == null and app.user.getGoogleId() == null %}#}
-                        <div class="block-8">
+                        <div class="block-8 block-mb-12">
                         <h3> Change Password </h3>
                         <form name="frmChangePwd" method="post" action="">
                             {{ form_widget(form_pwd) }}
