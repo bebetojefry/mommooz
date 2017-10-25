@@ -100,11 +100,7 @@ class ItemController extends Controller
      * @Route("/{id}/buy_now", name="item_buy_now", options={"expose"=true})
      */
     public function buyNowAction(StockEntry $stockEntry)
-    {    
-        if(!$this->getUser()){
-            return $this->redirect($this->generateUrl('login_page'));
-        }
-        
+    {            
         $em = $this->getDoctrine()->getManager();
         $reward_money_config = $em->getRepository('AppFrontBundle:Config')->findOneByName('reward_money');
         $reward_money = 0;
