@@ -17,6 +17,7 @@
         <div class="block-9 mb-pl2 pl-30p ptb-20p border_left userRight block-mb-12 mb-text-left">
             <h3> Cart Page </h3>
             <form name="frmCart" id="frmCart" method="post" action="{{ path('place_order') }}" > 
+               <div class="CartTableCary">
                 <table class="mt-15p cart-table">
                     <tr>
                         <th colspan="2">Item</th>
@@ -72,6 +73,7 @@
                         </td>
                     </tr>
                 </table>
+                </div>
                 <div class="full-width mt-10p ptb-20p text-right button-cart">
                     <a href="{{ path('home') }}"><button type="button" class="momz-button" name=""> <span class="icon-angle-left"></span>  Continue Shopping </button></a>
                     {% if app_web_user.getCart().getItems()|length > 0 %}

@@ -18,7 +18,7 @@
             <div class="block-7 block-mb-12">
                 <div class="dashshadowCary">
                     <div class="full-width ptb-5p head text-center">
-                        My Order
+                        <a href="{{ path('orders_page') }}">  My Order </a>
                     </div>
                     <div class="full-width pt-10p prl-10p text-center">
                         <div class="lv prl-15p">
@@ -44,7 +44,7 @@
 
                 <div class="dashshadowCary">
                     <div class="full-width ptb-5p head text-center">
-                       Reward
+                        <a href="{{ path('rewards_page') }}"> Reward </a>
                     </div>
                     <div class="full-width pt-10p prl-10p text-center">
                         <div class="lv prl-15p">
@@ -64,7 +64,7 @@
 
                 <div class="dashshadowCary wishlist">
                     <div class="full-width ptb-5p head text-center">
-                       <a href=""> Wishlist </a>
+                       <a href="{{ path('wishlist_page') }}"> Wishlist </a>
                     </div>
                     {% if app_web_user.getWishlist().getItems()|length == 0 %}
                         <p style="color:#666;text-align:center;" class="prl-15p"> No Items found in your wishlist  </p>
