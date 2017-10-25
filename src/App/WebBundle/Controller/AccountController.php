@@ -184,6 +184,7 @@ class AccountController extends Controller
             if($consumer == null){
                 $user = $this->getUser();
                 $user->setEmail($_POST['email']);
+                $user->setUsername($_POST['email']);
                 $user->setEnabled(true);
                 $em->persist();
                 $em->flush();

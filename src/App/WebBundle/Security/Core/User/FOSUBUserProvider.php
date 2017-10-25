@@ -55,8 +55,8 @@ class FOSUBUserProvider extends BaseClass
             $user->setFirstname($response->getFirstName());
             $user->setLastname($response->getLastName());
             $user->setEmail($response->getEmail());
-            $user->setUsername($username);            
-            $user->setPassword($username);
+            $user->setUsername($response->getEmail());            
+            $user->setPassword('momooz_cons');
             if($response->getEmail()){
                 $user->setEnabled(true);
             } else {
