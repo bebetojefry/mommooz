@@ -26,6 +26,7 @@
                                 <br/>
                                 Ph: {{ app.user.getPhone() }}
                                 {% if app_web_user.isAddressValidToDeliver(address) == false %}
+                                    <br/>
                                     <span>Delivery not available to this pincode - <a href="{{ path('address_form', {'id': address.getId()}) }}?cart=1">Change Pincode</a></span>
                                 {% endif %}
                             </div>
