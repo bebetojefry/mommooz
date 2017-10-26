@@ -26,10 +26,13 @@
                             <div class="col-lg-3">
                                 <table class="tbl-purchase-info">
                                     <tr>
-                                        <td>Ordered By : {{ purchase.getConsumer().getFullname() }}</td>
+                                        <td>Consumer : {{ purchase.getConsumer().getFullname() }}</td>
                                     </tr>
                                     <tr>
-                                        <td>Date : {{ purchase.getPurchasedOn()|date('d M Y h:i A') }}</td>
+                                        <td>Ordered On : {{ purchase.getPurchasedOn()|date('d M Y h:i A') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Order Status : {{ status[purchase.getStatus()] }}</td>
                                     </tr>
                                     <tr>
                                         <td>

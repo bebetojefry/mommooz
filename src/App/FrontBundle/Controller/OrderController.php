@@ -45,7 +45,8 @@ class OrderController extends Controller
         $itemsDatatable->buildDatatable(array('purchase' => $purchase));
         return $this->render('AppFrontBundle:Order:items.html.twig', array(
             'itemsDatatable' => $itemsDatatable,
-            'purchase' => $purchase
+            'purchase' => $purchase,
+            'status' => array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled')
         ));
     }
     

@@ -126,6 +126,12 @@ class PurchaseDatatable extends AbstractDatatableView
             ->add('deliveredBy', 'column', array(
                 'title' => 'Delivered By',
             ))
+            ->add('expectedOn', 'datetime', array(
+                'title' => 'Expected On',
+            ))
+            ->add('cancelledOn', 'datetime', array(
+                'title' => 'Cancelled On',
+            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
