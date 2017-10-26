@@ -35,12 +35,13 @@ class ComponentController extends Controller
         
         $cart = $this->getUser()->getCart();
         $cart->setItems(new \Doctrine\Common\Collections\ArrayCollection());
+        $em->persist($cart);
         
         foreach($anon_cart->getItems() as $item){
-            $cart->addItem($item);
+            $item->setCart($cart)
+            $em->persist($item);
         }
         
-        $em->persist($cart);
         $em->flush();
         
         return $this->redirect($this->generateUrl('place_order'));
