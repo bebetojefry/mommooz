@@ -16,8 +16,6 @@
             <div class="block-12 mb-pl2 pl-30p ptb-20p block-mb-12 mb-text-left">
                 {% set valid_addresses = 0 %}
                 {% for address in app.user.getAddresses() %}
-                    
-                        {% set valid_addresses = valid_addresses + 1 %}
                         <div class="block-4 addresscary br-4p block-lb-6 block-sb-12 text-center">
                             <div class="block-11  ptrbl-20p brd-L-1p text-left">
                                 <h3>
@@ -28,7 +26,9 @@
                                 Ph: {{ app.user.getPhone() }}
                                 {% if app_web_user.isAddressValidToDeliver(address) == false %}
                                     <br/>
-                                    <span>Delivery not available to this pincode - <a href="{{ path('address_form', {'id': address.getId()}) }}?cart=1">Change Pincode</a></span>
+                                    <span style="color:red;">Delivery not available to this pincode - <a href="{{ path('address_form', {'id': address.getId()}) }}?cart=1">Change Pincode</a></span>
+                                {% else %}
+                                    {% set valid_addresses = valid_addresses + 1 %}
                                 {% endif %}
                             </div>
                         </div>
