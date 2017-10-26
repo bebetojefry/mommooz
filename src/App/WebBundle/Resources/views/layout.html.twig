@@ -108,7 +108,7 @@
         <div class="block-4 block-fl-cary block-mb-12 text-right home-page-cart mb-text-center">
             <ul class="mt-25p">
                 <li class="prl-15p responcive-menu-cliker  pointer-csr"> <span class="icon-bars"></span> </li>
-                <li class="prl-15p {% if app.user == null %}user-click{% else %}user-clickB{% endif %} pointer-csr"> 
+                <li class="prl-15p relative-pos {% if app.user == null %}user-click{% else %}user-clickB{% endif %} pointer-csr"> 
                     <!--{% if app.user %}<a href="{{ path('account_home') }}">{% endif %}-->
                     <img src="{% if app.user == null %}{{ asset('bundles/appweb/images/icons/login_in.png') }}{% else %}{{ asset('bundles/appweb/images/icons/user.svg') }}{% endif %}" width="25" alt="user"> 
                     {% if app.user %}</a>{% endif %}
