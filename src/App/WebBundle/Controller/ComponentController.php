@@ -20,4 +20,22 @@ class ComponentController extends Controller
         $banners = $em->getRepository('AppFrontBundle:Banner')->findAll();
         return $this->render('AppWebBundle:Component:banner.html.twig', array('banners' => $banners));
     }
+    
+    /**
+     * @Route("/anon/cart/{id}", name="anon_cart")
+     */
+    public function anonCartAction(Request $request, $id) 
+    {
+        if(!$this->getUser()){
+            return $this->redirect($this->generateUrl('cart_page'));
+        }
+        
+        $em = $this->getDoctrine()->getManager();
+        $anon_cart = $em->getRepository('AppFrontBundle:Cart')->find($id);
+        
+        $cart = $this->getUser()->getCart();
+        $cart->setItems($anon_cart->getItems());
+        
+        return $this->redirect($this->generateUrl('place_order'));
+    }
 }

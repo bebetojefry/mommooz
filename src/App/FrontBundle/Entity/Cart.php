@@ -96,6 +96,13 @@ class Cart
 
         return $this;
     }
+    
+    public function setItems(\Doctrine\Common\Collections\ArrayCollection $items)
+    {
+        $this->items = $items;
+        
+        return $this;
+    }
 
     /**
      * Remove item

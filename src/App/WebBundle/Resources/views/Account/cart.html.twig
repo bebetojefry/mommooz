@@ -80,7 +80,7 @@
                         {% if app.user %}
                             <button type="submit" class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button>
                         {% else %}
-                            <a href="{{ path('login_page')~'?cart='~app_web_user.getCart().getId() }}"> <button class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button> </a>
+                            <a href="{{ path('anon_cart', {'id': app_web_user.getCart().getId()}) }}"> <button class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button> </a>
                         {% endif %}
                     {% endif %}
                 </div>

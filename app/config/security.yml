@@ -119,3 +119,4 @@ security:
       - { path: ^/account/wishlist, roles: IS_AUTHENTICATED_ANONYMOUSLY, host: %domain_consumer% }
       - { path: ^/account/[a-z]+, roles: ROLE_CONSUMER, host: %domain_consumer% }
       - { path: ^/item/[0-9]+/buy_now, roles: ROLE_CONSUMER, host: %domain_consumer% }
+      - { path: ^/anon/cart/[0-9]+, roles: ROLE_CONSUMER, host: %domain_consumer% }
