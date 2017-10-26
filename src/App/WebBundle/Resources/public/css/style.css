@@ -1149,6 +1149,8 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
 @media (max-width:480px){
     .dashshadowCary{width: 100%;}
     .dashshadowCary.wishlist .lv{width: 60%;}
+    .slider-navigation{text-align: center;padding: 5px 0;}
+    .slider-navigation .block-3{width: 15px;min-height: 15px!important;background: #ddd;margin-right: 8px;}
 }
 @media (max-width:768px){
     .dashshadowCary{width: 80%;}
@@ -1156,7 +1158,8 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
     
     .spanWhats{display: inline-block;}
     .CartTableCary{width: 100%;overflow-y: scroll;}
-    .CartTableCary table, .user-order table{min-width: 768px;}.CartTableCary table tr td, .CartTableCary table tr th, .user-order table tr td, .user-order table tr th {display: table-cell!important;}
+    .CartTableCary table, .user-order table{min-width: 768px;}.CartTableCary table tr td, .CartTableCary table tr th, .user-order table tr td, .user-order table tr th {display: table-cell!important;width: auto;}
+    
 }
     
 .comn_popUp{position: fixed;width: 100%;height: auto;max-height: 80%;min-height: 40px; background: rgba(255,255,255,.8);top: -110%;left: 0px;transition: 0.2s;padding: 8px;}
