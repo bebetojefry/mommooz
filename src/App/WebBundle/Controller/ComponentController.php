@@ -34,7 +34,14 @@ class ComponentController extends Controller
         $anon_cart = $em->getRepository('AppFrontBundle:Cart')->find($id);
         
         $cart = $this->getUser()->getCart();
-        $cart->setItems($anon_cart->getItems());
+        $cart->setItems(new \Doctrine\Common\Collections\ArrayCollection());
+        
+        foreach($anon_cart->getItems() as $item){
+            $cart->addItem($item);
+        }
+        
+        $em->persist($cart);
+        $em->flush();
         
         return $this->redirect($this->generateUrl('place_order'));
     }
