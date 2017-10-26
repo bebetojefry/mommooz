@@ -1156,13 +1156,21 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
     
     .spanWhats{display: inline-block;}
     .CartTableCary{width: 100%;overflow-y: scroll;}
-    .CartTableCary table{min-width: 768px;}.CartTableCary table tr td, .CartTableCary table tr th{width: auto!important;display: inline-block!important;}
+    .CartTableCary table, .user-orde table{min-width: 768px;}.CartTableCary table tr td, .CartTableCary table tr th, .user-order table tr td, .user-order table tr th {display: table-cell!important;}
 }
     
 .comn_popUp{position: fixed;width: 100%;height: auto;max-height: 80%;min-height: 40px; background: rgba(255,255,255,.8);top: -110%;left: 0px;transition: 0.2s;padding: 8px;}
 .comn_popUp.active{z-index: 15;top: 0%;}
 .comn_popUp .contentPopUp{max-width:600px;min-width: 280px;height: auto;position: absolute;top: 0;left: 0;right: 0;bottom: 0;margin: auto;background: #fff;font-family: sans-serif;box-shadow: 1px 1px 3px rgba(0,0,0,0.5);vertical-align: middle;border-radius: 5px;padding: 6px;}
 .comn_popUp .contentPopUp span{display: inline-block;vertical-align: middle;text-align: center;width: 100%;}
+
+
+
+.LogOutDropDown{width: 150px;top:100%;background: #eee;height: 0px;max-height: 0; overflow: hidden; z-index: 5;box-shadow: 1px 1px 2px rgba(0,0,0,0.1);opacity: 0;transition: 0.5s;}.LogOutDropDown.active{top: 108%;opacity: 1;height: auto;max-height: 500px;}
+.LogOutDropDown:after{content: "";background: #eee;position: absolute;width: 10px;height: 10px;top: -5px;transform: rotate(45deg);left: 10px;z-index: 0;}
+.LogOutDropDown a{display: inline-block;width: 100%;padding:8px;font-size: 13px;color: #000;text-align: left;position: relative;z-index: 2;}
+.LogOutDropDown a:hover{background: #ddd;}
+.LogOutDropDown a.logOut{background: #ddd;color: #000;}.LogOutDropDown a.logOut:hover{background: #f00;color: #fff;}
 
 
 .cheakout_popup{position: fixed;width: 100%;background: #333;bottom: -105%;left: 0px; opacity: 1;height: 60px;z-index: 12;

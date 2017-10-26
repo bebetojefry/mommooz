@@ -56,6 +56,10 @@ $('.footer-submenu, .footer-bottom-click, .footer-bottom-click span').click(func
 $('.user-click, .close-login').click(function(){
 	$(".login-register-show").toggleClass("active");
  });
+  
+$('.user-clickB').click(function(){
+	$(".LogOutDropDown").toggleClass("active");
+ });
  
 $('.responcive-menu-cliker, .close-main-menu').click(function(){
 	$("nav").toggleClass("active");
