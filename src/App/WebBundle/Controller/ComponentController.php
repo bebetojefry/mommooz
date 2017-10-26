@@ -34,8 +34,10 @@ class ComponentController extends Controller
         $anon_cart = $em->getRepository('AppFrontBundle:Cart')->find($id);
         
         $cart = $this->getUser()->getCart();
-        $cart->setItems(new \Doctrine\Common\Collections\ArrayCollection());
-        $em->persist($cart);
+        foreach($cart->getItems() as $item){
+            $em->remove($item);
+        }
+        $em->flush();
         
         foreach($anon_cart->getItems() as $item){
             $item->setCart($cart);
