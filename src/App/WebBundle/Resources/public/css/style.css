@@ -1150,8 +1150,9 @@ a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;paddin
     .dashshadowCary{width: 100%;}
     .dashshadowCary.wishlist .lv{width: 60%;}
     .slider-navigation{text-align: center;padding: 5px 0;}
-    .slider-navigation .block-3{width: 15px;min-height: 15px!important;background: #ddd!important;margin-right: 8px!important;border-radius: 50%!important;}
+    .slider-navigation .block-3{width: 15px;min-height: 15px!important;background: #ddd!important;margin-right: 8px!important;border-radius: 50%!important;padding: 0px!important;}
     .slider-navigation .block-3.active::after{display: none!important;}
+    .slider-navigation .block-3.active{background: #b60408!important;}
     .banner-item b{display: none!important;}
 }
 @media (max-width:768px){
