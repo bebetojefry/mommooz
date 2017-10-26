@@ -38,7 +38,7 @@ class ComponentController extends Controller
         $em->persist($cart);
         
         foreach($anon_cart->getItems() as $item){
-            $item->setCart($cart)
+            $item->setCart($cart);
             $em->persist($item);
         }
         
