@@ -113,6 +113,7 @@
                     <img src="{% if app.user == null %}{{ asset('bundles/appweb/images/icons/login_in.png') }}{% else %}{{ asset('bundles/appweb/images/icons/user.svg') }}{% endif %}" width="25" alt="user"> 
                     {% if app.user %}</a>{% endif %}
                     <!--user-clickB // plz add this class to above li if login-->
+                    {% if app.user %}
                     <div class="LogOutDropDown absolute-pos">
                        <a href="{{ path('account_home') }}"> Dashboard </a>
                        <a href="{{ path('profile_page') }}"> Profile </a>
@@ -120,7 +121,7 @@
                        <a href="{{ path('orders_page') }}"> My Orders </a>
                        <a href="{{ path('app_front_consumer_logout') }}" class="logOut"> Logout </a>
                    </div>
-                    
+                    {% endif %}
                 </li>
                 <!--<li class="prl-15p user-click2 pointer-csr relative-pos"> logAC 
                    <div class="logAfterClick absolute-pos left-pos">
