@@ -49,7 +49,7 @@ class User {
         
         if(!$cart instanceof Cart){
             $cart = new Cart();
-            $cart->setUser($this->user);
+            $cart->setUser(null);
             $cart->setSessionId(session_id());
             $em->persist($cart);
             $em->flush();
