@@ -418,7 +418,7 @@
             <!--<span class="dispaly-inline-block icon-inr mr-5p ml-15p"></span> 3250/-->
           
         </div>
-        <a href="{% if app.user %}{{ path('place_order') }}{% else %}{{ path('login_page')~'?cart='~app_web_user.getCart().getId() }}{% endif %}">
+        <a href="{% if app.user %}{{ path('place_order') }}{% else %}{{ path('anon_cart', {'id': app_web_user.getCart().getId()}) }}{% endif %}">
             <span class="dispaly-inline-block checkoutBut sb-mt-5p text-center br-6p va-middle ptb-10p prl-20p pointer-csr">
                 Checkout
                 <span class="dispaly-inline-block icon-arrow-right black-txt white-txt mr-5p"></span>
