@@ -59,10 +59,15 @@ class OrderController extends Controller
     public function statusAction(Request $request, Purchase $purchase)
     {
         $dm = $this->getDoctrine()->getManager();
+        
+        if($request->isMethod('POST')){
+            $form->handleRequest($request);
+            $purchase = $form->getData();
+        }
+        
         $form = $this->createForm(new PurchaseType(), $purchase);
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
-            $form->handleRequest($request);
             if($form->isValid() && $_POST['form_state'] == ''){
                 $purchase = $form->getData();
                 $dm->persist($purchase);
