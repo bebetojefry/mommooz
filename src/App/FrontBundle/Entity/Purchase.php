@@ -422,6 +422,7 @@ class Purchase
         } elseif($this->status == 5){
             $this->deliveredOn = null;
             $this->expectedOn = null;
+            $this->deliveredBy = null;
         } else {
             $this->deliveredOn = null;
             $this->cancelledOn = null;
