@@ -16,6 +16,8 @@ $(".nav-submenu").addClass("firstActive");
     $('.nav-submenu').mouseleave(function(){
 	   $(".nav-submenu").addClass("firstActive");
     });  
+   /* var slider_caryHeight = $('.slider-cary img').innerHeight();
+    $('.slider-offer-cary').height(slider_caryHeight+45);*/
     
 
 // add elements
@@ -102,7 +104,7 @@ $('.faq-div').click(function(){
 
 $('.nav-catg-click').hover(function(){
 	if($(".nav-submenu").hasClass("active")){
-	setTimeout(function(){$(".nav-submenu").removeClass("active"); }, 4000);
+	setTimeout(function(){$(".nav-submenu").removeClass("active"); }, 0);
 		}
 	else
 	{

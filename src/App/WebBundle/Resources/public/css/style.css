@@ -1060,6 +1060,7 @@ table.raf-table tr td{vertical-align: middle;}
     overflow: hidden;
 }
 .item-thumb h3{margin-top: 5px!important;}
+.item-thumb {}
 .first-cat-cary ul li ul li a{
     font-size: 13px!important;
     font-weight: normal!important;
@@ -1197,4 +1198,9 @@ body.paddBtm60{
 }
 .logAfterClick{width: 125px;color: #fff;max-height: 0px; text-align: left;padding: 0px;top: 140%;font-size: 14px;z-index: 3;border-radius: 5px;background: #fff;transition: 0.4s;}.logAfterClick a{color: #fff;padding: 5px 0;display: inline-block;}.logAfterClick a span{color: #fff;font-size: 12px;}
 .logAfterClick.active{padding: 10px;height: auto;max-height: 400px;background: #333;}
+
+.whychoosediv div{vertical-align: middle;}
+.whychoosediv h3{color: #024503; font-family: 'Roboto', sans-serif;}
+.whychoosediv em{font-size: 12px;}
+/*.whychoosediv{border-bottom: 1px #ddd solid;}*/
 

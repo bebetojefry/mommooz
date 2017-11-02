@@ -15,17 +15,17 @@
             <h5 class="mt-15p block-11">
                 {{ entry.getItem().getName() }}{% if entry.getVariant() %}{{ ' - '~entry.getVariant().getValue() }}{% endif %}
             </h5>
-            <h3 class="mt-5p"> <span style="text-decoration: line-through;font-size: 12px;color: #CCC;margin-bottom: 10px;display: inline-block;">MRP : {{ entry.getMrp() }}</span>
+            <h3 class="mt-5p"> <span style="text-decoration: line-through;margin-bottom: 5px;display: inline-block;width:100%;font-size:13px;color:#666;">MRP : {{ entry.getMrp() }}</span>
                 <span class="icon-inr ml-5p" style="font-size:13px;"></span>{{ entry.getActualPrice() }}</h3>
         </a>
         {% if entry.getInStock() > 0 %}
-            <div class="full-width mt-5p">
+            <div class="full-width mt-10p">
                 <input type="number" class="txt-item-qty mt-0p" value="1" style="width: 45px;" />
                 <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
                 {% set in_cart_count = app_web_user.getCartCount(entry) %}
                 <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}"><i>{{ in_cart_count }}</i> in cart</span>
                 <button class="button-product br-5p ptb-5p prl-5p pointer-csr add-to-cart ml-5p" data-entry="{{ entry.getId() }}">
-                    Add to Cart <span class="icon-arrow-right ml-0p" style="font-size:10px;"></span>
+                    Add to Cart <span class="icon-arrow-right ml-0p" style="font-size:10px;color:#333;"></span>
                 </button>
             </div>
         {% else %}

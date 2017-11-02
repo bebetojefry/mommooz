@@ -23,8 +23,65 @@
             </div>
         </div>
     </section>
+    
+    <div class="center-1200px whychoosediv ptb-20p mt-15p block-fl-cary mb-none">
+    <div class="block-3">
+        <h3 class="gray-dark-txt"> Why Choose Momooz? </h3>
+    </div>
+    <div class="block-9">
+       <div class="block-3 sb-block-12">
+    	<div class="icon-show mb-none block-5 transition_05s overflow-hidden" >
+        	 <img src="{{ asset('bundles/appweb/images/wcm-1.png') }}" class="image-fw" alt="">
+        </div>
+        <div class="block-7 block-mb-11">
+        	<h5> Quality </h5>
+            <em> You can Trust </em>
+        </div>
+    </div>
+       
+       <div class="block-3 sb-block-12">
+    	<div class="icon-show mb-none block-5 transition_05s overflow-hidden" >
+        	 <img src="{{ asset('bundles/appweb/images/wcm-2.png') }}" class="image-fw" alt="">
+        </div>
+        <div class="block-7 block-mb-11 pl-10p">
+        	<h5> On - Time <br/> Guarantee  </h5>
+            
+        </div>
+    </div>
+      
+      <div class="block-3 sb-block-12">
+    	<div class="icon-show mb-none block-5 transition_05s overflow-hidden" >
+        	 <img src="{{ asset('bundles/appweb/images/wcm-3.png') }}" class="image-fw" alt="">
+        </div>
+        <div class="block-7 block-mb-11">
+        	<h5> Free Delivery </h5>
+            <em> Free orders above Rs 300/- </em>
+        </div>
+    </div>
+      
+      <div class="block-3 sb-block-12">
+    	<div class="icon-show mb-none block-5 transition_05s overflow-hidden" >
+        	 <img src="{{ asset('bundles/appweb/images/wcm-4.png') }}" class="image-fw" alt="">
+        </div>
+        <div class="block-7 block-mb-11">
+           <em> No questions Asked  </em>
+            <h5>  Return policy  </h5>
+        </div>
+    </div>
+       
+    </div>
+</div>
 
-    <section class="features-cary center-1200px mb-text-left block-fl-cary ptb-20p sb-mt-0p mt-40p va-top sb-none">
+    
+    
+    
+
+    <section class="full-width by-product-home mt-15p ptb-20p">
+        {{ render(controller('AppWebBundle:Category:popular')) }}
+    </section>
+    
+
+<section class="features-cary center-1200px mb-text-left block-fl-cary ptb-20p sb-mt-0p mt-40p va-top sb-none">
         <div class="block-3 sb-block-12">
             <div class="icon-show mb-none block-4 transition_05s overflow-hidden" style="background:#fd6260;">
                 <img src="{{ asset('bundles/appweb/images/icons/logo-icon.svg') }}" class="image-fw" alt="momooz image">
@@ -61,10 +118,6 @@
                 <em> eat fresh</em>
             </div>
         </div>
-    </section>
-
-    <section class="full-width by-product-home mt-15p ptb-20p">
-        {{ render(controller('AppWebBundle:Category:popular')) }}
     </section>
 
     <section class="whats-new center-1200px block-fl-cary ptb-20p mt-10p mb-20p">
@@ -165,3 +218,4 @@
 {% block javascript %}
 
 {% endblock %}
+
