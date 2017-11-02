@@ -11,9 +11,10 @@ class PurchaseType extends AbstractType
     
     private $request;
     
-    public function __constructor($request){
+    public function __construct($request){
         $this->request = $request;
     } 
+    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
