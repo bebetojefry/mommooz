@@ -34,7 +34,6 @@ class ItemType extends AbstractType
         $categoriestoIdsTransformer = new CategoriesToIdsTransformer($this->om);
         
         $builder
-            ->add('code')
             ->add('name')
             ->add('description')
             ->add('price');

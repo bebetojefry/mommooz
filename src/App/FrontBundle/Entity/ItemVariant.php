@@ -27,6 +27,13 @@ class ItemVariant
      * @ORM\ManyToOne(targetEntity="Item", inversedBy="variants", cascade={"persist"}))
      */
     private $item;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=255, nullable=true)
+     */
+    private $code;
 
     /**
      * @var VariantType
@@ -206,5 +213,29 @@ class ItemVariant
     public function getUniqueName()
     {
         return sprintf('%s - %s', $this->getVariantType()->getName(), $this->value);
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return ItemVariant
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
     }
 }

@@ -33,13 +33,6 @@ class Item
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=255, nullable=true)
-     */
-    private $code;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -405,30 +398,6 @@ class Item
     public function getImages()
     {
         return $this->images;
-    }
-    
-    /**
-     * Set code
-     *
-     * @param string $code
-     *
-     * @return Item
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * Get code
-     *
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
     }
 
     /**

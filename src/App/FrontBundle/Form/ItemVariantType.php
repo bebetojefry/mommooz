@@ -15,6 +15,7 @@ class ItemVariantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('code')
             ->add('variantType', 'entity', array(
                 'class' => 'AppFrontBundle:VariantType',
                 'property' => 'name',
