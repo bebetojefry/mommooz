@@ -63,7 +63,7 @@ class OrderController extends Controller
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
             $form->handleRequest($request);
-            if($form->isValid()){
+            if($form->isValid() && $_POST['form_state'] == ''){
                 $purchase = $form->getData();
                 $dm->persist($purchase);
                 $dm->flush();
