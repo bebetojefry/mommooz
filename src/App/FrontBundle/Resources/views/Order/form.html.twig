@@ -4,6 +4,6 @@
 <script type="text/javascript">
     $('#{{ form.status.vars.id }}').on("change", function(){
         $('#form_state').val('reload');
-        $(this).parent('form').submit();
+        $(this).parents('form').submit();
     });
 </script>
