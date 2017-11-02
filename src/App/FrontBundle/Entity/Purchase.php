@@ -426,6 +426,7 @@ class Purchase
             $this->deliveredOn = null;
             $this->cancelledOn = null;
             $this->expectedOn = null;
+            $this->deliveredBy = null;
         }
     }
 }
