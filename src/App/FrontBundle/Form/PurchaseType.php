@@ -14,17 +14,26 @@ class PurchaseType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $order = $builder->getData();
         $builder
             ->add('status', 'choice', array(
                 'multiple' => false,
                 'expanded' => false,
                 'choices' => array(0 => 'Pending', 1 => 'Confirmed', 2 => 'Processing', 3=> "Out for delivered", 4 => 'Delivered', 5 => 'Cancelled'),                
-            ))
-            ->add('expectedOn')
-            ->add('deliveredOn')
-            ->add('deliveredBy')
-            ->add('cancelledOn')
-        ;
+            ));
+
+            if($order->getStatus() == 3) {
+                $builder->add('expectedOn');
+            }
+
+            if($order->getStatus() == 4) {
+                $builder->add('deliveredOn');
+                $builder->add('deliveredBy');
+            }
+
+            if($order->getStatus() == 5) {
+                $builder->add('cancelledOn');
+            }
     }
     
     /**

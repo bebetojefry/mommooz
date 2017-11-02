@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Purchase
 {
@@ -405,5 +406,26 @@ class Purchase
     public function getMethod()
     {
         return $this->method;
+    }
+
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function setDates()
+    {
+        if($this->status == 3){
+            $this->deliveredOn = null;
+            $this->cancelledOn = null;
+        } elseif($this->status == 4){
+            $this->cancelledOn = null;
+        } elseif($this->status == 5){
+            $this->deliveredOn = null;
+            $this->expectedOn = null;
+        } else {
+            $this->deliveredOn = null;
+            $this->cancelledOn = null;
+            $this->expectedOn = null;
+        }
     }
 }
