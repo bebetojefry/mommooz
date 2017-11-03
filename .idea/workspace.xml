@@ -24,21 +24,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OfferController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Controller/OfferController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.5">
-              <caret line="25" column="26" selection-start-line="18" selection-start-column="8" selection-end-line="25" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="ComponentController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Controller/ComponentController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8128342">
-              <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.6791444">
+              <caret line="34" column="25" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -612,16 +602,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Controller/OfferController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.5">
-          <caret line="25" column="26" selection-start-line="18" selection-start-column="8" selection-end-line="25" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.45454547">
+          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Controller/ComponentController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8128342">
-          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.6791444">
+          <caret line="34" column="25" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="25" />
           <folding />
         </state>
       </provider>

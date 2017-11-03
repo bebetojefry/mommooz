@@ -32,6 +32,8 @@ class ComponentController extends Controller
             ->where('o.status = :s and o.expiry >= :now')
             ->setParameter('s', true)
             ->setParameter('now', $now)
+            ->orderBy('id', 'DESC')
+            ->setMaxResults(2)
             ->getQuery()
             ->getResult();
         return $this->render('AppWebBundle:Component:offer.html.twig', array('offers' => $offers));
