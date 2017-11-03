@@ -14,6 +14,9 @@ use App\FrontBundle\Entity\Category;
  */
 class Item
 {
+
+    private static $rendered_thumbs = array();
+
     /**
      * @var integer
      *
@@ -750,5 +753,13 @@ class Item
         $this->categories = $categories;
         
         return $this;
+    }
+
+    public static function addRendered($item){
+        self::$rendered_thumbs[$item->getId()] = $item->getId();
+    }
+
+    public static function isRendered($item){
+        return isset(self::$rendered_thumbs[$item->getId()]);
     }
 }

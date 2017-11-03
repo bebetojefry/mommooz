@@ -383,6 +383,12 @@ class ItemController extends Controller
      * @Route("/{id}/thumb", name="item_thumb", options={"expose"=true})
      */
     public function thumbAction(StockEntry $entry) {
+        if(Item::isRendered($entry->getItem())){
+            return new Response('');
+        }
+
+        Item::addRendered($entry->getItem());
+
         return $this->render('AppWebBundle:Item:thumb.html.twig', array(
             'entry' => $entry
         ));

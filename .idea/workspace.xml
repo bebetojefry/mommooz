@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffbb2370-8ef1-4d1b-a74f-5465e202dcc8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/WebBundle/Resources/views/Item/thumb.html.twig" afterPath="$PROJECT_DIR$/src/App/WebBundle/Resources/views/Item/thumb.html.twig" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/FrontBundle/Entity/Item.php" afterPath="$PROJECT_DIR$/src/App/FrontBundle/Entity/Item.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App/WebBundle/Controller/ItemController.php" afterPath="$PROJECT_DIR$/src/App/WebBundle/Controller/ItemController.php" />
     </list>
     <ignored path="mommooz.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="thumb.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Resources/views/Item/thumb.html.twig">
+      <file leaf-file-name="ItemController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Controller/ItemController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8395722">
-              <caret line="61" column="6" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.7593583">
+              <caret line="387" column="9" selection-start-line="387" selection-start-column="9" selection-end-line="387" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Item.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App/FrontBundle/Entity/Item.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="46.294117">
+              <caret line="760" column="0" selection-start-line="760" selection-start-column="0" selection-end-line="760" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -49,6 +60,8 @@
         <option value="$PROJECT_DIR$/src/App/WebBundle/Resources/views/Component/offer.html.twig" />
         <option value="$PROJECT_DIR$/src/App/WebBundle/Controller/ComponentController.php" />
         <option value="$PROJECT_DIR$/src/App/WebBundle/Resources/views/Item/thumb.html.twig" />
+        <option value="$PROJECT_DIR$/src/App/FrontBundle/Entity/Item.php" />
+        <option value="$PROJECT_DIR$/src/App/WebBundle/Controller/ItemController.php" />
       </list>
     </option>
   </component>
@@ -335,6 +348,40 @@
               <option name="myItemId" value="Resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Category" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mommooz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mommooz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WebBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -381,6 +428,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="FrontBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mommooz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mommooz" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="App" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="FrontBundle" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Entity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -539,13 +612,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App/FrontBundle/Entity/Item.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="33.025642">
-          <caret line="635" column="38" selection-start-line="635" selection-start-column="20" selection-end-line="635" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/App/FrontBundle/Entity/Banner.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.882353">
@@ -578,6 +644,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="15.717949">
           <caret line="247" column="38" selection-start-line="247" selection-start-column="20" selection-end-line="247" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -610,10 +677,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Resources/views/Category/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5080214">
+          <caret line="19" column="61" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Resources/views/Item/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17825311">
+          <caret line="69" column="0" selection-start-line="69" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Resources/views/Item/thumb.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8395722">
+        <state vertical-scroll-proportion="1.631016">
           <caret line="61" column="6" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/FrontBundle/Entity/Item.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="46.294117">
+          <caret line="760" column="0" selection-start-line="760" selection-start-column="0" selection-end-line="760" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App/WebBundle/Controller/ItemController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7593583">
+          <caret line="387" column="9" selection-start-line="387" selection-start-column="9" selection-end-line="387" selection-end-column="9" />
           <folding />
         </state>
       </provider>
