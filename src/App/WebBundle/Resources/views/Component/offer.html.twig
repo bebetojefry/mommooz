@@ -1,6 +1,5 @@
-<div class="full-width">
-    <img src="{{ asset('bundles/appweb/images/offer-1.jpg') }}" class="image-fw" alt="offer">
-</div>
-<div class="full-width mt-15p">
-    <img src="{{ asset('bundles/appweb/images/offer-2.jpg') }}" class="image-fw" alt="offer">
-</div>
+{% for offer in offers %}
+    <div class="full-width">
+        <a href="{{ path('offer_items', {id: offer.getid()}) }}"><img src="{{ offer.getRealPicturePath() | imagine_filter('offer_thumb') }}" class="image-fw" alt="offer"></a>
+    </div>
+{% endif %}
