@@ -20,7 +20,7 @@
         </a>
         {% if entry.getInStock() > 0 %}
             <div class="full-width mt-10p">
-                <input type="number" class="txt-item-qty mt-0p" value="1" style="width: 45px;" />
+                <input type="number" class="txt-item-qty mt-0p" value="1" style="width: 45px;" min="1" />
                 <span>{% if entry.getVariant() %}{{ entry.getVariant().getValue() }}{% endif %}</span>
                 {% set in_cart_count = app_web_user.getCartCount(entry) %}
                 <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}"><i>{{ in_cart_count }}</i> in cart</span>
@@ -43,7 +43,7 @@
                                 <li class="VaM">
                                     <div class="b6 VaM text-left"> <span class="iB icon-inr"></span> {{ variantEntry.getActualPrice() }}/{{ variant.getValue() }} </div>
                                     {% if variantEntry.getInStock() > 0 %}
-                                        <div class="b4 VaM"><input type="number" name="" class="txt-item-qty"> <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}">(<i>{{ in_cart_count }}</i>)</span></div>
+                                        <div class="b4 VaM"><input type="number" name="" class="txt-item-qty" min="1"> <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}">(<i>{{ in_cart_count }}</i>)</span></div>
                                         <div class="b2 VaM text-center add-to-cart" data-entry="{{ variantEntry.getId() }}"> <span class="icon-cart-arrow-down iB pointer-csr"></span> </div>
                                     {% else %}
                                         <div class="varient-out-of-stock">Out of stock</div>
