@@ -1,6 +1,5 @@
-{{ offers|length }}
 {% for offer in offers %}
     <div class="full-width">
         <a href="{{ path('offer_items', {id: offer.getid()}) }}"><img src="{{ offer.getRealPicturePath() | imagine_filter('offer_thumb') }}" class="image-fw" alt="offer"></a>
     </div>
-{% endif %}
+{% endfor %}
