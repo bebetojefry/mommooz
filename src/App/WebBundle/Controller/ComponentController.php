@@ -26,8 +26,14 @@ class ComponentController extends Controller
      */
     public function offerAction()
     {
-        $em = $this->getDoctrine()->getManager();
-        $offers = $em->getRepository('AppFrontBundle:Offer')->findAll();
+        $now = new \DateTime('now');
+        $now->setTime(0, 0, 0);
+        $offers = $this->getDoctrine()->getManager()->getRepository("AppFrontBundle:Offer")->createQueryBuilder('o')
+            ->where('o.status = :s and o.expiry >= :now')
+            ->setParameter('s', true)
+            ->setParameter('now', $now)
+            ->getQuery()
+            ->getResult();
         return $this->render('AppWebBundle:Component:offer.html.twig', array('offers' => $offers));
     }
     
