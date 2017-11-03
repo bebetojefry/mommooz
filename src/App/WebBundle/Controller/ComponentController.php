@@ -20,6 +20,16 @@ class ComponentController extends Controller
         $banners = $em->getRepository('AppFrontBundle:Banner')->findAll();
         return $this->render('AppWebBundle:Component:banner.html.twig', array('banners' => $banners));
     }
+
+    /**
+     * @Route("/offer", name="component_offer")
+     */
+    public function offerAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $offers = $em->getRepository('AppFrontBundle:Offer')->findAll();
+        return $this->render('AppWebBundle:Component:offer.html.twig', array('offers' => $offers));
+    }
     
     /**
      * @Route("/anon/cart/{id}", name="anon_cart")
