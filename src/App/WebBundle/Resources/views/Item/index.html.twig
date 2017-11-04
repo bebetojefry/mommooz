@@ -135,8 +135,7 @@
                             <h4 class="mb-10p"> Available Quantity  </h4>
                             {% for variantType in item.getVariantsInStock() %}
                                 {% if variantType|length > 0 %}
-                                    <span class="dim-font">{{ variantType|first.getVariantType().getName() }}</span>
-                                    <br/>
+                                    <span class="dim-font spanVarient">{{ variantType|first.getVariantType().getName() }}</span>
                                     <select id="cmb_variant" class="br-5p block-7 brd-L-1p uppercase-txt">
                                         {% for variant in variantType %}
                                             <option {% if variant.getId() == entry.getVariant().getId() %}selected=""{% endif %} value="{{ variant.getId() }}"> {{ variant.getValue() }} </option>
