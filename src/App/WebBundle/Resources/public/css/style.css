@@ -121,12 +121,14 @@ a.comn-social.twit { left: 84px; }
 .social-top-header a.fb { right: 84px; }
 
 .searchEntBut{
-	background: url(../images/icons/search-icon.svg) no-repeat;
-	background-size: 6%;
+	background: url(../images/icons/search-icon.svg) no-repeat #fff;
+    background-size: 100%;
     position: absolute;
-    width: 25px;
-    padding: 8px 5px;
-    background: #ddd;
+    width: 34px;
+    padding: 16px 5px;
+    border: 0px;
+    right: 2.2%;
+    top: 16px;
 }
 
 .logo-cart-search { border-bottom: 1px #e9e9e9 solid; }
