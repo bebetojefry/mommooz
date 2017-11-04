@@ -1123,8 +1123,8 @@ transition:0.4s all ease;
 }
 .brd-L-1p{border: 2px #00e672 dotted !important;}
 
-span.spanVarient{display: inline-block;width: 100%;padding-bottom: 4px;}
-
+span.spanVarient{display: inline-block;width: 100%;padding-bottom: 4px;margin-top: 8px;}
+select#cmb_variant{margin-top: 5px!important;}
 .item-thumb .block-10{border: #eee 1px solid;padding: 10px;border-radius: 4px;position: relative;}
 .iB{display: inline-block;}.tC{text-align: center;}
 .b10{width: 83.33333333%;display: inline-block;margin-left: -4px;}
@@ -1133,6 +1133,8 @@ span.spanVarient{display: inline-block;width: 100%;padding-bottom: 4px;}
 .b6{width:50% ;display: inline-block;margin-left: -4px;}
 .VaM{vertical-align: middle!important;}
 .b4 input[type="number"], .b4 input[type="text"]{margin-top: 0px!important;padding:5px 8px!important;background:#ebebeb!important;border-radius: 2px!important;  }
+
+
 
 .plusActive{width: 15px;height: 15px;position: relative;cursor: pointer;display: inline-block;text-align: center;}
 .first-cat-cary ul li span.plusActive:after{position: absolute;content: "+";font-family: arial;font-size: 18px;font-weight: bold;left: 0px;
