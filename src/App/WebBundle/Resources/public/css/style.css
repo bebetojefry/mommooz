@@ -39,17 +39,12 @@ a:hover{color:#f97a78;}
 {
 	opacity: 0;
 	z-index: 0;
-	left: 0%;
-	transform: rotateY(20deg);
-	transform-origin: left;
 }
 
 .slider.active
 {
 	opacity: 1;
 	z-index: 2;
-	left: 0px;
-	transform: rotateX(0deg);
 }
 
 .slider-left { perspective: 1000; }
@@ -125,10 +120,14 @@ a.comn-social.twit { left: 84px; }
 
 .social-top-header a.fb { right: 84px; }
 
-.search-main-home
+.search-main-home .searchEntBut
 {
 	background: url(../images/icons/search-icon.svg) right no-repeat;
 	background-size: 6%;
+    position: absolute;
+    width: 25px;
+    padding: 8px 5px;
+    background: #ddd;
 }
 
 .logo-cart-search { border-bottom: 1px #e9e9e9 solid; }
@@ -175,7 +174,7 @@ a.comn-social.twit { left: 84px; }
 	bottom: -24px;
 	background: #fff;
 	border-bottom: 1px #dcddd4 solid;
-    overflow: hidden;
+    display: none;
 }
 
 .slider-navigation .block-3

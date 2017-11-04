@@ -1,4 +1,21 @@
-<div id="banner-image" class="block-98 slider-cary center-pos">
+
+          
+    <!----  New Slider Banner -- >
+     <!--<div class="block-98 slider-cary relative-pos center-pos">
+           <div class="full-width absolute-pos left-pos top-pos slider slide-1 active">
+               <a href=""> <img src="banners/2.jpg" class="image-fw" alt="momooz offer"> </a>
+           </div>
+        	<div class="full-width absolute-pos left-pos top-pos slider slide-2">
+               <a href=""> <img src="banners/3.jpg" class="image-fw" alt="momooz offer"> </a>
+           </div>
+           <div class="full-width absolute-pos left-pos top-pos slider slide-3">
+               <a href=""> <img src="banners/1.jpg" class="image-fw" alt="momooz offer"> </a>
+           </div>
+        </div>-->
+   
+
+   
+<div id="banner-image" class="block-98 slider-cary center-pos">   
     {% for banner in banners %}
         {% if loop.index0 == 0 %}
             <a href="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}"><img src="{{ banner.getRealPicturePath() | imagine_filter('banner') }}" class="image-fw" alt=""></a>

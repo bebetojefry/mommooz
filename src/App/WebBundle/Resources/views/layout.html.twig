@@ -98,10 +98,10 @@
             </div>
         </div>
         <div class="block-6 clearSet block-mb-12">
-            <div class="block-10 right-float mb-fn block-mb-12">
+            <div class="block-10 right-float relative-pos mb-fn block-mb-12">
                 <form method="get" action="{{ path('keyword_web_search') }}">
                     <input type="text" name="q" id="global-search" placeholder="Search Products" class="search-main-home" value="{{ app.request.get('q') }}">
-                    <button type="submit" style="visibility: hidden;">S</button>
+                    <button class="searchEntBut" type="submit"></button>
                 </form>
             </div>
         </div>

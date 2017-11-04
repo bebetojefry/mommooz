@@ -1,6 +1,7 @@
 // JavaScript Document
 var current_slide;
 var totalslides;
+var heightSlider;
 
 function isNumeric(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
@@ -37,6 +38,8 @@ $(".tab-head .floating-arrow").addClass("transition_1s");
 
 	var hc_height = $(".heigh-clear").height();
 	$(".tab-cary").height(hc_height);
+    
+    heightSlider =$('.slider-cary img').innerHeight();$('.slider-cary').height(heightSlider);
 
 // Click
 
@@ -103,14 +106,14 @@ $('.faq-div').click(function(){
 // -- Navigations
 
 $('.nav-catg-click').hover(function(){
-	/*if($(".nav-submenu").hasClass("active")){
-	setTimeout(function(){$(".nav-submenu").removeClass("active"); }, 0);
+	if($(".nav-submenu").hasClass("active")){
+	   setTimeout(function(){$(".nav-submenu").removeClass("active"); }, 0);
 		}
 	else
 	{
 		$(".nav-submenu, .main-sub-nav").addClass("active");
-		}*/
-    $(".nav-submenu").toggleClass("active");
+		}
+   // $(".nav-submenu").toggleClass("active");
  });
     
     
@@ -273,7 +276,7 @@ function slide_show(){
     if($(".slider-cary .slider").hasClass("active")){
                     $(".slider-cary .slider").removeClass("active");
             }
-    $(".slider-left .slide_"+current_slide).addClass("active");
+    $(".slide-"+current_slide).addClass("active");
 }
 
 $(document).ready(function(){
