@@ -103,13 +103,14 @@ $('.faq-div').click(function(){
 // -- Navigations
 
 $('.nav-catg-click').hover(function(){
-	if($(".nav-submenu").hasClass("active")){
+	/*if($(".nav-submenu").hasClass("active")){
 	setTimeout(function(){$(".nav-submenu").removeClass("active"); }, 0);
 		}
 	else
 	{
 		$(".nav-submenu, .main-sub-nav").addClass("active");
-		}
+		}*/
+    $(".nav-submenu").toggleClass("active");
  });
     
     

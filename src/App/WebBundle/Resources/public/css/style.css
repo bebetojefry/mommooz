@@ -175,6 +175,7 @@ a.comn-social.twit { left: 84px; }
 	bottom: -24px;
 	background: #fff;
 	border-bottom: 1px #dcddd4 solid;
+    overflow: hidden;
 }
 
 .slider-navigation .block-3
@@ -208,6 +209,10 @@ a.comn-social.twit { left: 84px; }
 	top: -6px;
 	left: 10px;
 }
+
+.offerRight .full-width:first-child{margin-top: 0px!important;}
+.offerRight .full-width{margin-top: 8px;}
+
 .features-cary{
 	perspective:500px;
 	}
