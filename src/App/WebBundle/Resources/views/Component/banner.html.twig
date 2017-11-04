@@ -46,7 +46,7 @@
                <a href=""> <img src="banners/1.jpg" class="image-fw" alt="momooz offer"> </a>
            </div>-->
         </div>
-<div id="banner-items" class="slider-n.avigation block-98 absolute-centre absolute-pos block-fl-cary font-normal">
+<div id="banner-items" class="slider-navigation block-98 absolute-centre absolute-pos block-fl-cary font-normal">
     {% for banner in banners %}     
         {% if loop.index0 < 4 %}
             <div class="block-3 {% if loop.index0 == 0 %}active{% endif %} banner-item relative-pos" data-image="{{ banner.getRealPicturePath() | imagine_filter('banner') }}" data-link="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}">
