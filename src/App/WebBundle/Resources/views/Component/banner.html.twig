@@ -24,14 +24,16 @@
     {% endfor %}
 </div>-->
   <div id="banner-image" class="block-98 slider-cary relative-pos center-pos">
+         {% set i = 1 %}
           {% for banner in banners %}
+                      
         {% if loop.index0 < 5 %}
-           <div class="full-width absolute-pos left-pos top-pos slider slide-1 active">
-               <a href=""> <img src="banners/2.jpg" class="image-fw" alt="momooz offer"> </a>
+           <div class="full-width absolute-pos left-pos top-pos slider slide-{{ i }} {% if loop.index0 == 0 %}active{% endif %}">
+               <a href="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}"> <img src="{{ banner.getRealPicturePath() | imagine_filter('banner') }}" class="image-fw" alt="momooz offer"> </a>
            </div>
-            <a href="{{ path(banner.getRouteName(), {'id': banner.getEntity().getId()}) }}">
-            <img src="{{ banner.getRealPicturePath() | imagine_filter('banner') }}" class="image-fw" alt=""></a>
+            
        {% endif %}
+       {% set i = i + 1 %}
     {% endfor %}
           
           <!-- <div class="full-width absolute-pos left-pos top-pos slider slide-1 active">
