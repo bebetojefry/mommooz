@@ -120,9 +120,8 @@ a.comn-social.twit { left: 84px; }
 
 .social-top-header a.fb { right: 84px; }
 
-.search-main-home .searchEntBut
-{
-	background: url(../images/icons/search-icon.svg) right no-repeat;
+.searchEntBut{
+	background: url(../images/icons/search-icon.svg) no-repeat;
 	background-size: 6%;
     position: absolute;
     width: 25px;
