@@ -610,7 +610,7 @@ class Item
             if($entry->getStock()->getStatus() && $entry->getStatus()){
                 $index = $this->getId();
 
-                if($this->getVariants()->count() > 0){
+                if($entry->getVariant()){
                     $index = $entry->getVariant()->getId();
                 }
 
