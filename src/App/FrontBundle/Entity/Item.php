@@ -673,7 +673,7 @@ class Item
     public function getEntryForVariant($variant){
         $entries = $this->getLowCostEntries();
         foreach($entries as $entry){
-            if($entry->getItem()->getVariants()->count() > 0 && $entry->getVariant()->getId() == $variant->getId()){
+            if($entry->getVariant() && $entry->getVariant()->getId() == $variant->getId()){
                 return $entry;
             }
         }
