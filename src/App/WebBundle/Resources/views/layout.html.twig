@@ -91,17 +91,17 @@
             </div>
         </div>
     </section>
-    <section class="center-1200px block-fl-cary pt-20p logo-cart-search va-top">
+    <section class="center-1200px block-fl-cary pt-20p logo-cart-search pb-15p va-top">
         <div class="block-2 block-mb-12 mb-text-center">
             <div class="block-mb-5 center-pos">
                 <a href="{{ path('home') }}"> <img src="{{ asset('bundles/appweb/images/icons/logo.png') }}" class="image-fw" alt="momooz"> </a>
             </div>
         </div>
         <div class="block-6 clearSet block-mb-12">
-            <div class="block-10 right-float mb-fn block-mb-12">
+            <div class="block-10 right-float relative-pos mb-fn block-mb-12">
                 <form method="get" action="{{ path('keyword_web_search') }}">
                     <input type="text" name="q" id="global-search" placeholder="Search Products" class="search-main-home" value="{{ app.request.get('q') }}">
-                    <button type="submit" style="visibility: hidden;">S</button>
+                    <button class="searchEntBut" type="submit"></button>
                 </form>
             </div>
         </div>
