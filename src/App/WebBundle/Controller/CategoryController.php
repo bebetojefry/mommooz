@@ -14,6 +14,10 @@ class CategoryController extends Controller
     
     public function indexAction(Category $category, $child = null)
     {
+        if(!$category->getStatus()){
+            return new Response('Category not found...', 404);
+        }
+
         return $this->render('AppWebBundle:Category:menu.html.twig', array('category' => $category, 'child' => $child));
     }
     
@@ -28,7 +32,7 @@ class CategoryController extends Controller
     }
     
     public function popularAction(){
-        $categories = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true), null, 4, 0);
+        $categories = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true, 'status' => true), null, 4, 0);
         return $this->render('AppWebBundle:Category:popular.html.twig', array('categories' => $categories));
     }
     

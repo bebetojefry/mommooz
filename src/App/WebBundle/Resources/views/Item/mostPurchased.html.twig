@@ -2,7 +2,7 @@
 {% set break = false %}
 {% set count = 0 %}
 {% for entry in entries if not break %}
-    {% if app_web_user.isDeliverable(entry)  %}
+    {% if app_web_user.isDeliverable(entry) && entry.isEnabled() %}
         {% set count = count + 1 %}
         <div class="full-width block-fl-cary mt-20p">
             <a href="{{ path('item_page', {'id': entry.getId()}) }}">
