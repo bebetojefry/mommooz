@@ -212,7 +212,7 @@ class ItemController extends Controller
         $result = array();
         $app_web_user = $this->get('app.web.user');
         foreach($entries as $entry){
-            if($app_web_user->isDeliverable($entry)){
+            if($app_web_user->isDeliverable($entry) && $entry->isEnabled()){
                 $content = $this->renderView('AppWebBundle:Item:newItem.html.twig', array(
                     'entry' => $entry
                 ));
