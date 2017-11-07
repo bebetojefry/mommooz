@@ -39,8 +39,8 @@ $(".tab-head .floating-arrow").addClass("transition_1s");
 	var hc_height = $(".heigh-clear").height();
 	$(".tab-cary").height(hc_height);
     
-    heightSlider =$('.slider-cary img').innerHeight();//$('.slider-cary').height(heightSlider);
-    alert(heightSlider);
+    heightSlider =$('.slider-cary img').innerHeight();$('.slider-cary, .offerRight').height(heightSlider);
+
 // Click
 
 $('.footer-submenu, .footer-bottom-click, .footer-bottom-click span').click(function(){

@@ -210,7 +210,7 @@ a.comn-social.twit { left: 84px; }
 	top: -6px;
 	left: 10px;
 }
-
+.offerRight{overflow: hidden;}
 .offerRight .full-width:first-child{margin-top: 0px!important;}
 .offerRight .full-width{margin-top: 8px;}
 
