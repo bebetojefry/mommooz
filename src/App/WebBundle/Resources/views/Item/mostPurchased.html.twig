@@ -4,12 +4,12 @@
 {% for entry in entries if not break %}
     {% if app_web_user.isDeliverable(entry)  %}
         {% set count = count + 1 %}
-        <div class="full-width block-fl-cary mt-15p">
+        <div class="full-width block-fl-cary mt-20p">
             <a href="{{ path('item_page', {'id': entry.getId()}) }}">
                 <div class="block-4"> <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="image-fw" alt="momooz product"> </div>
                 <div class="block-8 text-center">
                     <div class="block-10 center-pos text-left">
-                        <h5 class="mt-10p">{{ entry.getItem().getName() }}</h5>
+                        <h5 class="mt-0p">{{ entry.getItem().getName() }}</h5>
                         <h5 class="mt-10p">RS. {{ entry.getActualPrice() }}</h5>
                     </div>
                 </div>

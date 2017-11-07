@@ -1121,7 +1121,7 @@ transition:0.4s all ease;
     display: block;
     background: #fff;
 }
-.brd-L-1p{border: 2px #00e672 dotted !important;}
+.brd-L-1p{border: 2px #666 dotted !important;}
 
 span.spanVarient{display: inline-block;width: 100%;padding-bottom: 4px;margin-top: 8px;}
 select#cmb_variant{margin-top: 5px!important;}
