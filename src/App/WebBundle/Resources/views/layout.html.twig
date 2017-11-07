@@ -82,10 +82,11 @@
                     </form>
                 </div>
                 <div class="block-6 block-mb-12 mt-10p clearSet social-top-header relative-pos mb-none">
-                    <a href="https://www.facebook.com/momooz.17" class="fb"></a>
-                    <a href="" class="tw"></a>
-                    <a href="" class="yt"></a>
-                    <a href="" class="gp"></a>
+                    <a href="https://www.facebook.com/MoMoOZBazaar/" class="fb" target="_blank"></a>
+                    <!--<a href="" class="tw"></a>-->
+                    <a href="https://www.instagram.com/momooz_com/" class="tw" target="_blank"></a>
+               <!--     <a href="" class="yt"></a>-->
+                    <a href="https://plus.google.com/110829462966957449374" class="gp" target="_blank"></a>
                     <img src="{{ asset('bundles/appweb/images/icons/social-w-icons.svg') }}" class="right-float" width="100" alt="social momooz">
                 </div>
             </div>
@@ -100,8 +101,8 @@
         <div class="block-6 clearSet block-mb-12">
             <div class="block-10 right-float relative-pos mb-fn block-mb-12">
                 <form method="get" action="{{ path('keyword_web_search') }}">
-                    <input type="text" name="q" id="global-search" placeholder="Search Products" class="search-main-home" value="{{ app.request.get('q') }}">
-                    <button class="searchEntBut" type="submit"></button>
+                    <input type="text" name="q" id="global-search" placeholder="Search Products" class="search-main-home" value="{{ app.request.get('q') }}" required="required">
+                   <button class="searchEntBut" type="submit"></button>
                 </form>
             </div>
         </div>
@@ -228,10 +229,10 @@
             <div class="block-2 mt-15p block-mb-4 block-sb-12 sb-text-left">
                 <h4 class="mb-10p"> <strong>Social Media</strong> </h4>
                 <div class="full-width mt-15p relative-pos footer-social">
-                    <a href="" class="fb"></a>
-                    <a href="" class="tw"></a>
-                    <a href="" class="yt"></a>
-                    <a href="" class="gp"></a>
+                    <a href="https://www.facebook.com/MoMoOZBazaar/" class="fb" target="_blank"></a>
+                    <a href="https://www.instagram.com/momooz_com/" class="tw" target="_blank"></a>
+                    <a href="https://plus.google.com/110829462966957449374" class="yt" target="_blank"></a>
+                    <!--<a href="" class="gp"></a>-->
                     <img src="{{ asset('bundles/appweb/images/icons/social-icons.svg') }}" width="100" alt="social momooz">
                 </div>
             </div>

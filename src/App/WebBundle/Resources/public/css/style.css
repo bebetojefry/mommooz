@@ -116,12 +116,12 @@ a.comn-social.twit { left: 84px; }
 
 .social-top-header a.yt { right: 30px; }
 
-.social-top-header a.tw { right: 58px; }
+.social-top-header a.tw { right: 28px; }
 
-.social-top-header a.fb { right: 84px; }
+.social-top-header a.fb { right: 56px; }
 
 .searchEntBut{
-	background: url(../images/icons/search-icon.svg) no-repeat #fff;
+	background: url(../images/icons/search-icon.svg) no-repeat;
     background-size: 100%;
     position: absolute;
     width: 34px;
@@ -210,7 +210,7 @@ a.comn-social.twit { left: 84px; }
 	top: -6px;
 	left: 10px;
 }
-
+.offerRight{overflow: hidden;}
 .offerRight .full-width:first-child{margin-top: 0px!important;}
 .offerRight .full-width{margin-top: 8px;}
 
@@ -1121,7 +1121,8 @@ transition:0.4s all ease;
     display: block;
     background: #fff;
 }
-.brd-L-1p{border: 2px #00e672 dotted !important;}
+.brd-L-1p{/*border: 2px #666 dotted !important;*/box-shadow: 0px 1px 3px rgba(0,0,0,0.2);transition: 0.5s;}
+.brd-L-1p:hover{box-shadow: 0px 1px 15px rgba(0,0,0,0.3);}
 
 span.spanVarient{display: inline-block;width: 100%;padding-bottom: 4px;margin-top: 8px;}
 select#cmb_variant{margin-top: 5px!important;}
