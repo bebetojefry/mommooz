@@ -23,6 +23,10 @@ class ItemController extends Controller
      */
     public function pageAction(StockEntry $stockEntry)
     {
+        if(!$stockEntry->isEnabled()){
+            return new Response('Item not found or inactive...', 404);
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $view = new ItemView();
@@ -383,7 +387,7 @@ class ItemController extends Controller
      * @Route("/{id}/thumb", name="item_thumb", options={"expose"=true})
      */
     public function thumbAction(StockEntry $entry) {
-        if(Item::isRendered($entry->getItem())){
+        if(Item::isRendered($entry->getItem()) || !$entry->isEnabled()){
             return new Response('');
         }
 

@@ -1,12 +1,14 @@
 <ul {% if child == null %}class="main"{% endif %}>
     {% for menu in category.getChilds() %}
-        <li>
-            <a href="{{ path('category_page', {id: menu.getId()}) }}" data-link="{{ path('category_page', {id: menu.getId()}) }}" data-img="{{ menu.getRealPicturePath() | imagine_filter('menu_cat') }}">{{ menu.getCategoryName() }}
-                {% if menu.getChilds()|length > 0 %}<span class="icon-arrow-right"></span>{% endif %}
-            </a>
-            {% if menu.getChilds()|length > 0 %}    
-                {{ render(controller('AppWebBundle:Category:index', { 'id': menu.getId(), 'child': 1 })) }}
-            {% endif %}
-        </li>
+        {% if category.getStatus() %}
+            <li>
+                <a href="{{ path('category_page', {id: menu.getId()}) }}" data-link="{{ path('category_page', {id: menu.getId()}) }}" data-img="{{ menu.getRealPicturePath() | imagine_filter('menu_cat') }}">{{ menu.getCategoryName() }}
+                    {% if menu.getChilds()|length > 0 %}<span class="icon-arrow-right"></span>{% endif %}
+                </a>
+                {% if menu.getChilds()|length > 0 %}
+                    {{ render(controller('AppWebBundle:Category:index', { 'id': menu.getId(), 'child': 1 })) }}
+                {% endif %}
+            </li>
+        {% endif %}
     {% endfor %}
 </ul>

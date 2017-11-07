@@ -592,4 +592,8 @@ class StockEntry
         
         return $data;
     }
+
+    public function isEnabled(){
+        return ($this->getStatus() && $this->getItem()->getStatus() && $this->getItem()->getProduct()->getStatus() && $this->getItem()->getProduct()->getCategory()->getStatus());
+    }
 }
