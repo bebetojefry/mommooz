@@ -1,7 +1,7 @@
 {% set break = false %}
 {% set count = 0 %}
 {% for entry in entries if not break %}
-    {% if app_web_user.isDeliverable(entry) && entry.isEnabled()  %}
+    {% if app_web_user.isDeliverable(entry) and entry.isEnabled()  %}
         {% set count = count + 1 %}
         <div class="block-3 ptrbl-5p mt-10p block-mb-6 block-sb-12 new_entry_{{ entry.getId() }}">
             <a href="{{ path('item_page', {'id': entry.getId()}) }}">
