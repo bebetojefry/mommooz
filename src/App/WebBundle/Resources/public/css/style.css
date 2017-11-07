@@ -121,7 +121,7 @@ a.comn-social.twit { left: 84px; }
 .social-top-header a.fb { right: 84px; }
 
 .searchEntBut{
-	background: url(../images/icons/search-icon.svg) no-repeat #fff;
+	background: url(../images/icons/search-icon.svg) no-repeat;
     background-size: 100%;
     position: absolute;
     width: 34px;
