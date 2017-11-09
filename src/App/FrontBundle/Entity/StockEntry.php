@@ -594,6 +594,16 @@ class StockEntry
     }
 
     public function isEnabled(){
-        return ($this->getStatus() && $this->getItem()->getStatus() && $this->getItem()->getProduct()->getStatus() && $this->getItem()->getProduct()->getCategory()->getStatus());
+        $parent_cat_enabled = true;
+        $cat = $this->getItem()->getProduct()->getCategory();
+        while($cat->getParent()){
+            $cat = $cat->getParent();
+            if(!$cat->getStatus()){
+                $parent_cat_enabled = false;
+                break;
+            }
+        }
+
+        return ($this->getStatus() && $this->getItem()->getStatus() && $this->getItem()->getProduct()->getStatus() && $this->getItem()->getProduct()->getCategory()->getStatus() && $parent_cat_enabled);
     }
 }
