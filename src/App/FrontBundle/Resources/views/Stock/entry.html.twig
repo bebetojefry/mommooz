@@ -42,8 +42,10 @@
         }});
 
         $("#{{ form.item.vars.id }}").on('change', function(){
+            {#
             $("#{{ form.state.vars.id }}").val("");
             $(this).parents('form').eq(0).submit();
+            #}
         });
     });
 </script>       
