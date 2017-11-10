@@ -121,6 +121,14 @@ class ItemController extends Controller
     public function editAction(Request $request, Item $item)
     {
         $dm = $this->getDoctrine()->getManager();
+
+        if($request->isMethod('POST') && isset($_POST['app_frontbundle_item']['product'])){
+            $product = $dm->getRepository('AppFrontBundle:Product')->find($_POST['app_frontbundle_item']['product']);
+            if($product){
+                $item->setProduct($product);
+            }
+        }
+
         $form = $this->createForm(new ItemType($dm), $item);
         $error = '';
         $code = FormHelper::FORM;
