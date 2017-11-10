@@ -45,7 +45,7 @@
                                         , {{ item.getEntry().getVariant().getValue() }}
                                     {% endif %}
                                 </a>
-                                {% if item.getEntry().getInStock() < item.getQuantity() || !item.getEntry().isEnabled() %}
+                                {% if item.getEntry().getInStock() < item.getQuantity() || item.getEntry().isEnabled() == false %}
                                     {% set out_of_stock = out_of_stock + 1 %}
                                     <span>Out of stock</span>
                                 {% endif %}
