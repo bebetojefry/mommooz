@@ -20,8 +20,11 @@
             {% set cur = 0 %}
             {% for entry in category.getInStockEntries() if not break %}
                 {% if app_web_user.isDeliverable(entry) %}
-                    {% set cur = cur + 1 %}
-                    {{ render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) }}
+                    {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
+                    {% if thumb_content != "" %}
+                        {{ thumb_content }}
+                        {% set cur = cur + 1 %}
+                    {% endif %}
                     {% if cur == 9 %}
                         {% set break = true %}
                     {% endif %}

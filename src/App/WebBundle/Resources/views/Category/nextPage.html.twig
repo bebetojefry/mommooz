@@ -2,7 +2,7 @@
 {% set cur = 0 %}
 {% set page = app.request.get('page', 0) %}
 {% for entry in category.getInStockEntries() if not break %}
-    {% if app_web_user.isDeliverable(entry) && loop.index0 >= (page * 9) %}
+    {% if app_web_user.isDeliverable(entry) and loop.index0 >= (page * 9) %}
         {% set cur = cur + 1 %}
         {{ render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) }}
         {% if cur == 9 %}
