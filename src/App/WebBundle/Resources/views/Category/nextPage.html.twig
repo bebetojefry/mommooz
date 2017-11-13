@@ -8,8 +8,9 @@
         {% if thumb_content != "" %}
             {% set skip_index = skip_index + 1 %}
             {% if skip_index > (page * 9) %}
-            {{ thumb_content|raw }}
-            {% set cur = cur + 1 %}
+                {{ thumb_content|raw }}
+                {% set cur = cur + 1 %}
+            {% endif %}
         {% endif %}
         {% if cur == 9 %}
             {% set break = true %}
