@@ -1,0 +1,6 @@
+{% for entry in category.getInStockEntries() %}
+    {% if app_web_user.isDeliverable(entry) %}
+        {{ render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) }}
+    {% endif %}
+{% endfor %}
+<a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: app.request.get('page', 0) + 1}) }}">next page</a>

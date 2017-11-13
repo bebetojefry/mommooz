@@ -30,6 +30,16 @@ class CategoryController extends Controller
             'category' => $category
         ));
     }
+
+    /**
+     * @Route("/{id}/page/{page}.html", name="category_next_page", options={"expose"=true})
+     */
+    public function nextPageAction(Category $category, $page)
+    {
+        return $this->render('AppWebBundle:Category:nextPage.html.twig', array(
+            'category' => $category
+        ));
+    }
     
     public function popularAction(){
         $categories = $this->getDoctrine()->getManager()->getRepository('AppFrontBundle:Category')->findBy(array('popular' => true, 'status' => true), null, 4, 0);

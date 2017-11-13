@@ -21,7 +21,7 @@
                     {{ render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) }}
                 {% endif %}
             {% endfor %}
-            <a class="next-page" href="example-page2.html">next page</a>
+            <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: 0}) }}">next page</a>
         </div>
         <script type="text/javascript">
             $('#item-thumbs').jscroll({
