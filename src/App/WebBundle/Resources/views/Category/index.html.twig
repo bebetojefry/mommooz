@@ -15,12 +15,18 @@
     </script>
     <div class="block-9 block-lb-12 productspage-pro ptb-15p block-fl-cary pb-50p lb-border-none">
         <h4 class="pl-25p"> All Products </h4>
-        {% for entry in category.getInStockEntries() %} 
-            {% if app_web_user.isDeliverable(entry) %}
-                {{ render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) }}
-            {% endif %}
-        {% endfor %}
+        <div id="item-thumbs">
+            {% for entry in category.getInStockEntries() %}
+                {% if app_web_user.isDeliverable(entry) %}
+                    {{ render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) }}
+                {% endif %}
+            {% endfor %}
+            <a class="next-page" href="example-page2.html">next page</a>
+        </div>
         <script type="text/javascript">
+            $('#item-thumbs').jscroll({
+                nextSelector: 'a.next-page'
+            });
             $('#main_filter').ItemFilter(filter_modal);
         </script>
     </div>
