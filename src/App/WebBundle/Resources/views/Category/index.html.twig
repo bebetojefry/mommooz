@@ -34,7 +34,10 @@
         </div>
         <script type="text/javascript">
             $('#item-thumbs').jscroll({
-                nextSelector: 'a.next-page'
+                nextSelector: 'a.next-page',
+                callback: function() {
+                    $('#main_filter').ItemFilter(filter_modal);
+                }
             });
             $('#main_filter').ItemFilter(filter_modal);
         </script>
