@@ -22,7 +22,7 @@
                 {% if app_web_user.isDeliverable(entry) %}
                     {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
                     {% if thumb_content != "" %}
-                        {{ thumb_content }}
+                        {{ thumb_content|raw }}
                         {% set cur = cur + 1 %}
                     {% endif %}
                     {% if cur == 9 %}
