@@ -1,0 +1,22 @@
+{% set break = false %}
+{% set cur = 0 %}
+{% set page = app.request.get('page', 0) %}
+{% set skip_index = 0 %}
+{% for entry in category.getInStockEntries() if not break %}
+    {% if app_web_user.isDeliverable(entry) %}
+        {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
+        {% if thumb_content != "" %}
+            {% set skip_index = skip_index + 1 %}
+            {% if skip_index > (page * 9) %}
+                {{ thumb_content|raw }}
+                {% set cur = cur + 1 %}
+            {% endif %}
+        {% endif %}
+        {% if cur == 9 %}
+            {% set break = true %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+{% if cur > 0 %}
+    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: app.request.get('page', 0) + 1}) }}">next page</a>
+{% endif %}

@@ -279,22 +279,22 @@ function slide_show(){
     $(".slide-"+current_slide).addClass("active");
 }
 
-$(document).ready(function(){
-    $('.add-to-cart').on('click', function(){
+function bindAddtoCart() {
+    $('.add-to-cart').on('click', function () {
         var that = this;
         var qty = $(this).parent().find('.txt-item-qty').val();
-        if(!isNumeric(qty) || qty <= 0){
+        if (!isNumeric(qty) || qty <= 0) {
             openAlert('Invalid Quantity', 'error');
-            return; 
+            return;
         }
         $.ajax({
-            url: to_cart_url.replace('0', $(this).data('entry'))+'?qty='+qty,
+            url: to_cart_url.replace('0', $(this).data('entry')) + '?qty=' + qty,
             dataType: 'json',
-            success: function(resp){
-                if(resp.status){
+            success: function (resp) {
+                if (resp.status) {
                     $(that).parent().find('.in_cart_count i').text(resp.quantity);
                     $(that).parent().find('.in_cart_count').show();
-                    if(!resp.in_cart){
+                    if (!resp.in_cart) {
                         $('#cart-badge').html(parseInt($('#cart-badge').html()) + 1);
                         $('.cheakout_popup').addClass('active');
                         $('.cheakout_popup .count').html(parseInt($('.cheakout_popup .count').html()) + 1);
@@ -306,6 +306,10 @@ $(document).ready(function(){
             }
         });
     });
+}
+
+$(document).ready(function(){
+    bindAddtoCart();
 });
 
 $.fn.imageUploader = function( options ) {

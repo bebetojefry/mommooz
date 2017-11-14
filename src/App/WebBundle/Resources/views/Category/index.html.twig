@@ -15,12 +15,32 @@
     </script>
     <div class="block-9 block-lb-12 productspage-pro ptb-15p block-fl-cary pb-50p lb-border-none">
         <h4 class="pl-25p"> All Products </h4>
-        {% for entry in category.getInStockEntries() %} 
-            {% if app_web_user.isDeliverable(entry) %}
-                {{ render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) }}
-            {% endif %}
-        {% endfor %}
+        <div id="item-thumbs">
+            {% set break = false %}
+            {% set cur = 0 %}
+            {% for entry in category.getInStockEntries() if not break %}
+                {% if app_web_user.isDeliverable(entry) %}
+                    {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
+                    {% if thumb_content != "" %}
+                        {{ thumb_content|raw }}
+                        {% set cur = cur + 1 %}
+                    {% endif %}
+                    {% if cur == 9 %}
+                        {% set break = true %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: 1}) }}">next page</a>
+        </div>
         <script type="text/javascript">
+            $('#item-thumbs').jscroll({
+                nextSelector: 'a.next-page',
+                loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
+                callback: function() {
+                    $('#main_filter').ItemFilter(filter_modal);
+                    bindAddtoCart();
+                }
+            });
             $('#main_filter').ItemFilter(filter_modal);
         </script>
     </div>
