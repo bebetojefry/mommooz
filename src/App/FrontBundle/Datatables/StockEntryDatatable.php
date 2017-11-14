@@ -32,8 +32,7 @@ class StockEntryDatatable extends AbstractDatatableView
         $formatter = function($line) use ($repo){
             $entry = $repo->find($line['id']);
             $line['in_stock'] = $entry->getInStock();
-            $line['commission'] = $line['actualPrice'] - $line['price']; 
-            $line['namewithbrand'] = $line['item']['brand']['name'] . ' '.$line['item']['name'];
+            $line['commission'] = $line['actualPrice'] - $line['price'];
             $line['sl'] = $this->start + $this->sl++;
             
             return $line;
@@ -128,13 +127,10 @@ class StockEntryDatatable extends AbstractDatatableView
                 'title' => 'Sl No',
             ))
             ->add('item.name', 'column', array(
-                'visible' => false,
+                'title' => 'Item',
             ))
             ->add('item.brand.name', 'column', array(
-                'visible' => false,
-            ))
-            ->add('namewithbrand', 'virtual', array(
-                'title' => 'Item',
+                'title' => 'Brand',
             ))
             ->add('quantity', 'column', array(
                 'title' => 'Quantity',
