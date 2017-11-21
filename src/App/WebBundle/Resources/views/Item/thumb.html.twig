@@ -13,7 +13,7 @@
         <a href="{{ path('item_page', {'id': entry.getId()}) }}">
             <div class="block-8"> <img src="{{ entry.getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" class="full-width" alt=""> </div>
             <h5 class="mt-15p block-11">
-                {{ entry.getItem().getName() }}{% if entry.getVariant() %}{{ ' - '~entry.getVariant().getValue() }}{% endif %}
+                {{ entry.getItem().getName() }}
             </h5>
             <h3 class="mt-5p"> <span style="text-decoration: line-through;margin-bottom: 5px;display: inline-block;width:100%;font-size:13px;color:#666;">MRP : {{ entry.getMrp() }}</span>
                 <span class="icon-inr ml-5p" style="font-size:13px;"></span>{{ entry.getActualPrice() }}</h3>
