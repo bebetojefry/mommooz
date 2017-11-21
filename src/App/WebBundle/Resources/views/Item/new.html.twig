@@ -13,7 +13,7 @@
                         <span class="newNameSpan">{{ entry.getItem().getName() }}</span>
                         <br>
                         <span style="text-decoration: line-through;margin-bottom: 5px;display: inline-block;width:100%;font-size:13px;color:#666;">MRP : {{ entry.getMrp() }}</span>
-                        <strong>RS. {{ entry.getActualPrice() }}/{% if entry.getVariant() %}{{ '/'~entry.getVariant().getValue() }}{% endif %}</strong>
+                        <strong>RS. {{ entry.getActualPrice() }}{% if entry.getVariant() %}{{ '/'~entry.getVariant().getValue() }}{% endif %}</strong>
                     </div>
                 </div>
             </a>
