@@ -1051,7 +1051,7 @@ table.raf-table tr td{vertical-align: middle;}
 }
 
 .whats-new .block-98{
-    height: 285px;
+    height: 295px;
     overflow: hidden;
     
 }
@@ -1149,7 +1149,7 @@ select#cmb_variant{margin-top: 5px!important;}
 .VarientShowHover li span{font-size: 10px;color: #1b1d20;}
 .item-thumb .block-10:hover .VarientShowHover {max-height: 600px;height: auto; transition: 1s all;}
 
-.newNameSpan{display: inline-block;width: 100%;height: 30px;overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
+.newNameSpan{display: inline-block;width: 100%;/*height: 30px;*/overflow: hidden;text-overflow: ellipsis; white-space: nowrap;}
 a.load_more_new{border: 1px #eee solid;border-radius: 4px;font-size: 12px;padding: 3px 8px;}a.load_more_new span{font-size: 10px;}
 
 .dashshadowCary{display: inline-block;margin-right: 20px;padding: 0px 0px 10px 0px;border-radius: 5px;
