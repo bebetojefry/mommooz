@@ -690,7 +690,7 @@ class AccountController extends Controller
 
         $delivery_charge = 0;
         $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
-            ->where('c.priceFrom >= :p and c.priceTo <= :p')
+            ->where('c.priceFrom <= :p and c.priceTo >= :p')
             ->setParameter('p', $this->getUser()->getCart()->getPrice())
             ->setFirstResult(0)
             ->setMaxResults(1)
@@ -738,6 +738,21 @@ class AccountController extends Controller
             if(isset($_POST['use_reward'])){
                 $total_amt -= $_POST['reward_money'];
             }
+
+            $delivery_charge = 0;
+            $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
+                ->where('c.priceFrom <= :p and c.priceTo >= :p')
+                ->setParameter('p', $this->getUser()->getCart()->getPrice())
+                ->setFirstResult(0)
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getResult();
+
+            if(count($charges) > 0){
+                $delivery_charge = $charges[0]->getCharge();
+            }
+
+            $total_amt += $delivery_charge;
             
             $data = array(
                 'tid' => time(),
@@ -848,7 +863,7 @@ class AccountController extends Controller
 
             $delivery_charge = 0;
             $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
-                ->where('c.priceFrom >= :p and c.priceTo <= :p')
+                ->where('c.priceFrom <= :p and c.priceTo >= :p')
                 ->setParameter('p', $this->getUser()->getCart()->getPrice())
                 ->setFirstResult(0)
                 ->setMaxResults(1)
