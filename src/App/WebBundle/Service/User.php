@@ -42,7 +42,7 @@ class User {
     public function getCart(){
         $this->user = $this->container->get('security.token_storage')->getToken()->getUser();
         $em = $this->container->get('doctrine')->getManager();
-        if($this->user instanceof UserEntity){
+        if($this->user){
             $cart = $this->user->getCart();
         } else {
             $cart = $em->getRepository('AppFrontBundle:Cart')->findOneBySessionId(session_id());
