@@ -74,7 +74,7 @@ class BrandDatatable extends AbstractDatatableView
             'scroll_x' => false,
             'scroll_y' => '',
             'searching' => true,
-            'state_save' => true,
+            'state_save' => false,
             'delay' => 0,
             'extensions' => array(),
             'highlight' => false,

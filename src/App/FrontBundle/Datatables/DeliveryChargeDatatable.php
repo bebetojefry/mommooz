@@ -106,7 +106,7 @@ class DeliveryChargeDatatable extends AbstractDatatableView
             'class' => Style::BOOTSTRAP_3_STYLE,
             'individual_filtering' => false,
             'individual_filtering_position' => 'head',
-            'use_integration_options' => false,
+            'use_integration_options' => true,
             'force_dom' => false,
             'row_id' => 'id'
         ));
