@@ -153,10 +153,10 @@ class AdminController extends Controller
     }
 
     public function deliveryAction(Request $request){
-        $invoiceDatatable = $this->get('app.front.datatable.invoice');
-        $invoiceDatatable->buildDatatable();
-        return $this->render('AppFrontBundle:Admin:invoice.html.twig', array(
-            'invoiceDatatable' => $invoiceDatatable,
+        $chargeDatatable = $this->get('app.front.datatable.delivery_charge');
+        $chargeDatatable->buildDatatable();
+        return $this->render('AppFrontBundle:Admin:delivery_charge.html.twig', array(
+            'chargeDatatable' => $chargeDatatable,
         ));
     }
 }

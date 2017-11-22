@@ -7,18 +7,18 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\FrontBundle\Entity\Brand;
-use App\FrontBundle\Form\BrandType;
+use App\FrontBundle\Entity\DeliveryCharge;
+use App\FrontBundle\Form\DeliveryChargeType;
 use App\FrontBundle\Helper\FormHelper;
 
 class DeliveryController extends Controller
 {
     /**
-     * @Route("/results", name="brand_results", options={"expose"=true})
+     * @Route("/results", name="delivery_charge_results", options={"expose"=true})
      */
     public function indexResultsAction()
     {
-        $datatable = $this->get('app.front.datatable.brand');
+        $datatable = $this->get('app.front.datatable.delivery_charge');
         $datatable->buildDatatable();
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
         return $query->getResponse();
@@ -27,32 +27,30 @@ class DeliveryController extends Controller
     /**
      * Displays a form to add an existing location entity.
      *
-     * @Route("/new", name="brand_new", options={"expose"=true})
+     * @Route("/new", name="delivery_charge_new", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
     {
         $dm = $this->getDoctrine()->getManager();
-        $brand = new Brand();
-        $brand->setStatus(true);
-        $brand->setVisible(true);
-        $form = $this->createForm(new BrandType($dm), $brand);
+        $charge = new DeliveryCharge();
+        $form = $this->createForm(new DeliveryChargeType($dm), $charge);
                 
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if($form->isValid()){
-                $brand = $form->getData();
-                $dm->persist($brand);
+                $charge = $form->getData();
+                $dm->persist($charge);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'Brand Updated');
+                $this->get('session')->getFlashBag()->add('success', 'New delivery charge added');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
             }
         }
         
-        $body = $this->renderView('AppFrontBundle:Brand:form.html.twig',
+        $body = $this->renderView('AppFrontBundle:DeliveryCharge:form.html.twig',
             array('form' => $form->createView())
         );
         
@@ -62,36 +60,30 @@ class DeliveryController extends Controller
     /**
      * Displays a form to edit an existing brand entity.
      *
-     * @Route("/{id}/edit", name="brand_edit", options={"expose"=true})
+     * @Route("/{id}/edit", name="delivery_charge_edit", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function editAction(Request $request, Brand $brand)
+    public function editAction(Request $request, DeliveryCharge $charge)
     {
         $dm = $this->getDoctrine()->getManager();
-        $form = $this->createForm(new BrandType($dm), $brand);
+        $form = $this->createForm(new DeliveryChargeType($dm), $charge);
         
         $code = FormHelper::FORM;
         if($request->isMethod('POST')){
             $form->handleRequest($request);
             if($form->isValid()){
-                $brand = $form->getData();
-                $dm->persist($brand);
+                $charge = $form->getData();
+                $dm->persist($charge);
                 $dm->flush();
-                $this->get('session')->getFlashBag()->add('success', 'Brand created');
+                $this->get('session')->getFlashBag()->add('success', 'Delievry charge updated');
                 $code = FormHelper::REFRESH;
             } else {
                 $code = FormHelper::REFRESH_FORM;
             }
         }
         
-        $keywords = $brand->getKeywords()->getValues();
-        $keyword_values = array();
-        foreach($keywords as $keyword){
-            $keyword_values[] = array('id' => $keyword->getId(), 'name' => $keyword->getKeyword());
-        }
-        
-        $body = $this->renderView('AppFrontBundle:Brand:form.html.twig',
-            array('form' => $form->createView(), 'keyword_values' => json_encode($keyword_values))
+        $body = $this->renderView('AppFrontBundle:DeliveryCharge:form.html.twig',
+            array('form' => $form->createView())
         );
         
         return new Response(json_encode(array('code' => $code, 'data' => $body)));
@@ -100,38 +92,16 @@ class DeliveryController extends Controller
     /**
      * Displays a form to delete an existing brand entity.
      *
-     * @Route("/{id}/delete", name="brand_delete", options={"expose"=true})
+     * @Route("/{id}/delete", name="delivery_charge_delete", options={"expose"=true})
      * @Method({"GET", "POST"})
      */
-    public function deleteAction(Request $request, Brand $brand)
+    public function deleteAction(Request $request, DeliveryCharge $charge)
     {
         $dm = $this->getDoctrine()->getManager();
-        
-        $items = $dm->getRepository('AppFrontBundle:Item')->findByBrand($brand);
-        
-        if(count($items) > 0){
-            $this->get('session')->getFlashBag()->add('error', 'You can\'t delete this brand, since there is around '.count($items).' item(s) associated to this brand.');
-        } else {
-            $dm->remove($brand);
-            $dm->flush();
-            $this->get('session')->getFlashBag()->add('success', 'Brand removed');
-        }
+        $dm->remove($charge);
+        $dm->flush();
+        $this->get('session')->getFlashBag()->add('success', 'Delivery charge removed');
         
         return new Response(json_encode(array('code' => FormHelper::REFRESH)));
-    }
-    
-    /**
-     * List Brand products.
-     *
-     * @Route("/{id}/items", name="brand_show", options={"expose"=true})
-     * @Method({"GET"})
-     */
-    public function productsAction(Request $request, Brand $brand)
-    {
-        $itemDatatable = $this->get('app.front.datatable.item');
-        $itemDatatable->buildDatatable(array('brand' => $brand));
-        return $this->render('AppFrontBundle:Admin:item.html.twig', array(
-            'itemDatatable' => $itemDatatable,
-        ));
     }
 }

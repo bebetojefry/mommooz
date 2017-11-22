@@ -204,3 +204,9 @@ services:
          parent: sg_datatables.datatable.abstract
          properties:
              requestStack: '@request_stack'
+
+    app.front.datatable.delivery_charge:
+             class: App\FrontBundle\Datatables\DeliveryChargeDatatable
+             parent: sg_datatables.datatable.abstract
+             properties:
+                 requestStack: '@request_stack'
