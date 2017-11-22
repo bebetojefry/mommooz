@@ -40,6 +40,7 @@ class User {
      * Get count of cart items
      */
     public function getCart(){
+        $this->user = $this->container->get('security.token_storage')->getToken()->getUser();
         $em = $this->container->get('doctrine')->getManager();
         if($this->user instanceof UserEntity){
             $cart = $this->user->getCart();
