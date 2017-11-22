@@ -15,9 +15,9 @@ class DeliveryChargeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('priceFrom')
-            ->add('priceTo')
-            ->add('charge')
+            ->add('priceFrom', 'text', array('attr' => array("pattern" => "[+-]?([0-9]*[.])?[0-9]+", 'data-pattern-error' => 'Invalid Price')))
+            ->add('priceTo', 'text', array('attr' => array("pattern" => "[+-]?([0-9]*[.])?[0-9]+", 'data-pattern-error' => 'Invalid Price')))
+            ->add('charge', 'text', array('attr' => array("pattern" => "[+-]?([0-9]*[.])?[0-9]+", 'data-pattern-error' => 'Invalid Charge')))
         ;
     }
     
