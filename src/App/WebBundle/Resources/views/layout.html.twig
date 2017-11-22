@@ -141,7 +141,6 @@
                     <a href="{{ path('cart_page') }}">
                         <img src="{{ asset('bundles/appweb/images/icons/cart.svg') }}" width="25" alt="Cart">
                         {% set cart = app_web_user.getCart() %}
-                        Cart Id: {{ cart.getId() }}
                         <div class="badge" id="cart-badge">{{ cart.getItems().count() }}</div>
                     </a>
                 </li>

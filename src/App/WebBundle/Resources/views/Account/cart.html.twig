@@ -14,7 +14,6 @@
         
         {% include 'AppWebBundle:Account:menu.html.twig' %}
         {% set cart = app_web_user.getCart() %}
-        Cart Id: {{ cart.getId() }}
         <div class="block-9 mb-pl2 pl-30p ptb-20p border_left userRight block-mb-12 mb-text-left">
             <h3> Cart Page </h3>
             <form name="frmCart" id="frmCart" method="post" action="{{ path('place_order') }}" > 
