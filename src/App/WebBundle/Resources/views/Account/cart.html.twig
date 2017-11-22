@@ -13,7 +13,8 @@
     <section class="center-1200px block-fl-cary  va-top">
         
         {% include 'AppWebBundle:Account:menu.html.twig' %}
-        
+        {% set cart = app_web_user.getCart() %}
+        Cart Id: {{ cart.getId() }}
         <div class="block-9 mb-pl2 pl-30p ptb-20p border_left userRight block-mb-12 mb-text-left">
             <h3> Cart Page </h3>
             <form name="frmCart" id="frmCart" method="post" action="{{ path('place_order') }}" > 
@@ -28,14 +29,14 @@
                     </tr>
                     {% set totalPrice = 0 %}
                     {% set out_of_stock = 0 %}
-                    {% if app_web_user.getCart().getItems()|length == 0 %}
+                    {% if cart.getItems()|length == 0 %}
                         <tr>
                             <td colspan="6">
                                 <div style="color: #aca8b0; font-size: 13px; text-align: center; width: 100%;"> No Items found in your cart. </div>
                             </td>
                         </tr>
                     {% endif %}    
-                    {% for item in app_web_user.getCart().getItems() %}
+                    {% for item in cart.getItems() %}
                         <tr>
                             <td> <img src="{{ item.getEntry().getItem().getRealPicturePath() | imagine_filter('item_thumb') }}" width="60" class="dispaly-inline-block" alt="product name"> </td>
                             <td> 
@@ -76,11 +77,11 @@
                 </div>
                 <div class="full-width mt-10p ptb-20p text-right button-cart">
                     <a href="{{ path('home') }}"><button type="button" class="momz-button" name=""> <span class="icon-angle-left"></span>  Continue Shopping </button></a>
-                    {% if app_web_user.getCart().getItems()|length > 0 %}
+                    {% if cart.getItems()|length > 0 %}
                         {% if app.user %}
                             <button type="submit" class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button>
                         {% else %}
-                            <a href="{{ path('anon_cart', {'id': app_web_user.getCart().getId()}) }}"> <button type="button" class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button> </a>
+                            <a href="{{ path('anon_cart', {'id': cart.getId()}) }}"> <button type="button" class="momz-button ml-10p active" name=""> Place Order <span class="icon-arrow-right"></span> </button> </a>
                         {% endif %}
                     {% endif %}
                 </div>

@@ -140,7 +140,9 @@
                 <li class="pl-15p relative-pos cart-click "> 
                     <a href="{{ path('cart_page') }}">
                         <img src="{{ asset('bundles/appweb/images/icons/cart.svg') }}" width="25" alt="Cart">
-                        <div class="badge" id="cart-badge">{{ app_web_user.getCart().getItems().count() }}</div>
+                        {% set cart = app_web_user.getCart() %}
+                        Cart Id: {{ cart.getId() }}
+                        <div class="badge" id="cart-badge">{{ cart.getItems().count() }}</div>
                     </a>
                 </li>
             </ul>
