@@ -103,7 +103,7 @@ class DeliveryChargeDatatable extends AbstractDatatableView
             'search_delay' => 0,
             'state_duration' => 7200,
             'stripe_classes' => array(),
-            'class' => Style::BASE_STYLE,
+            'class' => Style::BOOTSTRAP_3_STYLE,
             'individual_filtering' => false,
             'individual_filtering_position' => 'head',
             'use_integration_options' => false,
@@ -167,6 +167,12 @@ class DeliveryChargeDatatable extends AbstractDatatableView
                 )
             ))
         ;
+
+        $this->callbacks->set(array(
+            'row_callback' => array(
+                'template' => 'AppFrontBundle:DataTable:row_callback.js.twig',
+            )
+        ));
     }
 
     /**
