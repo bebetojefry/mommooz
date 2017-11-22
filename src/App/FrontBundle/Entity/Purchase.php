@@ -98,6 +98,13 @@ class Purchase
      */
     private $method;
 
+    /**
+     * @var float
+     *
+     * @ORM\Column(name="delivery_charge", type="float", nullable=true)
+     */
+    private $deliveryCharge;
+
     /*
      * constructor
      */
@@ -429,5 +436,29 @@ class Purchase
             $this->expectedOn = null;
             $this->deliveredBy = null;
         }
+    }
+
+    /**
+     * Set deliveryCharge
+     *
+     * @param float $deliveryCharge
+     *
+     * @return Purchase
+     */
+    public function setDeliveryCharge($deliveryCharge)
+    {
+        $this->deliveryCharge = $deliveryCharge;
+
+        return $this;
+    }
+
+    /**
+     * Get deliveryCharge
+     *
+     * @return float
+     */
+    public function getDeliveryCharge()
+    {
+        return $this->deliveryCharge;
     }
 }

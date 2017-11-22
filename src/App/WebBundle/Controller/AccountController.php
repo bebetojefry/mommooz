@@ -687,9 +687,22 @@ class AccountController extends Controller
                 $reward_money = round($total_rewards/$reward_money_config->getValue(), 2);
             }
         }
+
+        $delivery_charge = 0;
+        $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
+            ->where('c.priceFrom >= :p and c.priceTo <= :p')
+            ->setParameter('p', $this->getUser()->getCart()->getPrice())
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+
+        if(count($charges) > 0){
+            $delivery_charge = $charges[0]->getCharge();
+        }
         
         return $this->render('AppWebBundle:Account:placeOrder.html.twig', 
-            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards)
+            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards, 'delivery_charge' => $delivery_charge)
         );
     }
     
@@ -783,45 +796,45 @@ class AccountController extends Controller
     public function submitorderAction(Request $request)
     {
         $workingKey = '3B8AE5C662C3123B31BACF1454781F6B';
-	$encResponse = $_POST["encResp"];
-	$rcvdString = $this->get('app.ccavenue.crypt')->decrypt($encResponse, $workingKey);
-	$order_status = "";
-	$decryptValues = explode('&', $rcvdString);
-	$dataSize = sizeof($decryptValues);
-	echo "<center>";
+        $encResponse = $_POST["encResp"];
+        $rcvdString = $this->get('app.ccavenue.crypt')->decrypt($encResponse, $workingKey);
+        $order_status = "";
+        $decryptValues = explode('&', $rcvdString);
+        $dataSize = sizeof($decryptValues);
+        echo "<center>";
 
-	for($i = 0; $i < $dataSize; $i++) 
-	{
-            $information=explode('=',$decryptValues[$i]);
-            if($i==3)	$order_status=$information[1];
-	}
+        for($i = 0; $i < $dataSize; $i++)
+        {
+                $information=explode('=',$decryptValues[$i]);
+                if($i==3)	$order_status=$information[1];
+        }
 
-	if($order_status==="Success")
-	{
-            $this->get('session')->set('order_method', 'PAID');
-            return $this->forward('AppWebBundle:Account:ordersuccess');
-		
-	}
-	else if($order_status==="Aborted")
-	{
+        if($order_status==="Success")
+        {
+                $this->get('session')->set('order_method', 'PAID');
+                return $this->forward('AppWebBundle:Account:ordersuccess');
+
+        }
+        else if($order_status==="Aborted")
+        {
+                return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
+                    'status' => '<b>Aborted: </b>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail.'
+                ));
+
+        }
+        else if($order_status==="Failure")
+        {
             return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
-                'status' => '<b>Aborted: </b>Thank you for shopping with us.We will keep you posted regarding the status of your order through e-mail.'
-            ));
-	
-	}
-	else if($order_status==="Failure")
-	{
-	    return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
-                'status' => '<b>Failure: </b>Thank you for shopping with us.However,the transaction has been declined.'
-            ));
-	}
-	else
-	{
-            return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
-                'status' => '<b>Error: </b>Security Error. Illegal access detected.'
-            ));
-	
-	}
+                    'status' => '<b>Failure: </b>Thank you for shopping with us.However,the transaction has been declined.'
+                ));
+        }
+        else
+        {
+                return $this->render('AppWebBundle:Account:pay_status.html.twig', array(
+                    'status' => '<b>Error: </b>Security Error. Illegal access detected.'
+                ));
+
+        }
     }
     
     /**
@@ -833,11 +846,25 @@ class AccountController extends Controller
             $em = $this->getDoctrine()->getManager();
             $address = $em->getRepository('AppFrontBundle:Address')->find($this->get('session')->get('address'));
 
+            $delivery_charge = 0;
+            $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
+                ->where('c.priceFrom >= :p and c.priceTo <= :p')
+                ->setParameter('p', $this->getUser()->getCart()->getPrice())
+                ->setFirstResult(0)
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getResult();
+
+            if(count($charges) > 0){
+                $delivery_charge = $charges[0]->getCharge();
+            }
+
             $purchase = new Purchase();
             $purchase->setConsumer($this->getUser());
             $purchase->setDeliverTo($address);
             $purchase->setPurchasedOn(new \DateTime('now'));
             $purchase->setMethod($this->get('session')->get('order_method'));
+            $purchase->setDeliveryCharge($delivery_charge);
             $purchase->setStatus(0);
 
             $em->persist($purchase);
