@@ -325,12 +325,12 @@ class AccountController extends Controller
         $total_rewards = 0;
         if($reward_money_config && $this->getUser()){
             if(!$this->getUser()->getCart()){
-                /*$cart = new Cart();
+                $cart = new Cart();
                 $cart->setUser($this->getUser());
                 $cart->setSessionId(session_id());
                 $em->persist($cart);
                 $em->flush();
-                $this->getUser()->setCart($cart);*/
+                $this->getUser()->setCart($cart);
             }
             
             $cart_price = $this->getUser()->getCart()->getPrice();
