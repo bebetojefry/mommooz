@@ -12,13 +12,39 @@ use Sg\DatatablesBundle\Datatable\View\Style;
  */
 class DeliveryChargeDatatable extends AbstractDatatableView
 {
+
+    public $requestStack;
+    private $start = 0;
+    private $sl = 1;
+
+    protected function getRequest()
+    {
+        return $this->requestStack->getCurrentRequest();
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLineFormatter()
+    {
+        $this->start = $this->getRequest()->query->get('start', 0);
+        $formatter = function($line){
+            $line['sl'] = $this->start + $this->sl++;
+
+            return $line;
+        };
+
+        return $formatter;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function buildDatatable(array $options = array())
     {
         $this->topActions->set(array(
-            'start_html' => '<div class="row"><div class="col-sm-3">',
+            'start_html' => '<div class="row"><div class="col-sm-12">',
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
@@ -88,6 +114,10 @@ class DeliveryChargeDatatable extends AbstractDatatableView
         $this->columnBuilder
             ->add('id', 'column', array(
                 'title' => 'Id',
+                'visible' => false,
+            ))
+            ->add('sl', 'virtual', array(
+                'title' => 'Sl No',
             ))
             ->add('priceFrom', 'column', array(
                 'title' => 'Price From',
