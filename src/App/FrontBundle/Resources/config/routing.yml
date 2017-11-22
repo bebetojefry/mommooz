@@ -134,6 +134,15 @@ admin_consumer_actions:
     type:     annotation
     prefix: /consumer
 
+app_front_admin_delivery_charge:
+    path:     /delivery_charge
+    host:     "%domain_admin%"
+    defaults: { _controller: AppFrontBundle:Admin:delivery}
+
+admin_delivery_actions:
+    resource: "@AppFrontBundle/Controller/DeliveryController.php"
+    type:     annotation
+    prefix: /delivery_charge
 
 app_front_admin_order:
     path:     /order
