@@ -726,6 +726,8 @@ class AccountController extends Controller
     {
         if(isset($_POST['buy_now'])){
             $this->get('session')->set('buy_now', $_POST['buy_now']);
+        } elseif($this->get('session')->get('buy_now')) {
+            $this->get('session')->remove('buy_now');
         }
         
         if(isset($_POST['cod'])){
