@@ -332,7 +332,7 @@ class AccountController extends Controller
                 $em->flush();
                 $this->getUser()->setCart($cart);
             }
-            
+
             $cart_price = $this->getUser()->getCart()->getPrice();
             $max_points_needed = round($cart_price*$reward_money_config->getValue(), 2);
             $rewards = $em->getRepository('AppFrontBundle:Reward')->findByConsumer($this->getUser());
@@ -352,7 +352,7 @@ class AccountController extends Controller
         $delivery_charge = 0;
         $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
             ->where('c.priceFrom <= :p and c.priceTo >= :p')
-            ->setParameter('p', $this->getUser()->getCart()->getPrice())
+            ->setParameter('p', $this->get('app.web.user')->getCart()->getPrice())
             ->setFirstResult(0)
             ->setMaxResults(1)
             ->getQuery()
