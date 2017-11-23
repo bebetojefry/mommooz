@@ -758,9 +758,7 @@ class AccountController extends Controller
                 $cart = $this->getUser()->getCart();
             }
 
-            foreach($cart->getItems() as $item){
-                $total_amt += $item->getQuantity()*$item->getPrice();
-            }
+            $total_amt = $cart->getPrice();
             
             if(isset($_POST['use_reward'])){
                 $total_amt -= $_POST['reward_money'];
@@ -769,7 +767,7 @@ class AccountController extends Controller
             $delivery_charge = 0;
             $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
                 ->where('c.priceFrom <= :p and c.priceTo >= :p')
-                ->setParameter('p', $this->getUser()->getCart()->getPrice())
+                ->setParameter('p', $cart->getPrice())
                 ->setFirstResult(0)
                 ->setMaxResults(1)
                 ->getQuery()
