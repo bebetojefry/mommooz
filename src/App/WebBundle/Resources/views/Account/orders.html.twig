@@ -38,6 +38,7 @@
                     <th>Order Id</th>
                     <th>Ordered On</th>
                     <th>Total Items</th>
+                    <th>Delivery Charge</th>
                     <th>Total Price</th>
                     <th>Status</th>
                     <th>Expected Delivery</th>
@@ -48,9 +49,10 @@
                             <td><a href="{{ path('order_detail_page', {'id': order.getId()}) }}">#{{ order.getId() }}</a></td>
                             <td>{{ order.getPurchasedOn()|date('d-M-Y h:i A') }}</td>
                             <td>{{ order.getItems()|length }}</td>
+                            <td>{{ order.getDeliveryCharge() }}</td>
                             {% set total_amt = order.getTotalPrice() %}
                             {% if order.getRewardUse() %}
-                                {% set total_amt = order.getTotalPrice() - order.getRewardUse().getMoney() %}
+                                {% set total_amt = order.getTotalPrice() - order.getRewardUse().getMoney() + order.getDeliveryCharge() %}
                             {% endif %}
                             <td>{{ total_amt }}</td>
                             <td>{{ status[order.getStatus()] }}</td>

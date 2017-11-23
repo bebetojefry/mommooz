@@ -69,7 +69,8 @@
                                 </div>
                             {% endif %}
                             <input type="hidden" name="totalPrice" value="{{ totalPrice }}" />
-                            Total Price : <span class="icon-inr"></span> <span id="cart-price">{{ totalPrice }}</span>  
+                            <span>Delivery Charge: {{ delivery_charge }}</span> <br/>
+                            Total Price : <span class="icon-inr"></span> <span id="cart-price">{{ totalPrice + delivery_charge }}</span>
                         </td>
                     </tr>
                 </table>

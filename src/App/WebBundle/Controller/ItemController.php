@@ -125,9 +125,22 @@ class ItemController extends Controller
                 $reward_money = round($total_rewards/$reward_money_config->getValue(), 2);
             }
         }
+
+        $delivery_charge = 0;
+        $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
+            ->where('c.priceFrom <= :p and c.priceTo >= :p')
+            ->setParameter('p', $stockEntry->getActualPrice())
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+
+        if(count($charges) > 0){
+            $delivery_charge = $charges[0]->getCharge();
+        }
         
         return $this->render('AppWebBundle:Item:buyNow.html.twig', 
-            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards, 'entry' => $stockEntry)
+            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards, 'entry' => $stockEntry, 'delivery_charge' => $delivery_charge)
         );
     }
 

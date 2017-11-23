@@ -81,7 +81,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Net Amount: {{ purchase.getTotalPrice() - reward_amt }}
+                                            Net Amount: {{ purchase.getTotalPrice() - reward_amt + purchase.getDeliveryCharge() }}
                                         </td>
                                     </tr>
                                 </table>

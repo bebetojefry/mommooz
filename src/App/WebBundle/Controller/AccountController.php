@@ -348,9 +348,22 @@ class AccountController extends Controller
                 $reward_money = round($total_rewards/$reward_money_config->getValue(), 2);
             }
         }
+
+        $delivery_charge = 0;
+        $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
+            ->where('c.priceFrom <= :p and c.priceTo >= :p')
+            ->setParameter('p', $this->getUser()->getCart()->getPrice())
+            ->setFirstResult(0)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+
+        if(count($charges) > 0){
+            $delivery_charge = $charges[0]->getCharge();
+        }
         
         return $this->render('AppWebBundle:Account:cart.html.twig', 
-            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards)
+            array('reward_money' => $reward_money, 'total_rewards' => $total_rewards, 'delivery_charge' => $delivery_charge)
         );
     }
     
@@ -861,10 +874,17 @@ class AccountController extends Controller
             $em = $this->getDoctrine()->getManager();
             $address = $em->getRepository('AppFrontBundle:Address')->find($this->get('session')->get('address'));
 
+            if($entry_id = $this->get('session')->get('buy_now')){
+                $entry = $em->getRepository('AppFrontBundle:StockEntry')->find($entry_id);
+                $total_price = $entry->getActualPrice();
+            } else {
+                $total_price = $this->getUser()->getCart()->getPrice();
+            }
+
             $delivery_charge = 0;
             $charges = $em->getRepository("AppFrontBundle:DeliveryCharge")->createQueryBuilder('c')
                 ->where('c.priceFrom <= :p and c.priceTo >= :p')
-                ->setParameter('p', $this->getUser()->getCart()->getPrice())
+                ->setParameter('p', $total_price)
                 ->setFirstResult(0)
                 ->setMaxResults(1)
                 ->getQuery()

@@ -101,7 +101,7 @@ class Purchase
     /**
      * @var float
      *
-     * @ORM\Column(name="delivery_charge", type="float", nullable=true)
+     * @ORM\Column(name="delivery_charge", type="float", nullable=true, options={"default"=0})
      */
     private $deliveryCharge;
 
