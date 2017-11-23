@@ -205,7 +205,7 @@
                         <span class="in_cart_count" style="{% if in_cart_count == 0 %}display: none;{% endif %}"><i>{{ in_cart_count }}</i> in cart</span>
                         <button class="momz-button" id="add-to-cart"> Add to Cart <span class="icon-arrow-right"></span> </button>
                         <button {% if inWishList %}style="display: none;"{% endif %} class="momz-button ml-10p mb-ml-0p mt-10p" id="add-to-wishlist"> Add to Wishlist <span class="icon-arrow-right"></span> </button>
-                        {% if entry.getInStock() >= 1 %}
+                        {% if entry.getInStock() >= 1 and entry.isEnabled() %}
                             <a href="{{ path('item_buy_now', {'id': entry.getId()}) }}"><button class="momz-button ml-10p mb-ml-0p mt-10p" id="buy-now"> Buy Now <span class="icon-arrow-right"></span> </button></a>
                         {% endif %}
                         <span id="in-wishlist" style="color: green; margin-left: 10px; {% if inWishList == null %}display: none;{% endif %}"><i style="color: #333;" class="fa fa-heart fa-1" aria-hidden="true"></i> In Wishlist</span>
