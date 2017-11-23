@@ -11,7 +11,7 @@
 	<a href="{{ path('home') }}">Home</a> - Place Order
     </div>
     <section class="center-1200px cart-page ptb-20p">
-        <h3> Place Your Order </h3>
+        <h3> Place Your Order for <a href="{{ path('item_page', {'id': entry.getId()}) }}">{{ entry.getItem().getName() }} {% if entry.getVariant() %} - {{ entry.getVariant().getValue() }} {% endif %}</a> </h3>
         <form name="frmOrderSubmit" id="frmOrderSubmit" method="post" action="{{ path('pay_order') }}" >
             <div class="block-12 mb-pl2 pl-30p ptb-20p block-mb-12 mb-text-left">
                 {% set valid_addresses = 0 %}
@@ -49,7 +49,7 @@
                     <a href="{{ path('address_form', {'id': 0}) }}"><button type="button" class="momz-button ml-10p active" name=""> Add delivery address </button></a>
                 {% else %}
                     <div style="display: inline-block; margin-right: 10px;">
-                        <span>Price: {{ entry.getActualPrice() }}</span> &nbsp;&nbsp; <span>Delivery Charge : {{ delivery_charge }}</span>
+                        <span>Net Price: Rs.{{ entry.getActualPrice() }}</span> &nbsp;&nbsp; <span>Delivery Charge : Rs.{{ delivery_charge }}</span>
                     </div>
                     <button type="submit" class="momz-button ml-10p" name="cod"> Cash on Delivery <span class="icon-arrow-right"></span> </button>
                     <button type="submit" class="momz-button ml-10p active" name="pay"> Proceed to Payment <span class="icon-arrow-right"></span> </button>
