@@ -69,13 +69,15 @@
                                 </div>
                             {% endif %}
                             <input type="hidden" name="totalPrice" value="{{ totalPrice }}" />
-                            <span>Delivery Charge: {{ delivery_charge }}</span> <br/>
-                            Total Price : <span class="icon-inr"></span> <span id="cart-price">{{ totalPrice + delivery_charge }}</span>
                         </td>
                     </tr>
                 </table>
                 </div>
                 <div class="full-width mt-10p ptb-20p text-right button-cart">
+                    <div style="display: inline-block; margin: 12px 17px;">
+                        <span>Delivery Charge: {{ delivery_charge }}</span> <br/>
+                        Total Price : <span class="icon-inr"></span> <span id="cart-price">{{ totalPrice + delivery_charge }}</span>
+                    </div>
                     <a href="{{ path('home') }}"><button type="button" class="momz-button" name=""> <span class="icon-angle-left"></span>  Continue Shopping </button></a>
                     {% if cart.getItems()|length > 0 %}
                         {% if app.user %}

@@ -743,7 +743,19 @@ class AccountController extends Controller
             $access_code = 'AVSU70ED20AW44USWA';
             
             $total_amt = 0;
-            $cart = $this->getUser()->getCart();
+            if($entry_id = $this->get('session')->get('buy_now')){
+                $entry = $em->getRepository('AppFrontBundle:StockEntry')->find($entry_id);
+                $cart = new Cart();
+                $cart_item = new CartItem();
+                $cart_item->setEntry($entry);
+                $cart_item->setQuantity(1);
+                $cart_item->setPrice($entry->getActualPrice());
+                $cart_item->setStatus(false);
+                $cart->addItem($cart_item);
+            } else {
+                $cart = $this->getUser()->getCart();
+            }
+
             foreach($cart->getItems() as $item){
                 $total_amt += $item->getQuantity()*$item->getPrice();
             }
