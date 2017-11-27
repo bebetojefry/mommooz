@@ -113,6 +113,9 @@ class PurchaseDatatable extends AbstractDatatableView
             ->add('purchasedOn', 'datetime', array(
                 'title' => 'Purchased On',
             ))
+            ->add('deliveryCharge', 'column', array(
+                'title' => 'Delivery Charge',
+            ))
             ->add('status', 'column', array('visible' => false))
             ->add('state', 'virtual', array(
                 'title' => 'Status',
