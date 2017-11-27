@@ -93,9 +93,9 @@
     <script type="text/javascript">
         $('#use_reward').on('change', function(){
             if($(this).is(':checked')){
-                var totalPrice = parseFloat('{{ totalPrice }}') - parseFloat('{{ reward_money }}');
+                var totalPrice = parseFloat('{{ totalPrice + delivery_charge }}') - parseFloat('{{ reward_money }}');
             } else {
-                var totalPrice = parseFloat('{{ totalPrice }}');
+                var totalPrice = parseFloat('{{ totalPrice + delivery_charge }}');
             }
             $('#cart-price').html(totalPrice);
         });
