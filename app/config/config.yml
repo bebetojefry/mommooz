@@ -43,6 +43,7 @@ twig:
         productUploadDir: %products_upload_dir%
         rootDir: %kernel.root_dir%
         app_web_user: @app.web.user
+        traditional_cat: %traditional_cat%
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
