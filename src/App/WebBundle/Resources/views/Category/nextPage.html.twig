@@ -5,18 +5,11 @@
 {% for entry in category.getInStockEntries() if not break %}
     {% if app_web_user.isDeliverable(entry) %}
         {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
-        {% if thumb_content != ""  %}
-            {% if not break %}
-                {% set skip_index = skip_index + 1 %}
-                {% if skip_index > (page * 9) %}
-                    {{ thumb_content|raw }}
-                    {% set cur = cur + 1 %}
-                {% endif %}
-            {% else %}
-                {% set filterData = entry.getFilterData() %}
-                <script type="text/javascript">
-                    filter_modal.register('{{ filterData|json_encode()|raw }}');
-                </script>
+        {% if thumb_content != "" %}
+            {% set skip_index = skip_index + 1 %}
+            {% if skip_index > (page * 9) %}
+                {{ thumb_content|raw }}
+                {% set cur = cur + 1 %}
             {% endif %}
         {% endif %}
         {% if cur == 9 %}
