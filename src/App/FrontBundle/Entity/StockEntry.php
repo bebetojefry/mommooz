@@ -578,7 +578,9 @@ class StockEntry
         
         $data['tagged_cats'] = array();
         foreach($this->getItem()->getCategories() as $cat) {
-            $data['tagged_cats'][] = array('id' => $cat->getId(), 'name' => $cat->getCategoryName());
+            if($cat->getId() != $category->getId()) {
+                $data['tagged_cats'][] = array('id' => $cat->getId(), 'name' => $cat->getCategoryName());
+            }
         }
         
         $brand = $this->getItem()->getBrand();
