@@ -18,19 +18,12 @@
         <div id="item-thumbs">
             {% set break = false %}
             {% set cur = 0 %}
-            {% for entry in category.getInStockEntries() %}
+            {% for entry in category.getInStockEntries() if not break %}
                 {% if app_web_user.isDeliverable(entry) %}
                     {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
                     {% if thumb_content != "" %}
-                        {% if not break %}
-                            {{ thumb_content|raw }}
-                            {% set cur = cur + 1 %}
-                        {% else %}
-                            {% set filterData = entry.getFilterData() %}
-                            <script type="text/javascript">
-                                filter_modal.register('{{ filterData|json_encode()|raw }}');
-                            </script>
-                        {% endif %}
+                        {{ thumb_content|raw }}
+                        {% set cur = cur + 1 %}
                     {% endif %}
                     {% if cur == 9 %}
                         {% set break = true %}
