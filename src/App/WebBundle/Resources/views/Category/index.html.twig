@@ -37,11 +37,18 @@
                 nextSelector: 'a.next-page',
                 loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
                 callback: function() {
-                    $('#main_filter').ItemFilter(filter_modal);
-                    bindAddtoCart();
+                    {#$('#main_filter').ItemFilter(filter_modal);
+                    bindAddtoCart();#}
                 }
             });
             {# $('#main_filter').ItemFilter(filter_modal); #}
+
+            $.ajax({
+                url: '{{ path('category_filter', {'id': category.getId()}) }}',
+                success: function(resp) {
+                    $('body').append(resp);
+                }
+            });
         </script>
     </div>
 </div>

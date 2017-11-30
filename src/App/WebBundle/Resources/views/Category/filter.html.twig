@@ -1,14 +1,14 @@
 <script type="text/javascript">
-    var filter_modal = new FilterModal();
+    var filter_modal_ext = new FilterModal();
 </script>
 {% for entry in category.getInStockEntries() %}
     {% if app_web_user.isDeliverable(entry) and entry.isEnabled() %}
         {% set filterData = entry.getFilterData() %}
         <script type="text/javascript">
-            filter_modal.register('{{ filterData|json_encode()|raw }}');
+            filter_modal_ext.register('{{ filterData|json_encode()|raw }}');
         </script>
     {% endif %}
 {% endfor %}
 <script type="text/javascript">
-    $('#main_filter').ItemFilter(filter_modal);
+    $('#main_filter').ItemFilter(filter_modal_ext);
 </script>
