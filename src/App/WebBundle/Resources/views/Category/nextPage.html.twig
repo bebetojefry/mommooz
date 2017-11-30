@@ -7,6 +7,7 @@
 
     {% set valid_cat = true %}
     {% set valid_brand = true %}
+    {% set valid_offer = true %}
 
     {% if cats|length > 0 %}
         {% if entry.getItem().getProduct().getCategory().getId() not in cats %}
@@ -22,6 +23,10 @@
         {% else %}
             {% set valid_brand = false %}
         {% endif %}
+    {% endif %}
+
+    {% if onOffer %}
+        valid_offer = entry.onOffer()
     {% endif %}
 
     {% if app_web_user.isDeliverable(entry) and valid_cat and valid_brand %}
