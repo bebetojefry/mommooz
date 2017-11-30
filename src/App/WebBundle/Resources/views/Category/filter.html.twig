@@ -1,5 +1,6 @@
 <script type="text/javascript">
     var filter_modal_ext = new FilterModal();
+    filter_modal_ext.setRefreshUrl("{{ path('category_next_page', {id: category.getId(), page: 0}) }}");
 </script>
 {% for entry in category.getInStockEntries() %}
     {% if app_web_user.isDeliverable(entry) and entry.isEnabled() %}

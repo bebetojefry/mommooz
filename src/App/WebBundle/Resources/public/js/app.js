@@ -402,12 +402,19 @@ function openAlert(message, type){
 
     // Define our constructor
     this.FilterModal = function() {
+
+        this.refreshUrl = null;
+
         this.items = [];
         this.brands = [];
         this.categories = [];
         
         this.brand_items = [];
         this.category_items = [];
+    }
+
+    FilterModal.prototype.setRefreshUrl = function(url) {
+        this.refreshUrl = url;
     }
 
     FilterModal.prototype.register = function(item) {
@@ -484,15 +491,24 @@ $.fn.ItemFilter = function( FilterModal ) {
                checked.splice(index, 1);
             }
         }
+
+        if(FilterModal.refreshUrl){
+            $.ajax({
+                url: FilterModal.refreshUrl,
+                success: function(resp) {
+                    $('#item-thumbs').html(resp);
+                }
+            })
+        }
         
-        if(checked.length > 0){
+        /*if(checked.length > 0){
             $('.item-thumb').hide();
             checked.forEach(function (val) {
                 $('.'+val).show();
             });
         } else {
             $('.item-thumb').show();
-        }
+        }*/
     });
 }
 
