@@ -9,6 +9,7 @@
     {% set valid_brand = true %}
 
     {% if cats|length > 0 %}
+        {{ entry.getItem().getProduct().getCategory().getId() }}
         {% if entry.getItem().getProduct().getCategory().getId() not in cats %}
             {% set valid_cat = false %}
         {% endif %}
@@ -16,6 +17,7 @@
 
     {% if brands|length > 0 %}
         {% if entry.getItem().getBrand() %}
+            {{  entry.getItem().getBrand().getId() }}
             {% if entry.getItem().getBrand().getId() not in brands %}
                 {% set valid_brand = false %}
             {% endif %}
