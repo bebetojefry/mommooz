@@ -44,10 +44,31 @@ class CategoryController extends Controller
     /**
      * @Route("/{id}/page/{page}.html", name="category_next_page", options={"expose"=true})
      */
-    public function nextPageAction(Category $category, $page)
+    public function nextPageAction(Request $request, Category $category, $page)
     {
+        $cats = array();
+        $brands = array();
+        $onOffer = isset($_POST["on_offer"]);
+        foreach($_POST as $val){
+            $val = explode('_', $val);
+            if(count($val) == 2) {
+                switch ($val[0]) {
+                    case 'cat':
+                        $cats[] = $val[1];
+                        break;
+                    case 'brand':
+                        $brands[] = $val[1];
+                        break;
+                }
+            }
+        }
+
         return $this->render('AppWebBundle:Category:nextPage.html.twig', array(
-            'category' => $category
+            'category' => $category,
+            'cats' => $cats,
+            'brands' => $brands,
+            'onOffer' => $onOffer,
+            'cur_page' => $request->query->get('cur_page', 1)
         ));
     }
     

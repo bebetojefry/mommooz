@@ -2,21 +2,25 @@
 {% set cur = 0 %}
 {% set page = app.request.get('page', 0) %}
 {% set skip_index = 0 %}
+{% set stop_pos = cur_page * 9 %}
 {% for entry in category.getInStockEntries() if not break %}
     {% if app_web_user.isDeliverable(entry) %}
         {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
         {% if thumb_content != "" %}
             {% set skip_index = skip_index + 1 %}
-            {% if skip_index > (page * 9) %}
+            {% if skip_index > (page * stop_pos) %}
                 {{ thumb_content|raw }}
                 {% set cur = cur + 1 %}
             {% endif %}
         {% endif %}
-        {% if cur == 9 %}
+        {% if cur == stop_pos %}
             {% set break = true %}
         {% endif %}
     {% endif %}
 {% endfor %}
+{% if cur_page > 1 %}
+    {% set page = cur_page - 1 %}
+{% endif %}
 {% if cur > 0 %}
-    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: app.request.get('page', 0) + 1}) }}">next page</a>
+    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}">next page</a>
 {% endif %}
