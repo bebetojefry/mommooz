@@ -8,7 +8,7 @@
             filter_modal.register('{{ filterData|json_encode()|raw }}');
         </script>
     {% endif %}
-{% endif %}
+{% endfor %}
 <script type="text/javascript">
     $('#main_filter').ItemFilter(filter_modal);
 </script>
