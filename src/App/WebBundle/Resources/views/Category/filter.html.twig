@@ -2,7 +2,7 @@
     var filter_modal = new FilterModal();
 </script>
 {% for entry in category.getInStockEntries() %}
-    {% if app_web_user.isDeliverable(entry) and entry.isEnabled() %}
+    {% if entry.isEnabled() %}
         {% set filterData = entry.getFilterData() %}
         <script type="text/javascript">
             filter_modal.register('{{ filterData|json_encode()|raw }}');
