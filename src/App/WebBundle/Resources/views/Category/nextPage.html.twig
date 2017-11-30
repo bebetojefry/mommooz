@@ -4,7 +4,27 @@
 {% set skip_index = 0 %}
 {% set stop_pos = cur_page * 9 %}
 {% for entry in category.getInStockEntries() if not break %}
-    {% if app_web_user.isDeliverable(entry) %}
+
+    {% set valid_cat = true %}
+    {% set valid_brand = true %}
+
+    {% if cats|length > 0 %}
+        {% if entry.getItem().getProduct().getCategory().getId() not in cats %}
+            {% set valid_cat = false %}
+        {% endif %}
+    {% endif %}
+
+    {% if brands|length > 0 %}
+        {% if entry.getItem().getBrand() %}
+            {% if entry.getItem().getBrand().getId() not in brands %}
+                {% set valid_brand = false %}
+            {% endif %}
+        {% else %}
+            {% set valid_brand = false %}
+        {% endif %}
+    {% endif %}
+
+    {% if app_web_user.isDeliverable(entry) and valid_cat and valid_brand %}
         {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
         {% if thumb_content != "" %}
             {% set skip_index = skip_index + 1 %}
@@ -22,5 +42,5 @@
     {% set page = cur_page - 1 %}
 {% endif %}
 {% if cur > 0 %}
-    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}">next page</a>
+    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
 {% endif %}
