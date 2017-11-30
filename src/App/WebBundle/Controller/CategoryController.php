@@ -32,6 +32,16 @@ class CategoryController extends Controller
     }
 
     /**
+     * @Route("/{id}/filter", name="category_filter", options={"expose"=true})
+     */
+    public function filterAction(Category $category)
+    {
+        return $this->renderView('AppWebBundle:Category:filter.html.twig', array(
+            'category' => $category
+        ));
+    }
+
+    /**
      * @Route("/{id}/page/{page}.html", name="category_next_page", options={"expose"=true})
      */
     public function nextPageAction(Category $category, $page)
