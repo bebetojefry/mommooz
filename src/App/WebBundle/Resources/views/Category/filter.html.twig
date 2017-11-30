@@ -1,7 +1,7 @@
 <script type="text/javascript">
     var filter_modal_ext = new FilterModal();
     filter_modal_ext.setRefreshUrl("{{ path('category_next_page', {id: category.getId(), page: 0}) }}");
-    filter_modal_ext.setServerSide(true);
+    filter_modal_ext.setServerSide(false);
     filter_modal_ext.setLoader("<div style='width:100%; text-align:center; margin-top:20px;'><img style='display: inline-block; position: relative; top: 3px; right: 5px;' src='{{ asset('images/ajax-loader.gif') }}' /> Loading...</div>");
 </script>
 {% for entry in category.getInStockEntries() %}
