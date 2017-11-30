@@ -41,6 +41,10 @@
                     {#$('#main_filter').ItemFilter(filter_modal);
                     bindAddtoCart();#}
                     page++;
+
+                    if($('#item-thumbs').find(".filter_field").length() > 0){
+                        $('#item-thumbs').find(".filter_field").eq(0).trigger('change');
+                    }
                 }
             });
             {# $('#main_filter').ItemFilter(filter_modal); #}
