@@ -9,7 +9,6 @@
     {% set valid_brand = true %}
 
     {% if cats|length > 0 %}
-        {{ '<br/>CAT - '~entry.getItem().getProduct().getCategory().getId()~' - '~entry.getItem().getProduct().getCategory().getCategoryName() }}
         {% if entry.getItem().getProduct().getCategory().getId() not in cats %}
             {% set valid_cat = false %}
         {% endif %}
@@ -17,7 +16,6 @@
 
     {% if brands|length > 0 %}
         {% if entry.getItem().getBrand() %}
-            {{  '<br/>Brand - '~entry.getItem().getBrand().getId()~' - '~entry.getItem().getBrand().getName() }}
             {% if entry.getItem().getBrand().getId() not in brands %}
                 {% set valid_brand = false %}
             {% endif %}
