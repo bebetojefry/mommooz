@@ -400,7 +400,8 @@ class ItemController extends Controller
      * @Route("/{id}/thumb", name="item_thumb", options={"expose"=true})
      */
     public function thumbAction(StockEntry $entry) {
-        if(Item::isRendered($entry->getItem()) || !$entry->isEnabled()){
+        //if(Item::isRendered($entry->getItem()) || !$entry->isEnabled()){
+        if(!$entry->isEnabled()){
             return new Response('');
         }
 
