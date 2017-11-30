@@ -42,6 +42,13 @@
                     bindAddtoCart();#}
                     page++;
 
+                    var thumbs = $( ".item-thumb" );
+
+                    if ( thumbs.parent().is( "div.jscroll-added" ) ) {
+                        thumbs.unwrap();
+                    }
+
+
                     if($('#main_filter').find(".filter_field").length > 0){
                         $('#main_filter').find(".filter_field").eq(0).trigger('change');
                     }
