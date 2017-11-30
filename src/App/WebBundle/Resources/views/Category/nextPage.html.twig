@@ -26,10 +26,10 @@
     {% endif %}
 
     {% if onOffer %}
-        valid_offer = entry.onOffer()
+        {% set valid_offer = entry.onOffer() %}
     {% endif %}
 
-    {% if app_web_user.isDeliverable(entry) and valid_cat and valid_brand %}
+    {% if app_web_user.isDeliverable(entry) and valid_cat and valid_brand and valid_offer %}
         {% set thumb_content = render(controller('AppWebBundle:Item:thumb', { 'id': entry.getId() })) %}
         {% if thumb_content != "" %}
             {% set skip_index = skip_index + 1 %}
