@@ -36,9 +36,9 @@ class CategoryController extends Controller
      */
     public function filterAction(Category $category)
     {
-        return $this->renderView('AppWebBundle:Category:filter.html.twig', array(
+        return new Response($this->renderView('AppWebBundle:Category:filter.html.twig', array(
             'category' => $category
-        ));
+        )));
     }
 
     /**
