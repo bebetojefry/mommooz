@@ -9,6 +9,10 @@
     {% set valid_brand = true %}
     {% set valid_offer = true %}
 
+    {% set filter_cat = cats|join(';')  %}
+    {% set filter_brand = brands|join(';') %}
+    {% set filter_onOffer = onOffer %}
+
     {% if cats|length > 0 %}
         {% if entry.getItem().getProduct().getCategory().getId() not in cats %}
             {% set valid_cat = false %}
@@ -67,5 +71,5 @@
     </script>
 {% endif %}
 {% if cur > 0 %}
-    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
+    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1, cats: filter_cat, brand: filter_brand, onOffer: filter_onOffer}) }}"></a>
 {% endif %}

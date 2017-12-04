@@ -51,6 +51,20 @@ class CategoryController extends Controller
         $onOffer = isset($_POST["on_offer"]);
         $isFilter = $request->isMethod('POST');
 
+        if($request->isMethod('GET')) {
+            if (isset($_GET['cats'])) {
+                $cats = explode(';', $_GET['cats']);
+            }
+
+            if (isset($_GET['brand'])) {
+                $brands = explode(';', $_GET['brand']);
+            }
+
+            if (isset($_GET['onOffer'])) {
+                $onOffer = (bool)$_GET['onOffer'];
+            }
+        }
+
         foreach($_POST as $val){
             $val = explode('_', $val);
             if(count($val) == 2) {
