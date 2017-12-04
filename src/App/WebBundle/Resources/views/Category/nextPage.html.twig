@@ -73,7 +73,7 @@
         });
     </script>
 {% endif %}
-{% if rendered == cur_page %}
+{% if rendered == stop_pos %}
     <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
 {% else %}
     <span style="display: inline-block;width: 100%;text-align: center;margin-top: 10px;">No more items to display...</span>
