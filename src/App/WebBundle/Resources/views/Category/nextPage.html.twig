@@ -3,6 +3,7 @@
 {% set page = app.request.get('page', 0) %}
 {% set skip_index = 0 %}
 {% set stop_pos = cur_page * 9 %}
+{% set rendered = 0 %}
 
 {% set filter_cat = cats|join(';')  %}
 {% set filter_brand = brands|join(';') %}
@@ -45,6 +46,7 @@
             {% set skip_index = skip_index + 1 %}
             {% if skip_index > (page * stop_pos) %}
                 {{ thumb_content|raw }}
+                {% set rendered = rendered + 1 %}
                 {% set cur = cur + 1 %}
             {% endif %}
         {% endif %}
@@ -71,4 +73,8 @@
         });
     </script>
 {% endif %}
-<a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
+{% if rendered == cur_page %}
+    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
+{% else %}
+    <span>No more items to display...</span>
+{% endif %}
