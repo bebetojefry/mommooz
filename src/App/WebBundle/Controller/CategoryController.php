@@ -25,7 +25,11 @@ class CategoryController extends Controller
      * @Route("/{id}/page", name="category_page", options={"expose"=true})
      */
     public function pageAction(Category $category)
-    {       
+    {
+        $this->get('session')->remove('filter_cat');
+        $this->get('session')->remove('filter_brand');
+        $this->get('session')->remove('filter_offer');
+
         return $this->render('AppWebBundle:Category:index.html.twig', array(
             'category' => $category
         ));
@@ -48,35 +52,46 @@ class CategoryController extends Controller
     {
         $cats = array();
         $brands = array();
-        $onOffer = isset($_POST["on_offer"]);
         $isFilter = $request->isMethod('POST');
 
         if($request->isMethod('GET')) {
-            if (isset($_GET['cats'])) {
-                $cats = explode(';', $_GET['cats']);
+            if ($this->get('session')->get('filter_cat')) {
+                $cats = explode(';', $this->get('session')->get('filter_cat'));
             }
 
-            if (isset($_GET['brand'])) {
-                $brands = explode(';', $_GET['brand']);
+            if ($this->get('session')->get('filter_brand')) {
+                $brands = explode(';', $this->get('session')->get('filter_brand'));
             }
 
-            if (isset($_GET['onOffer'])) {
-                $onOffer = (bool)$_GET['onOffer'];
+            if ($this->get('session')->get('filter_offer')) {
+                $onOffer = $this->get('session')->get('filter_offer');
             }
         }
 
-        foreach($_POST as $val){
-            $val = explode('_', $val);
-            if(count($val) == 2) {
-                switch ($val[0]) {
-                    case 'cat':
-                        $cats[] = $val[1];
-                        break;
-                    case 'brand':
-                        $brands[] = $val[1];
-                        break;
+        if($request->isMethod('POST')) {
+            $onOffer = isset($_POST["on_offer"]);
+            foreach ($_POST as $val) {
+                $val = explode('_', $val);
+                if (count($val) == 2) {
+                    switch ($val[0]) {
+                        case 'cat':
+                            if(!in_array($val[1], $cats)) {
+                                $cats[] = $val[1];
+                            }
+                            break;
+                        case 'brand':
+                            if(!in_array($val[1], $brands)) {
+                                $brands[] = $val[1];
+                            }
+
+                            break;
+                    }
                 }
             }
+
+            $this->get('session')->set('filter_cat', implode(';', $cats));
+            $this->get('session')->set('filter_brand', implode(';', $brands));
+            $this->get('session')->set('filter_offer', $onOffer);
         }
 
         return $this->render('AppWebBundle:Category:nextPage.html.twig', array(
