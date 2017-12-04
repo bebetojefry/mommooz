@@ -48,7 +48,7 @@
         {% endif %}
     {% endif %}
 {% endfor %}
-{% if cur_page > 1 %}
+{% if isFilter %}
     {% set page = cur_page - 1 %}
     <script type="text/javascript">
         $('#item-thumbs').jscroll({
@@ -56,6 +56,12 @@
             loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
             callback: function() {
                 page++;
+
+                var thumbs = $( ".item-thumb" );
+
+                if (thumbs.parent().is("div.jscroll-added")) {
+                    thumbs.unwrap();
+                }
             }
         });
     </script>

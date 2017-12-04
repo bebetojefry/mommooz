@@ -34,7 +34,7 @@
         </div>
         <script type="text/javascript">
             var page = 1;
-            {#$('#item-thumbs').jscroll({
+            $('#item-thumbs').jscroll({
                 nextSelector: 'a.next-page',
                 loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
                 callback: function() {
@@ -45,13 +45,8 @@
                     if (thumbs.parent().is("div.jscroll-added")) {
                         thumbs.unwrap();
                     }
-
-
-                    if($('#main_filter').find(".filter_field").length > 0){
-                        $('#main_filter').find(".filter_field").eq(0).trigger('change');
-                    }
                 }
-            });#}
+            });
             {# $('#main_filter').ItemFilter(filter_modal); #}
 
             $.ajax({

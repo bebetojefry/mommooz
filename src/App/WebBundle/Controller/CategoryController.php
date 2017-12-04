@@ -49,6 +49,8 @@ class CategoryController extends Controller
         $cats = array();
         $brands = array();
         $onOffer = isset($_POST["on_offer"]);
+        $isFilter = $request->isMethod('POST');
+
         foreach($_POST as $val){
             $val = explode('_', $val);
             if(count($val) == 2) {
@@ -68,7 +70,8 @@ class CategoryController extends Controller
             'cats' => $cats,
             'brands' => $brands,
             'onOffer' => $onOffer,
-            'cur_page' => $request->query->get('cur_page', 1)
+            'cur_page' => $request->query->get('cur_page', 1),
+            'isFilter' => $isFilter
         ));
     }
     
