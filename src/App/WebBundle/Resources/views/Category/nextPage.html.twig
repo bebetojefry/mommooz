@@ -13,6 +13,11 @@
         {% if entry.getItem().getProduct().getCategory().getId() not in cats %}
             {% set valid_cat = false %}
         {% endif %}
+        {% for tag_cat in entry.getItem().getCategories() %}
+            {% if tag_cat.getId() in cats %}
+                {% set valid_cat = true %}
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
     {% if brands|length > 0 %}
