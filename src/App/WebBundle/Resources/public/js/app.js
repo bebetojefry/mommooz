@@ -515,7 +515,6 @@ $.fn.ItemFilter = function( FilterModal ) {
                 })
             }
         } else {
-
             if(checked.length > 0){
                 $('.item-thumb').hide();
                 checked.forEach(function (val) {

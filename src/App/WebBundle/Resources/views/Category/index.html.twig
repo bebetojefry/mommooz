@@ -34,17 +34,15 @@
         </div>
         <script type="text/javascript">
             var page = 1;
-            $('#item-thumbs').jscroll({
+            {#$('#item-thumbs').jscroll({
                 nextSelector: 'a.next-page',
                 loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
                 callback: function() {
-                    {#$('#main_filter').ItemFilter(filter_modal);
-                    bindAddtoCart();#}
                     page++;
 
                     var thumbs = $( ".item-thumb" );
 
-                    if ( thumbs.parent().is( "div.jscroll-added" ) ) {
+                    if (thumbs.parent().is("div.jscroll-added")) {
                         thumbs.unwrap();
                     }
 
@@ -53,7 +51,7 @@
                         $('#main_filter').find(".filter_field").eq(0).trigger('change');
                     }
                 }
-            });
+            });#}
             {# $('#main_filter').ItemFilter(filter_modal); #}
 
             $.ajax({

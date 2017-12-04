@@ -122,6 +122,16 @@ class Category
     }
 
     /**
+     * Get categoryName
+     *
+     * @return string
+     */
+    public function getNameForRoute()
+    {
+        return str_replace(' ', '-', $this->categoryName);
+    }
+
+    /**
      * Set parent
      *
      * @param string $parent
