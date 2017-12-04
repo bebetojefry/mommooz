@@ -410,6 +410,7 @@ function openAlert(message, type){
         this.items = [];
         this.brands = [];
         this.categories = [];
+        this.added_items = [];
         
         this.brand_items = [];
         this.category_items = [];
@@ -429,7 +430,13 @@ function openAlert(message, type){
 
     FilterModal.prototype.register = function(item) {
         item = JSON.parse(item);
+
+        if(this.added_items[item.item_id] != undefined){
+            return;
+        }
+
         this.items.push(item);
+        this.added_items[item.item_id] = true;
         
         if(item.brand != undefined){
             if(this.brand_items[item.brand.id] == undefined){

@@ -76,5 +76,5 @@
 {% if rendered == cur_page %}
     <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
 {% else %}
-    <span>No more items to display...</span>
+    <span style="display: inline-block;width: 100%;text-align: center;margin-top: 10px;">No more items to display...</span>
 {% endif %}

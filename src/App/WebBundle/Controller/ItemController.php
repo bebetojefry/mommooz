@@ -401,7 +401,6 @@ class ItemController extends Controller
      */
     public function thumbAction(StockEntry $entry) {
         if(Item::isRendered($entry->getItem()) || !$entry->isEnabled()){
-        //if(!$entry->isEnabled()){
             return new Response('');
         }
 

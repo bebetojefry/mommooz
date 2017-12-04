@@ -574,6 +574,7 @@ class StockEntry
     public function getFilterData(){
         $data = array();
         $category = $this->getItem()->getProduct()->getCategory();
+        $data['item_id'] = $this->getItem()->getId();
         $data['cat'] = array('id' => $category->getId(), 'name' => $category->getCategoryName());
         
         $data['tagged_cats'] = array();
