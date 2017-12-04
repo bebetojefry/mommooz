@@ -71,5 +71,5 @@
     </script>
 {% endif %}
 {% if cur > 0 %}
-    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1, cats: filter_cat, brand: filter_brand, onOffer: filter_onOffer}) }}"></a>
+    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}?cat={{ filter_cat }}&brand={{ filter_brand }}&onOffer={{ filter_onOffer }}"></a>
 {% endif %}
