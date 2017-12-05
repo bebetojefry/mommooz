@@ -55,8 +55,18 @@
         {% endif %}
     {% endif %}
 {% endfor %}
+
 {% if isFilter %}
     {% set page = cur_page - 1 %}
+{% endif %}
+
+{% if rendered == stop_pos %}
+    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
+{% else %}
+    <span style="display: inline-block;width: 100%;text-align: center;margin-top: 10px;">No more items to display...</span>
+{% endif %}
+
+{% if isFilter %}
     <script type="text/javascript">
         $('#item-thumbs').jscroll.destroy();
         $('#item-thumbs').jscroll({
@@ -74,11 +84,7 @@
         });
     </script>
 {% endif %}
-{% if rendered == stop_pos %}
-    <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
-{% else %}
-    <span style="display: inline-block;width: 100%;text-align: center;margin-top: 10px;">No more items to display...</span>
-{% endif %}
+
 <script type="text/javascript">
     bindAddtoCart();
 </script>
