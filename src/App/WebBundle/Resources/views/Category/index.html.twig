@@ -30,11 +30,19 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <a class="next-page" href="{{ path('category_next_page', {id: category.getId(), page: 1}) }}"></a>
+            <a class="next-page" href="javascript:void(0);" data-url="{{ path('category_next_page', {id: category.getId(), page: 1}) }}">Load More</a>
         </div>
         <script type="text/javascript">
             var page = 1;
-            $('#item-thumbs').jscroll({
+            $('.next-page').on('click', function(){
+                $.ajax({
+                    url: $(this).data('url'),
+                    success: function(resp) {
+                        $('#item-thumbs').append(resp);
+                    }
+                });
+            });
+            {#$('#item-thumbs').jscroll({
                 nextSelector: 'a.next-page',
                 loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
                 callback: function() {
@@ -46,7 +54,7 @@
                         thumbs.unwrap();
                     }
                 }
-            });
+            });#}
 
             $.ajax({
                 url: '{{ path('category_filter', {'id': category.getId()}) }}',
