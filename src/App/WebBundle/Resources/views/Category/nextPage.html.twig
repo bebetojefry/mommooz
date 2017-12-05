@@ -61,7 +61,7 @@
 {% endif %}
 
 {% if rendered == stop_pos %}
-    <a class="next-page" href="javascript:void(0);" data-url="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}"></a>
+    <a class="next-page" style="display: inline-block;width: 100%;text-align: center;margin-top: 20px;" href="javascript:void(0);" data-url="{{ path('category_next_page', {id: category.getId(), page: page + 1}) }}">Load More</a>
 {% else %}
     <span style="display: inline-block;width: 100%;text-align: center;margin-top: 10px;">No more items to display...</span>
 {% endif %}
@@ -73,6 +73,7 @@
             $.ajax({
                 url: $(this).data('url'),
                 success: function(resp) {
+                    $('.next-page').remove();
                     $('#item-thumbs').append(resp);
                 }
             });
