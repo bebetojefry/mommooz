@@ -58,6 +58,7 @@
 {% if isFilter %}
     {% set page = cur_page - 1 %}
     <script type="text/javascript">
+        $('#item-thumbs').jscroll.destroy();
         $('#item-thumbs').jscroll({
             nextSelector: 'a.next-page',
             loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
