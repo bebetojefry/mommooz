@@ -65,36 +65,34 @@
 {% else %}
     <span style="display: inline-block;width: 100%;text-align: center;margin-top: 10px;">No more items to display...</span>
 {% endif %}
+<script type="text/javascript">
 
-{% if isFilter %}
-    <script type="text/javascript">
-
-        $('.next-page').on('click', function(){
-            $.ajax({
-                url: $(this).data('url'),
-                success: function(resp) {
-                    $('.next-page').remove();
-                    $('#item-thumbs').append(resp);
-                }
-            });
-        });
-
-        {#$('#item-thumbs').jscroll.destroy();
-        $('#item-thumbs').jscroll({
-            nextSelector: 'a.next-page',
-            loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
-            callback: function() {
-                page++;
-
-                var thumbs = $( ".item-thumb" );
-
-                if (thumbs.parent().is("div.jscroll-added")) {
-                    thumbs.unwrap();
-                }
+    $('.next-page').on('click', function(){
+        $.ajax({
+            url: $(this).data('url'),
+            success: function(resp) {
+                $('.next-page').remove();
+                $('#item-thumbs').append(resp);
             }
-        });#}
-    </script>
-{% endif %}
+        });
+    });
+
+    {#$('#item-thumbs').jscroll.destroy();
+    $('#item-thumbs').jscroll({
+        nextSelector: 'a.next-page',
+        loadingHtml: '<div style="width:100%; text-align:center; margin-top:20px;"><img style="display: inline-block; position: relative; top: 3px; right: 5px;" src="{{ asset('images/ajax-loader.gif') }}" /> Loading...</div>',
+        callback: function() {
+            page++;
+
+            var thumbs = $( ".item-thumb" );
+
+            if (thumbs.parent().is("div.jscroll-added")) {
+                thumbs.unwrap();
+            }
+        }
+    });#}
+</script>
+
 
 <script type="text/javascript">
     bindAddtoCart();
