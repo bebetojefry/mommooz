@@ -52,12 +52,13 @@ class AccountController extends Controller
                     $consumer->setUsername($consumer->getEmail());
                     $consumer->setLocale('en');
                     $consumer->setCreatedOn(new \DateTime('now'));
-                    $consumer->setStatus(false);
+                    //$consumer->setStatus(false);
+                    $consumer->setStatus(true);
                     $em->persist($consumer);
                     $em->flush();
 
                     //send verification email to customer
-                    $content = $this->renderView('AppWebBundle:Account:activateTemplate.html.twig',
+                   /* $content = $this->renderView('AppWebBundle:Account:activateTemplate.html.twig',
                         array('consumer' => $consumer)
                     );
 
@@ -71,7 +72,7 @@ class AccountController extends Controller
                         $this->get('mailer')->send($message);
                     } catch(\Exception $e) {
 
-                    }
+                    }*/
 
                     return $this->redirect($this->generateUrl('register_thank_you'));
                 }
