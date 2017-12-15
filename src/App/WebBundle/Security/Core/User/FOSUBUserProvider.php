@@ -39,7 +39,8 @@ class FOSUBUserProvider extends BaseClass
     {
         $username = $response->getUsername();
         $data = $response->getResponse();
-        $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+        $email = trim($response->getEmail());
+        $user = $this->userManager->findUserBy(array('email' => $email));
         //when the user is registrating
         if (null === $user) {
             $service = $response->getResourceOwner()->getName();
@@ -54,7 +55,7 @@ class FOSUBUserProvider extends BaseClass
             //modify here with relevant data
             $user->setFirstname($response->getFirstName());
             $user->setLastname($response->getLastName());
-            $user->setEmail($response->getEmail());
+            $user->setEmail($email);
             $user->setUsername($response->getEmail());            
             $user->setPassword('momooz_cons');
             if($response->getEmail()){
