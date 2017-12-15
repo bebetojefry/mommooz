@@ -176,7 +176,7 @@ class AccountController extends Controller
     }
     
     /**
-     * @Route("/request_email", name="request_consumer_email")
+     * @Route("/request_email", name="request_consumer_email_phone")
      */
     public function requestEmailAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
@@ -184,9 +184,17 @@ class AccountController extends Controller
             $consumer = $em->getRepository('AppFrontBundle:Consumer')->findOneByEmail($_POST['email']);
             if($consumer == null){
                 $user = $this->getUser();
-                $user->setEmail($_POST['email']);
-                $user->setUsername($_POST['email']);
-                $user->setEnabled(true);
+
+                if(isset($_POST['email'])) {
+                    $user->setEmail($_POST['email']);
+                    $user->setUsername($_POST['email']);
+                    $user->setEnabled(true);
+                }
+
+                if(isset($_POST['phone'])) {
+                    $user->setPhone($_POST['phone']);
+                }
+
                 $em->persist();
                 $em->flush();
                 

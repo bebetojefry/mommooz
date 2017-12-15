@@ -15,7 +15,15 @@
             <div class="block-6 block-lb-8 block-mb-11 text-left br-4p bs-nrmls ptrbl-40p yellow-bg">
             <h3> Please enter your email address </h3>
             <form role="form" name="frmRequestEmail" id="frmRequestEmail" method="POST" action="{{ path('forgot_consumer_password') }}">
-                <input type="email" name="email" id="email" required="" placeholder="Consumer Email ID" autofocus>
+                {% if app.user.getEmail() == null %}
+                    <input type="email" name="email" id="email" required="" placeholder="Consumer Email ID" autofocus>
+                {% endif %}
+                <br/>
+                <br/>
+                {% if app.user.getPhone() == null %}
+                    <input type="number" name="phone" id="phone" required="" placeholder="Consumer Phone Number">
+                {% endif %}
+
                 <button type="submit" class="momz-button mt-20p"> Submit <span class="icon-arrow-right-1"></span> </button>
                 <script type="text/javascript">
                     $('#frmRequestEmail').validator();
