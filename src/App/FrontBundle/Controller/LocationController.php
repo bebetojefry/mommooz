@@ -22,11 +22,12 @@ class LocationController extends Controller
         $datatable = $this->get('app.front.datatable.location');
         $datatable->buildDatatable(array('region' => $region));
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+        $query->buildQuery();
         $qb = $query->getQuery();
         $qb->andWhere("location.region = :r");
         $qb->setParameter('r', $region);
         $query->setQuery($qb);
-        return $query->getResponse();
+        return $query->getResponse(false);
     }
     
     /**
