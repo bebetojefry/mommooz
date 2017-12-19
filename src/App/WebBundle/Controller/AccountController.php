@@ -181,28 +181,28 @@ class AccountController extends Controller
     public function requestEmailAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
         if($request->isMethod('POST')) {
-            $consumer = $em->getRepository('AppFrontBundle:Consumer')->findOneByEmail($_POST['email']);
-            if($consumer == null){
-                $user = $this->getUser();
-
+            if($user = $this->getUser()){
                 if(isset($_POST['email'])) {
-                    $user->setEmail($_POST['email']);
-                    $user->setUsername($_POST['email']);
-                    $user->setEnabled(true);
+                    $consumer = $em->getRepository('AppFrontBundle:Consumer')->findOneByEmail($_POST['email']);
+                    if($consumer == null) {
+                        $user->setEmail($_POST['email']);
+                        $user->setUsername($_POST['email']);
+                        $user->setEnabled(true);
+                    } else {
+                        $request->getSession()
+                            ->getFlashBag()
+                            ->add('email_request_error', 'Given email ID already in use.');
+                    }
                 }
 
                 if(isset($_POST['phone'])) {
                     $user->setPhone($_POST['phone']);
                 }
 
-                $em->persist();
+                $em->persist($user);
                 $em->flush();
                 
                 return $this->redirect($this->generateUrl('home'));
-            } else {
-                $request->getSession()
-                    ->getFlashBag()
-                    ->add('email_request_error', 'Given email ID already in use.');
             }
         }
         
