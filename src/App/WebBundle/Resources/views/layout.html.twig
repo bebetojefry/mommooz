@@ -38,7 +38,7 @@
         {% if app.user and app.request.attributes.get('_route') != 'request_consumer_email_phone' %}
             {% if app.user.getEmail() == null or app.user.getPhone() == null %}
                 <script>
-                    //window.location = '{{ url('request_consumer_email_phone') }}';
+                    window.location = '{{ url('request_consumer_email_phone') }}';
                 </script>
             {% endif %}
         {% endif %}
