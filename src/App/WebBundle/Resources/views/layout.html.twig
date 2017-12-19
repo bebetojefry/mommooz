@@ -34,15 +34,15 @@
         <script src="{{ asset('assets/vendor/jscroll/jquery.jscroll.js') }}"></script>
         <script src="{{ asset('bundles/appweb/js/jquery.imgzoom.js') }}"></script>
         <script src="{{ asset('bundles/appweb/js/app.js') }}"></script>
-        {%  block check_email_phone %}
-            {% if app.user %}
-                {% if app.user.getEmail() == null or app.user.getPhone() == null %}
-                    <script>
-                        window.location = '{{ url('request_consumer_email_phone') }}';
-                    </script>
-                {% endif %}
+
+        {% if app.user and app.request.attributes.get('_route') != 'request_consumer_email_phone' %}
+            {% if app.user.getEmail() == null or app.user.getPhone() == null %}
+                <script>
+                    window.location = '{{ url('request_consumer_email_phone') }}';
+                </script>
             {% endif %}
-        {% endblock %}
+        {% endif %}
+
 </head>
 <body class="relative-pos">
     {% set defaultRegion = app_web_user.getDefaultRegion() %}
