@@ -13,14 +13,14 @@
 
     <section class="center-1200px text-center block-fl-cary ptb-25p">
             <div class="block-6 block-lb-8 block-mb-11 text-left br-4p bs-nrmls ptrbl-40p yellow-bg">
-            <h3> Please enter your email address </h3>
+            <h3> Please enter your contact details </h3>
             <form role="form" name="frmRequestEmail" id="frmRequestEmail" method="POST" action="{{ path('request_consumer_email_phone') }}">
                 {% if app.user.getEmail() == null %}
                     <input type="email" name="email" id="email" required="" placeholder="Consumer Email ID" autofocus>
                 {% endif %}
-                <br/>
-                <br/>
+
                 {% if app.user.getPhone() == null %}
+                    <br/>
                     <input type="number" name="phone" id="phone" required="" placeholder="Consumer Phone Number">
                 {% endif %}
 
