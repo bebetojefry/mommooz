@@ -164,6 +164,7 @@ class ItemController extends Controller
                     ->join('i.categories', 'c')
                     ->where('c.id = :cat_id')
                     ->andWhere('se.status = :status')
+                    ->orderBy('se.id', 'DESC')
                     ->setParameter('status', true)
                     ->setParameter('cat_id', $cat->getId());
                     
