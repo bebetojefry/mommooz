@@ -21,7 +21,7 @@
 
                 {% if app.user.getPhone() == null %}
                     <br/>
-                    <input type="number" name="phone" id="phone" required="" placeholder="Consumer Phone Number">
+                    <input type="number" pattern="[0-9]{10,12}" name="phone" id="phone" required="" placeholder="Consumer Phone Number">
                 {% endif %}
 
                 <button type="submit" class="momz-button mt-20p"> Submit <span class="icon-arrow-right-1"></span> </button>
