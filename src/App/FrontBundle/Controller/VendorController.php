@@ -263,7 +263,7 @@ class VendorController extends Controller
         $dm = $this->getDoctrine()->getManager();
         $vendor = $this->getUser();
         
-        $form = $this->createForm(new UserType($dm), $vendor);
+        $form = $this->createForm(new UserType($dm, $this->get('router')), $vendor);
         
         if($request->isMethod('POST')){
             $form->handleRequest($request);
