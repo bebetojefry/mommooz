@@ -11,57 +11,70 @@ parameters:
     facebook_app_secret: '9623b3b7611ba447f259e71dae54a3ea'
     google_app_id: '891762845675-lh8gber2nn4g1evot8c11i1l9n0q8ph3.apps.googleusercontent.com'
     google_app_secret: 'EFVHUZPxXqHbL3BzonjI6ZNQ'
-    
-framework:
-    router:
-        resource: "%kernel.root_dir%/config/routing_dev.yml"
-        strict_requirements: true
-    profiler: { only_exceptions: false }
-
-web_profiler:
-    toolbar: false
-    intercept_redirects: false
 
 monolog:
     handlers:
         main:
-            type:   stream
-            path:   "%kernel.logs_dir%/%kernel.environment%.log"
-            level:  error
+            type:         fingers_crossed
+            action_level: error
+            handler:      nested
+        nested:
+            type:  stream
+            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            level: debug
         console:
-            type:   console
-            bubble: false
-            verbosity_levels:
-                VERBOSITY_VERBOSE: INFO
-                VERBOSITY_VERY_VERBOSE: DEBUG
-            channels: ["!doctrine"]
-        console_very_verbose:
-            type:   console
-            bubble: false
-            verbosity_levels:
-                VERBOSITY_VERBOSE: NOTICE
-                VERBOSITY_VERY_VERBOSE: NOTICE
-                VERBOSITY_DEBUG: DEBUG
-            channels: ["doctrine"]
-        # uncomment to get logging in your browser
-        # you may have to allow bigger header sizes in your Web server configuration
-        #firephp:
-        #    type:   firephp
-        #    level:  info
-        #chromephp:
-        #    type:   chromephp
-        #    level:  info
+            type:  console
 
-assetic:
-    use_controller: true
+#framework:
+#    router:
+#        resource: "%kernel.root_dir%/config/routing_dev.yml"
+#        strict_requirements: true
+#    profiler: { only_exceptions: false }
+#
+#web_profiler:
+#    toolbar: false
+#    intercept_redirects: false
 
-hautelook_alice:
-    db_drivers:
-        orm: ~
-    locale: en_US
-    seed: 1
-    persist_once: false
-    loading_limit: 10
+#monolog:
+#    handlers:
+#        main:
+#            type:   stream
+#            path:   "%kernel.logs_dir%/%kernel.environment%.log"
+#            level:  error
+#        console:
+#            type:   console
+#            bubble: false
+#            verbosity_levels:
+#                VERBOSITY_VERBOSE: INFO
+#                VERBOSITY_VERY_VERBOSE: DEBUG
+#            channels: ["!doctrine"]
+#        console_very_verbose:
+#            type:   console
+#            bubble: false
+#            verbosity_levels:
+#                VERBOSITY_VERBOSE: NOTICE
+#                VERBOSITY_VERY_VERBOSE: NOTICE
+#                VERBOSITY_DEBUG: DEBUG
+#            channels: ["doctrine"]
+#        # uncomment to get logging in your browser
+#        # you may have to allow bigger header sizes in your Web server configuration
+#        firephp:
+#            type:   firephp
+#            level:  info
+#        chromephp:
+#            type:   chromephp
+#            level:  info
+
+#assetic:
+#    use_controller: true
+#
+#hautelook_alice:
+#    db_drivers:
+#        orm: ~
+#    locale: en_US
+#    seed: 1
+#    persist_once: false
+#    loading_limit: 10
 
 #swiftmailer:
 #    delivery_address: me@example.com
