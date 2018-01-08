@@ -44,6 +44,7 @@ twig:
         rootDir: %kernel.root_dir%
         app_web_user: @app.web.user
         traditional_cat: %traditional_cat%
+        site_domain: %domain_consumer%
 # Assetic Configuration
 assetic:
     debug:          "%kernel.debug%"
@@ -211,3 +212,8 @@ liip_imagine :
             quality : 75
             filters :
                 thumbnail  : { size : [188, 184], mode : outbound }
+
+fos_rest:
+    routing_loader:
+        default_format: json
+        include_format: true

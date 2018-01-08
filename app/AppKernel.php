@@ -29,8 +29,10 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Ob\HighchartsBundle\ObHighchartsBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
             new App\FrontBundle\AppFrontBundle(),
             new App\WebBundle\AppWebBundle(),
+            new App\ApiBundle\AppApiBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test', 'svr'))) {

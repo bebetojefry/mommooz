@@ -10,82 +10,25 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
-        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '32dcc8afd4335739640db7d200c1971d' => __DIR__ . '/..' . '/symfony/polyfill-apcu/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '3fad0ebbff9928a94a9d8941fb314bd8' => __DIR__ . '/..' . '/symfony/symfony/src/Symfony/Component/Intl/Resources/stubs/functions.php',
         'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
     );
 
-    public static $prefixLengthsPsr4 = array (
-        'Z' => 
-        array (
-            'Zend\\Json\\' => 10,
-        ),
-        'S' => 
-        array (
-            'Symfony\\Polyfill\\Mbstring\\' => 26,
-            'Symfony\\Component\\' => 18,
-            'Symfony\\Bundle\\SwiftmailerBundle\\' => 33,
-            'Symfony\\Bundle\\MonologBundle\\' => 29,
-            'Symfony\\Bundle\\AsseticBundle\\' => 29,
-            'Symfony\\Bundle\\' => 15,
-            'Symfony\\Bridge\\Twig\\' => 20,
-            'Symfony\\Bridge\\Swiftmailer\\' => 27,
-            'Symfony\\Bridge\\ProxyManager\\' => 28,
-            'Symfony\\Bridge\\PhpUnit\\' => 23,
-            'Symfony\\Bridge\\Monolog\\' => 23,
-            'Symfony\\Bridge\\Doctrine\\' => 24,
-            'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
-        ),
-        'P' => 
-        array (
-            'Psr\\Log\\' => 8,
-        ),
-        'O' => 
-        array (
-            'Ob\\HighchartsBundle\\' => 20,
-        ),
-        'N' => 
-        array (
-            'Nelmio\\Alice\\' => 13,
-        ),
-        'M' => 
-        array (
-            'Monolog\\' => 8,
-        ),
-        'L' => 
-        array (
-            'Liip\\ImagineBundle\\' => 19,
-            'Leafo\\ScssPhp\\' => 14,
-        ),
-        'I' => 
-        array (
-            'Incenteev\\ParameterHandler\\' => 27,
-        ),
-        'H' => 
-        array (
-            'Hautelook\\AliceBundle\\' => 22,
-            'HWI\\Bundle\\OAuthBundle\\' => 23,
-        ),
-        'F' => 
-        array (
-            'Faker\\' => 6,
-            'FOS\\JsRoutingBundle\\' => 20,
-        ),
-        'E' => 
-        array (
-            'Endroid\\QrCode\\' => 15,
-            'Endroid\\Bundle\\QrCodeBundle\\' => 28,
-        ),
-        'D' => 
-        array (
-            'Doctrine\\Instantiator\\' => 22,
-            'Doctrine\\Common\\Cache\\' => 22,
-            'Doctrine\\Common\\' => 16,
-            'Doctrine\\Bundle\\FixturesBundle\\' => 31,
-            'Doctrine\\Bundle\\DoctrineCacheBundle\\' => 36,
-            'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
-        ),
+    public static $firstCharsPsr4 = array (
+        'Z' => true,
+        'S' => true,
+        'P' => true,
+        'O' => true,
+        'N' => true,
+        'M' => true,
+        'L' => true,
+        'I' => true,
+        'H' => true,
+        'F' => true,
+        'E' => true,
+        'D' => true,
     );
 
     public static $prefixDirsPsr4 = array (
@@ -157,6 +100,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         array (
             0 => __DIR__ . '/..' . '/nelmio/alice/src/Nelmio/Alice',
         ),
+        'Negotiation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/willdurand/negotiation/src/Negotiation',
+        ),
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
@@ -184,6 +131,10 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
         'Faker\\' => 
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
+        'FOS\\RestBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/friendsofsymfony/rest-bundle',
         ),
         'FOS\\JsRoutingBundle\\' => 
         array (
@@ -414,7 +365,7 @@ class ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937::$prefixLengthsPsr4;
+            $loader->firstCharsPsr4 = ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937::$firstCharsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937::$prefixDirsPsr4;
             $loader->fallbackDirsPsr4 = ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInitc3ec7c6224e4ca57262be7a5efbb7937::$prefixesPsr0;

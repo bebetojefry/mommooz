@@ -6,6 +6,11 @@ app_web:
 app_front:
     resource: "@AppFrontBundle/Resources/config/routing.yml"
 
+app_api:
+    resource: "@AppApiBundle/Resources/config/routing.yml"
+    host:     "%domain_api%"
+    prefix:   /v1.0/
+
 jstranslations:
     resource: "@FunddyJsTranslationsBundle/Resources/config/routing.yml"
 

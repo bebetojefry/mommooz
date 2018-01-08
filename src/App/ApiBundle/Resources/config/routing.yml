@@ -1,0 +1,3 @@
+app_api_demo:
+    type: rest
+    resource: App\ApiBundle\Controller\DemoController

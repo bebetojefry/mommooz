@@ -43,7 +43,8 @@ namespace Composer\Autoload;
 class ClassLoader
 {
     // PSR-4
-    private $prefixLengthsPsr4 = array();
+    private $firstCharsPsr4 = array();
+    private $prefixLengthsPsr4 = array(); // For BC with legacy static maps
     private $prefixDirsPsr4 = array();
     private $fallbackDirsPsr4 = array();
 
@@ -55,6 +56,7 @@ class ClassLoader
     private $classMap = array();
     private $classMapAuthoritative = false;
     private $missingClasses = array();
+    private $apcuPrefix;
 
     public function getPrefixes()
     {
@@ -169,11 +171,10 @@ class ClassLoader
             }
         } elseif (!isset($this->prefixDirsPsr4[$prefix])) {
             // Register directories for a new namespace.
-            $length = strlen($prefix);
-            if ('\\' !== $prefix[$length - 1]) {
+            if ('\\' !== substr($prefix, -1)) {
                 throw new \InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
             }
-            $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
+            $this->firstCharsPsr4[$prefix[0]] = true;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
         } elseif ($prepend) {
             // Prepend directories for an already registered namespace.
@@ -220,11 +221,10 @@ class ClassLoader
         if (!$prefix) {
             $this->fallbackDirsPsr4 = (array) $paths;
         } else {
-            $length = strlen($prefix);
-            if ('\\' !== $prefix[$length - 1]) {
+            if ('\\' !== substr($prefix, -1)) {
                 throw new \InvalidArgumentException("A non-empty PSR-4 prefix must end with a namespace separator.");
             }
-            $this->prefixLengthsPsr4[$prefix[0]][$prefix] = $length;
+            $this->firstCharsPsr4[$prefix[0]] = true;
             $this->prefixDirsPsr4[$prefix] = (array) $paths;
         }
     }
@@ -272,6 +272,26 @@ class ClassLoader
     }
 
     /**
+     * APCu prefix to use to cache found/not-found classes, if the extension is enabled.
+     *
+     * @param string|null $apcuPrefix
+     */
+    public function setApcuPrefix($apcuPrefix)
+    {
+        $this->apcuPrefix = function_exists('apcu_fetch') && ini_get('apc.enabled') ? $apcuPrefix : null;
+    }
+
+    /**
+     * The APCu prefix in use, or null if APCu caching is not enabled.
+     *
+     * @return string|null
+     */
+    public function getApcuPrefix()
+    {
+        return $this->apcuPrefix;
+    }
+
+    /**
      * Registers this instance as an autoloader.
      *
      * @param bool $prepend Whether to prepend the autoloader or not
@@ -313,11 +333,6 @@ class ClassLoader
      */
     public function findFile($class)
     {
-        // work around for PHP 5.3.0 - 5.3.2 https://bugs.php.net/50731
-        if ('\\' == $class[0]) {
-            $class = substr($class, 1);
-        }
-
         // class map lookup
         if (isset($this->classMap[$class])) {
             return $this->classMap[$class];
@@ -325,12 +340,22 @@ class ClassLoader
         if ($this->classMapAuthoritative || isset($this->missingClasses[$class])) {
             return false;
         }
+        if (null !== $this->apcuPrefix) {
+            $file = apcu_fetch($this->apcuPrefix.$class, $hit);
+            if ($hit) {
+                return $file;
+            }
+        }
 
         $file = $this->findFileWithExtension($class, '.php');
 
         // Search for Hack files if we are running on HHVM
         if (false === $file && defined('HHVM_VERSION')) {
             $file = $this->findFileWithExtension($class, '.hh');
+        }
+
+        if (null !== $this->apcuPrefix) {
+            apcu_add($this->apcuPrefix.$class, $file);
         }
 
         if (false === $file) {
@@ -347,11 +372,15 @@ class ClassLoader
         $logicalPathPsr4 = strtr($class, '\\', DIRECTORY_SEPARATOR) . $ext;
 
         $first = $class[0];
-        if (isset($this->prefixLengthsPsr4[$first])) {
-            foreach ($this->prefixLengthsPsr4[$first] as $prefix => $length) {
-                if (0 === strpos($class, $prefix)) {
-                    foreach ($this->prefixDirsPsr4[$prefix] as $dir) {
-                        if (file_exists($file = $dir . DIRECTORY_SEPARATOR . substr($logicalPathPsr4, $length))) {
+        if (isset($this->firstCharsPsr4[$first]) || isset($this->prefixLengthsPsr4[$first])) {
+            $subPath = $class;
+            while (false !== $lastPos = strrpos($subPath, '\\')) {
+                $subPath = substr($subPath, 0, $lastPos);
+                $search = $subPath.'\\';
+                if (isset($this->prefixDirsPsr4[$search])) {
+                    $pathEnd = DIRECTORY_SEPARATOR . substr($logicalPathPsr4, $lastPos + 1);
+                    foreach ($this->prefixDirsPsr4[$search] as $dir) {
+                        if (file_exists($file = $dir . $pathEnd)) {
                             return $file;
                         }
                     }

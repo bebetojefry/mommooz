@@ -387,7 +387,7 @@
             var myDate = new Date();
             myDate.setMonth(myDate.getMonth() + 12);
             document.cookie = cookieName +"=" + cookieValue + ";expires=" + myDate 
-                          + ";domain=momooz.com;path=/"; 
+                          + ";domain={{ site_domain }};path=/";
         });
         
         $('.skip-close').on('click', function(){
@@ -397,7 +397,7 @@
                 var myDate = new Date();
                 myDate.setMonth(myDate.getMonth() + 12);
                 document.cookie = cookieName +"=" + cookieValue + ";expires=" + myDate 
-                              + ";domain=momooz.com;path=/"; 
+                              + ";domain={{ site_domain }};path=/";
             {% endif %}
                 
             window.location = '{{ path('home_explore_skip') }}';
