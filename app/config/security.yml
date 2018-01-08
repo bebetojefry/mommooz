@@ -89,7 +89,7 @@ security:
                 login_path:        /account/login
                 default_target_path: /account
                 failure_path:      /account/login
-                use_referer: true
+                use_referer: false
                 
                 oauth_user_provider:
                     #this is my custom user provider, created from FOSUBUserProvider - will manage the
