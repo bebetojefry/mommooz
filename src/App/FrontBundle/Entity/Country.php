@@ -6,12 +6,15 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use App\FrontBundle\Entity\State;
 use Doctrine\Common\Collections\Collection;
+use App\FrontBundle\Annotation as AppAnnotation;
+
 
 /**
  * Country
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @AppAnnotation\CmsClass(displayName="Country")
  */
 class Country
 {

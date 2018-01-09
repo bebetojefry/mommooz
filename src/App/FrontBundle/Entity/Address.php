@@ -3,12 +3,14 @@
 namespace App\FrontBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\FrontBundle\Annotation as AppAnnotation;
 
 /**
  * Address
  *
  * @ORM\Table()
  * @ORM\Entity
+ * @AppAnnotation\CmsClass(displayName="User Address")
  */
 class Address
 {
@@ -25,6 +27,7 @@ class Address
      * @var string
      *
      * @ORM\Column(name="house", type="string", length=255)
+     * @AppAnnotation\CmsProperty(displayName="House Name")
      */
     private $house;
 
@@ -32,6 +35,7 @@ class Address
      * @var string
      *
      * @ORM\Column(name="street", type="string", length=255)
+     * @AppAnnotation\CmsProperty(displayName="Street Name")
      */
     private $street;
 
@@ -39,6 +43,7 @@ class Address
      * @var string
      *
      * @ORM\Column(name="landmark", type="string", length=255)
+     * @AppAnnotation\CmsProperty(displayName="Land Mark")
      */
     private $landmark;
 
