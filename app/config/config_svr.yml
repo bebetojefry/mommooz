@@ -7,7 +7,7 @@ parameters:
     domain_admin: mgr.momooz.com
     domain_vendor: vnd.momooz.com
     domain_consumer: momooz.com
-    domain_api: momooz.com
+    domain_api: api.momooz.com
     facebook_app_id: '1628161744158326'
     facebook_app_secret: '9623b3b7611ba447f259e71dae54a3ea'
     google_app_id: '891762845675-lh8gber2nn4g1evot8c11i1l9n0q8ph3.apps.googleusercontent.com'
