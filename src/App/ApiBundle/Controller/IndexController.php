@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 class IndexController extends FOSRestController
 {
     /**
-     * @Rest\Get("/home")
+     * @Rest\Get("/home_api")
      */
     public function homeAction(Request $request)
     {
