@@ -1,3 +1,7 @@
 app_api_demo:
     type: rest
     resource: App\ApiBundle\Controller\DemoController
+
+app_api_home:
+    type: rest
+    resource: App\ApiBundle\Controller\HomeController
