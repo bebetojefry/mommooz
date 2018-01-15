@@ -8,12 +8,12 @@ use App\FrontBundle\Handler\CmsAnnotationHandler;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Component\HttpFoundation\Request;
 
-class DemoController extends FOSRestController
+class IndexController extends FOSRestController
 {
     /**
-     * @Rest\Get("/demo")
+     * @Rest\Get("/home")
      */
-    public function demoAction(Request $request)
+    public function apiHomeAction(Request $request)
     {
         $data = array();
         $em = $this->getDoctrine()->getManager();
