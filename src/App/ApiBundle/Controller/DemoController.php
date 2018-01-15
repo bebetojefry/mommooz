@@ -11,9 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 class DemoController extends FOSRestController
 {
     /**
-     * @Rest\Get("/home_api")
+     * @Rest\Get("/demo")
      */
-    public function homeAction(Request $request)
+    public function demoAction(Request $request)
     {
         $data = array();
         $em = $this->getDoctrine()->getManager();
