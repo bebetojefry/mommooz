@@ -4,4 +4,4 @@ app_api_demo:
 
 app_api_home:
     type: rest
-    resource: App\ApiBundle\Controller\HomeController
+    resource: App\ApiBundle\Controller\IndexController
