@@ -36,7 +36,7 @@ class IndexController extends FOSRestController
             $data['banners'][] = array(
                 'banner_image' => $imagemanagerResponse->getTargetUrl(),
                 'banner_id' => $banner->getId(),
-                'banner_link' => $this->generateUrl($banner->getRouteName(), array('id' => $banner->getId()), true),
+                'banner_link' => $this->generateUrl($banner->getRouteName(), array('id' => $banner->getEntity()->getId()), true),
                 'banner_type' => $reflect->getShortName()
             );
         }
